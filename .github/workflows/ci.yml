@@ -1,0 +1,99 @@
+name: CI & Release
+
+on:
+  push:
+    branches:
+      - main
+    tags:
+      - "v*"
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: write
+  packages: write
+
+jobs:
+  commit-lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Lint Commit Messages
+        uses: wagoid/commitlint-github-action@v5
+
+  build-test:
+    runs-on: ubuntu-latest
+    needs: commit-lint
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          registry-url: "https://registry.npmjs.org/"
+          cache: "npm"
+      - run: npm ci --legacy-peer-deps
+      - run: npx playwright install --with-deps
+      - run: npx nx affected -t lint test build e2e
+
+  canary-release:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    needs: build-test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          registry-url: "https://registry.npmjs.org/"
+      - run: npm ci --legacy-peer-deps
+      - name: Publish Canary Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: npx semantic-release
+
+  label-prs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Auto-label PRs
+        uses: actions/labeler@v5
+        with:
+          repo-token: "${{ secrets.GH_TOKEN }}"
+
+  dependabot-auto-merge:
+    needs: [build-test]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Auto-merge Dependabot PRs
+        uses: fastify/github-action-merge-dependabot@v3
+        with:
+          github-token: ${{ secrets.GH_TOKEN }}
+          target: minor
+
+  deploy-storybook:
+    needs: build-test
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: "npm"
+      - run: npm ci --legacy-peer-deps
+      - name: Build Storybook
+        run: npx nx run ngx-tailwind-flex-ui:build-storybook
+      - name: Deploy Storybook to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GH_TOKEN }}
+          publish_dir: dist/storybook/ngx-tailwind-flex-ui
