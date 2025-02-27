@@ -1,6 +1,6 @@
 {
   "name": "@iarunsaragadam/ngx-tailwind-flex-ui",
-  "version": "0.0.1-canary.0.0",
+  "version": "1.0.0-canary.1",
   "license": "MIT",
   "scripts": {
     "test": "npx nx run-many --target=test",
