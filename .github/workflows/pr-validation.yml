@@ -1,0 +1,126 @@
+name: PR Validation 🚨
+
+on:
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  pr-title-lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: amannn/action-semantic-pull-request@v5
+        with:
+          types: |
+            feat
+            fix
+            docs
+            style
+            refactor
+            perf
+            test
+            chore
+            ci
+            build
+          requireScope: false
+          subjectPattern: "^(?!.*(fix|update|change|improve|enhance|cleanup|workaround)$).*$"
+          subjectPatternError: "PR titles should be specific and follow Conventional Commits."
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  pr-description-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const pr = context.payload.pull_request;
+            if (!pr || !pr.body || pr.body.trim().length < 20) {
+              core.setFailed("PR rejected: Description must be meaningful and at least 20 characters long.");
+            }
+
+  commit-lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Lint Commit Messages
+        uses: wagoid/commitlint-github-action@v5
+
+  pr-branch-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            if (context.payload.pull_request.base.ref !== 'main') {
+              core.setFailed("PR rejected: Must target the `main` branch.");
+            }
+
+  lint-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: "npm"
+      - run: npm ci --legacy-peer-deps
+      - run: npx nx affected -t lint
+        continue-on-error: false
+
+  test-check:
+    runs-on: ubuntu-latest
+    needs: lint-check
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: "npm"
+      - run: npm ci --legacy-peer-deps
+      - run: npx nx affected -t test e2e
+        continue-on-error: false
+
+  security-check:
+    runs-on: ubuntu-latest
+    needs: test-check
+    steps:
+      - uses: actions/checkout@v4
+      - run: npm audit --audit-level=moderate
+        continue-on-error: false
+
+  summary:
+    runs-on: ubuntu-latest
+    needs:
+      [
+        pr-title-lint,
+        pr-description-check,
+        commit-lint,
+        pr-branch-check,
+        lint-check,
+        test-check,
+        security-check,
+      ]
+    steps:
+      - name: Provide Failure Summary
+        if: failure()
+        run: |
+          echo "🚨 PR Validation Failed 🚨" >> $GITHUB_STEP_SUMMARY
+          echo "Reasons:" >> $GITHUB_STEP_SUMMARY
+          echo "- Ensure PR title follows Conventional Commits." >> $GITHUB_STEP_SUMMARY
+          echo "- Ensure PR description is at least 20 characters long." >> $GITHUB_STEP_SUMMARY
+          echo "- Ensure PR targets the `main` branch." >> $GITHUB_STEP_SUMMARY
+          echo "- Fix linting issues (run `npm run lint`)." >> $GITHUB_STEP_SUMMARY
+          echo "- Fix failing tests (run `npm run test`)." >> $GITHUB_STEP_SUMMARY
+          echo "- Resolve security vulnerabilities (run `npm audit fix`)." >> $GITHUB_STEP_SUMMARY
+          echo "💡 Please fix these issues and update your PR." >> $GITHUB_STEP_SUMMARY
