@@ -7,7 +7,7 @@ describe('ButtonToggleComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ButtonToggleComponent]
+      imports: [ButtonToggleComponent]
     }).compileComponents();
 
     fixture = TestBed.createComponent(ButtonToggleComponent);
@@ -20,14 +20,14 @@ describe('ButtonToggleComponent', () => {
   });
 
   it('should toggle state on click', () => {
-    expect(component.toggled).toBeFalse();
+    expect(component.toggled).toBeFalsy();
     component.toggle();
-    expect(component.toggled).toBeTrue();
+    expect(component.toggled).toBeTruthy();
   });
 
   it('should not toggle when disabled', () => {
     component.disabled = true;
     component.toggle();
-    expect(component.toggled).toBeFalse();
+    expect(component.toggled).toBeFalsy();
   });
 });

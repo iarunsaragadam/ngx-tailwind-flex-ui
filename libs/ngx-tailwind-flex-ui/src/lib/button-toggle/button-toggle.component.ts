@@ -1,7 +1,7 @@
 import { Component, Input, HostBinding } from '@angular/core';
 
 @Component({
-  selector: 'app-button-toggle',
+  selector: 'lib-button-toggle',
   template: `<button (click)="toggle()" [disabled]="disabled"><ng-content></ng-content></button>`,
   styles: []
 })
