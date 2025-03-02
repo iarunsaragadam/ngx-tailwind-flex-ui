@@ -33,7 +33,13 @@
  */
 
 /**
- * @license Angular v19.1.7
+ * @license Angular v19.1.8
+ * (c) 2010-2024 Google LLC. https://angular.io/
+ * License: MIT
+ */
+
+/**
+ * @license Angular v<unknown>
  * (c) 2010-2024 Google LLC. https://angular.io/
  * License: MIT
  */
