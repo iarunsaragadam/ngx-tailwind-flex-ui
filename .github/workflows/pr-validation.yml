@@ -109,6 +109,25 @@ jobs:
       - run: npm audit --audit-level=moderate
         continue-on-error: false
 
+  storybook-build-check:
+    runs-on: ubuntu-latest
+    needs: lint-check
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: ${{ github.event.pull_request.head.sha }}
+      - name: Fetch base branch
+        run: git fetch origin ${{ github.base_ref }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: "npm"
+      - run: npm ci --legacy-peer-deps
+      - name: Check if Storybook builds
+        run: npx nx affected -t build-storybook --base=origin/${{ github.base_ref }} --head=${{ github.event.pull_request.head.sha }}
+        continue-on-error: false
+
   summary:
     runs-on: ubuntu-latest
     needs:
@@ -120,6 +139,7 @@ jobs:
         lint-check,
         test-check,
         security-check,
+        storybook-build-check,
       ]
     steps:
       - name: Provide Failure Summary
@@ -134,3 +154,4 @@ jobs:
           echo "- Fix failing tests (run `npm run test`)." >> $GITHUB_STEP_SUMMARY
           echo "- Resolve security vulnerabilities (run `npm audit fix`)." >> $GITHUB_STEP_SUMMARY
           echo "💡 Please fix these issues and update your PR." >> $GITHUB_STEP_SUMMARY
+          echo "- Fix Storybook build issues (run `npx nx build-storybook ngx-tailwind-flex-ui`)." >> $GITHUB_STEP_SUMMARY
