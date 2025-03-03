@@ -1,5 +1,10 @@
 import 'zone.js';
 
+const link = document.createElement('link');
+link.rel = 'stylesheet';
+link.href = 'https://fonts.googleapis.com/icon?family=Material+Icons';
+document.head.appendChild(link);
+
 export const parameters = {
   actions: { argTypesRegex: '^on[A-Z].*' },
   controls: {
