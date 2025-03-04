@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { CommonModule } from '@angular/common'; 
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'lib-icon',
@@ -13,14 +13,14 @@ export class IconComponent {
   @Input() size: 'sm' | 'md' | 'lg' | 'xl' = 'md';
   @Input() color = 'text-gray-500';
 
-  get sizeClass(): string {
-    const sizeMap = {
-      sm: 'text-sm',
-      md: 'text-base',
-      lg: 'text-2xl',
-      xl: 'text-4xl',
+  get sizePx(): number {
+    const sizeMap: Record<string, number> = {
+      sm: 16,
+      md: 24,  // Default Material Icon size
+      lg: 32,
+      xl: 48,
     };
-    return sizeMap[this.size] || sizeMap.md;
+    return sizeMap[this.size] || sizeMap['md'];
   }
 
   get colorClass(): string {

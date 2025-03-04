@@ -1,0 +1,826 @@
+{
+    "pipes": [],
+    "interfaces": [],
+    "injectables": [],
+    "guards": [],
+    "interceptors": [],
+    "classes": [],
+    "directives": [],
+    "components": [
+        {
+            "name": "ButtonComponent",
+            "id": "component-ButtonComponent-7b549b2939b9a34abd922e3a0255997fdcdc44e13e0d3149f6f081fd94e8328dfcef16d4b504efc25d22156e814a32fd37682ce25460fb63fbe9f89259f6c17c",
+            "file": "libs/ngx-tailwind-flex-ui/src/lib/button/button.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "lib-button",
+            "styleUrls": [],
+            "styles": [],
+            "templateUrl": [
+                "./button.component.html"
+            ],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [
+                {
+                    "name": "class",
+                    "defaultValue": "''",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 12,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "disabled",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 11,
+                    "type": "boolean",
+                    "decorators": []
+                },
+                {
+                    "name": "variant",
+                    "defaultValue": "'primary'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 10,
+                    "type": "\"primary\" | \"accent\" | \"outline\" | \"text\"",
+                    "decorators": []
+                }
+            ],
+            "outputsClass": [],
+            "propertiesClass": [],
+            "methodsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [
+                {
+                    "name": "class",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 14,
+                    "type": "any",
+                    "decorators": []
+                }
+            ],
+            "hostListeners": [],
+            "standalone": true,
+            "imports": [],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component, Input, HostBinding } from '@angular/core';\n\n@Component({\n  selector: 'lib-button',\n  standalone: true,\n  templateUrl: './button.component.html',\n  styles: [], // No inline styles; Tailwind handles it\n})\nexport class ButtonComponent {\n  @Input() variant: 'primary' | 'accent' | 'outline' | 'text' = 'primary';\n  @Input() disabled = false;\n  @Input() class = ''; // Allow users to pass custom Tailwind classes\n\n  @HostBinding('class') get hostClasses() {\n    const baseClasses =\n      'inline-flex items-center justify-center px-4 py-2 rounded-md font-medium transition-colors duration-200';\n    const variantClasses = {\n      primary:\n        'bg-blue-600 text-white hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2',\n      accent:\n        'bg-purple-600 text-white hover:bg-purple-700 focus:ring-2 focus:ring-purple-500 focus:ring-offset-2',\n      outline:\n        'border border-gray-300 text-gray-700 hover:bg-gray-100 focus:ring-2 focus:ring-gray-500 focus:ring-offset-2',\n      text: 'text-gray-700 hover:bg-gray-100 focus:ring-2 focus:ring-gray-500 focus:ring-offset-2',\n    };\n    const disabledClasses = this.disabled\n      ? 'opacity-50 cursor-not-allowed'\n      : '';\n\n    return `${baseClasses} ${variantClasses[this.variant]} ${disabledClasses} ${\n      this.class\n    }`.trim();\n  }\n}\n",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "",
+            "extends": [],
+            "accessors": {
+                "hostClasses": {
+                    "name": "hostClasses",
+                    "getSignature": {
+                        "name": "hostClasses",
+                        "type": "",
+                        "returnType": "",
+                        "line": 14
+                    }
+                }
+            },
+            "templateData": "<button [disabled]=\"disabled\">\n  <ng-content></ng-content>\n</button>\n"
+        },
+        {
+            "name": "IconComponent",
+            "id": "component-IconComponent-5aa773a6e880c2e7321715a97108ab13b79bb19e782154c23dd13ec81d958ee42c3cc1a64ae98a42a5ed510500e262d6416046a36c79ddd1e54057a95c34f581",
+            "file": "libs/ngx-tailwind-flex-ui/src/lib/icon/icon.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "lib-icon",
+            "styleUrls": [
+                "./icon.component.css"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./icon.component.html"
+            ],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [
+                {
+                    "name": "color",
+                    "defaultValue": "'text-gray-500'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 14,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "name",
+                    "defaultValue": "'home'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 12,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "size",
+                    "defaultValue": "'md'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 13,
+                    "type": "\"sm\" | \"md\" | \"lg\" | \"xl\"",
+                    "decorators": []
+                }
+            ],
+            "outputsClass": [],
+            "propertiesClass": [],
+            "methodsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": true,
+            "imports": [
+                {
+                    "name": "CommonModule",
+                    "type": "module"
+                }
+            ],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component, Input } from '@angular/core';\nimport { CommonModule } from '@angular/common'; \n\n@Component({\n  selector: 'lib-icon',\n  standalone: true,\n  imports: [CommonModule],\n  templateUrl: './icon.component.html',\n  styleUrls: ['./icon.component.css'],\n})\nexport class IconComponent {\n  @Input() name = 'home';\n  @Input() size: 'sm' | 'md' | 'lg' | 'xl' = 'md';\n  @Input() color = 'text-gray-500';\n\n  get sizeClass(): string {\n    const sizeMap = {\n      sm: 'text-sm',\n      md: 'text-base',\n      lg: 'text-2xl',\n      xl: 'text-4xl',\n    };\n    return sizeMap[this.size] || sizeMap.md;\n  }\n\n  get colorClass(): string {\n    return this.color;\n  }\n}\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": ".material-icons {\n    display: inline-flex;\n    align-items: center;\n    justify-content: center;\n    vertical-align: middle;\n}",
+                    "styleUrl": "./icon.component.css"
+                }
+            ],
+            "stylesData": "",
+            "extends": [],
+            "accessors": {
+                "sizeClass": {
+                    "name": "sizeClass",
+                    "getSignature": {
+                        "name": "sizeClass",
+                        "type": "string",
+                        "returnType": "string",
+                        "line": 16
+                    }
+                },
+                "colorClass": {
+                    "name": "colorClass",
+                    "getSignature": {
+                        "name": "colorClass",
+                        "type": "string",
+                        "returnType": "string",
+                        "line": 26
+                    }
+                }
+            },
+            "templateData": "<span class=\"material-icons\" [ngClass]=\"[sizeClass, colorClass]\">\n    {{ name }}\n</span>\n  "
+        },
+        {
+            "name": "IconComponent",
+            "id": "component-IconComponent-f4ffddc67d4dc8cdcc909de572d3660df47682439e6a9f4405942573613c1afc2dac2183ba5b0f69bbb0568ec3eb59ac6e3bfa8c56f5eecf072b8b573f060f08",
+            "file": "libs/ngx-tailwind-flex-ui/src/lib/icon/icon.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "lib-icon",
+            "styleUrls": [
+                "./icon.component.css"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./icon.component.html"
+            ],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [
+                {
+                    "name": "color",
+                    "defaultValue": "'text-gray-500'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 14,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "name",
+                    "defaultValue": "'home'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 12,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "size",
+                    "defaultValue": "'md'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 13,
+                    "type": "\"sm\" | \"md\" | \"lg\" | \"xl\"",
+                    "decorators": []
+                }
+            ],
+            "outputsClass": [],
+            "propertiesClass": [],
+            "methodsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": true,
+            "imports": [
+                {
+                    "name": "CommonModule",
+                    "type": "module"
+                }
+            ],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component, Input } from '@angular/core';\nimport { CommonModule } from '@angular/common';\n\n@Component({\n  selector: 'lib-icon',\n  standalone: true,\n  imports: [CommonModule],\n  templateUrl: './icon.component.html',\n  styleUrls: ['./icon.component.css'],\n})\nexport class IconComponent {\n  @Input() name = 'home';\n  @Input() size: 'sm' | 'md' | 'lg' | 'xl' = 'md';\n  @Input() color = 'text-gray-500';\n\n  get sizePx(): number {\n    const sizeMap: Record<string, number> = {\n      sm: 16,\n      md: 24,  // Default Material Icon size\n      lg: 32,\n      xl: 48,\n    };\n    return sizeMap[this.size] || sizeMap['md'];\n  }\n\n  get colorClass(): string {\n    return this.color;\n  }\n}\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": ".material-icons {\n    display: inline-flex;\n    align-items: center;\n    justify-content: center;\n    vertical-align: middle;\n}",
+                    "styleUrl": "./icon.component.css"
+                }
+            ],
+            "stylesData": "",
+            "extends": [],
+            "accessors": {
+                "sizePx": {
+                    "name": "sizePx",
+                    "getSignature": {
+                        "name": "sizePx",
+                        "type": "number",
+                        "returnType": "number",
+                        "line": 16
+                    }
+                },
+                "colorClass": {
+                    "name": "colorClass",
+                    "getSignature": {
+                        "name": "colorClass",
+                        "type": "string",
+                        "returnType": "string",
+                        "line": 26
+                    }
+                }
+            },
+            "templateData": "<span \n  class=\"material-icons\"\n  [ngClass]=\"colorClass\"\n  [style.font-size.px]=\"sizePx\">\n  {{ name }}\n</span>\n"
+        }
+    ],
+    "modules": [],
+    "miscellaneous": {
+        "variables": [
+            {
+                "name": "Accent",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/ngx-tailwind-flex-ui/src/lib/button/button.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  args: {\n    variant: 'accent',\n    disabled: false,\n  },\n  render: (args) => ({\n    props: args,\n    template: `<lib-button [variant]=\"variant\" [disabled]=\"disabled\">Accent Button</lib-button>`,\n  }),\n}"
+            },
+            {
+                "name": "config",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/ngx-tailwind-flex-ui/.storybook/main.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "StorybookConfig",
+                "defaultValue": "{\n  stories: ['../**/*.@(mdx|stories.@(js|jsx|ts|tsx))'],\n  addons: ['@storybook/addon-essentials', '@storybook/addon-interactions'],\n  framework: {\n    name: '@storybook/angular',\n    options: {},\n  },\n  docs: {\n    autodocs: true,\n    defaultName: 'Docs',\n  },\n}"
+            },
+            {
+                "name": "CustomStyled",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/ngx-tailwind-flex-ui/src/lib/button/button.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  args: {\n    variant: 'primary',\n    class: 'text-lg px-6 py-3 bg-green-500 hover:bg-green-600',\n  },\n  render: (args) => ({\n    props: args,\n    template: `<lib-button [variant]=\"variant\" [class]=\"class\">Custom Styled Button</lib-button>`,\n  }),\n}"
+            },
+            {
+                "name": "Default",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/ngx-tailwind-flex-ui/src/lib/icon/icon.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  args: {\n    name: 'home',\n    size: 'md',\n    color: 'text-gray-500',\n  },\n  render: (args) => ({\n    props: args,\n    template: `<lib-icon [name]=\"name\" [size]=\"size\" [color]=\"color\"></lib-icon>`,\n  }),\n}"
+            },
+            {
+                "name": "Disabled",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/ngx-tailwind-flex-ui/src/lib/button/button.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  args: {\n    variant: 'primary',\n    disabled: true,\n  },\n  render: (args) => ({\n    props: args,\n    template: `<lib-button [variant]=\"variant\" [disabled]=\"disabled\">Disabled Button</lib-button>`,\n  }),\n}"
+            },
+            {
+                "name": "LargeRedIcon",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/ngx-tailwind-flex-ui/src/lib/icon/icon.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  args: {\n    name: 'favorite',\n    size: 'xl',\n    color: 'text-red-500',\n  },\n  render: (args) => ({\n    props: args,\n    template: `<lib-icon [name]=\"name\" [size]=\"size\" [color]=\"color\"></lib-icon>`,\n  }),\n}"
+            },
+            {
+                "name": "link",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/ngx-tailwind-flex-ui/.storybook/preview.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "document.createElement('link')"
+            },
+            {
+                "name": "meta",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/ngx-tailwind-flex-ui/src/lib/button/button.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Meta<ButtonComponent>",
+                "defaultValue": "{\n  title: 'Components/Button',\n  component: ButtonComponent,\n  tags: ['autodocs'],\n  argTypes: {\n    variant: {\n      control: 'select',\n      options: ['primary', 'accent', 'outline', 'text'],\n      description: 'Button style variant',\n    },\n    disabled: {\n      control: 'boolean',\n      description: 'Disables the button',\n    },\n    class: {\n      control: 'text',\n      description: 'Additional Tailwind CSS classes for customization',\n    },\n  },\n}"
+            },
+            {
+                "name": "meta",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/ngx-tailwind-flex-ui/src/lib/icon/icon.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Meta<IconComponent>",
+                "defaultValue": "{\n  title: 'Components/Icon',\n  component: IconComponent,\n  tags: ['autodocs'],\n  argTypes: {\n    name: { control: 'text', description: 'Icon name from Material Icons' },\n    size: { \n      control: 'radio', \n      options: ['sm', 'md', 'lg', 'xl'], \n      description: 'Size of the icon' \n    },\n    color: { control: 'text', description: 'Tailwind color classes' },\n  },\n}"
+            },
+            {
+                "name": "Outline",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/ngx-tailwind-flex-ui/src/lib/button/button.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  args: {\n    variant: 'outline',\n    disabled: false,\n  },\n  render: (args) => ({\n    props: args,\n    template: `<lib-button [variant]=\"variant\" [disabled]=\"disabled\">Outline Button</lib-button>`,\n  }),\n}"
+            },
+            {
+                "name": "parameters",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/ngx-tailwind-flex-ui/.storybook/preview.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "object",
+                "defaultValue": "{\n  actions: { argTypesRegex: '^on[A-Z].*' },\n  controls: {\n    matchers: {\n      color: /(background|color)$/i,\n      date: /Date$/,\n    },\n  },\n}"
+            },
+            {
+                "name": "Primary",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/ngx-tailwind-flex-ui/src/lib/button/button.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  args: {\n    variant: 'primary',\n    disabled: false,\n  },\n  render: (args) => ({\n    props: args,\n    template: `<lib-button [variant]=\"variant\" [disabled]=\"disabled\">Primary Button</lib-button>`,\n  }),\n}"
+            },
+            {
+                "name": "SmallBlueIcon",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/ngx-tailwind-flex-ui/src/lib/icon/icon.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  args: {\n    name: 'star',\n    size: 'sm',\n    color: 'text-blue-500',\n  },\n  render: (args) => ({\n    props: args,\n    template: `<lib-icon [name]=\"name\" [size]=\"size\" [color]=\"color\"></lib-icon>`,\n  }),\n}"
+            },
+            {
+                "name": "Text",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/ngx-tailwind-flex-ui/src/lib/button/button.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  args: {\n    variant: 'text',\n    disabled: false,\n  },\n  render: (args) => ({\n    props: args,\n    template: `<lib-button [variant]=\"variant\" [disabled]=\"disabled\">Text Button</lib-button>`,\n  }),\n}"
+            }
+        ],
+        "functions": [],
+        "typealiases": [
+            {
+                "name": "Story",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "StoryObj<ButtonComponent>",
+                "file": "libs/ngx-tailwind-flex-ui/src/lib/button/button.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 183
+            },
+            {
+                "name": "Story",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "StoryObj<IconComponent>",
+                "file": "libs/ngx-tailwind-flex-ui/src/lib/icon/icon.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 183
+            }
+        ],
+        "enumerations": [],
+        "groupedVariables": {
+            "libs/ngx-tailwind-flex-ui/src/lib/button/button.component.stories.ts": [
+                {
+                    "name": "Accent",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/ngx-tailwind-flex-ui/src/lib/button/button.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  args: {\n    variant: 'accent',\n    disabled: false,\n  },\n  render: (args) => ({\n    props: args,\n    template: `<lib-button [variant]=\"variant\" [disabled]=\"disabled\">Accent Button</lib-button>`,\n  }),\n}"
+                },
+                {
+                    "name": "CustomStyled",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/ngx-tailwind-flex-ui/src/lib/button/button.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  args: {\n    variant: 'primary',\n    class: 'text-lg px-6 py-3 bg-green-500 hover:bg-green-600',\n  },\n  render: (args) => ({\n    props: args,\n    template: `<lib-button [variant]=\"variant\" [class]=\"class\">Custom Styled Button</lib-button>`,\n  }),\n}"
+                },
+                {
+                    "name": "Disabled",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/ngx-tailwind-flex-ui/src/lib/button/button.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  args: {\n    variant: 'primary',\n    disabled: true,\n  },\n  render: (args) => ({\n    props: args,\n    template: `<lib-button [variant]=\"variant\" [disabled]=\"disabled\">Disabled Button</lib-button>`,\n  }),\n}"
+                },
+                {
+                    "name": "meta",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/ngx-tailwind-flex-ui/src/lib/button/button.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Meta<ButtonComponent>",
+                    "defaultValue": "{\n  title: 'Components/Button',\n  component: ButtonComponent,\n  tags: ['autodocs'],\n  argTypes: {\n    variant: {\n      control: 'select',\n      options: ['primary', 'accent', 'outline', 'text'],\n      description: 'Button style variant',\n    },\n    disabled: {\n      control: 'boolean',\n      description: 'Disables the button',\n    },\n    class: {\n      control: 'text',\n      description: 'Additional Tailwind CSS classes for customization',\n    },\n  },\n}"
+                },
+                {
+                    "name": "Outline",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/ngx-tailwind-flex-ui/src/lib/button/button.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  args: {\n    variant: 'outline',\n    disabled: false,\n  },\n  render: (args) => ({\n    props: args,\n    template: `<lib-button [variant]=\"variant\" [disabled]=\"disabled\">Outline Button</lib-button>`,\n  }),\n}"
+                },
+                {
+                    "name": "Primary",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/ngx-tailwind-flex-ui/src/lib/button/button.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  args: {\n    variant: 'primary',\n    disabled: false,\n  },\n  render: (args) => ({\n    props: args,\n    template: `<lib-button [variant]=\"variant\" [disabled]=\"disabled\">Primary Button</lib-button>`,\n  }),\n}"
+                },
+                {
+                    "name": "Text",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/ngx-tailwind-flex-ui/src/lib/button/button.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  args: {\n    variant: 'text',\n    disabled: false,\n  },\n  render: (args) => ({\n    props: args,\n    template: `<lib-button [variant]=\"variant\" [disabled]=\"disabled\">Text Button</lib-button>`,\n  }),\n}"
+                }
+            ],
+            "libs/ngx-tailwind-flex-ui/.storybook/main.ts": [
+                {
+                    "name": "config",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/ngx-tailwind-flex-ui/.storybook/main.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "StorybookConfig",
+                    "defaultValue": "{\n  stories: ['../**/*.@(mdx|stories.@(js|jsx|ts|tsx))'],\n  addons: ['@storybook/addon-essentials', '@storybook/addon-interactions'],\n  framework: {\n    name: '@storybook/angular',\n    options: {},\n  },\n  docs: {\n    autodocs: true,\n    defaultName: 'Docs',\n  },\n}"
+                }
+            ],
+            "libs/ngx-tailwind-flex-ui/src/lib/icon/icon.stories.ts": [
+                {
+                    "name": "Default",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/ngx-tailwind-flex-ui/src/lib/icon/icon.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  args: {\n    name: 'home',\n    size: 'md',\n    color: 'text-gray-500',\n  },\n  render: (args) => ({\n    props: args,\n    template: `<lib-icon [name]=\"name\" [size]=\"size\" [color]=\"color\"></lib-icon>`,\n  }),\n}"
+                },
+                {
+                    "name": "LargeRedIcon",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/ngx-tailwind-flex-ui/src/lib/icon/icon.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  args: {\n    name: 'favorite',\n    size: 'xl',\n    color: 'text-red-500',\n  },\n  render: (args) => ({\n    props: args,\n    template: `<lib-icon [name]=\"name\" [size]=\"size\" [color]=\"color\"></lib-icon>`,\n  }),\n}"
+                },
+                {
+                    "name": "meta",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/ngx-tailwind-flex-ui/src/lib/icon/icon.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Meta<IconComponent>",
+                    "defaultValue": "{\n  title: 'Components/Icon',\n  component: IconComponent,\n  tags: ['autodocs'],\n  argTypes: {\n    name: { control: 'text', description: 'Icon name from Material Icons' },\n    size: { \n      control: 'radio', \n      options: ['sm', 'md', 'lg', 'xl'], \n      description: 'Size of the icon' \n    },\n    color: { control: 'text', description: 'Tailwind color classes' },\n  },\n}"
+                },
+                {
+                    "name": "SmallBlueIcon",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/ngx-tailwind-flex-ui/src/lib/icon/icon.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  args: {\n    name: 'star',\n    size: 'sm',\n    color: 'text-blue-500',\n  },\n  render: (args) => ({\n    props: args,\n    template: `<lib-icon [name]=\"name\" [size]=\"size\" [color]=\"color\"></lib-icon>`,\n  }),\n}"
+                }
+            ],
+            "libs/ngx-tailwind-flex-ui/.storybook/preview.ts": [
+                {
+                    "name": "link",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/ngx-tailwind-flex-ui/.storybook/preview.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "document.createElement('link')"
+                },
+                {
+                    "name": "parameters",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/ngx-tailwind-flex-ui/.storybook/preview.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "object",
+                    "defaultValue": "{\n  actions: { argTypesRegex: '^on[A-Z].*' },\n  controls: {\n    matchers: {\n      color: /(background|color)$/i,\n      date: /Date$/,\n    },\n  },\n}"
+                }
+            ]
+        },
+        "groupedFunctions": {},
+        "groupedEnumerations": {},
+        "groupedTypeAliases": {
+            "libs/ngx-tailwind-flex-ui/src/lib/button/button.component.stories.ts": [
+                {
+                    "name": "Story",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "StoryObj<ButtonComponent>",
+                    "file": "libs/ngx-tailwind-flex-ui/src/lib/button/button.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 183
+                }
+            ],
+            "libs/ngx-tailwind-flex-ui/src/lib/icon/icon.stories.ts": [
+                {
+                    "name": "Story",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "StoryObj<IconComponent>",
+                    "file": "libs/ngx-tailwind-flex-ui/src/lib/icon/icon.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 183
+                }
+            ]
+        }
+    },
+    "routes": [],
+    "coverage": {
+        "count": 0,
+        "status": "low",
+        "files": [
+            {
+                "filePath": "libs/ngx-tailwind-flex-ui/.storybook/main.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "config",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/ngx-tailwind-flex-ui/.storybook/preview.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "link",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/ngx-tailwind-flex-ui/.storybook/preview.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "parameters",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/ngx-tailwind-flex-ui/src/lib/button/button.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Accent",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/ngx-tailwind-flex-ui/src/lib/button/button.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "CustomStyled",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/ngx-tailwind-flex-ui/src/lib/button/button.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Disabled",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/ngx-tailwind-flex-ui/src/lib/button/button.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "meta",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/ngx-tailwind-flex-ui/src/lib/button/button.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Outline",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/ngx-tailwind-flex-ui/src/lib/button/button.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Primary",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/ngx-tailwind-flex-ui/src/lib/button/button.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Text",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/ngx-tailwind-flex-ui/src/lib/button/button.component.stories.ts",
+                "type": "type alias",
+                "linktype": "miscellaneous",
+                "linksubtype": "typealias",
+                "name": "Story",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/ngx-tailwind-flex-ui/src/lib/button/button.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "ButtonComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/5",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/ngx-tailwind-flex-ui/src/lib/icon/icon.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "IconComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/4",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/ngx-tailwind-flex-ui/src/lib/icon/icon.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Default",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/ngx-tailwind-flex-ui/src/lib/icon/icon.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "LargeRedIcon",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/ngx-tailwind-flex-ui/src/lib/icon/icon.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "meta",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/ngx-tailwind-flex-ui/src/lib/icon/icon.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "SmallBlueIcon",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/ngx-tailwind-flex-ui/src/lib/icon/icon.stories.ts",
+                "type": "type alias",
+                "linktype": "miscellaneous",
+                "linksubtype": "typealias",
+                "name": "Story",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            }
+        ]
+    }
+}
