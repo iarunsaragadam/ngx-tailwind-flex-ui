@@ -94,6 +94,8 @@ jobs:
         with:
           github_token: ${{ secrets.GH_TOKEN }}
           publish_dir: dist/storybook/ngx-tailwind-flex-ui
+          destination_dir: docs
+          keep_files: true
 
   deploy-playground:
     needs: build-test
@@ -110,9 +112,14 @@ jobs:
       - run: npm ci --legacy-peer-deps
       - name: Build Playground App
         run: npx nx build playground --base-href=/ngx-tailwind-flex-ui/playground/
+      - name: Debug Build Output
+        run: |
+          echo "Checking build output directory..."
+          ls -la dist/apps/playground
       - name: Deploy Playground to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GH_TOKEN }}
           publish_dir: dist/apps/playground
           destination_dir: playground
+          keep_files: true
