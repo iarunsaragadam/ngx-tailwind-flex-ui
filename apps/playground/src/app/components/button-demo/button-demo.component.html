@@ -1,0 +1,24 @@
+<div class="p-6">
+  <h1 class="text-2xl font-bold mb-4">Button Component Demo</h1>
+  <div class="flex flex-col gap-4">
+    <div>
+      <h2 class="text-lg font-semibold mb-2">Default Button</h2>
+      <lib-button>Default Button</lib-button>
+    </div>
+
+    <div>
+      <h2 class="text-lg font-semibold mb-2">Primary Button</h2>
+      <lib-button variant="outline">Outline Button</lib-button>
+    </div>
+
+    <div>
+      <h2 class="text-lg font-semibold mb-2">Secondary Button</h2>
+      <lib-button variant="accent">Accent Button</lib-button>
+    </div>
+
+    <div>
+      <h2 class="text-lg font-semibold mb-2">Disabled Button</h2>
+      <lib-button [disabled]="true">Disabled Button</lib-button>
+    </div>
+  </div>
+</div>
