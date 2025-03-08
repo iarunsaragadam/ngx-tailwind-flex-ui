@@ -16,4 +16,11 @@ export const appRoutes: Route[] = [
         (m) => m.IconDemoComponent
       ),
   },
+  {
+    path: 'card',
+    loadComponent: () =>
+      import('./components/card-demo/card-demo.component').then(
+        (m) => m.CardDemoComponent
+      ),
+  },
 ];
