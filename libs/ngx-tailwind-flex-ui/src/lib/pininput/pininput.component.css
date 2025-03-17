@@ -5,11 +5,11 @@
 }
 
 .otp-box {
-    width: 30px; /* Adjusted width */
-    height: 40px; /* Adjusted height */
-    font-size: 18px; /* Adjusted font size for better readability */
+    width: 10px; /* Adjusted width */
+    height: 10px; /* Adjusted height */
+    font-size: 6px; /* Adjusted font size for better readability */
     text-align: center;
-    border: 2px solid #ccc;
+    border: 1px solid #ccc;
     border-radius: 5px;
     transition: border-color 0.3s ease-in-out;
 }
