@@ -1,0 +1,12 @@
+.half-star {
+    position: relative;
+    display: inline-block;
+  }
+  .half-star::after {
+    content: "⯨"; /* Half-star effect */
+    position: absolute;
+    left: 0;
+    width: 50%;
+    overflow: hidden;
+  }
+  
