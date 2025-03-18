@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <div class="w-full bg-gray-200 rounded-full h-4 overflow-hidden relative">
 
   <!-- Determinate & Buffer Primary Progress -->
@@ -51,4 +52,32 @@ class="absolute top-0 left-0 h-full w-full overflow-hidden"
 </div>
 
 
+=======
+<div
+  class="relative w-full h-4 overflow-hidden bg-gray-200 rounded-md {{ class }}"
+  role="progressbar"
+  [attr.aria-valuemin]="min"
+  [attr.aria-valuemax]="max"
+  [attr.aria-valuenow]="mode === 'determinate' ? value : null"
+>
+  <!-- Buffer Layer (for buffer mode) -->
+  <div
+    *ngIf="mode === 'buffer'"
+    class="absolute top-0 left-0 h-full bg-gray-400 transition-all duration-300"
+    [style.width]="bufferWidth"
+  ></div>
+
+  <!-- Progress Layer -->
+  <div
+    *ngIf="mode !== 'query'"
+    class="absolute top-0 left-0 h-full bg-blue-600 transition-all duration-300"
+    [style.width]="progressWidth"
+  ></div>
+
+  <!-- Indeterminate / Query Mode -->
+  <div
+    *ngIf="mode === 'indeterminate' || mode === 'query'"
+    class="absolute inset-0 h-full bg-blue-600 animate-pulse"
+  ></div>
+>>>>>>> bf823cd (add progress bar)
 </div>
