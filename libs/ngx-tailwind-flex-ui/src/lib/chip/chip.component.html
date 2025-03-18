@@ -1,0 +1,22 @@
+<div
+  class="flex items-center space-x-2 px-3 py-1 rounded-full cursor-pointer focus:ring-2 focus:ring-offset-2"
+  [class.clickable]="clickable"
+  (click)="onClick()"
+  (keydown)="onKeydown($event)"
+  tabindex="0"
+>
+  <!-- Optional Icon -->
+  <span *ngIf="icon" class="material-icons text-sm">{{ icon }}</span>
+
+  <!-- Chip Label -->
+  <ng-content></ng-content>
+
+  <!-- Remove Button (if removable) -->
+  <button
+    *ngIf="removable"
+    class="ml-2 text-white hover:text-gray-300 focus:outline-none"
+    (click)="onRemove($event)"
+  >
+    ✕
+  </button>
+</div>
