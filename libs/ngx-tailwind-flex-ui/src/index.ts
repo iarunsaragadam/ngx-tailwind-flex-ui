@@ -6,3 +6,5 @@ export * from './lib/progress-bar/progress-bar.component';
 
 export * from './lib/progress-bar/progress-bar.component';
 export * from './lib/chip/chip.component';
+export * from './lib/slider/slider.component';
+
