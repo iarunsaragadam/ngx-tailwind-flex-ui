@@ -1,0 +1,74 @@
+<div
+  class="flex flex-col sm:flex-row sm:justify-between sm:items-center p-4 gap-4 text-sm"
+  role="navigation"
+  aria-label="Pagination"
+>
+  <!-- Custom Template Support -->
+  <ng-container *ngIf="customTemplate; else defaultTemplate">
+    <ng-container
+      *ngTemplateOutlet="customTemplate; context: {
+        currentPage: currentPage,
+        totalPages: totalPages,
+        pageSize: pageSize,
+        pageSizeOptions: pageSizeOptions,
+        changePageSize: changePageSize.bind(this),
+        changePage: changePage.bind(this)
+      }"
+    ></ng-container>
+  </ng-container>
+
+  <!-- Default Template -->
+  <ng-template #defaultTemplate>
+    <div class="flex items-center gap-2">
+      <label for="pageSize">Items per page:</label>
+      <select
+        id="pageSize"
+        class="border px-2 py-1 rounded"
+        [value]="pageSize"
+        (change)="changePageSize($any($event.target).value)"
+      >
+        <option *ngFor="let option of pageSizeOptions" [value]="option">
+          {{ option }}
+        </option>
+      </select>
+    </div>
+
+    <div class="flex items-center gap-2">
+      <lib-button
+        variant="outline"
+        (click)="changePage(0)"
+        [disabled]="currentPage === 0"
+      >
+        First
+      </lib-button>
+
+      <lib-button
+        variant="outline"
+        (click)="changePage(currentPage - 1)"
+        [disabled]="currentPage === 0"
+      >
+        Prev
+      </lib-button>
+
+      <span role="status" aria-live="polite">
+        Page {{ currentPage + 1 }} of {{ totalPages }}
+      </span>
+
+      <lib-button
+        variant="outline"
+        (click)="changePage(currentPage + 1)"
+        [disabled]="currentPage >= totalPages - 1"
+      >
+        Next
+      </lib-button>
+
+      <lib-button
+        variant="outline"
+        (click)="changePage(totalPages - 1)"
+        [disabled]="currentPage >= totalPages - 1"
+      >
+        Last
+      </lib-button>
+    </div>
+  </ng-template>
+</div>
