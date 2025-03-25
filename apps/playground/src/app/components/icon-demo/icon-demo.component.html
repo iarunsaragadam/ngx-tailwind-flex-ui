@@ -92,6 +92,34 @@
   <section class="mb-12">
     <h2 class="text-2xl font-semibold mb-4 pb-2 border-b">Interactive Example</h2>
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <!-- Icon Selector -->
+      <div class="p-4 border rounded-lg">
+        <h3 class="text-lg font-medium mb-3">Icon Selector</h3>
+        <div class="flex flex-col gap-4">
+          <p class="text-gray-600">Click on an icon to select it:</p>
+          <div class="grid grid-cols-5 gap-4">
+            <button *ngFor="let icon of commonIcons.slice(0, 10)"
+                 class="p-2 border rounded-md cursor-pointer hover:bg-gray-100 flex flex-col items-center gap-1"
+                 [class.bg-blue-100]="selectedIcon === icon"
+                 (click)="selectIcon(icon)"
+                 (keydown.enter)="selectIcon(icon)"
+                 (keydown.space)="selectIcon(icon); $event.preventDefault()"
+                 tabindex="0"
+                 role="button"
+                 [attr.aria-pressed]="selectedIcon === icon">
+              <lib-icon [name]="icon"></lib-icon>
+              <span class="text-xs">{{icon}}</span>
+            </button>
+          </div>
+          <div class="mt-4 p-4 border rounded-md bg-gray-50 flex items-center justify-center">
+            <div class="flex flex-col items-center gap-2">
+              <lib-icon [name]="selectedIcon" size="xl" color="text-blue-600"></lib-icon>
+              <span class="text-sm">Selected: {{selectedIcon}}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <!-- Animation Example -->
       <div class="p-4 border rounded-lg">
         <h3 class="text-lg font-medium mb-3">Animation Example</h3>
