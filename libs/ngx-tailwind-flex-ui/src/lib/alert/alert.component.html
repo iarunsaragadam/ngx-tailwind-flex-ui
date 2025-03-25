@@ -1,0 +1,39 @@
+<div
+  *ngIf="isVisible"
+  class="alert fixed z-50 p-4 rounded-lg shadow-lg flex justify-between items-center max-w-md mx-auto bg-gray-100 border border-gray-300"
+  [ngClass]="{
+    'bg-green-100 border-green-500': type === 'success',
+    'bg-red-100 border-red-500': type === 'error',
+    'bg-yellow-100 border-yellow-500': type === 'warning',
+    'bg-blue-100 border-blue-500': type === 'info',
+    'top-4 left-4': position === 'top-left',
+    'top-4 left-1/2 -translate-x-1/2': position === 'top-center',
+    'top-4 right-4': position === 'top-right',
+    'bottom-4 left-4': position === 'bottom-left',
+    'bottom-4 left-1/2 -translate-x-1/2': position === 'bottom-center',
+    'bottom-4 right-4': position === 'bottom-right'
+  }"
+  role="alert"
+  aria-live="polite"
+>
+  <div class="flex items-center space-x-2">
+    <span class="message text-gray-800">{{ message }}</span>
+  </div>
+  <div class="flex space-x-2">
+    <button
+      *ngIf="action"
+      (click)="onAction()"
+      class="text-blue-600 hover:text-blue-800 focus:outline-none underline"
+    >
+      {{ action }}
+    </button>
+    <button
+      *ngIf="dismissible"
+      (click)="close()"
+      class="text-gray-500 hover:text-gray-700 focus:outline-none text-xl"
+      aria-label="Close alert"
+    >
+      ✕
+    </button>
+  </div>
+</div>
