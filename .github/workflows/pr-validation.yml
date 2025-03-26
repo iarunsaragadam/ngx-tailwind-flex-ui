@@ -97,6 +97,8 @@ jobs:
           node-version: 20
           cache: "npm"
       - run: npm ci --legacy-peer-deps
+      - name: Install Playwright browsers
+        run: npx playwright install --with-deps
       - name: Run affected tests
         run: npx nx affected -t test e2e --base=origin/${{ github.base_ref }} --head=${{ github.event.pull_request.head.sha }}
         continue-on-error: false
