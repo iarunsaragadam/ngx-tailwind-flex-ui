@@ -27,8 +27,8 @@ jobs:
             ci
             build
           requireScope: false
-          subjectPattern: "^(?!.*(fix|update|change|improve|enhance|cleanup|workaround)$).*$"
-          subjectPatternError: "PR titles should be specific and follow Conventional Commits."
+          subjectPattern: '^(?!.*(fix|update|change|improve|enhance|cleanup|workaround)$).*$'
+          subjectPatternError: 'PR titles should be specific and follow Conventional Commits.'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -76,7 +76,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: "npm"
+          cache: 'npm'
       - run: npm ci --legacy-peer-deps
       - name: Run affected lint
         run: npx nx affected -t lint --base=origin/${{ github.base_ref }} --head=${{ github.event.pull_request.head.sha }}
@@ -95,8 +95,10 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: "npm"
+          cache: 'npm'
       - run: npm ci --legacy-peer-deps
+      - name: Install playwright browsers
+        run: npx playwright install --with-deps
       - name: Run affected tests
         run: npx nx affected -t test e2e --base=origin/${{ github.base_ref }} --head=${{ github.event.pull_request.head.sha }}
         continue-on-error: false
@@ -122,7 +124,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: "npm"
+          cache: 'npm'
       - run: npm ci --legacy-peer-deps
       - name: Check if Storybook builds
         run: npx nx affected -t build-storybook --base=origin/${{ github.base_ref }} --head=${{ github.event.pull_request.head.sha }}
