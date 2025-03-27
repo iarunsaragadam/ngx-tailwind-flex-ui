@@ -1,0 +1,72 @@
+<div
+  class="relative inline-block"
+  [style.width.px]="size"
+  [style.height.px]="size"
+  role="progressbar"
+  [attr.aria-valuenow]="mode === 'determinate' ? value : null"
+  [attr.aria-valuemin]="0"
+  [attr.aria-valuemax]="100"
+  [attr.aria-label]="mode === 'determinate' ? 'Loading progress' : 'Loading'"
+>
+  <!-- Indeterminate Spinner -->
+  <svg
+    *ngIf="mode === 'indeterminate'"
+    class="animate-spin"
+    [style.width.px]="size"
+    [style.height.px]="size"
+    viewBox="0 0 100 100"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <circle
+      class="opacity-25"
+      cx="50"
+      cy="50"
+      r="40"
+      [style.stroke]="color"
+      [style.stroke-width]="thickness"
+      fill="none"
+    />
+    <circle
+      cx="50"
+      cy="50"
+      r="40"
+      [style.stroke]="color"
+      [style.stroke-width]="thickness"
+      fill="none"
+      stroke-linecap="round"
+      stroke-dasharray="251.2"
+      stroke-dashoffset="62.8"
+    />
+  </svg>
+
+  <!-- Determinate Spinner -->
+  <svg
+    *ngIf="mode === 'determinate'"
+    [style.width.px]="size"
+    [style.height.px]="size"
+    viewBox="0 0 100 100"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <circle
+      class="opacity-25"
+      cx="50"
+      cy="50"
+      r="40"
+      [style.stroke]="color"
+      [style.stroke-width]="thickness"
+      fill="none"
+    />
+    <circle
+      class="transition-all duration-300 ease-in-out"
+      cx="50"
+      cy="50"
+      r="40"
+      [style.stroke]="color"
+      [style.stroke-width]="thickness"
+      fill="none"
+      stroke-linecap="round"
+      [style.stroke-dasharray]="251.2"
+      [style.stroke-dashoffset]="251.2 - 251.2 * (value / 100)"
+    />
+  </svg>
+</div>
