@@ -1,0 +1,52 @@
+<div class="relative inline-block w-64">
+    <input
+      #inputRef
+      type="text"
+      class="w-full border rounded px-3 py-2"
+      [value]="formatDate()"
+      readonly
+      (click)="toggleCalendar()"
+    />
+  
+    <div
+      *ngIf="showCalendar"
+      class="absolute mt-1 w-full bg-white shadow border rounded z-10 p-4"
+      role="dialog"
+      aria-label="Calendar popup"
+    >
+      <!-- Header -->
+      <div class="flex justify-between mb-2">
+        <button (click)="prevMonth()">←</button>
+        <div>{{ currentMonth | date: 'MMMM yyyy' }}</div>
+        <button (click)="nextMonth()">→</button>
+      </div>
+  
+      <!-- Weekdays -->
+      <div class="grid grid-cols-7 gap-1 text-center font-medium mb-1">
+        <div *ngFor="let d of ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa']">
+          {{ d }}
+        </div>
+      </div>
+  
+      <!-- Dates -->
+      <div class="grid grid-cols-7 gap-1 text-center">
+        <ng-container *ngFor="let day of daysInMonth">
+          <div *ngIf="!day"></div>
+          <button
+            *ngIf="day"
+            [disabled]="isDisabled(day)"
+            (click)="selectDate(day)"
+            [ngClass]="{
+              'py-1 px-2 rounded hover:bg-blue-200': true,
+              'bg-blue-500 text-white': day && selectedDate && isSameDate(day, selectedDate),
+              'bg-gray-300': day && isDisabled(day),
+              'bg-yellow-200': day && isHoliday(day)
+            }"
+          >
+            {{ day.getDate() }}
+          </button>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+  
