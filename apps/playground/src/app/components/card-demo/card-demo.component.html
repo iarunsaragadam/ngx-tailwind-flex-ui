@@ -1,0 +1,50 @@
+<div class="p-8 max-w-6xl mx-auto">
+  <h1 class="text-3xl font-bold mb-8">Card Component Example</h1>
+
+  <!-- Basic Usage Example -->
+  <section class="mb-8">
+    <h2 class="text-2xl font-semibold mb-4 pb-2 border-b">Basic Card Usage</h2>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <lib-card variant="default">
+        <div class="p-4">
+          <h3 class="text-lg font-medium">Default Card</h3>
+          <p class="mt-2 text-gray-600">Basic card with default styling.</p>
+        </div>
+      </lib-card>
+
+      <lib-card variant="outlined">
+        <div class="p-4">
+          <h3 class="text-lg font-medium">Outlined Card</h3>
+          <p class="mt-2 text-gray-600">Card with a border outline.</p>
+        </div>
+      </lib-card>
+
+      <lib-card variant="elevated">
+        <div class="p-4">
+          <h3 class="text-lg font-medium">Elevated Card</h3>
+          <p class="mt-2 text-gray-600">Card with shadow effect.</p>
+        </div>
+      </lib-card>
+    </div>
+  </section>
+
+  <!-- Card with Header and Footer -->
+  <section class="mb-8">
+    <h2 class="text-2xl font-semibold mb-4 pb-2 border-b">Card with Header and Footer</h2>
+    <div class="w-full max-w-md mx-auto">
+      <lib-card variant="outlined" padding="none">
+        <div class="border-b p-4 bg-gray-50">
+          <h3 class="text-lg font-medium">Card Header</h3>
+        </div>
+        <div class="p-4">
+          <p class="text-gray-600">Main content goes here.</p>
+          <p class="mt-2 text-gray-600">This demonstrates how to structure a card with header and footer.</p>
+        </div>
+        <div class="border-t p-4 bg-gray-50 flex justify-end space-x-2">
+          <lib-button variant="outline">Cancel</lib-button>
+          <lib-button>Submit</lib-button>
+        </div>
+      </lib-card>
+    </div>
+  </section>
+</div>
