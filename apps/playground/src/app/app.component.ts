@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { Route, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { appRoutes } from './app.routes'; // Import app routes
 
@@ -19,12 +19,12 @@ export class AppComponent implements OnInit {
   }
 
   // Extract navigation items from the routes configuration
-  private extractNavItems(routes: any[]): { path: string; label: string }[] {
+  private extractNavItems(routes: Route[]): { path: string; label: string }[] {
     return routes
       .filter((route) => route.path && route.path !== '' && !route.redirectTo)
       .map((route) => ({
-        path: route.path,
-        label: this.formatLabel(route.path),
+        path: route.path as string,
+        label: this.formatLabel(route.path as string),
       }));
   }
 
