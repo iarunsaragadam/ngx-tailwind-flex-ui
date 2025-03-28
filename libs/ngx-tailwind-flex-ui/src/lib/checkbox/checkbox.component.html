@@ -1,0 +1,13 @@
+<label class="flex items-center">
+    <input
+      type="checkbox"
+      [checked]="checked"
+      [disabled]="disabled"
+      [indeterminate]="indeterminate"
+      (change)="onChange($event)"
+      class="form-checkbox"
+    />
+    <span *ngIf="label" class="ml-2" [class.order-last]="labelPosition === 'after'">
+      {{ label }}
+    </span>
+  </label>
