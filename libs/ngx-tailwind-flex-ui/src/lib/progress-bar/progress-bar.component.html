@@ -1,54 +1,27 @@
-<div class="w-full bg-gray-200 rounded-full h-4 overflow-hidden relative">
-
-  <!-- Determinate & Buffer Primary Progress -->
+<div
+  class="relative w-full h-4 overflow-hidden bg-gray-200 rounded-md {{ class }}"
+  role="progressbar"
+  [attr.aria-valuemin]="min"
+  [attr.aria-valuemax]="max"
+  [attr.aria-valuenow]="mode === 'determinate' ? value : null"
+>
+  <!-- Buffer Layer (for buffer mode) -->
   <div
-    *ngIf="variant === 'determinate' || variant === 'buffer'"
-    class="h-full transition-all duration-300"
-    [ngClass]="progressBarClass"
-    [style.width.%]="progress"
-    role="progressbar"
-    [attr.aria-valuenow]="progress"
-    aria-valuemin="0"
-    aria-valuemax="100"
+    *ngIf="mode === 'buffer'"
+    class="absolute top-0 left-0 h-full bg-gray-400 transition-all duration-300"
+    [style.width]="bufferWidth"
   ></div>
 
-  <!-- Indeterminate Animation -->
+  <!-- Progress Layer -->
   <div
-    *ngIf="variant === 'indeterminate'"
-    class="absolute top-0 left-0 h-full w-full overflow-hidden"
-  >
-    <div
-      class="h-full w-1/3 animate-indeterminate"
-      [ngClass]="progressBarClass"
-    ></div>
-  </div>
+    *ngIf="mode !== 'query'"
+    class="absolute top-0 left-0 h-full bg-blue-600 transition-all duration-300"
+    [style.width]="progressWidth"
+  ></div>
 
-  <!-- Query Mode (Reversed Indeterminate) -->
+  <!-- Indeterminate / Query Mode -->
   <div
-    *ngIf="variant === 'query'"
-    class="absolute top-0 left-0 h-full w-full overflow-hidden"
-  >
-    <div
-      class="h-full w-1/3 animate-query"
-      [ngClass]="progressBarClass"
-    ></div>
-  </div>
-
-  <!-- Buffer Secondary Progress -->
-  <!-- Buffer Secondary Progress Background -->
-<div
-*ngIf="variant === 'buffer'"
-class="absolute top-0 left-0 h-full bg-gray-300 opacity-50"
-[style.width.%]="bufferProgress"
-></div>
-
-<!-- Buffer Animation Overlay -->
-<div
-*ngIf="variant === 'buffer'"
-class="absolute top-0 left-0 h-full w-full overflow-hidden"
->
-<div class="buffer-wave"></div>
-</div>
-
-
+    *ngIf="mode === 'indeterminate' || mode === 'query'"
+    class="absolute inset-0 h-full bg-blue-600 animate-pulse"
+  ></div>
 </div>
