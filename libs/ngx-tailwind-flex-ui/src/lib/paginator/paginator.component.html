@@ -1,0 +1,31 @@
+<!-- Page Size Selector -->
+<div class="flex items-center space-x-2">
+  <label for="pageSizeSelect" class="text-gray-600 text-sm">Items per page:</label>
+  <select 
+    id="pageSizeSelect"
+    [value]="pageSize"
+    (change)="changePageSize($event)"
+    class="border border-gray-300 rounded-md px-2 py-2 bg-white text-gray-700">
+    <option *ngFor="let size of pageSizeOptions" [value]="size">{{ size }}</option>
+  </select>
+</div>
+
+<!-- Page Information -->
+<span class="text-gray-500 text-sm">
+  {{ startItem }} – {{ endItem }} of {{ length }}
+</span>
+
+<!-- Navigation Controls -->
+<button 
+  [disabled]="isFirstPage"
+  (click)="changePage(pageIndex - 1)"
+  class="p-2 text-gray-500 hover:text-black disabled:opacity-50">
+  ❮
+</button>
+
+<button 
+  [disabled]="isLastPage"
+  (click)="changePage(pageIndex + 1)"
+  class="p-2 text-gray-500 hover:text-black disabled:opacity-50">
+  ❯
+</button>
