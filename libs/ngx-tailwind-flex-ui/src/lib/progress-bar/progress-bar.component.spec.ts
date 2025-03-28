@@ -1,9 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ProgressBarComponent } from './progress-bar.component';
-<<<<<<< HEAD
-=======
 import { CommonModule } from '@angular/common';
->>>>>>> bf823cd (add progress bar)
 
 describe('ProgressBarComponent', () => {
   let component: ProgressBarComponent;
@@ -11,11 +8,7 @@ describe('ProgressBarComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-<<<<<<< HEAD
-      imports: [ProgressBarComponent],
-=======
       imports: [ProgressBarComponent, CommonModule],
->>>>>>> bf823cd (add progress bar)
     }).compileComponents();
 
     fixture = TestBed.createComponent(ProgressBarComponent);
@@ -26,8 +19,6 @@ describe('ProgressBarComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-<<<<<<< HEAD
-=======
 
   it('should have correct progress width in determinate mode', () => {
     component.mode = 'determinate';
@@ -52,5 +43,4 @@ describe('ProgressBarComponent', () => {
     fixture.detectChanges();
     expect(component.progressWidth).toBe('100%');
   });
->>>>>>> bf823cd (add progress bar)
 });
