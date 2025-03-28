@@ -1,0 +1,15 @@
+<div class="flex space-x-1" role="radiogroup">
+    <ng-container *ngFor="let star of [].constructor(max); let i = index">
+      <span
+        [class]="getStarClasses(i + 1)"
+        (click)="setRating(i + 1)"
+        (keydown.enter)="setRating(i + 1)"
+        tabindex="0"
+        role="radio"
+        [attr.aria-label]="'Rate ' + (i + 1) + ' out of ' + max"
+        [attr.aria-checked]="i + 1 === value"
+      >
+        {{ icon }}
+      </span>
+    </ng-container>
+  </div>
