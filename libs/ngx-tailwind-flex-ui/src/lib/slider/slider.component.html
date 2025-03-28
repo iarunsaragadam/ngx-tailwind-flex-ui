@@ -1,0 +1,46 @@
+<div class="slider-container">
+    <!-- Single Slider -->
+    <div *ngIf="!range" class="slider-wrapper">
+      <div class="thumb-label" *ngIf="showLabels">{{ value }}</div>
+      <input
+        type="range"
+        [min]="min"
+        [max]="max"
+        [step]="step"
+        [(ngModel)]="value"
+        (input)="onInput($event)"
+        class="slider"
+        aria-label="Slider"
+        [attr.aria-valuemin]="min"
+        [attr.aria-valuemax]="max"
+        [attr.aria-valuenow]="value"
+      />
+    </div>
+  
+    <!-- Range Slider -->
+    <div *ngIf="range" class="slider-wrapper">
+      <div class="thumb-label" *ngIf="showLabels">{{ value }}</div>
+      <input
+        type="range"
+        [min]="min"
+        [max]="max"
+        [step]="step"
+        [(ngModel)]="value"
+        (input)="onRangeInput($event, 'min')"
+        class="slider"
+        aria-label="Min Range"
+      />
+      <div class="thumb-label" *ngIf="showLabels">{{ value2 }}</div>
+      <input
+        type="range"
+        [min]="min"
+        [max]="max"
+        [step]="step"
+        [(ngModel)]="value2"
+        (input)="onRangeInput($event, 'max')"
+        class="slider"
+        aria-label="Max Range"
+      />
+    </div>
+  </div>
+  

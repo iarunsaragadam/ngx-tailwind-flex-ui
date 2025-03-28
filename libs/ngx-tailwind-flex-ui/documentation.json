@@ -9,7 +9,7 @@
     "components": [
         {
             "name": "ButtonComponent",
-            "id": "component-ButtonComponent-7b549b2939b9a34abd922e3a0255997fdcdc44e13e0d3149f6f081fd94e8328dfcef16d4b504efc25d22156e814a32fd37682ce25460fb63fbe9f89259f6c17c",
+            "id": "component-ButtonComponent-4a0e060db7ffd16a679766d8091dfca8a2ed6c08cda8975d4756d1434716949e4060c639031b77f2ca38977983acb0622a2fa77db817a21a979f35ebeca9f233",
             "file": "libs/ngx-tailwind-flex-ui/src/lib/button/button.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -74,7 +74,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, Input, HostBinding } from '@angular/core';\n\n@Component({\n  selector: 'lib-button',\n  standalone: true,\n  templateUrl: './button.component.html',\n  styles: [], // No inline styles; Tailwind handles it\n})\nexport class ButtonComponent {\n  @Input() variant: 'primary' | 'accent' | 'outline' | 'text' = 'primary';\n  @Input() disabled = false;\n  @Input() class = ''; // Allow users to pass custom Tailwind classes\n\n  @HostBinding('class') get hostClasses() {\n    const baseClasses =\n      'inline-flex items-center justify-center px-4 py-2 rounded-md font-medium transition-colors duration-200';\n    const variantClasses = {\n      primary:\n        'bg-blue-600 text-white hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2',\n      accent:\n        'bg-purple-600 text-white hover:bg-purple-700 focus:ring-2 focus:ring-purple-500 focus:ring-offset-2',\n      outline:\n        'border border-gray-300 text-gray-700 hover:bg-gray-100 focus:ring-2 focus:ring-gray-500 focus:ring-offset-2',\n      text: 'text-gray-700 hover:bg-gray-100 focus:ring-2 focus:ring-gray-500 focus:ring-offset-2',\n    };\n    const disabledClasses = this.disabled\n      ? 'opacity-50 cursor-not-allowed'\n      : '';\n\n    return `${baseClasses} ${variantClasses[this.variant]} ${disabledClasses} ${\n      this.class\n    }`.trim();\n  }\n}\n",
+            "sourceCode": "import { Component, Input, HostBinding } from '@angular/core';\r\n\r\n@Component({\r\n  selector: 'lib-button',\r\n  standalone: true,\r\n  templateUrl: './button.component.html',\r\n  styles: [], // No inline styles; Tailwind handles it\r\n})\r\nexport class ButtonComponent {\r\n  @Input() variant: 'primary' | 'accent' | 'outline' | 'text' = 'primary';\r\n  @Input() disabled = false;\r\n  @Input() class = ''; // Allow users to pass custom Tailwind classes\r\n\r\n  @HostBinding('class') get hostClasses() {\r\n    const baseClasses =\r\n      'inline-flex items-center justify-center px-4 py-2 rounded-md font-medium transition-colors duration-200';\r\n    const variantClasses = {\r\n      primary:\r\n        'bg-blue-600 text-white hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2',\r\n      accent:\r\n        'bg-purple-600 text-white hover:bg-purple-700 focus:ring-2 focus:ring-purple-500 focus:ring-offset-2',\r\n      outline:\r\n        'border border-gray-300 text-gray-700 hover:bg-gray-100 focus:ring-2 focus:ring-gray-500 focus:ring-offset-2',\r\n      text: 'text-gray-700 hover:bg-gray-100 focus:ring-2 focus:ring-gray-500 focus:ring-offset-2',\r\n    };\r\n    const disabledClasses = this.disabled\r\n      ? 'opacity-50 cursor-not-allowed'\r\n      : '';\r\n\r\n    return `${baseClasses} ${variantClasses[this.variant]} ${disabledClasses} ${\r\n      this.class\r\n    }`.trim();\r\n  }\r\n}\r\n",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
@@ -90,31 +90,65 @@
                     }
                 }
             },
-            "templateData": "<button [disabled]=\"disabled\">\n  <ng-content></ng-content>\n</button>\n"
+            "templateData": "<button [disabled]=\"disabled\">\r\n  <ng-content></ng-content>\r\n</button>\r\n"
         },
         {
-            "name": "IconComponent",
-            "id": "component-IconComponent-5aa773a6e880c2e7321715a97108ab13b79bb19e782154c23dd13ec81d958ee42c3cc1a64ae98a42a5ed510500e262d6416046a36c79ddd1e54057a95c34f581",
-            "file": "libs/ngx-tailwind-flex-ui/src/lib/icon/icon.component.ts",
+            "name": "CheckboxComponent",
+            "id": "component-CheckboxComponent-3e31ed4b198418c35c05e2204cc80f657c0a1a6a48cc16bf1797e1258eebe36b7eff09b47c327cdc58b19a774a707c518858bec3fb9f30a3d09640bf0f2eb373",
+            "file": "libs/ngx-tailwind-flex-ui/src/lib/checkbox/checkbox.component.ts",
             "encapsulation": [],
             "entryComponents": [],
             "inputs": [],
             "outputs": [],
             "providers": [],
-            "selector": "lib-icon",
-            "styleUrls": [
-                "./icon.component.css"
-            ],
+            "selector": "lib-checkbox",
+            "styleUrls": [],
             "styles": [],
             "templateUrl": [
-                "./icon.component.html"
+                "./checkbox.component.html"
             ],
             "viewProviders": [],
             "hostDirectives": [],
             "inputsClass": [
                 {
-                    "name": "color",
-                    "defaultValue": "'text-gray-500'",
+                    "name": "checked",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 11,
+                    "type": "boolean",
+                    "decorators": []
+                },
+                {
+                    "name": "class",
+                    "defaultValue": "''",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 16,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "disabled",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 12,
+                    "type": "boolean",
+                    "decorators": []
+                },
+                {
+                    "name": "indeterminate",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 13,
+                    "type": "boolean",
+                    "decorators": []
+                },
+                {
+                    "name": "label",
+                    "defaultValue": "''",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "line": 14,
@@ -122,27 +156,92 @@
                     "decorators": []
                 },
                 {
-                    "name": "name",
-                    "defaultValue": "'home'",
+                    "name": "labelPosition",
+                    "defaultValue": "'after'",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 12,
-                    "type": "string",
-                    "decorators": []
-                },
-                {
-                    "name": "size",
-                    "defaultValue": "'md'",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "line": 13,
-                    "type": "\"sm\" | \"md\" | \"lg\" | \"xl\"",
+                    "line": 15,
+                    "type": "\"before\" | \"after\"",
                     "decorators": []
                 }
             ],
-            "outputsClass": [],
+            "outputsClass": [
+                {
+                    "name": "checkboxClick",
+                    "defaultValue": "new EventEmitter<Event>()",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 19,
+                    "type": "EventEmitter"
+                },
+                {
+                    "name": "checkedChange",
+                    "defaultValue": "new EventEmitter<boolean>()",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 18,
+                    "type": "EventEmitter"
+                }
+            ],
             "propertiesClass": [],
-            "methodsClass": [],
+            "methodsClass": [
+                {
+                    "name": "onChange",
+                    "args": [
+                        {
+                            "name": "event",
+                            "type": "Event",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 21,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "event",
+                            "type": "Event",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "onClick",
+                    "args": [
+                        {
+                            "name": "event",
+                            "type": "Event",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 25,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "event",
+                            "type": "Event",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                }
+            ],
             "deprecated": false,
             "deprecationMessage": "",
             "hostBindings": [],
@@ -157,41 +256,16 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, Input } from '@angular/core';\nimport { CommonModule } from '@angular/common'; \n\n@Component({\n  selector: 'lib-icon',\n  standalone: true,\n  imports: [CommonModule],\n  templateUrl: './icon.component.html',\n  styleUrls: ['./icon.component.css'],\n})\nexport class IconComponent {\n  @Input() name = 'home';\n  @Input() size: 'sm' | 'md' | 'lg' | 'xl' = 'md';\n  @Input() color = 'text-gray-500';\n\n  get sizeClass(): string {\n    const sizeMap = {\n      sm: 'text-sm',\n      md: 'text-base',\n      lg: 'text-2xl',\n      xl: 'text-4xl',\n    };\n    return sizeMap[this.size] || sizeMap.md;\n  }\n\n  get colorClass(): string {\n    return this.color;\n  }\n}\n",
+            "sourceCode": "import { Component, Input, Output, EventEmitter } from '@angular/core';\r\nimport { CommonModule } from '@angular/common';\r\n@Component({\r\n  selector: 'lib-checkbox',\r\n  standalone: true,\r\n  imports: [CommonModule],\r\n  templateUrl: './checkbox.component.html',\r\n  styles: [], // No inline styles; Tailwind handles it\r\n})\r\nexport class CheckboxComponent {\r\n  @Input() checked = false;\r\n  @Input() disabled = false;\r\n  @Input() indeterminate = false;\r\n  @Input() label = '';\r\n  @Input() labelPosition: 'before' | 'after' = 'after';\r\n  @Input() class = ''; // Allow users to pass custom Tailwind classes\r\n\r\n  @Output() checkedChange = new EventEmitter<boolean>();\r\n  @Output() checkboxClick = new EventEmitter<Event>();\r\n\r\n  onChange(event: Event) {\r\n    this.checkedChange.emit((event.target as HTMLInputElement).checked);\r\n  }\r\n\r\n  onClick(event: Event) {\r\n    this.checkboxClick.emit(event);\r\n  }\r\n}",
             "assetsDirs": [],
-            "styleUrlsData": [
-                {
-                    "data": ".material-icons {\n    display: inline-flex;\n    align-items: center;\n    justify-content: center;\n    vertical-align: middle;\n}",
-                    "styleUrl": "./icon.component.css"
-                }
-            ],
+            "styleUrlsData": "",
             "stylesData": "",
             "extends": [],
-            "accessors": {
-                "sizeClass": {
-                    "name": "sizeClass",
-                    "getSignature": {
-                        "name": "sizeClass",
-                        "type": "string",
-                        "returnType": "string",
-                        "line": 16
-                    }
-                },
-                "colorClass": {
-                    "name": "colorClass",
-                    "getSignature": {
-                        "name": "colorClass",
-                        "type": "string",
-                        "returnType": "string",
-                        "line": 26
-                    }
-                }
-            },
-            "templateData": "<span class=\"material-icons\" [ngClass]=\"[sizeClass, colorClass]\">\n    {{ name }}\n</span>\n  "
+            "templateData": "<label class=\"flex items-center\">\r\n    <input\r\n      type=\"checkbox\"\r\n      [checked]=\"checked\"\r\n      [disabled]=\"disabled\"\r\n      [indeterminate]=\"indeterminate\"\r\n      (change)=\"onChange($event)\"\r\n      class=\"form-checkbox\"\r\n    />\r\n    <span *ngIf=\"label\" class=\"ml-2\" [class.order-last]=\"labelPosition === 'after'\">\r\n      {{ label }}\r\n    </span>\r\n  </label>"
         },
         {
             "name": "IconComponent",
-            "id": "component-IconComponent-f4ffddc67d4dc8cdcc909de572d3660df47682439e6a9f4405942573613c1afc2dac2183ba5b0f69bbb0568ec3eb59ac6e3bfa8c56f5eecf072b8b573f060f08",
+            "id": "component-IconComponent-f8319707c4db8c28b1c60cee96154c58150cc29b3cf08e5d353aea2d6c0988772ae60eaf015395a6d4d3e8fb7cf4bea0e18774b39cae83d9e473d3a30a4a0fe0",
             "file": "libs/ngx-tailwind-flex-ui/src/lib/icon/icon.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -254,11 +328,11 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, Input } from '@angular/core';\nimport { CommonModule } from '@angular/common';\n\n@Component({\n  selector: 'lib-icon',\n  standalone: true,\n  imports: [CommonModule],\n  templateUrl: './icon.component.html',\n  styleUrls: ['./icon.component.css'],\n})\nexport class IconComponent {\n  @Input() name = 'home';\n  @Input() size: 'sm' | 'md' | 'lg' | 'xl' = 'md';\n  @Input() color = 'text-gray-500';\n\n  get sizePx(): number {\n    const sizeMap: Record<string, number> = {\n      sm: 16,\n      md: 24,  // Default Material Icon size\n      lg: 32,\n      xl: 48,\n    };\n    return sizeMap[this.size] || sizeMap['md'];\n  }\n\n  get colorClass(): string {\n    return this.color;\n  }\n}\n",
+            "sourceCode": "import { Component, Input } from '@angular/core';\r\nimport { CommonModule } from '@angular/common';\r\n\r\n@Component({\r\n  selector: 'lib-icon',\r\n  standalone: true,\r\n  imports: [CommonModule],\r\n  templateUrl: './icon.component.html',\r\n  styleUrls: ['./icon.component.css'],\r\n})\r\nexport class IconComponent {\r\n  @Input() name = 'home';\r\n  @Input() size: 'sm' | 'md' | 'lg' | 'xl' = 'md';\r\n  @Input() color = 'text-gray-500';\r\n\r\n  get sizePx(): number {\r\n    const sizeMap: Record<string, number> = {\r\n      sm: 16,\r\n      md: 24,  // Default Material Icon size\r\n      lg: 32,\r\n      xl: 48,\r\n    };\r\n    return sizeMap[this.size] || sizeMap['md'];\r\n  }\r\n\r\n  get colorClass(): string {\r\n    return this.color;\r\n  }\r\n}\r\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": ".material-icons {\n    display: inline-flex;\n    align-items: center;\n    justify-content: center;\n    vertical-align: middle;\n}",
+                    "data": ".material-icons {\r\n    display: inline-flex;\r\n    align-items: center;\r\n    justify-content: center;\r\n    vertical-align: middle;\r\n}",
                     "styleUrl": "./icon.component.css"
                 }
             ],
@@ -284,7 +358,751 @@
                     }
                 }
             },
-            "templateData": "<span \n  class=\"material-icons\"\n  [ngClass]=\"colorClass\"\n  [style.font-size.px]=\"sizePx\">\n  {{ name }}\n</span>\n"
+            "templateData": "<span \r\n  class=\"material-icons\"\r\n  [ngClass]=\"colorClass\"\r\n  [style.font-size.px]=\"sizePx\">\r\n  {{ name }}\r\n</span>\r\n"
+        },
+        {
+            "name": "LoadingSpinnerComponent",
+            "id": "component-LoadingSpinnerComponent-87646e3e0b77bb88f2ed95a1c78b1b56876072354a4b59a95947194859bc52044d1abe3d30b75bb063d39e64c4a3b386c488745ad2424f51f0603f821834f0ca",
+            "file": "libs/ngx-tailwind-flex-ui/src/lib/loadingSpinner/loadingSpinner.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "lib-loading-spinner",
+            "styleUrls": [
+                "./loadingSpinner.component.css"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./loadingSpinner.component.html"
+            ],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [
+                {
+                    "name": "color",
+                    "defaultValue": "'#3b82f6'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 16,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "mode",
+                    "defaultValue": "'indeterminate'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 12,
+                    "type": "\"determinate\" | \"indeterminate\"",
+                    "decorators": []
+                },
+                {
+                    "name": "size",
+                    "defaultValue": "40",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 14,
+                    "type": "number",
+                    "decorators": []
+                },
+                {
+                    "name": "thickness",
+                    "defaultValue": "4",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 15,
+                    "type": "number",
+                    "decorators": []
+                },
+                {
+                    "name": "value",
+                    "defaultValue": "0",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 13,
+                    "type": "number",
+                    "decorators": []
+                }
+            ],
+            "outputsClass": [],
+            "propertiesClass": [],
+            "methodsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": true,
+            "imports": [
+                {
+                    "name": "CommonModule",
+                    "type": "module"
+                }
+            ],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component, Input } from '@angular/core';\r\nimport { CommonModule } from '@angular/common';\r\n\r\n@Component({\r\n  selector: 'lib-loading-spinner',\r\n  standalone: true,\r\n  imports: [CommonModule],\r\n  templateUrl: './loadingSpinner.component.html',\r\n  styleUrls: ['./loadingSpinner.component.css'],\r\n})\r\nexport class LoadingSpinnerComponent {\r\n  @Input() mode: 'determinate' | 'indeterminate' = 'indeterminate'; // Loading state\r\n  @Input() value = 0; // Progress value (0-100) for determinate mode\r\n  @Input() size = 40; // Diameter in pixels\r\n  @Input() thickness = 4; // Stroke width in pixels\r\n  @Input() color = '#3b82f6'; // Default Tailwind blue-500\r\n}\r\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": ":host {\r\n  display: inline-block;\r\n}\r\n\r\nsvg {\r\n  display: block;\r\n}\r\n",
+                    "styleUrl": "./loadingSpinner.component.css"
+                }
+            ],
+            "stylesData": "",
+            "extends": [],
+            "templateData": "<div\r\n  class=\"relative inline-block\"\r\n  [style.width.px]=\"size\"\r\n  [style.height.px]=\"size\"\r\n  role=\"progressbar\"\r\n  [attr.aria-valuenow]=\"mode === 'determinate' ? value : null\"\r\n  [attr.aria-valuemin]=\"0\"\r\n  [attr.aria-valuemax]=\"100\"\r\n  [attr.aria-label]=\"mode === 'determinate' ? 'Loading progress' : 'Loading'\"\r\n>\r\n  <!-- Indeterminate Spinner -->\r\n  <svg\r\n    *ngIf=\"mode === 'indeterminate'\"\r\n    class=\"animate-spin\"\r\n    [style.width.px]=\"size\"\r\n    [style.height.px]=\"size\"\r\n    viewBox=\"0 0 100 100\"\r\n    xmlns=\"http://www.w3.org/2000/svg\"\r\n  >\r\n    <circle\r\n      class=\"opacity-25\"\r\n      cx=\"50\"\r\n      cy=\"50\"\r\n      r=\"40\"\r\n      [style.stroke]=\"color\"\r\n      [style.stroke-width]=\"thickness\"\r\n      fill=\"none\"\r\n    />\r\n    <circle\r\n      cx=\"50\"\r\n      cy=\"50\"\r\n      r=\"40\"\r\n      [style.stroke]=\"color\"\r\n      [style.stroke-width]=\"thickness\"\r\n      fill=\"none\"\r\n      stroke-linecap=\"round\"\r\n      stroke-dasharray=\"251.2\"\r\n      stroke-dashoffset=\"62.8\"\r\n    />\r\n  </svg>\r\n\r\n  <!-- Determinate Spinner -->\r\n  <svg\r\n    *ngIf=\"mode === 'determinate'\"\r\n    [style.width.px]=\"size\"\r\n    [style.height.px]=\"size\"\r\n    viewBox=\"0 0 100 100\"\r\n    xmlns=\"http://www.w3.org/2000/svg\"\r\n  >\r\n    <circle\r\n      class=\"opacity-25\"\r\n      cx=\"50\"\r\n      cy=\"50\"\r\n      r=\"40\"\r\n      [style.stroke]=\"color\"\r\n      [style.stroke-width]=\"thickness\"\r\n      fill=\"none\"\r\n    />\r\n    <circle\r\n      class=\"transition-all duration-300 ease-in-out\"\r\n      cx=\"50\"\r\n      cy=\"50\"\r\n      r=\"40\"\r\n      [style.stroke]=\"color\"\r\n      [style.stroke-width]=\"thickness\"\r\n      fill=\"none\"\r\n      stroke-linecap=\"round\"\r\n      [style.stroke-dasharray]=\"251.2\"\r\n      [style.stroke-dashoffset]=\"251.2 - 251.2 * (value / 100)\"\r\n    />\r\n  </svg>\r\n</div>\r\n"
+        },
+        {
+            "name": "PininputComponent",
+            "id": "component-PininputComponent-c68e7bfe8118d4c154aebb06c09d53b0db03f11cb001b4710e0b6a32a806443ed8802e3c53bb843a5fb6a231f38e0cf2c7d3ebac3d5cc8a476054c835a3f7e3f",
+            "file": "libs/ngx-tailwind-flex-ui/src/lib/pininput/pininput.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "lib-otp-input",
+            "styleUrls": [],
+            "styles": [],
+            "templateUrl": [
+                "./pininput.component.html"
+            ],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [
+                {
+                    "name": "autoSubmit",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 25,
+                    "type": "boolean",
+                    "decorators": []
+                },
+                {
+                    "name": "customClass",
+                    "defaultValue": "''",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 27,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "disabled",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 26,
+                    "type": "boolean",
+                    "decorators": []
+                },
+                {
+                    "name": "length",
+                    "defaultValue": "6",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 22,
+                    "type": "number",
+                    "decorators": []
+                },
+                {
+                    "name": "mask",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 24,
+                    "type": "boolean",
+                    "decorators": []
+                },
+                {
+                    "name": "pin",
+                    "defaultValue": "''",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 28,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "preventPaste",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 29,
+                    "type": "boolean",
+                    "decorators": []
+                },
+                {
+                    "name": "type",
+                    "defaultValue": "'number'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 23,
+                    "type": "string",
+                    "decorators": []
+                }
+            ],
+            "outputsClass": [
+                {
+                    "name": "completed",
+                    "defaultValue": "new EventEmitter<string>()",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 30,
+                    "type": "EventEmitter"
+                }
+            ],
+            "propertiesClass": [
+                {
+                    "name": "inputBoxes",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "QueryList<ElementRef>",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 32,
+                    "decorators": [
+                        {
+                            "name": "ViewChildren",
+                            "stringifiedArguments": "'otpInput'"
+                        }
+                    ],
+                    "modifierKind": [
+                        170
+                    ]
+                },
+                {
+                    "name": "otpValues",
+                    "defaultValue": "[]",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string[]",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 33,
+                    "modifierKind": [
+                        125
+                    ]
+                }
+            ],
+            "methodsClass": [
+                {
+                    "name": "emitOTP",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 92,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\nEmits OTP when all fields are filled",
+                    "description": "<p>Emits OTP when all fields are filled</p>\n",
+                    "modifierKind": [
+                        125
+                    ]
+                },
+                {
+                    "name": "ngAfterViewInit",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 39,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
+                {
+                    "name": "onInput",
+                    "args": [
+                        {
+                            "name": "event",
+                            "type": "Event",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        },
+                        {
+                            "name": "index",
+                            "type": "number",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 44,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\nHandles user input in OTP fields",
+                    "description": "<p>Handles user input in OTP fields</p>\n",
+                    "modifierKind": [
+                        125
+                    ],
+                    "jsdoctags": [
+                        {
+                            "name": "event",
+                            "type": "Event",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        },
+                        {
+                            "name": "index",
+                            "type": "number",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "onKeyDown",
+                    "args": [
+                        {
+                            "name": "event",
+                            "type": "KeyboardEvent",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        },
+                        {
+                            "name": "index",
+                            "type": "number",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 68,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\nHandles Backspace key for moving to the previous field",
+                    "description": "<p>Handles Backspace key for moving to the previous field</p>\n",
+                    "modifierKind": [
+                        125
+                    ],
+                    "jsdoctags": [
+                        {
+                            "name": "event",
+                            "type": "KeyboardEvent",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        },
+                        {
+                            "name": "index",
+                            "type": "number",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "onPaste",
+                    "args": [
+                        {
+                            "name": "event",
+                            "type": "ClipboardEvent",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 75,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\nHandles pasting OTP values",
+                    "description": "<p>Handles pasting OTP values</p>\n",
+                    "modifierKind": [
+                        125
+                    ],
+                    "jsdoctags": [
+                        {
+                            "name": "event",
+                            "type": "ClipboardEvent",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": true,
+            "imports": [
+                {
+                    "name": "CommonModule",
+                    "type": "module"
+                },
+                {
+                    "name": "FormsModule",
+                    "type": "module"
+                }
+            ],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import {\r\n  Component,\r\n  Input,\r\n  Output,\r\n  EventEmitter,\r\n  ViewChildren,\r\n  QueryList,\r\n  ElementRef,\r\n  AfterViewInit\r\n} from '@angular/core';\r\nimport { CommonModule } from '@angular/common';\r\nimport { FormsModule } from '@angular/forms';\r\n\r\n@Component({\r\n  selector: 'lib-otp-input',\r\n  standalone: true,\r\n  imports: [CommonModule, FormsModule], // ✅ Ensure FormsModule is imported\r\n  templateUrl: './pininput.component.html',\r\n  styles: [],\r\n})\r\nexport class PininputComponent implements AfterViewInit {\r\n  @Input() public length = 6; // Default 6-digit OTP\r\n  @Input() public type = 'number'; // Accepts only numbers by default\r\n  @Input() public mask = false; // Mask input like passwords\r\n  @Input() public autoSubmit = false; // Auto-submit when complete\r\n  @Input() public disabled = false; // Disable input\r\n  @Input() public customClass = ''; // Custom styling\r\n  @Input() public pin = ''; // Ensure property exists\r\n  @Input() public preventPaste = false;\r\n  @Output() public completed = new EventEmitter<string>(); // Emits OTP when complete\r\n\r\n  @ViewChildren('otpInput') inputBoxes!: QueryList<ElementRef>;\r\n  public otpValues: string[] = [];\r\n\r\n  constructor() {\r\n    this.otpValues = new Array(this.length).fill('');\r\n  }\r\n\r\n  ngAfterViewInit() {\r\n    setTimeout(() => this.inputBoxes.get(0)?.nativeElement.focus(), 100);\r\n  }\r\n\r\n  /** Handles user input in OTP fields */\r\n  public onInput(event: Event, index: number) {\r\n    const input = event.target as HTMLInputElement;\r\n    const value = input.value;\r\n\r\n    // Allow only numbers if type is 'number'\r\n    if (this.type === 'number' && !/^\\d$/.test(value)) {\r\n      input.value = '';\r\n      return;\r\n    }\r\n\r\n    this.otpValues[index] = value;\r\n\r\n    // Move to the next input box if a digit is entered\r\n    if (value && index < this.length - 1) {\r\n      this.inputBoxes.get(index + 1)?.nativeElement.focus();\r\n    }\r\n\r\n    // Emit OTP if all fields are filled\r\n    if (this.otpValues.every((v) => v !== '')) {\r\n      this.emitOTP();\r\n    }\r\n  }\r\n\r\n  /** Handles Backspace key for moving to the previous field */\r\n  public onKeyDown(event: KeyboardEvent, index: number) {\r\n    if (event.key === 'Backspace' && !this.otpValues[index] && index > 0) {\r\n      this.inputBoxes.get(index - 1)?.nativeElement.focus();\r\n    }\r\n  }\r\n\r\n  /** Handles pasting OTP values */\r\n  public onPaste(event: ClipboardEvent) {\r\n    if (this.preventPaste) {\r\n      event.preventDefault();\r\n      return;\r\n    }\r\n\r\n    event.preventDefault();\r\n    const pasteData = event.clipboardData?.getData('text') ?? '';\r\n\r\n    // Validate if the pasted data length matches the OTP length\r\n    if (pasteData.length === this.length && /^[a-zA-Z0-9]+$/.test(pasteData)) {\r\n      this.otpValues = pasteData.split('');\r\n      this.emitOTP();\r\n    }\r\n  }\r\n\r\n  /** Emits OTP when all fields are filled */\r\n  public emitOTP() {\r\n    const otp = this.otpValues.join('');\r\n    if (this.autoSubmit) {\r\n      this.completed.emit(otp);\r\n    }\r\n  }\r\n}\r\n",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "args": [],
+                "line": 33
+            },
+            "extends": [],
+            "implements": [
+                "AfterViewInit"
+            ],
+            "templateData": "<div class=\"otp-container\">\r\n    <input\r\n      *ngFor=\"let digit of otpValues; let i = index\"\r\n      #otpInput\r\n      type=\"{{ mask ? 'password' : 'text' }}\"\r\n      [(ngModel)]=\"otpValues[i]\"\r\n      (input)=\"onInput($event, i)\"\r\n      (keydown)=\"onKeyDown($event, i)\"\r\n      (paste)=\"onPaste($event)\"\r\n      maxlength=\"1\"\r\n      [disabled]=\"disabled\"\r\n      class=\"otp-box\"\r\n      [attr.aria-label]=\"'OTP Digit ' + (i + 1)\"\r\n    />\r\n  </div>"
+        },
+        {
+            "name": "ProgressBarComponent",
+            "id": "component-ProgressBarComponent-abb9f969a514074cc9c18fca0ffab71b148411d0c381a30c661d2d3ea0f82e1f4ed5d66aaf817ee3068bc81fc62131b1d13bf0e1373f72bbfeb0987dbee91d68",
+            "file": "libs/ngx-tailwind-flex-ui/src/lib/progress-bar/progress-bar.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "lib-progress-bar",
+            "styleUrls": [],
+            "styles": [],
+            "templateUrl": [
+                "./progress-bar.component.html"
+            ],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [
+                {
+                    "name": "bufferValue",
+                    "defaultValue": "100",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 14,
+                    "type": "number",
+                    "decorators": []
+                },
+                {
+                    "name": "class",
+                    "defaultValue": "''",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 17,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "max",
+                    "defaultValue": "100",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 16,
+                    "type": "number",
+                    "decorators": []
+                },
+                {
+                    "name": "min",
+                    "defaultValue": "0",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 15,
+                    "type": "number",
+                    "decorators": []
+                },
+                {
+                    "name": "mode",
+                    "defaultValue": "'determinate'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 12,
+                    "type": "\"determinate\" | \"indeterminate\" | \"buffer\" | \"query\"",
+                    "decorators": []
+                },
+                {
+                    "name": "value",
+                    "defaultValue": "0",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 13,
+                    "type": "number",
+                    "decorators": []
+                }
+            ],
+            "outputsClass": [],
+            "propertiesClass": [],
+            "methodsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": true,
+            "imports": [
+                {
+                    "name": "CommonModule",
+                    "type": "module"
+                }
+            ],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component, Input,  } from '@angular/core';\r\nimport { CommonModule } from '@angular/common';\r\n\r\n@Component({\r\n  selector: 'lib-progress-bar',\r\n  standalone: true,\r\n  templateUrl: './progress-bar.component.html',\r\n  styles: [],\r\n  imports: [CommonModule],\r\n})\r\nexport class ProgressBarComponent {\r\n  @Input() mode: 'determinate' | 'indeterminate' | 'buffer' | 'query' = 'determinate';\r\n  @Input() value = 0; // Current progress value\r\n  @Input() bufferValue = 100; // Buffer progress value (for buffer mode)\r\n  @Input() min = 0; // Minimum progress value\r\n  @Input() max = 100; // Maximum progress value\r\n  @Input() class = ''; // Additional Tailwind classes\r\n\r\n  get progressWidth(): string {\r\n    if (this.mode === 'indeterminate' || this.mode === 'query') return '100%';\r\n    if (this.max === this.min) return '0%'; // Prevent division by zero\r\n    const clampedValue = Math.max(this.min, Math.min(this.value, this.max));\r\n    return `${((clampedValue - this.min) / (this.max - this.min)) * 100}%`;\r\n  }\r\n\r\n  get bufferWidth(): string {\r\n    if (this.mode !== 'buffer') return '0%';\r\n    if (this.max === this.min) return '100%';\r\n    const clampedBuffer = Math.max(this.min, Math.min(this.bufferValue, this.max));\r\n    return `${((clampedBuffer - this.min) / (this.max - this.min)) * 100}%`;\r\n  }\r\n}\r\n",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "",
+            "extends": [],
+            "accessors": {
+                "progressWidth": {
+                    "name": "progressWidth",
+                    "getSignature": {
+                        "name": "progressWidth",
+                        "type": "string",
+                        "returnType": "string",
+                        "line": 19
+                    }
+                },
+                "bufferWidth": {
+                    "name": "bufferWidth",
+                    "getSignature": {
+                        "name": "bufferWidth",
+                        "type": "string",
+                        "returnType": "string",
+                        "line": 26
+                    }
+                }
+            },
+            "templateData": "<div\r\n  class=\"relative w-full h-4 overflow-hidden bg-gray-200 rounded-md {{ class }}\"\r\n  role=\"progressbar\"\r\n  [attr.aria-valuemin]=\"min\"\r\n  [attr.aria-valuemax]=\"max\"\r\n  [attr.aria-valuenow]=\"mode === 'determinate' ? value : null\"\r\n>\r\n  <!-- Buffer Layer (for buffer mode) -->\r\n  <div\r\n    *ngIf=\"mode === 'buffer'\"\r\n    class=\"absolute top-0 left-0 h-full bg-gray-400 transition-all duration-300\"\r\n    [style.width]=\"bufferWidth\"\r\n  ></div>\r\n\r\n  <!-- Progress Layer -->\r\n  <div\r\n    *ngIf=\"mode !== 'query'\"\r\n    class=\"absolute top-0 left-0 h-full bg-blue-600 transition-all duration-300\"\r\n    [style.width]=\"progressWidth\"\r\n  ></div>\r\n\r\n  <!-- Indeterminate / Query Mode -->\r\n  <div\r\n    *ngIf=\"mode === 'indeterminate' || mode === 'query'\"\r\n    class=\"absolute inset-0 h-full bg-blue-600 animate-pulse\"\r\n  ></div>\r\n</div>\r\n"
+        },
+        {
+            "name": "RatingComponent",
+            "id": "component-RatingComponent-9ec8cc587143bf3ef43816fb5ec14d7c9aaa00b7a51031589a5d8c28dc236a908a220f28a8a4727c9bfc7dab2985e3cfc1e3988693c687d67fceb70320817a6c",
+            "file": "libs/ngx-tailwind-flex-ui/src/lib/rating/rating.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "lib-rating",
+            "styleUrls": [
+                "./rating.component.css"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./rating.component.html"
+            ],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [
+                {
+                    "name": "activeColor",
+                    "defaultValue": "'text-yellow-400'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 18,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "allowHalf",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 15,
+                    "type": "boolean",
+                    "decorators": []
+                },
+                {
+                    "name": "icon",
+                    "defaultValue": "'⭐'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 16,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "inactiveColor",
+                    "defaultValue": "'text-gray-300'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 19,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "max",
+                    "defaultValue": "5",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 12,
+                    "type": "number",
+                    "decorators": []
+                },
+                {
+                    "name": "readonly",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 14,
+                    "type": "boolean",
+                    "decorators": []
+                },
+                {
+                    "name": "size",
+                    "defaultValue": "'text-2xl'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 17,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "value",
+                    "defaultValue": "0",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 13,
+                    "type": "number",
+                    "decorators": []
+                }
+            ],
+            "outputsClass": [
+                {
+                    "name": "valueChange",
+                    "defaultValue": "new EventEmitter<number>()",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 20,
+                    "type": "EventEmitter"
+                }
+            ],
+            "propertiesClass": [],
+            "methodsClass": [
+                {
+                    "name": "getStarClasses",
+                    "args": [
+                        {
+                            "name": "starIndex",
+                            "type": "number",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "string",
+                    "typeParameters": [],
+                    "line": 29,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "starIndex",
+                            "type": "number",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "setRating",
+                    "args": [
+                        {
+                            "name": "rating",
+                            "type": "number",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        },
+                        {
+                            "name": "isHalf",
+                            "type": "",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "defaultValue": "false"
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 22,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "rating",
+                            "type": "number",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        },
+                        {
+                            "name": "isHalf",
+                            "type": "",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "defaultValue": "false",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": true,
+            "imports": [
+                {
+                    "name": "CommonModule",
+                    "type": "module"
+                }
+            ],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component, Input, Output, EventEmitter } from '@angular/core';\r\nimport { CommonModule } from '@angular/common';\r\n\r\n@Component({\r\n  selector: 'lib-rating',\r\n  standalone: true,\r\n  templateUrl: './rating.component.html',\r\n  styleUrls: ['./rating.component.css'],\r\n  imports: [CommonModule],\r\n})\r\nexport class RatingComponent {\r\n  @Input() max = 5;\r\n  @Input() value = 0;\r\n  @Input() readonly = false;\r\n  @Input() allowHalf!: boolean;  // ✅ Fixed: No default value, avoids ESLint issue\r\n  @Input() icon = '⭐';\r\n  @Input() size = 'text-2xl';\r\n  @Input() activeColor = 'text-yellow-400';\r\n  @Input() inactiveColor = 'text-gray-300';\r\n  @Output() valueChange = new EventEmitter<number>();\r\n\r\n  setRating(rating: number, isHalf = false) {\r\n    if (!this.readonly) {\r\n      this.value = isHalf && this.allowHalf ? rating + 0.5 : rating;\r\n      this.valueChange.emit(this.value);\r\n    }\r\n  }\r\n\r\n  getStarClasses(starIndex: number) {\r\n    if (this.value >= starIndex) {\r\n      return `${this.activeColor} ${this.size}`;\r\n    } else if (this.allowHalf && this.value >= starIndex - 0.5) {\r\n      return `${this.activeColor} ${this.size} half-star`;\r\n    } else {\r\n      return `${this.inactiveColor} ${this.size}`;\r\n    }\r\n  }\r\n}\r\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": ".half-star {\r\n    position: relative;\r\n    display: inline-block;\r\n  }\r\n  .half-star::after {\r\n    content: \"⯨\"; /* Half-star effect */\r\n    position: absolute;\r\n    left: 0;\r\n    width: 50%;\r\n    overflow: hidden;\r\n  }\r\n  ",
+                    "styleUrl": "./rating.component.css"
+                }
+            ],
+            "stylesData": "",
+            "extends": [],
+            "templateData": "<div class=\"flex space-x-1\" role=\"radiogroup\">\r\n    <ng-container *ngFor=\"let star of [].constructor(max); let i = index\">\r\n      <span\r\n        [class]=\"getStarClasses(i + 1)\"\r\n        (click)=\"setRating(i + 1)\"\r\n        (keydown.enter)=\"setRating(i + 1)\"\r\n        tabindex=\"0\"\r\n        role=\"radio\"\r\n        [attr.aria-label]=\"'Rate ' + (i + 1) + ' out of ' + max\"\r\n        [attr.aria-checked]=\"i + 1 === value\"\r\n      >\r\n        {{ icon }}\r\n      </span>\r\n    </ng-container>\r\n  </div>"
         }
     ],
     "modules": [],
@@ -298,7 +1116,37 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\n  args: {\n    variant: 'accent',\n    disabled: false,\n  },\n  render: (args) => ({\n    props: args,\n    template: `<lib-button [variant]=\"variant\" [disabled]=\"disabled\">Accent Button</lib-button>`,\n  }),\n}"
+                "defaultValue": "{\r\n  args: {\r\n    variant: 'accent',\r\n    disabled: false,\r\n  },\r\n  render: (args) => ({\r\n    props: args,\r\n    template: `<lib-button [variant]=\"variant\" [disabled]=\"disabled\">Accent Button</lib-button>`,\r\n  }),\r\n}"
+            },
+            {
+                "name": "Buffer",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/ngx-tailwind-flex-ui/src/lib/progress-bar/progress-bar.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\r\n  args: { mode: 'buffer', value: 50, bufferValue: 80 },\r\n  render: (args) => ({\r\n    props: args,\r\n    template: `<lib-progress-bar [mode]=\"mode\" [value]=\"value\" [bufferValue]=\"bufferValue\"></lib-progress-bar>`,\r\n  }),\r\n}"
+            },
+            {
+                "name": "Checked",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/ngx-tailwind-flex-ui/src/lib/checkbox/checkbox.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\r\n  args: {\r\n    checked: true,\r\n  },\r\n  render: (args) => ({\r\n    props: args,\r\n  }),\r\n}"
+            },
+            {
+                "name": "Colored",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/ngx-tailwind-flex-ui/src/lib/loadingSpinner/loadingSpinner.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\r\n  args: {\r\n    color: '#ef4444', // Tailwind red-500\r\n  },\r\n}"
             },
             {
                 "name": "config",
@@ -308,7 +1156,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "StorybookConfig",
-                "defaultValue": "{\n  stories: ['../**/*.@(mdx|stories.@(js|jsx|ts|tsx))'],\n  addons: ['@storybook/addon-essentials', '@storybook/addon-interactions'],\n  framework: {\n    name: '@storybook/angular',\n    options: {},\n  },\n  docs: {\n    autodocs: true,\n    defaultName: 'Docs',\n  },\n}"
+                "defaultValue": "{\r\n  stories: ['../**/*.@(mdx|stories.@(js|jsx|ts|tsx))'],\r\n  addons: ['@storybook/addon-essentials', '@storybook/addon-interactions'],\r\n  framework: {\r\n    name: '@storybook/angular',\r\n    options: {},\r\n  },\r\n  docs: {\r\n    autodocs: true,\r\n    defaultName: 'Docs',\r\n  },\r\n}"
             },
             {
                 "name": "CustomStyled",
@@ -318,7 +1166,27 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\n  args: {\n    variant: 'primary',\n    class: 'text-lg px-6 py-3 bg-green-500 hover:bg-green-600',\n  },\n  render: (args) => ({\n    props: args,\n    template: `<lib-button [variant]=\"variant\" [class]=\"class\">Custom Styled Button</lib-button>`,\n  }),\n}"
+                "defaultValue": "{\r\n  args: {\r\n    variant: 'primary',\r\n    class: 'text-lg px-6 py-3 bg-green-500 hover:bg-green-600',\r\n  },\r\n  render: (args) => ({\r\n    props: args,\r\n    template: `<lib-button [variant]=\"variant\" [class]=\"class\">Custom Styled Button</lib-button>`,\r\n  }),\r\n}"
+            },
+            {
+                "name": "CustomStyled",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/ngx-tailwind-flex-ui/src/lib/checkbox/checkbox.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\r\n  args: {\r\n    checked: false,\r\n    class: 'text-lg',\r\n  },\r\n  render: (args) => ({\r\n    props: args,\r\n  }),\r\n}"
+            },
+            {
+                "name": "Default",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/ngx-tailwind-flex-ui/src/lib/checkbox/checkbox.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\r\n  args: {\r\n    checked: false,\r\n  },\r\n  render: (args) => ({\r\n    props: args,\r\n  }),\r\n}"
             },
             {
                 "name": "Default",
@@ -328,7 +1196,77 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\n  args: {\n    name: 'home',\n    size: 'md',\n    color: 'text-gray-500',\n  },\n  render: (args) => ({\n    props: args,\n    template: `<lib-icon [name]=\"name\" [size]=\"size\" [color]=\"color\"></lib-icon>`,\n  }),\n}"
+                "defaultValue": "{\r\n  args: {\r\n    name: 'home',\r\n    size: 'md',\r\n    color: 'text-gray-500',\r\n  },\r\n  render: (args) => ({\r\n    props: args,\r\n    template: `<lib-icon [name]=\"name\" [size]=\"size\" [color]=\"color\"></lib-icon>`,\r\n  }),\r\n}"
+            },
+            {
+                "name": "Default",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/ngx-tailwind-flex-ui/src/lib/loadingSpinner/loadingSpinner.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\r\n  args: {},\r\n}"
+            },
+            {
+                "name": "Default",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/ngx-tailwind-flex-ui/src/lib/rating/rating.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "Template.bind({})"
+            },
+            {
+                "name": "DefaultPinInput",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/ngx-tailwind-flex-ui/src/lib/pininput/pininput.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\r\n  args: {\r\n    length: 6,\r\n    type: 'number',\r\n    autoSubmit: false,\r\n  },\r\n  render: (args) => ({\r\n    props: args,\r\n    template: `<lib-otp-input [length]=\"6\" [type]=\"'number'\" (completed)=\"verifyOtp($event)\"></lib-otp-input>`,\r\n  }),\r\n}"
+            },
+            {
+                "name": "DefaultRating",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/ngx-tailwind-flex-ui/src/lib/rating/rating.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\r\n  args: {\r\n    value: 3.5,\r\n    max: 5,\r\n    allowHalf: true,\r\n  },\r\n  render: (args) => ({\r\n    props: { ...args},\r\n    template: `<lib-rating [value]=\"value\" [max]=\"max\" [allowHalf]=\"allowHalf\"></lib-rating>`,\r\n  }),\r\n}"
+            },
+            {
+                "name": "Determinate",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/ngx-tailwind-flex-ui/src/lib/loadingSpinner/loadingSpinner.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\r\n  args: {\r\n    mode: 'determinate',\r\n    value: 50,\r\n  },\r\n}"
+            },
+            {
+                "name": "Determinate",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/ngx-tailwind-flex-ui/src/lib/progress-bar/progress-bar.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\r\n  args: { mode: 'determinate', value: 50 },\r\n  render: (args) => ({\r\n    props: args,\r\n    template: `<lib-progress-bar [mode]=\"mode\" [value]=\"value\"></lib-progress-bar>`,\r\n  }),\r\n}"
+            },
+            {
+                "name": "DeterminateProgress",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/ngx-tailwind-flex-ui/src/lib/loadingSpinner/loadingSpinner.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\r\n  args: {\r\n    mode: 'determinate',\r\n    value: 75,\r\n    size: 50,\r\n    thickness: 5,\r\n    color: '#10b981', // Tailwind green-500\r\n  },\r\n}"
             },
             {
                 "name": "Disabled",
@@ -338,7 +1276,47 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\n  args: {\n    variant: 'primary',\n    disabled: true,\n  },\n  render: (args) => ({\n    props: args,\n    template: `<lib-button [variant]=\"variant\" [disabled]=\"disabled\">Disabled Button</lib-button>`,\n  }),\n}"
+                "defaultValue": "{\r\n  args: {\r\n    variant: 'primary',\r\n    disabled: true,\r\n  },\r\n  render: (args) => ({\r\n    props: args,\r\n    template: `<lib-button [variant]=\"variant\" [disabled]=\"disabled\">Disabled Button</lib-button>`,\r\n  }),\r\n}"
+            },
+            {
+                "name": "Disabled",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/ngx-tailwind-flex-ui/src/lib/checkbox/checkbox.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\r\n  args: {\r\n    checked: false,\r\n    disabled: true,\r\n  },\r\n  render: (args) => ({\r\n    props: args,\r\n  }),\r\n}"
+            },
+            {
+                "name": "Indeterminate",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/ngx-tailwind-flex-ui/src/lib/checkbox/checkbox.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\r\n  args: {\r\n    checked: false,\r\n    indeterminate: true,\r\n  },\r\n  render: (args) => ({\r\n    props: args,\r\n  }),\r\n}"
+            },
+            {
+                "name": "Indeterminate",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/ngx-tailwind-flex-ui/src/lib/progress-bar/progress-bar.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\r\n  args: { mode: 'indeterminate' },\r\n  render: (args) => ({\r\n    props: args,\r\n    template: `<lib-progress-bar [mode]=\"mode\"></lib-progress-bar>`,\r\n  }),\r\n}"
+            },
+            {
+                "name": "Large",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/ngx-tailwind-flex-ui/src/lib/loadingSpinner/loadingSpinner.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\r\n  args: {\r\n    size: 60,\r\n  },\r\n}"
             },
             {
                 "name": "LargeRedIcon",
@@ -348,7 +1326,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\n  args: {\n    name: 'favorite',\n    size: 'xl',\n    color: 'text-red-500',\n  },\n  render: (args) => ({\n    props: args,\n    template: `<lib-icon [name]=\"name\" [size]=\"size\" [color]=\"color\"></lib-icon>`,\n  }),\n}"
+                "defaultValue": "{\r\n  args: {\r\n    name: 'favorite',\r\n    size: 'xl',\r\n    color: 'text-red-500',\r\n  },\r\n  render: (args) => ({\r\n    props: args,\r\n    template: `<lib-icon [name]=\"name\" [size]=\"size\" [color]=\"color\"></lib-icon>`,\r\n  }),\r\n}"
             },
             {
                 "name": "link",
@@ -368,7 +1346,17 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Meta<ButtonComponent>",
-                "defaultValue": "{\n  title: 'Components/Button',\n  component: ButtonComponent,\n  tags: ['autodocs'],\n  argTypes: {\n    variant: {\n      control: 'select',\n      options: ['primary', 'accent', 'outline', 'text'],\n      description: 'Button style variant',\n    },\n    disabled: {\n      control: 'boolean',\n      description: 'Disables the button',\n    },\n    class: {\n      control: 'text',\n      description: 'Additional Tailwind CSS classes for customization',\n    },\n  },\n}"
+                "defaultValue": "{\r\n  title: 'Components/Button',\r\n  component: ButtonComponent,\r\n  tags: ['autodocs'],\r\n  argTypes: {\r\n    variant: {\r\n      control: 'select',\r\n      options: ['primary', 'accent', 'outline', 'text'],\r\n      description: 'Button style variant',\r\n    },\r\n    disabled: {\r\n      control: 'boolean',\r\n      description: 'Disables the button',\r\n    },\r\n    class: {\r\n      control: 'text',\r\n      description: 'Additional Tailwind CSS classes for customization',\r\n    },\r\n  },\r\n}"
+            },
+            {
+                "name": "meta",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/ngx-tailwind-flex-ui/src/lib/checkbox/checkbox.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Meta<CheckboxComponent>",
+                "defaultValue": "{\r\n  title: 'Components/Checkbox',\r\n  component: CheckboxComponent,\r\n  tags: ['autodocs'],\r\n  argTypes: {\r\n    checked: {\r\n      control: 'boolean',\r\n      description: 'Checked state of the checkbox',\r\n    },\r\n    disabled: {\r\n      control: 'boolean',\r\n      description: 'Disables the checkbox',\r\n    },\r\n    indeterminate: {\r\n      control: 'boolean',\r\n      description: 'Indeterminate state of the checkbox',\r\n    },\r\n    label: {\r\n      control: 'text',\r\n      description: 'Label text',\r\n    },\r\n    labelPosition: {\r\n      control: 'select',\r\n      options: ['before', 'after'],\r\n      description: 'Position of the label relative to the checkbox',\r\n    },\r\n    class: {\r\n      control: 'text',\r\n      description: 'Additional Tailwind CSS classes for customization',\r\n    },\r\n  },\r\n}"
             },
             {
                 "name": "meta",
@@ -378,7 +1366,47 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Meta<IconComponent>",
-                "defaultValue": "{\n  title: 'Components/Icon',\n  component: IconComponent,\n  tags: ['autodocs'],\n  argTypes: {\n    name: { control: 'text', description: 'Icon name from Material Icons' },\n    size: { \n      control: 'radio', \n      options: ['sm', 'md', 'lg', 'xl'], \n      description: 'Size of the icon' \n    },\n    color: { control: 'text', description: 'Tailwind color classes' },\n  },\n}"
+                "defaultValue": "{\r\n  title: 'Components/Icon',\r\n  component: IconComponent,\r\n  tags: ['autodocs'],\r\n  argTypes: {\r\n    name: { control: 'text', description: 'Icon name from Material Icons' },\r\n    size: { \r\n      control: 'radio', \r\n      options: ['sm', 'md', 'lg', 'xl'], \r\n      description: 'Size of the icon' \r\n    },\r\n    color: { control: 'text', description: 'Tailwind color classes' },\r\n  },\r\n}"
+            },
+            {
+                "name": "meta",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/ngx-tailwind-flex-ui/src/lib/loadingSpinner/loadingSpinner.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Meta<LoadingSpinnerComponent>",
+                "defaultValue": "{\r\n  title: 'Components/LoadingSpinnerComponent',\r\n  component: LoadingSpinnerComponent,\r\n  tags: ['autodocs'],\r\n  argTypes: {\r\n    mode: {\r\n      control: 'select',\r\n      options: ['determinate', 'indeterminate'],\r\n      description: 'Loading state',\r\n    },\r\n    value: {\r\n      control: 'number',\r\n      description: 'Progress value (0-100) for determinate mode',\r\n    },\r\n    size: { control: 'number', description: 'Diameter in pixels' },\r\n    thickness: { control: 'number', description: 'Stroke width in pixels' },\r\n    color: {\r\n      control: 'color',\r\n      description: 'Spinner color (hex or Tailwind color)',\r\n    },\r\n  },\r\n}"
+            },
+            {
+                "name": "meta",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/ngx-tailwind-flex-ui/src/lib/pininput/pininput.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Meta<PininputComponent>",
+                "defaultValue": "{\r\n  title: 'Components/PinInput',\r\n  component: PininputComponent,\r\n  tags: ['autodocs'],\r\n  decorators: [\r\n    moduleMetadata({\r\n      imports: [CommonModule, FormsModule, PininputComponent], // ✅ Fix import references\r\n    }),\r\n  ],\r\n}"
+            },
+            {
+                "name": "meta",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/ngx-tailwind-flex-ui/src/lib/progress-bar/progress-bar.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Meta<ProgressBarComponent>",
+                "defaultValue": "{\r\n  title: 'Components/ProgressBar',\r\n  component: ProgressBarComponent,\r\n  tags: ['autodocs'],\r\n  argTypes: {\r\n    mode: {\r\n      control: 'select',\r\n      options: ['determinate', 'indeterminate', 'buffer', 'query'],\r\n      description: 'Defines progress bar mode',\r\n    },\r\n    value: {\r\n      control: { type: 'number', min: 0, max: 100 },\r\n      description: 'Current progress value (for determinate mode)',\r\n    },\r\n    bufferValue: {\r\n      control: { type: 'number', min: 0, max: 100 },\r\n      description: 'Buffer progress value (for buffer mode)',\r\n    },\r\n    class: {\r\n      control: 'text',\r\n      description: 'Additional Tailwind CSS classes for styling',\r\n    },\r\n  },\r\n}"
+            },
+            {
+                "name": "meta",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/ngx-tailwind-flex-ui/src/lib/rating/rating.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Meta<RatingComponent>",
+                "defaultValue": "{\r\n  title: 'Components/Rating',\r\n  component: RatingComponent,\r\n  tags: ['autodocs'],\r\n}"
             },
             {
                 "name": "Outline",
@@ -388,7 +1416,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\n  args: {\n    variant: 'outline',\n    disabled: false,\n  },\n  render: (args) => ({\n    props: args,\n    template: `<lib-button [variant]=\"variant\" [disabled]=\"disabled\">Outline Button</lib-button>`,\n  }),\n}"
+                "defaultValue": "{\r\n  args: {\r\n    variant: 'outline',\r\n    disabled: false,\r\n  },\r\n  render: (args) => ({\r\n    props: args,\r\n    template: `<lib-button [variant]=\"variant\" [disabled]=\"disabled\">Outline Button</lib-button>`,\r\n  }),\r\n}"
             },
             {
                 "name": "parameters",
@@ -398,7 +1426,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "object",
-                "defaultValue": "{\n  actions: { argTypesRegex: '^on[A-Z].*' },\n  controls: {\n    matchers: {\n      color: /(background|color)$/i,\n      date: /Date$/,\n    },\n  },\n}"
+                "defaultValue": "{\r\n  actions: { argTypesRegex: '^on[A-Z].*' },\r\n  controls: {\r\n    matchers: {\r\n      color: /(background|color)$/i,\r\n      date: /Date$/,\r\n    },\r\n  },\r\n}"
             },
             {
                 "name": "Primary",
@@ -408,7 +1436,17 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\n  args: {\n    variant: 'primary',\n    disabled: false,\n  },\n  render: (args) => ({\n    props: args,\n    template: `<lib-button [variant]=\"variant\" [disabled]=\"disabled\">Primary Button</lib-button>`,\n  }),\n}"
+                "defaultValue": "{\r\n  args: {\r\n    variant: 'primary',\r\n    disabled: false,\r\n  },\r\n  render: (args) => ({\r\n    props: args,\r\n    template: `<lib-button [variant]=\"variant\" [disabled]=\"disabled\">Primary Button</lib-button>`,\r\n  }),\r\n}"
+            },
+            {
+                "name": "Query",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/ngx-tailwind-flex-ui/src/lib/progress-bar/progress-bar.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\r\n  args: { mode: 'query' },\r\n  render: (args) => ({\r\n    props: args,\r\n    template: `<lib-progress-bar [mode]=\"mode\"></lib-progress-bar>`,\r\n  }),\r\n}"
             },
             {
                 "name": "SmallBlueIcon",
@@ -418,7 +1456,17 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\n  args: {\n    name: 'star',\n    size: 'sm',\n    color: 'text-blue-500',\n  },\n  render: (args) => ({\n    props: args,\n    template: `<lib-icon [name]=\"name\" [size]=\"size\" [color]=\"color\"></lib-icon>`,\n  }),\n}"
+                "defaultValue": "{\r\n  args: {\r\n    name: 'star',\r\n    size: 'sm',\r\n    color: 'text-blue-500',\r\n  },\r\n  render: (args) => ({\r\n    props: args,\r\n    template: `<lib-icon [name]=\"name\" [size]=\"size\" [color]=\"color\"></lib-icon>`,\r\n  }),\r\n}"
+            },
+            {
+                "name": "Template",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/ngx-tailwind-flex-ui/src/lib/rating/rating.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "StoryFn<RatingComponent>",
+                "defaultValue": "(args) => ({\r\n  props: { ...args },\r\n})"
             },
             {
                 "name": "Text",
@@ -428,7 +1476,37 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\n  args: {\n    variant: 'text',\n    disabled: false,\n  },\n  render: (args) => ({\n    props: args,\n    template: `<lib-button [variant]=\"variant\" [disabled]=\"disabled\">Text Button</lib-button>`,\n  }),\n}"
+                "defaultValue": "{\r\n  args: {\r\n    variant: 'text',\r\n    disabled: false,\r\n  },\r\n  render: (args) => ({\r\n    props: args,\r\n    template: `<lib-button [variant]=\"variant\" [disabled]=\"disabled\">Text Button</lib-button>`,\r\n  }),\r\n}"
+            },
+            {
+                "name": "Thick",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/ngx-tailwind-flex-ui/src/lib/loadingSpinner/loadingSpinner.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\r\n  args: {\r\n    thickness: 6,\r\n  },\r\n}"
+            },
+            {
+                "name": "WithLabel",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/ngx-tailwind-flex-ui/src/lib/checkbox/checkbox.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\r\n  args: {\r\n    checked: false,\r\n    label: 'Checkbox Label',\r\n  },\r\n  render: (args) => ({\r\n    props: args,\r\n  }),\r\n}"
+            },
+            {
+                "name": "WithLabelPositionBefore",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/ngx-tailwind-flex-ui/src/lib/checkbox/checkbox.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\r\n  args: {\r\n    checked: false,\r\n    label: 'Checkbox Label',\r\n    labelPosition: 'before',\r\n  },\r\n  render: (args) => ({\r\n    props: args,\r\n  }),\r\n}"
             }
         ],
         "functions": [],
@@ -448,8 +1526,63 @@
                 "name": "Story",
                 "ctype": "miscellaneous",
                 "subtype": "typealias",
+                "rawtype": "StoryObj<CheckboxComponent>",
+                "file": "libs/ngx-tailwind-flex-ui/src/lib/checkbox/checkbox.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 183
+            },
+            {
+                "name": "Story",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
                 "rawtype": "StoryObj<IconComponent>",
                 "file": "libs/ngx-tailwind-flex-ui/src/lib/icon/icon.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 183
+            },
+            {
+                "name": "Story",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "StoryObj<LoadingSpinnerComponent>",
+                "file": "libs/ngx-tailwind-flex-ui/src/lib/loadingSpinner/loadingSpinner.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 183
+            },
+            {
+                "name": "Story",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "StoryObj<PininputComponent>",
+                "file": "libs/ngx-tailwind-flex-ui/src/lib/pininput/pininput.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 183
+            },
+            {
+                "name": "Story",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "StoryObj<ProgressBarComponent>",
+                "file": "libs/ngx-tailwind-flex-ui/src/lib/progress-bar/progress-bar.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 183
+            },
+            {
+                "name": "Story",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "StoryObj<RatingComponent>",
+                "file": "libs/ngx-tailwind-flex-ui/src/lib/rating/rating.component.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "description": "",
@@ -467,7 +1600,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{\n  args: {\n    variant: 'accent',\n    disabled: false,\n  },\n  render: (args) => ({\n    props: args,\n    template: `<lib-button [variant]=\"variant\" [disabled]=\"disabled\">Accent Button</lib-button>`,\n  }),\n}"
+                    "defaultValue": "{\r\n  args: {\r\n    variant: 'accent',\r\n    disabled: false,\r\n  },\r\n  render: (args) => ({\r\n    props: args,\r\n    template: `<lib-button [variant]=\"variant\" [disabled]=\"disabled\">Accent Button</lib-button>`,\r\n  }),\r\n}"
                 },
                 {
                     "name": "CustomStyled",
@@ -477,7 +1610,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{\n  args: {\n    variant: 'primary',\n    class: 'text-lg px-6 py-3 bg-green-500 hover:bg-green-600',\n  },\n  render: (args) => ({\n    props: args,\n    template: `<lib-button [variant]=\"variant\" [class]=\"class\">Custom Styled Button</lib-button>`,\n  }),\n}"
+                    "defaultValue": "{\r\n  args: {\r\n    variant: 'primary',\r\n    class: 'text-lg px-6 py-3 bg-green-500 hover:bg-green-600',\r\n  },\r\n  render: (args) => ({\r\n    props: args,\r\n    template: `<lib-button [variant]=\"variant\" [class]=\"class\">Custom Styled Button</lib-button>`,\r\n  }),\r\n}"
                 },
                 {
                     "name": "Disabled",
@@ -487,7 +1620,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{\n  args: {\n    variant: 'primary',\n    disabled: true,\n  },\n  render: (args) => ({\n    props: args,\n    template: `<lib-button [variant]=\"variant\" [disabled]=\"disabled\">Disabled Button</lib-button>`,\n  }),\n}"
+                    "defaultValue": "{\r\n  args: {\r\n    variant: 'primary',\r\n    disabled: true,\r\n  },\r\n  render: (args) => ({\r\n    props: args,\r\n    template: `<lib-button [variant]=\"variant\" [disabled]=\"disabled\">Disabled Button</lib-button>`,\r\n  }),\r\n}"
                 },
                 {
                     "name": "meta",
@@ -497,7 +1630,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Meta<ButtonComponent>",
-                    "defaultValue": "{\n  title: 'Components/Button',\n  component: ButtonComponent,\n  tags: ['autodocs'],\n  argTypes: {\n    variant: {\n      control: 'select',\n      options: ['primary', 'accent', 'outline', 'text'],\n      description: 'Button style variant',\n    },\n    disabled: {\n      control: 'boolean',\n      description: 'Disables the button',\n    },\n    class: {\n      control: 'text',\n      description: 'Additional Tailwind CSS classes for customization',\n    },\n  },\n}"
+                    "defaultValue": "{\r\n  title: 'Components/Button',\r\n  component: ButtonComponent,\r\n  tags: ['autodocs'],\r\n  argTypes: {\r\n    variant: {\r\n      control: 'select',\r\n      options: ['primary', 'accent', 'outline', 'text'],\r\n      description: 'Button style variant',\r\n    },\r\n    disabled: {\r\n      control: 'boolean',\r\n      description: 'Disables the button',\r\n    },\r\n    class: {\r\n      control: 'text',\r\n      description: 'Additional Tailwind CSS classes for customization',\r\n    },\r\n  },\r\n}"
                 },
                 {
                     "name": "Outline",
@@ -507,7 +1640,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{\n  args: {\n    variant: 'outline',\n    disabled: false,\n  },\n  render: (args) => ({\n    props: args,\n    template: `<lib-button [variant]=\"variant\" [disabled]=\"disabled\">Outline Button</lib-button>`,\n  }),\n}"
+                    "defaultValue": "{\r\n  args: {\r\n    variant: 'outline',\r\n    disabled: false,\r\n  },\r\n  render: (args) => ({\r\n    props: args,\r\n    template: `<lib-button [variant]=\"variant\" [disabled]=\"disabled\">Outline Button</lib-button>`,\r\n  }),\r\n}"
                 },
                 {
                     "name": "Primary",
@@ -517,7 +1650,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{\n  args: {\n    variant: 'primary',\n    disabled: false,\n  },\n  render: (args) => ({\n    props: args,\n    template: `<lib-button [variant]=\"variant\" [disabled]=\"disabled\">Primary Button</lib-button>`,\n  }),\n}"
+                    "defaultValue": "{\r\n  args: {\r\n    variant: 'primary',\r\n    disabled: false,\r\n  },\r\n  render: (args) => ({\r\n    props: args,\r\n    template: `<lib-button [variant]=\"variant\" [disabled]=\"disabled\">Primary Button</lib-button>`,\r\n  }),\r\n}"
                 },
                 {
                     "name": "Text",
@@ -527,7 +1660,213 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{\n  args: {\n    variant: 'text',\n    disabled: false,\n  },\n  render: (args) => ({\n    props: args,\n    template: `<lib-button [variant]=\"variant\" [disabled]=\"disabled\">Text Button</lib-button>`,\n  }),\n}"
+                    "defaultValue": "{\r\n  args: {\r\n    variant: 'text',\r\n    disabled: false,\r\n  },\r\n  render: (args) => ({\r\n    props: args,\r\n    template: `<lib-button [variant]=\"variant\" [disabled]=\"disabled\">Text Button</lib-button>`,\r\n  }),\r\n}"
+                }
+            ],
+            "libs/ngx-tailwind-flex-ui/src/lib/progress-bar/progress-bar.component.stories.ts": [
+                {
+                    "name": "Buffer",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/ngx-tailwind-flex-ui/src/lib/progress-bar/progress-bar.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\r\n  args: { mode: 'buffer', value: 50, bufferValue: 80 },\r\n  render: (args) => ({\r\n    props: args,\r\n    template: `<lib-progress-bar [mode]=\"mode\" [value]=\"value\" [bufferValue]=\"bufferValue\"></lib-progress-bar>`,\r\n  }),\r\n}"
+                },
+                {
+                    "name": "Determinate",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/ngx-tailwind-flex-ui/src/lib/progress-bar/progress-bar.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\r\n  args: { mode: 'determinate', value: 50 },\r\n  render: (args) => ({\r\n    props: args,\r\n    template: `<lib-progress-bar [mode]=\"mode\" [value]=\"value\"></lib-progress-bar>`,\r\n  }),\r\n}"
+                },
+                {
+                    "name": "Indeterminate",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/ngx-tailwind-flex-ui/src/lib/progress-bar/progress-bar.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\r\n  args: { mode: 'indeterminate' },\r\n  render: (args) => ({\r\n    props: args,\r\n    template: `<lib-progress-bar [mode]=\"mode\"></lib-progress-bar>`,\r\n  }),\r\n}"
+                },
+                {
+                    "name": "meta",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/ngx-tailwind-flex-ui/src/lib/progress-bar/progress-bar.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Meta<ProgressBarComponent>",
+                    "defaultValue": "{\r\n  title: 'Components/ProgressBar',\r\n  component: ProgressBarComponent,\r\n  tags: ['autodocs'],\r\n  argTypes: {\r\n    mode: {\r\n      control: 'select',\r\n      options: ['determinate', 'indeterminate', 'buffer', 'query'],\r\n      description: 'Defines progress bar mode',\r\n    },\r\n    value: {\r\n      control: { type: 'number', min: 0, max: 100 },\r\n      description: 'Current progress value (for determinate mode)',\r\n    },\r\n    bufferValue: {\r\n      control: { type: 'number', min: 0, max: 100 },\r\n      description: 'Buffer progress value (for buffer mode)',\r\n    },\r\n    class: {\r\n      control: 'text',\r\n      description: 'Additional Tailwind CSS classes for styling',\r\n    },\r\n  },\r\n}"
+                },
+                {
+                    "name": "Query",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/ngx-tailwind-flex-ui/src/lib/progress-bar/progress-bar.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\r\n  args: { mode: 'query' },\r\n  render: (args) => ({\r\n    props: args,\r\n    template: `<lib-progress-bar [mode]=\"mode\"></lib-progress-bar>`,\r\n  }),\r\n}"
+                }
+            ],
+            "libs/ngx-tailwind-flex-ui/src/lib/checkbox/checkbox.component.stories.ts": [
+                {
+                    "name": "Checked",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/ngx-tailwind-flex-ui/src/lib/checkbox/checkbox.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\r\n  args: {\r\n    checked: true,\r\n  },\r\n  render: (args) => ({\r\n    props: args,\r\n  }),\r\n}"
+                },
+                {
+                    "name": "CustomStyled",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/ngx-tailwind-flex-ui/src/lib/checkbox/checkbox.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\r\n  args: {\r\n    checked: false,\r\n    class: 'text-lg',\r\n  },\r\n  render: (args) => ({\r\n    props: args,\r\n  }),\r\n}"
+                },
+                {
+                    "name": "Default",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/ngx-tailwind-flex-ui/src/lib/checkbox/checkbox.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\r\n  args: {\r\n    checked: false,\r\n  },\r\n  render: (args) => ({\r\n    props: args,\r\n  }),\r\n}"
+                },
+                {
+                    "name": "Disabled",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/ngx-tailwind-flex-ui/src/lib/checkbox/checkbox.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\r\n  args: {\r\n    checked: false,\r\n    disabled: true,\r\n  },\r\n  render: (args) => ({\r\n    props: args,\r\n  }),\r\n}"
+                },
+                {
+                    "name": "Indeterminate",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/ngx-tailwind-flex-ui/src/lib/checkbox/checkbox.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\r\n  args: {\r\n    checked: false,\r\n    indeterminate: true,\r\n  },\r\n  render: (args) => ({\r\n    props: args,\r\n  }),\r\n}"
+                },
+                {
+                    "name": "meta",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/ngx-tailwind-flex-ui/src/lib/checkbox/checkbox.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Meta<CheckboxComponent>",
+                    "defaultValue": "{\r\n  title: 'Components/Checkbox',\r\n  component: CheckboxComponent,\r\n  tags: ['autodocs'],\r\n  argTypes: {\r\n    checked: {\r\n      control: 'boolean',\r\n      description: 'Checked state of the checkbox',\r\n    },\r\n    disabled: {\r\n      control: 'boolean',\r\n      description: 'Disables the checkbox',\r\n    },\r\n    indeterminate: {\r\n      control: 'boolean',\r\n      description: 'Indeterminate state of the checkbox',\r\n    },\r\n    label: {\r\n      control: 'text',\r\n      description: 'Label text',\r\n    },\r\n    labelPosition: {\r\n      control: 'select',\r\n      options: ['before', 'after'],\r\n      description: 'Position of the label relative to the checkbox',\r\n    },\r\n    class: {\r\n      control: 'text',\r\n      description: 'Additional Tailwind CSS classes for customization',\r\n    },\r\n  },\r\n}"
+                },
+                {
+                    "name": "WithLabel",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/ngx-tailwind-flex-ui/src/lib/checkbox/checkbox.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\r\n  args: {\r\n    checked: false,\r\n    label: 'Checkbox Label',\r\n  },\r\n  render: (args) => ({\r\n    props: args,\r\n  }),\r\n}"
+                },
+                {
+                    "name": "WithLabelPositionBefore",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/ngx-tailwind-flex-ui/src/lib/checkbox/checkbox.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\r\n  args: {\r\n    checked: false,\r\n    label: 'Checkbox Label',\r\n    labelPosition: 'before',\r\n  },\r\n  render: (args) => ({\r\n    props: args,\r\n  }),\r\n}"
+                }
+            ],
+            "libs/ngx-tailwind-flex-ui/src/lib/loadingSpinner/loadingSpinner.component.stories.ts": [
+                {
+                    "name": "Colored",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/ngx-tailwind-flex-ui/src/lib/loadingSpinner/loadingSpinner.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\r\n  args: {\r\n    color: '#ef4444', // Tailwind red-500\r\n  },\r\n}"
+                },
+                {
+                    "name": "Default",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/ngx-tailwind-flex-ui/src/lib/loadingSpinner/loadingSpinner.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\r\n  args: {},\r\n}"
+                },
+                {
+                    "name": "Determinate",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/ngx-tailwind-flex-ui/src/lib/loadingSpinner/loadingSpinner.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\r\n  args: {\r\n    mode: 'determinate',\r\n    value: 50,\r\n  },\r\n}"
+                },
+                {
+                    "name": "DeterminateProgress",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/ngx-tailwind-flex-ui/src/lib/loadingSpinner/loadingSpinner.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\r\n  args: {\r\n    mode: 'determinate',\r\n    value: 75,\r\n    size: 50,\r\n    thickness: 5,\r\n    color: '#10b981', // Tailwind green-500\r\n  },\r\n}"
+                },
+                {
+                    "name": "Large",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/ngx-tailwind-flex-ui/src/lib/loadingSpinner/loadingSpinner.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\r\n  args: {\r\n    size: 60,\r\n  },\r\n}"
+                },
+                {
+                    "name": "meta",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/ngx-tailwind-flex-ui/src/lib/loadingSpinner/loadingSpinner.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Meta<LoadingSpinnerComponent>",
+                    "defaultValue": "{\r\n  title: 'Components/LoadingSpinnerComponent',\r\n  component: LoadingSpinnerComponent,\r\n  tags: ['autodocs'],\r\n  argTypes: {\r\n    mode: {\r\n      control: 'select',\r\n      options: ['determinate', 'indeterminate'],\r\n      description: 'Loading state',\r\n    },\r\n    value: {\r\n      control: 'number',\r\n      description: 'Progress value (0-100) for determinate mode',\r\n    },\r\n    size: { control: 'number', description: 'Diameter in pixels' },\r\n    thickness: { control: 'number', description: 'Stroke width in pixels' },\r\n    color: {\r\n      control: 'color',\r\n      description: 'Spinner color (hex or Tailwind color)',\r\n    },\r\n  },\r\n}"
+                },
+                {
+                    "name": "Thick",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/ngx-tailwind-flex-ui/src/lib/loadingSpinner/loadingSpinner.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\r\n  args: {\r\n    thickness: 6,\r\n  },\r\n}"
                 }
             ],
             "libs/ngx-tailwind-flex-ui/.storybook/main.ts": [
@@ -539,7 +1878,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "StorybookConfig",
-                    "defaultValue": "{\n  stories: ['../**/*.@(mdx|stories.@(js|jsx|ts|tsx))'],\n  addons: ['@storybook/addon-essentials', '@storybook/addon-interactions'],\n  framework: {\n    name: '@storybook/angular',\n    options: {},\n  },\n  docs: {\n    autodocs: true,\n    defaultName: 'Docs',\n  },\n}"
+                    "defaultValue": "{\r\n  stories: ['../**/*.@(mdx|stories.@(js|jsx|ts|tsx))'],\r\n  addons: ['@storybook/addon-essentials', '@storybook/addon-interactions'],\r\n  framework: {\r\n    name: '@storybook/angular',\r\n    options: {},\r\n  },\r\n  docs: {\r\n    autodocs: true,\r\n    defaultName: 'Docs',\r\n  },\r\n}"
                 }
             ],
             "libs/ngx-tailwind-flex-ui/src/lib/icon/icon.stories.ts": [
@@ -551,7 +1890,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{\n  args: {\n    name: 'home',\n    size: 'md',\n    color: 'text-gray-500',\n  },\n  render: (args) => ({\n    props: args,\n    template: `<lib-icon [name]=\"name\" [size]=\"size\" [color]=\"color\"></lib-icon>`,\n  }),\n}"
+                    "defaultValue": "{\r\n  args: {\r\n    name: 'home',\r\n    size: 'md',\r\n    color: 'text-gray-500',\r\n  },\r\n  render: (args) => ({\r\n    props: args,\r\n    template: `<lib-icon [name]=\"name\" [size]=\"size\" [color]=\"color\"></lib-icon>`,\r\n  }),\r\n}"
                 },
                 {
                     "name": "LargeRedIcon",
@@ -561,7 +1900,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{\n  args: {\n    name: 'favorite',\n    size: 'xl',\n    color: 'text-red-500',\n  },\n  render: (args) => ({\n    props: args,\n    template: `<lib-icon [name]=\"name\" [size]=\"size\" [color]=\"color\"></lib-icon>`,\n  }),\n}"
+                    "defaultValue": "{\r\n  args: {\r\n    name: 'favorite',\r\n    size: 'xl',\r\n    color: 'text-red-500',\r\n  },\r\n  render: (args) => ({\r\n    props: args,\r\n    template: `<lib-icon [name]=\"name\" [size]=\"size\" [color]=\"color\"></lib-icon>`,\r\n  }),\r\n}"
                 },
                 {
                     "name": "meta",
@@ -571,7 +1910,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Meta<IconComponent>",
-                    "defaultValue": "{\n  title: 'Components/Icon',\n  component: IconComponent,\n  tags: ['autodocs'],\n  argTypes: {\n    name: { control: 'text', description: 'Icon name from Material Icons' },\n    size: { \n      control: 'radio', \n      options: ['sm', 'md', 'lg', 'xl'], \n      description: 'Size of the icon' \n    },\n    color: { control: 'text', description: 'Tailwind color classes' },\n  },\n}"
+                    "defaultValue": "{\r\n  title: 'Components/Icon',\r\n  component: IconComponent,\r\n  tags: ['autodocs'],\r\n  argTypes: {\r\n    name: { control: 'text', description: 'Icon name from Material Icons' },\r\n    size: { \r\n      control: 'radio', \r\n      options: ['sm', 'md', 'lg', 'xl'], \r\n      description: 'Size of the icon' \r\n    },\r\n    color: { control: 'text', description: 'Tailwind color classes' },\r\n  },\r\n}"
                 },
                 {
                     "name": "SmallBlueIcon",
@@ -581,7 +1920,71 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{\n  args: {\n    name: 'star',\n    size: 'sm',\n    color: 'text-blue-500',\n  },\n  render: (args) => ({\n    props: args,\n    template: `<lib-icon [name]=\"name\" [size]=\"size\" [color]=\"color\"></lib-icon>`,\n  }),\n}"
+                    "defaultValue": "{\r\n  args: {\r\n    name: 'star',\r\n    size: 'sm',\r\n    color: 'text-blue-500',\r\n  },\r\n  render: (args) => ({\r\n    props: args,\r\n    template: `<lib-icon [name]=\"name\" [size]=\"size\" [color]=\"color\"></lib-icon>`,\r\n  }),\r\n}"
+                }
+            ],
+            "libs/ngx-tailwind-flex-ui/src/lib/rating/rating.component.stories.ts": [
+                {
+                    "name": "Default",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/ngx-tailwind-flex-ui/src/lib/rating/rating.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
+                    "name": "DefaultRating",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/ngx-tailwind-flex-ui/src/lib/rating/rating.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\r\n  args: {\r\n    value: 3.5,\r\n    max: 5,\r\n    allowHalf: true,\r\n  },\r\n  render: (args) => ({\r\n    props: { ...args},\r\n    template: `<lib-rating [value]=\"value\" [max]=\"max\" [allowHalf]=\"allowHalf\"></lib-rating>`,\r\n  }),\r\n}"
+                },
+                {
+                    "name": "meta",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/ngx-tailwind-flex-ui/src/lib/rating/rating.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Meta<RatingComponent>",
+                    "defaultValue": "{\r\n  title: 'Components/Rating',\r\n  component: RatingComponent,\r\n  tags: ['autodocs'],\r\n}"
+                },
+                {
+                    "name": "Template",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/ngx-tailwind-flex-ui/src/lib/rating/rating.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "StoryFn<RatingComponent>",
+                    "defaultValue": "(args) => ({\r\n  props: { ...args },\r\n})"
+                }
+            ],
+            "libs/ngx-tailwind-flex-ui/src/lib/pininput/pininput.component.stories.ts": [
+                {
+                    "name": "DefaultPinInput",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/ngx-tailwind-flex-ui/src/lib/pininput/pininput.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\r\n  args: {\r\n    length: 6,\r\n    type: 'number',\r\n    autoSubmit: false,\r\n  },\r\n  render: (args) => ({\r\n    props: args,\r\n    template: `<lib-otp-input [length]=\"6\" [type]=\"'number'\" (completed)=\"verifyOtp($event)\"></lib-otp-input>`,\r\n  }),\r\n}"
+                },
+                {
+                    "name": "meta",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/ngx-tailwind-flex-ui/src/lib/pininput/pininput.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Meta<PininputComponent>",
+                    "defaultValue": "{\r\n  title: 'Components/PinInput',\r\n  component: PininputComponent,\r\n  tags: ['autodocs'],\r\n  decorators: [\r\n    moduleMetadata({\r\n      imports: [CommonModule, FormsModule, PininputComponent], // ✅ Fix import references\r\n    }),\r\n  ],\r\n}"
                 }
             ],
             "libs/ngx-tailwind-flex-ui/.storybook/preview.ts": [
@@ -603,7 +2006,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "object",
-                    "defaultValue": "{\n  actions: { argTypesRegex: '^on[A-Z].*' },\n  controls: {\n    matchers: {\n      color: /(background|color)$/i,\n      date: /Date$/,\n    },\n  },\n}"
+                    "defaultValue": "{\r\n  actions: { argTypesRegex: '^on[A-Z].*' },\r\n  controls: {\r\n    matchers: {\r\n      color: /(background|color)$/i,\r\n      date: /Date$/,\r\n    },\r\n  },\r\n}"
                 }
             ]
         },
@@ -623,6 +2026,19 @@
                     "kind": 183
                 }
             ],
+            "libs/ngx-tailwind-flex-ui/src/lib/checkbox/checkbox.component.stories.ts": [
+                {
+                    "name": "Story",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "StoryObj<CheckboxComponent>",
+                    "file": "libs/ngx-tailwind-flex-ui/src/lib/checkbox/checkbox.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 183
+                }
+            ],
             "libs/ngx-tailwind-flex-ui/src/lib/icon/icon.stories.ts": [
                 {
                     "name": "Story",
@@ -630,6 +2046,58 @@
                     "subtype": "typealias",
                     "rawtype": "StoryObj<IconComponent>",
                     "file": "libs/ngx-tailwind-flex-ui/src/lib/icon/icon.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 183
+                }
+            ],
+            "libs/ngx-tailwind-flex-ui/src/lib/loadingSpinner/loadingSpinner.component.stories.ts": [
+                {
+                    "name": "Story",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "StoryObj<LoadingSpinnerComponent>",
+                    "file": "libs/ngx-tailwind-flex-ui/src/lib/loadingSpinner/loadingSpinner.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 183
+                }
+            ],
+            "libs/ngx-tailwind-flex-ui/src/lib/pininput/pininput.component.stories.ts": [
+                {
+                    "name": "Story",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "StoryObj<PininputComponent>",
+                    "file": "libs/ngx-tailwind-flex-ui/src/lib/pininput/pininput.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 183
+                }
+            ],
+            "libs/ngx-tailwind-flex-ui/src/lib/progress-bar/progress-bar.component.stories.ts": [
+                {
+                    "name": "Story",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "StoryObj<ProgressBarComponent>",
+                    "file": "libs/ngx-tailwind-flex-ui/src/lib/progress-bar/progress-bar.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 183
+                }
+            ],
+            "libs/ngx-tailwind-flex-ui/src/lib/rating/rating.component.stories.ts": [
+                {
+                    "name": "Story",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "StoryObj<RatingComponent>",
+                    "file": "libs/ngx-tailwind-flex-ui/src/lib/rating/rating.component.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "description": "",
@@ -763,6 +2231,105 @@
                 "status": "low"
             },
             {
+                "filePath": "libs/ngx-tailwind-flex-ui/src/lib/checkbox/checkbox.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Checked",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/ngx-tailwind-flex-ui/src/lib/checkbox/checkbox.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "CustomStyled",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/ngx-tailwind-flex-ui/src/lib/checkbox/checkbox.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Default",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/ngx-tailwind-flex-ui/src/lib/checkbox/checkbox.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Disabled",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/ngx-tailwind-flex-ui/src/lib/checkbox/checkbox.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Indeterminate",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/ngx-tailwind-flex-ui/src/lib/checkbox/checkbox.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "meta",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/ngx-tailwind-flex-ui/src/lib/checkbox/checkbox.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "WithLabel",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/ngx-tailwind-flex-ui/src/lib/checkbox/checkbox.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "WithLabelPositionBefore",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/ngx-tailwind-flex-ui/src/lib/checkbox/checkbox.component.stories.ts",
+                "type": "type alias",
+                "linktype": "miscellaneous",
+                "linksubtype": "typealias",
+                "name": "Story",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/ngx-tailwind-flex-ui/src/lib/checkbox/checkbox.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "CheckboxComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/11",
+                "status": "low"
+            },
+            {
                 "filePath": "libs/ngx-tailwind-flex-ui/src/lib/icon/icon.component.ts",
                 "type": "component",
                 "linktype": "component",
@@ -819,6 +2386,262 @@
                 "name": "Story",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/ngx-tailwind-flex-ui/src/lib/loadingSpinner/loadingSpinner.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Colored",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/ngx-tailwind-flex-ui/src/lib/loadingSpinner/loadingSpinner.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Default",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/ngx-tailwind-flex-ui/src/lib/loadingSpinner/loadingSpinner.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Determinate",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/ngx-tailwind-flex-ui/src/lib/loadingSpinner/loadingSpinner.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "DeterminateProgress",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/ngx-tailwind-flex-ui/src/lib/loadingSpinner/loadingSpinner.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Large",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/ngx-tailwind-flex-ui/src/lib/loadingSpinner/loadingSpinner.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "meta",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/ngx-tailwind-flex-ui/src/lib/loadingSpinner/loadingSpinner.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Thick",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/ngx-tailwind-flex-ui/src/lib/loadingSpinner/loadingSpinner.component.stories.ts",
+                "type": "type alias",
+                "linktype": "miscellaneous",
+                "linksubtype": "typealias",
+                "name": "Story",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/ngx-tailwind-flex-ui/src/lib/loadingSpinner/loadingSpinner.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "LoadingSpinnerComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/6",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/ngx-tailwind-flex-ui/src/lib/pininput/pininput.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "DefaultPinInput",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/ngx-tailwind-flex-ui/src/lib/pininput/pininput.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "meta",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/ngx-tailwind-flex-ui/src/lib/pininput/pininput.component.stories.ts",
+                "type": "type alias",
+                "linktype": "miscellaneous",
+                "linksubtype": "typealias",
+                "name": "Story",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/ngx-tailwind-flex-ui/src/lib/pininput/pininput.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "PininputComponent",
+                "coveragePercent": 22,
+                "coverageCount": "4/18",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/ngx-tailwind-flex-ui/src/lib/progress-bar/progress-bar.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Buffer",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/ngx-tailwind-flex-ui/src/lib/progress-bar/progress-bar.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Determinate",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/ngx-tailwind-flex-ui/src/lib/progress-bar/progress-bar.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Indeterminate",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/ngx-tailwind-flex-ui/src/lib/progress-bar/progress-bar.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "meta",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/ngx-tailwind-flex-ui/src/lib/progress-bar/progress-bar.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Query",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/ngx-tailwind-flex-ui/src/lib/progress-bar/progress-bar.component.stories.ts",
+                "type": "type alias",
+                "linktype": "miscellaneous",
+                "linksubtype": "typealias",
+                "name": "Story",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/ngx-tailwind-flex-ui/src/lib/progress-bar/progress-bar.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "ProgressBarComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/7",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/ngx-tailwind-flex-ui/src/lib/rating/rating.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Default",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/ngx-tailwind-flex-ui/src/lib/rating/rating.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "DefaultRating",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/ngx-tailwind-flex-ui/src/lib/rating/rating.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "meta",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/ngx-tailwind-flex-ui/src/lib/rating/rating.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Template",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/ngx-tailwind-flex-ui/src/lib/rating/rating.component.stories.ts",
+                "type": "type alias",
+                "linktype": "miscellaneous",
+                "linksubtype": "typealias",
+                "name": "Story",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/ngx-tailwind-flex-ui/src/lib/rating/rating.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "RatingComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/12",
                 "status": "low"
             }
         ]
