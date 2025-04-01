@@ -4,7 +4,8 @@
   "peerDependencies": {
     "@angular/core": "^19.1.0",
     "@angular/common": "^19.1.0",
-    "@nx/angular": "20.4.6"
+    "@nx/angular": "20.4.6",
+    "@angular/animations": "^19.1.0"
   },
   "sideEffects": false
 }

@@ -1,0 +1,67 @@
+<div
+  *ngIf="isVisible"
+  class="alert fixed z-50 p-4 rounded-lg shadow-lg flex justify-between items-center max-w-md mx-auto bg-gray-100 border border-gray-300 dark:bg-gray-800 dark:border-gray-600 dark:text-gray-200"
+  [ngClass]="getClasses()"
+  [style.top]="position.includes('top') ? 4 + offset + 'px' : null"
+  [style.bottom]="position.includes('bottom') ? 4 + offset + 'px' : null"
+  role="alert"
+  aria-live="polite"
+  [attr.aria-label]="ariaLabel"
+  [@fadeInOut]="animation === 'fade' ? { value: '' } : null"
+  [@slideInOut]="
+    animation === 'slide' ? { value: '', params: getAnimationParams() } : null
+  "
+  (mouseenter)="pauseTimer()"
+  (mouseleave)="resumeTimer()"
+>
+  <div class="flex items-center space-x-2">
+    <span
+      class="material-icons text-lg"
+      [ngClass]="
+        iconColor
+          ? 'material-icons--custom-color ' + iconColor
+          : type === 'success'
+          ? 'text-green-600 dark:text-green-400'
+          : type === 'error'
+          ? 'text-red-600 dark:text-red-400'
+          : type === 'warning'
+          ? 'text-yellow-600 dark:text-yellow-400'
+          : 'text-blue-600 dark:text-blue-400'
+      "
+    >
+      {{ getIcon() }}
+    </span>
+    <span class="message">{{ message }}</span>
+  </div>
+  <div class="flex space-x-2">
+    <ng-container *ngIf="action">
+      <ng-container
+        *ngTemplateOutlet="actionTemplate || defaultActionTemplate"
+      ></ng-container>
+    </ng-container>
+    <button
+      *ngIf="dismissible"
+      (click)="close()"
+      (keydown.enter)="close()"
+      (keydown.space)="close()"
+      class="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300 focus:outline-none text-xl"
+      aria-label="Close alert"
+      tabindex="0"
+    >
+      ✕
+    </button>
+  </div>
+</div>
+
+<ng-template #defaultActionTemplate>
+  <button
+    (click)="onAction()"
+    (keydown.enter)="onAction()"
+    (keydown.space)="onAction()"
+    class="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 focus:outline-none underline"
+    [attr.aria-label]="action + ' action'"
+    tabindex="0"
+  >
+    {{ action }}
+  </button>
+</ng-template>
