@@ -1,0 +1,16 @@
+<div class="flex gap-2 justify-center mt-4">
+    <input
+      *ngFor="let digit of otpValues; let i = index"
+      #otpInput
+      [type]="mask ? 'password' : type"
+      [(ngModel)]="otpValues[i]"
+      (input)="onInput($event, i)"
+      (keydown)="onKeyDown($event, i)"
+      (paste)="onPaste($event)"
+      maxlength="1"
+      [disabled]="disabled"
+      [attr.aria-label]="'OTP Digit ' + (i + 1)"
+      class="w-12 h-12 text-center text-lg border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-200"
+    />
+  </div>
+  
