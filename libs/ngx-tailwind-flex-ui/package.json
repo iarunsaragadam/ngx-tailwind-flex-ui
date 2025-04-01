@@ -1,10 +1,10 @@
 {
-  "name": "@ngx-tailwind-flex-ui",
+  "name": "ngx-tailwind-flex-ui",
   "version": "0.0.1",
   "peerDependencies": {
-    "@angular/core": "^19.1.0",
-    "@angular/common": "^19.1.0",
+    "@angular/core": "19.1.8",
+    "@angular/common": "19.1.8",
+    "@angular/forms": "19.1.8",
     "@nx/angular": "20.4.6"
-  },
-  "sideEffects": false
+  }
 }
