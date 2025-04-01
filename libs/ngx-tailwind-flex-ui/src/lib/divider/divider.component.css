@@ -1,0 +1,7 @@
+:host {
+  display: block;
+  width: 100%; /* Horizontal divider stretches by default */
+  height: 100%; /* Vertical divider stretches by default */
+  min-height: 1px; /* Ensure visibility if no parent height */
+  min-width: 1px; /* Ensure visibility if no parent width */
+}
