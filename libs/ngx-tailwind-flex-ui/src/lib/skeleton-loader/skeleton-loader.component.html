@@ -1,0 +1,78 @@
+<ng-container [ngSwitch]="layout">
+  <!-- Simple Layout -->
+  <ng-container *ngSwitchCase="'simple'">
+    <div
+      class="skeleton-loader"
+      [ngClass]="[validatedTypeClass, validatedAnimationClass]"
+      [style.width]="type === 'circle' ? height : width"
+      [style.height]="type === 'text' ? '16px' : height"
+      [style.backgroundColor]="color"
+    ></div>
+  </ng-container>
+
+  <!-- Card Layout -->
+  <ng-container *ngSwitchCase="'card'">
+    <div class="skeleton-card">
+      <ng-container *ngIf="showAvatar">
+        <div
+          class="skeleton-loader rounded-full"
+          [ngClass]="validatedAnimationClass"
+          [style.width]="'40px'"
+          [style.height]="'40px'"
+          [style.backgroundColor]="color"
+        ></div>
+      </ng-container>
+      <div class="card-content">
+        <div
+          class="skeleton-loader rounded"
+          [ngClass]="validatedAnimationClass"
+          [style.width]="width ? '80%' : '80%'"
+          [style.height]="'10px'"
+          [style.backgroundColor]="color"
+        ></div>
+        <div
+          class="skeleton-loader rounded animate-wave"
+          [style.width]="width ? '40%' : '40%'"
+          [style.height]="'10px'"
+          [style.backgroundColor]="color"
+        ></div>
+        <div
+          class="skeleton-loader rounded-none"
+          [ngClass]="validatedAnimationClass"
+          [style.width]="width"
+          [style.height]="'140px'"
+          [style.backgroundColor]="color"
+        ></div>
+        <div
+          class="skeleton-loader rounded"
+          [ngClass]="validatedAnimationClass"
+          [style.width]="'100%'"
+          [style.height]="'10px'"
+          [style.backgroundColor]="color"
+        ></div>
+      </div>
+    </div>
+  </ng-container>
+
+  <!-- Avatar Layout -->
+  <ng-container *ngSwitchCase="'avatar'">
+    <div class="skeleton-avatar">
+      <div
+        class="skeleton-loader rounded-full"
+        [ngClass]="validatedAnimationClass"
+        [style.width]="'40px'"
+        [style.height]="'40px'"
+        [style.backgroundColor]="color"
+      ></div>
+      <div class="avatar-content">
+        <div
+          class="skeleton-loader rounded"
+          [ngClass]="validatedAnimationClass"
+          [style.width]="'100%'"
+          [style.height]="type === 'text' ? '16px' : height"
+          [style.backgroundColor]="color"
+        ></div>
+      </div>
+    </div>
+  </ng-container>
+</ng-container>
