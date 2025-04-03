@@ -1,10 +1,11 @@
 {
-  "name": "@ngx-tailwind-flex-ui",
-  "version": "0.0.1",
+  "name": "ngx-tailwind-flex-ui",
+  "version": "1.0.0-canary.1",
   "peerDependencies": {
-    "@angular/core": "^19.1.0",
-    "@angular/common": "^19.1.0",
-    "@nx/angular": "20.4.6"
-  },
-  "sideEffects": false
+    "@angular/core": "^19.0.0",
+    "@angular/common": "^19.0.0",
+    "@angular/forms": "^19.0.0",
+    "@nx/angular": "*",
+    "google-libphonenumber": "^3.2.27"
+  }
 }

@@ -1,0 +1,28 @@
+<div class="flex items-center gap-2">
+    <!-- Country dropdown or static -->
+    <ng-container *ngIf="!disableCountryDropdown; else staticCountry">
+      <select
+        class="border p-2 rounded"
+        [(ngModel)]="selectedCountry.iso2"
+        (ngModelChange)="onCountryChange($event)">
+        <option *ngFor="let c of countries" [value]="c.iso2">
+          {{ showCountryFlag ? c.flag : '' }} +{{ c.dialCode }} ({{ c.iso2}})
+        </option>
+      </select>
+    </ng-container>
+    <ng-template #staticCountry>
+      <span class="text-sm">
+        {{ showCountryFlag ? selectedCountry.flag : '' }}
+        {{ showCountryCode ? '+' + selectedCountry.dialCode : '' }}
+      </span>
+    </ng-template>
+  
+    <!-- Phone Input -->
+    <input
+      class="flex-1 border p-2 rounded"
+      type="tel"
+      [value]="phoneNumber"
+      (input)="onInputChange($event.target.value)"
+      placeholder="Enter phone number" />
+  </div>
+  
