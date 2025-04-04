@@ -3,6 +3,14 @@ import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { appRoutes } from './app.routes'; // Import app routes
 
+// Define a type for your route objects
+export interface Route {
+  path: string;
+  label?: string;
+  redirectTo?: string;
+  // Add any other properties that may be present in your route configurations
+}
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -19,7 +27,7 @@ export class AppComponent implements OnInit {
   }
 
   // Extract navigation items from the routes configuration
-  private extractNavItems(routes: any[]): { path: string; label: string }[] {
+  private extractNavItems(routes: Route[]): { path: string; label: string }[] {
     return routes
       .filter((route) => route.path && route.path !== '' && !route.redirectTo)
       .map((route) => ({
@@ -39,3 +47,4 @@ export class AppComponent implements OnInit {
       .join(' ');
   }
 }
+

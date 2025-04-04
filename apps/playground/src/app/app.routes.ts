@@ -1,19 +1,14 @@
-import { Route } from '@angular/router';
+import { Route } from './app.component'; // Import the Route interface if necessary
 
 export const appRoutes: Route[] = [
-  { path: '', redirectTo: 'button', pathMatch: 'full' },
   {
-    path: 'button',
-    loadComponent: () =>
-      import('./components/button-demo/button-demo.component').then(
-        (m) => m.ButtonDemoComponent
-      ),
+    path: 'home',
+    label: 'Home',
+    redirectTo: '/home',
   },
   {
-    path: 'icon',
-    loadComponent: () =>
-      import('./components/icon-demo/icon-demo.component').then(
-        (m) => m.IconDemoComponent
-      ),
+    path: 'about',
+    label: 'About',
   },
+  // More route configurations...
 ];

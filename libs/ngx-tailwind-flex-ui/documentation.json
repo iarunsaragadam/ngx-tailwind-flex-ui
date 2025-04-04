@@ -9,7 +9,7 @@
     "components": [
         {
             "name": "ButtonComponent",
-            "id": "component-ButtonComponent-7b549b2939b9a34abd922e3a0255997fdcdc44e13e0d3149f6f081fd94e8328dfcef16d4b504efc25d22156e814a32fd37682ce25460fb63fbe9f89259f6c17c",
+            "id": "component-ButtonComponent-4a0e060db7ffd16a679766d8091dfca8a2ed6c08cda8975d4756d1434716949e4060c639031b77f2ca38977983acb0622a2fa77db817a21a979f35ebeca9f233",
             "file": "libs/ngx-tailwind-flex-ui/src/lib/button/button.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -74,7 +74,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, Input, HostBinding } from '@angular/core';\n\n@Component({\n  selector: 'lib-button',\n  standalone: true,\n  templateUrl: './button.component.html',\n  styles: [], // No inline styles; Tailwind handles it\n})\nexport class ButtonComponent {\n  @Input() variant: 'primary' | 'accent' | 'outline' | 'text' = 'primary';\n  @Input() disabled = false;\n  @Input() class = ''; // Allow users to pass custom Tailwind classes\n\n  @HostBinding('class') get hostClasses() {\n    const baseClasses =\n      'inline-flex items-center justify-center px-4 py-2 rounded-md font-medium transition-colors duration-200';\n    const variantClasses = {\n      primary:\n        'bg-blue-600 text-white hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2',\n      accent:\n        'bg-purple-600 text-white hover:bg-purple-700 focus:ring-2 focus:ring-purple-500 focus:ring-offset-2',\n      outline:\n        'border border-gray-300 text-gray-700 hover:bg-gray-100 focus:ring-2 focus:ring-gray-500 focus:ring-offset-2',\n      text: 'text-gray-700 hover:bg-gray-100 focus:ring-2 focus:ring-gray-500 focus:ring-offset-2',\n    };\n    const disabledClasses = this.disabled\n      ? 'opacity-50 cursor-not-allowed'\n      : '';\n\n    return `${baseClasses} ${variantClasses[this.variant]} ${disabledClasses} ${\n      this.class\n    }`.trim();\n  }\n}\n",
+            "sourceCode": "import { Component, Input, HostBinding } from '@angular/core';\r\n\r\n@Component({\r\n  selector: 'lib-button',\r\n  standalone: true,\r\n  templateUrl: './button.component.html',\r\n  styles: [], // No inline styles; Tailwind handles it\r\n})\r\nexport class ButtonComponent {\r\n  @Input() variant: 'primary' | 'accent' | 'outline' | 'text' = 'primary';\r\n  @Input() disabled = false;\r\n  @Input() class = ''; // Allow users to pass custom Tailwind classes\r\n\r\n  @HostBinding('class') get hostClasses() {\r\n    const baseClasses =\r\n      'inline-flex items-center justify-center px-4 py-2 rounded-md font-medium transition-colors duration-200';\r\n    const variantClasses = {\r\n      primary:\r\n        'bg-blue-600 text-white hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2',\r\n      accent:\r\n        'bg-purple-600 text-white hover:bg-purple-700 focus:ring-2 focus:ring-purple-500 focus:ring-offset-2',\r\n      outline:\r\n        'border border-gray-300 text-gray-700 hover:bg-gray-100 focus:ring-2 focus:ring-gray-500 focus:ring-offset-2',\r\n      text: 'text-gray-700 hover:bg-gray-100 focus:ring-2 focus:ring-gray-500 focus:ring-offset-2',\r\n    };\r\n    const disabledClasses = this.disabled\r\n      ? 'opacity-50 cursor-not-allowed'\r\n      : '';\r\n\r\n    return `${baseClasses} ${variantClasses[this.variant]} ${disabledClasses} ${\r\n      this.class\r\n    }`.trim();\r\n  }\r\n}\r\n",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
@@ -90,62 +90,207 @@
                     }
                 }
             },
-            "templateData": "<button [disabled]=\"disabled\">\n  <ng-content></ng-content>\n</button>\n"
+            "templateData": "<button [disabled]=\"disabled\">\r\n  <ng-content></ng-content>\r\n</button>\r\n"
         },
         {
-            "name": "IconComponent",
-            "id": "component-IconComponent-5aa773a6e880c2e7321715a97108ab13b79bb19e782154c23dd13ec81d958ee42c3cc1a64ae98a42a5ed510500e262d6416046a36c79ddd1e54057a95c34f581",
-            "file": "libs/ngx-tailwind-flex-ui/src/lib/icon/icon.component.ts",
+            "name": "ChipComponent",
+            "id": "component-ChipComponent-cbf94b3b93f3c0cfa8fbeae5651c09cbeeb34e60e6169cfeceeb5053df7459bea050489b2e0065dcd6238c4524984d3862b238cd0fd9ef8d0978d79a3ec44923",
+            "file": "libs/ngx-tailwind-flex-ui/src/lib/chip/chip.component.ts",
             "encapsulation": [],
             "entryComponents": [],
             "inputs": [],
             "outputs": [],
             "providers": [],
-            "selector": "lib-icon",
-            "styleUrls": [
-                "./icon.component.css"
-            ],
+            "selector": "lib-chip",
+            "styleUrls": [],
             "styles": [],
             "templateUrl": [
-                "./icon.component.html"
+                "./chip.component.html"
             ],
             "viewProviders": [],
             "hostDirectives": [],
             "inputsClass": [
                 {
-                    "name": "color",
-                    "defaultValue": "'text-gray-500'",
+                    "name": "clickable",
+                    "defaultValue": "false",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 14,
-                    "type": "string",
+                    "line": 15,
+                    "type": "boolean",
                     "decorators": []
                 },
                 {
-                    "name": "name",
-                    "defaultValue": "'home'",
+                    "name": "color",
+                    "defaultValue": "'primary'",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "line": 12,
-                    "type": "string",
+                    "type": "\"primary\" | \"secondary\" | \"accent\" | \"neutral\"",
                     "decorators": []
                 },
                 {
-                    "name": "size",
-                    "defaultValue": "'md'",
+                    "name": "disabled",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 16,
+                    "type": "boolean",
+                    "decorators": []
+                },
+                {
+                    "name": "icon",
+                    "defaultValue": "null",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 18,
+                    "type": "string | null",
+                    "decorators": []
+                },
+                {
+                    "name": "removable",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 14,
+                    "type": "boolean",
+                    "decorators": []
+                },
+                {
+                    "name": "selected",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 17,
+                    "type": "boolean",
+                    "decorators": []
+                },
+                {
+                    "name": "variant",
+                    "defaultValue": "'filled'",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "line": 13,
-                    "type": "\"sm\" | \"md\" | \"lg\" | \"xl\"",
+                    "type": "\"filled\" | \"outlined\"",
                     "decorators": []
                 }
             ],
-            "outputsClass": [],
+            "outputsClass": [
+                {
+                    "name": "clicked",
+                    "defaultValue": "new EventEmitter<void>()",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 21,
+                    "type": "EventEmitter"
+                },
+                {
+                    "name": "removed",
+                    "defaultValue": "new EventEmitter<void>()",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 20,
+                    "type": "EventEmitter"
+                },
+                {
+                    "name": "selectedChange",
+                    "defaultValue": "new EventEmitter<boolean>()",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 22,
+                    "type": "EventEmitter"
+                }
+            ],
             "propertiesClass": [],
-            "methodsClass": [],
+            "methodsClass": [
+                {
+                    "name": "onClick",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 56,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
+                {
+                    "name": "onKeydown",
+                    "args": [
+                        {
+                            "name": "event",
+                            "type": "KeyboardEvent",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 71,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "event",
+                            "type": "KeyboardEvent",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "onRemove",
+                    "args": [
+                        {
+                            "name": "event",
+                            "type": "Event",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 48,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "event",
+                            "type": "Event",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "toggleSelection",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 64,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                }
+            ],
             "deprecated": false,
             "deprecationMessage": "",
-            "hostBindings": [],
+            "hostBindings": [
+                {
+                    "name": "class",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 24,
+                    "type": "any",
+                    "decorators": []
+                }
+            ],
             "hostListeners": [],
             "standalone": true,
             "imports": [
@@ -157,41 +302,27 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, Input } from '@angular/core';\nimport { CommonModule } from '@angular/common'; \n\n@Component({\n  selector: 'lib-icon',\n  standalone: true,\n  imports: [CommonModule],\n  templateUrl: './icon.component.html',\n  styleUrls: ['./icon.component.css'],\n})\nexport class IconComponent {\n  @Input() name = 'home';\n  @Input() size: 'sm' | 'md' | 'lg' | 'xl' = 'md';\n  @Input() color = 'text-gray-500';\n\n  get sizeClass(): string {\n    const sizeMap = {\n      sm: 'text-sm',\n      md: 'text-base',\n      lg: 'text-2xl',\n      xl: 'text-4xl',\n    };\n    return sizeMap[this.size] || sizeMap.md;\n  }\n\n  get colorClass(): string {\n    return this.color;\n  }\n}\n",
+            "sourceCode": "import { Component, Input, Output, EventEmitter, HostBinding } from '@angular/core';\r\nimport { CommonModule } from '@angular/common';\r\n\r\n@Component({\r\n  selector: 'lib-chip',\r\n  standalone: true,\r\n  templateUrl: './chip.component.html',\r\n  styles: [],\r\n  imports: [CommonModule],\r\n})\r\nexport class ChipComponent {\r\n  @Input() color: 'primary' | 'secondary' | 'accent' | 'neutral' = 'primary';\r\n  @Input() variant: 'filled' | 'outlined' = 'filled';\r\n  @Input() removable = false;\r\n  @Input() clickable = false;\r\n  @Input() disabled = false;\r\n  @Input() selected = false;\r\n  @Input() icon: string | null = null;\r\n\r\n  @Output() removed = new EventEmitter<void>();\r\n  @Output() clicked = new EventEmitter<void>();\r\n  @Output() selectedChange = new EventEmitter<boolean>();\r\n\r\n  @HostBinding('class') get hostClasses() {\r\n    const baseClasses =\r\n      'inline-flex items-center gap-2 px-4 py-2 rounded-full font-medium transition-all duration-200 focus:ring-2 focus:ring-offset-2';\r\n\r\n    const colorClasses = {\r\n      primary: 'bg-blue-600 text-white hover:bg-blue-700',\r\n      secondary: 'bg-purple-600 text-white hover:bg-purple-700',\r\n      accent: 'bg-green-500 text-white hover:bg-green-600',\r\n      neutral: 'bg-gray-300 text-gray-800 hover:bg-gray-400',\r\n    };\r\n\r\n    const outlinedClasses = {\r\n      primary: 'border border-blue-600 text-blue-600 hover:bg-blue-100',\r\n      secondary: 'border border-purple-600 text-purple-600 hover:bg-purple-100',\r\n      accent: 'border border-green-500 text-green-500 hover:bg-green-100',\r\n      neutral: 'border border-gray-300 text-gray-600 hover:bg-gray-100',\r\n    };\r\n\r\n    const selectedClasses = this.selected ? 'ring-2 ring-blue-500' : '';\r\n    const disabledClasses = this.disabled ? 'opacity-50 cursor-not-allowed' : '';\r\n\r\n    return `${baseClasses} ${this.variant === 'filled' ? colorClasses[this.color] : outlinedClasses[this.color]} ${selectedClasses} ${disabledClasses}`.trim();\r\n  }\r\n\r\n  onRemove(event: Event) {\r\n    event.stopPropagation(); // Prevent click event on chip when clicking remove button\r\n    if (!this.disabled) {\r\n      console.log('Chip removed event emitted'); // ✅ Debugging\r\n      this.removed.emit();\r\n    }\r\n  }\r\n\r\n  onClick() {\r\n    if (this.clickable && !this.disabled) {\r\n      console.log('Chip clicked event emitted'); // ✅ Debugging\r\n      this.clicked.emit();\r\n      this.toggleSelection();\r\n    }\r\n  }\r\n\r\n  toggleSelection() {\r\n    if (!this.disabled) {\r\n      this.selected = !this.selected;\r\n      this.selectedChange.emit(this.selected);\r\n    }\r\n  }\r\n\r\n  onKeydown(event: KeyboardEvent) {\r\n    console.log('Key pressed:', event.key); // ✅ Debugging log\r\n\r\n    if (event.key === 'Enter' || event.key === ' ') {\r\n      this.onClick();\r\n    }\r\n\r\n    if (event.key === 'Escape' && this.selected) {\r\n      this.selected = false;\r\n      this.selectedChange.emit(this.selected);\r\n    }\r\n\r\n    if ((event.key === 'Backspace' || event.key === 'Delete') && this.removable) {\r\n      event.preventDefault(); // ✅ Prevents default browser behavior\r\n      console.log('Backspace/Delete pressed - Removing chip'); // ✅ Debugging log\r\n      this.onRemove(event);\r\n    }\r\n  }\r\n}\r\n\r\n\r\n\r\n\r\n\r\n",
             "assetsDirs": [],
-            "styleUrlsData": [
-                {
-                    "data": ".material-icons {\n    display: inline-flex;\n    align-items: center;\n    justify-content: center;\n    vertical-align: middle;\n}",
-                    "styleUrl": "./icon.component.css"
-                }
-            ],
+            "styleUrlsData": "",
             "stylesData": "",
             "extends": [],
             "accessors": {
-                "sizeClass": {
-                    "name": "sizeClass",
+                "hostClasses": {
+                    "name": "hostClasses",
                     "getSignature": {
-                        "name": "sizeClass",
-                        "type": "string",
-                        "returnType": "string",
-                        "line": 16
-                    }
-                },
-                "colorClass": {
-                    "name": "colorClass",
-                    "getSignature": {
-                        "name": "colorClass",
-                        "type": "string",
-                        "returnType": "string",
-                        "line": 26
+                        "name": "hostClasses",
+                        "type": "",
+                        "returnType": "",
+                        "line": 24
                     }
                 }
             },
-            "templateData": "<span class=\"material-icons\" [ngClass]=\"[sizeClass, colorClass]\">\n    {{ name }}\n</span>\n  "
+            "templateData": "<div\r\n  class=\"flex items-center space-x-2 px-3 py-1 rounded-full cursor-pointer focus:ring-2 focus:ring-offset-2\"\r\n  [class.clickable]=\"clickable\"\r\n  (click)=\"onClick()\"\r\n  (keydown)=\"onKeydown($event)\"\r\n  tabindex=\"0\"\r\n>\r\n  <!-- Optional Icon -->\r\n  <span *ngIf=\"icon\" class=\"material-icons text-sm\">{{ icon }}</span>\r\n\r\n  <!-- Chip Label -->\r\n  <ng-content></ng-content>\r\n\r\n  <!-- Remove Button (if removable) -->\r\n  <button\r\n    *ngIf=\"removable\"\r\n    class=\"ml-2 text-white hover:text-gray-300 focus:outline-none\"\r\n    (click)=\"onRemove($event)\"\r\n  >\r\n    ✕\r\n  </button>\r\n</div>"
         },
         {
             "name": "IconComponent",
-            "id": "component-IconComponent-f4ffddc67d4dc8cdcc909de572d3660df47682439e6a9f4405942573613c1afc2dac2183ba5b0f69bbb0568ec3eb59ac6e3bfa8c56f5eecf072b8b573f060f08",
+            "id": "component-IconComponent-f8319707c4db8c28b1c60cee96154c58150cc29b3cf08e5d353aea2d6c0988772ae60eaf015395a6d4d3e8fb7cf4bea0e18774b39cae83d9e473d3a30a4a0fe0",
             "file": "libs/ngx-tailwind-flex-ui/src/lib/icon/icon.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -254,11 +385,11 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, Input } from '@angular/core';\nimport { CommonModule } from '@angular/common';\n\n@Component({\n  selector: 'lib-icon',\n  standalone: true,\n  imports: [CommonModule],\n  templateUrl: './icon.component.html',\n  styleUrls: ['./icon.component.css'],\n})\nexport class IconComponent {\n  @Input() name = 'home';\n  @Input() size: 'sm' | 'md' | 'lg' | 'xl' = 'md';\n  @Input() color = 'text-gray-500';\n\n  get sizePx(): number {\n    const sizeMap: Record<string, number> = {\n      sm: 16,\n      md: 24,  // Default Material Icon size\n      lg: 32,\n      xl: 48,\n    };\n    return sizeMap[this.size] || sizeMap['md'];\n  }\n\n  get colorClass(): string {\n    return this.color;\n  }\n}\n",
+            "sourceCode": "import { Component, Input } from '@angular/core';\r\nimport { CommonModule } from '@angular/common';\r\n\r\n@Component({\r\n  selector: 'lib-icon',\r\n  standalone: true,\r\n  imports: [CommonModule],\r\n  templateUrl: './icon.component.html',\r\n  styleUrls: ['./icon.component.css'],\r\n})\r\nexport class IconComponent {\r\n  @Input() name = 'home';\r\n  @Input() size: 'sm' | 'md' | 'lg' | 'xl' = 'md';\r\n  @Input() color = 'text-gray-500';\r\n\r\n  get sizePx(): number {\r\n    const sizeMap: Record<string, number> = {\r\n      sm: 16,\r\n      md: 24,  // Default Material Icon size\r\n      lg: 32,\r\n      xl: 48,\r\n    };\r\n    return sizeMap[this.size] || sizeMap['md'];\r\n  }\r\n\r\n  get colorClass(): string {\r\n    return this.color;\r\n  }\r\n}\r\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": ".material-icons {\n    display: inline-flex;\n    align-items: center;\n    justify-content: center;\n    vertical-align: middle;\n}",
+                    "data": ".material-icons {\r\n    display: inline-flex;\r\n    align-items: center;\r\n    justify-content: center;\r\n    vertical-align: middle;\r\n}",
                     "styleUrl": "./icon.component.css"
                 }
             ],
@@ -284,7 +415,466 @@
                     }
                 }
             },
-            "templateData": "<span \n  class=\"material-icons\"\n  [ngClass]=\"colorClass\"\n  [style.font-size.px]=\"sizePx\">\n  {{ name }}\n</span>\n"
+            "templateData": "<span \r\n  class=\"material-icons\"\r\n  [ngClass]=\"colorClass\"\r\n  [style.font-size.px]=\"sizePx\">\r\n  {{ name }}\r\n</span>\r\n"
+        },
+        {
+            "name": "LoadingSpinnerComponent",
+            "id": "component-LoadingSpinnerComponent-87646e3e0b77bb88f2ed95a1c78b1b56876072354a4b59a95947194859bc52044d1abe3d30b75bb063d39e64c4a3b386c488745ad2424f51f0603f821834f0ca",
+            "file": "libs/ngx-tailwind-flex-ui/src/lib/loadingSpinner/loadingSpinner.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "lib-loading-spinner",
+            "styleUrls": [
+                "./loadingSpinner.component.css"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./loadingSpinner.component.html"
+            ],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [
+                {
+                    "name": "color",
+                    "defaultValue": "'#3b82f6'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 16,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "mode",
+                    "defaultValue": "'indeterminate'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 12,
+                    "type": "\"determinate\" | \"indeterminate\"",
+                    "decorators": []
+                },
+                {
+                    "name": "size",
+                    "defaultValue": "40",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 14,
+                    "type": "number",
+                    "decorators": []
+                },
+                {
+                    "name": "thickness",
+                    "defaultValue": "4",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 15,
+                    "type": "number",
+                    "decorators": []
+                },
+                {
+                    "name": "value",
+                    "defaultValue": "0",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 13,
+                    "type": "number",
+                    "decorators": []
+                }
+            ],
+            "outputsClass": [],
+            "propertiesClass": [],
+            "methodsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": true,
+            "imports": [
+                {
+                    "name": "CommonModule",
+                    "type": "module"
+                }
+            ],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component, Input } from '@angular/core';\r\nimport { CommonModule } from '@angular/common';\r\n\r\n@Component({\r\n  selector: 'lib-loading-spinner',\r\n  standalone: true,\r\n  imports: [CommonModule],\r\n  templateUrl: './loadingSpinner.component.html',\r\n  styleUrls: ['./loadingSpinner.component.css'],\r\n})\r\nexport class LoadingSpinnerComponent {\r\n  @Input() mode: 'determinate' | 'indeterminate' = 'indeterminate'; // Loading state\r\n  @Input() value = 0; // Progress value (0-100) for determinate mode\r\n  @Input() size = 40; // Diameter in pixels\r\n  @Input() thickness = 4; // Stroke width in pixels\r\n  @Input() color = '#3b82f6'; // Default Tailwind blue-500\r\n}\r\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": ":host {\r\n  display: inline-block;\r\n}\r\n\r\nsvg {\r\n  display: block;\r\n}\r\n",
+                    "styleUrl": "./loadingSpinner.component.css"
+                }
+            ],
+            "stylesData": "",
+            "extends": [],
+            "templateData": "<div\r\n  class=\"relative inline-block\"\r\n  [style.width.px]=\"size\"\r\n  [style.height.px]=\"size\"\r\n  role=\"progressbar\"\r\n  [attr.aria-valuenow]=\"mode === 'determinate' ? value : null\"\r\n  [attr.aria-valuemin]=\"0\"\r\n  [attr.aria-valuemax]=\"100\"\r\n  [attr.aria-label]=\"mode === 'determinate' ? 'Loading progress' : 'Loading'\"\r\n>\r\n  <!-- Indeterminate Spinner -->\r\n  <svg\r\n    *ngIf=\"mode === 'indeterminate'\"\r\n    class=\"animate-spin\"\r\n    [style.width.px]=\"size\"\r\n    [style.height.px]=\"size\"\r\n    viewBox=\"0 0 100 100\"\r\n    xmlns=\"http://www.w3.org/2000/svg\"\r\n  >\r\n    <circle\r\n      class=\"opacity-25\"\r\n      cx=\"50\"\r\n      cy=\"50\"\r\n      r=\"40\"\r\n      [style.stroke]=\"color\"\r\n      [style.stroke-width]=\"thickness\"\r\n      fill=\"none\"\r\n    />\r\n    <circle\r\n      cx=\"50\"\r\n      cy=\"50\"\r\n      r=\"40\"\r\n      [style.stroke]=\"color\"\r\n      [style.stroke-width]=\"thickness\"\r\n      fill=\"none\"\r\n      stroke-linecap=\"round\"\r\n      stroke-dasharray=\"251.2\"\r\n      stroke-dashoffset=\"62.8\"\r\n    />\r\n  </svg>\r\n\r\n  <!-- Determinate Spinner -->\r\n  <svg\r\n    *ngIf=\"mode === 'determinate'\"\r\n    [style.width.px]=\"size\"\r\n    [style.height.px]=\"size\"\r\n    viewBox=\"0 0 100 100\"\r\n    xmlns=\"http://www.w3.org/2000/svg\"\r\n  >\r\n    <circle\r\n      class=\"opacity-25\"\r\n      cx=\"50\"\r\n      cy=\"50\"\r\n      r=\"40\"\r\n      [style.stroke]=\"color\"\r\n      [style.stroke-width]=\"thickness\"\r\n      fill=\"none\"\r\n    />\r\n    <circle\r\n      class=\"transition-all duration-300 ease-in-out\"\r\n      cx=\"50\"\r\n      cy=\"50\"\r\n      r=\"40\"\r\n      [style.stroke]=\"color\"\r\n      [style.stroke-width]=\"thickness\"\r\n      fill=\"none\"\r\n      stroke-linecap=\"round\"\r\n      [style.stroke-dasharray]=\"251.2\"\r\n      [style.stroke-dashoffset]=\"251.2 - 251.2 * (value / 100)\"\r\n    />\r\n  </svg>\r\n</div>\r\n"
+        },
+        {
+            "name": "PaginatorComponent",
+            "id": "component-PaginatorComponent-90b8fefde7adb6bec711d3f364730b24718220abba32876ee3d21559d81f12801224e20268295ba5dbd3ab79e2ad599801201dd2d9d9868c944d2902a33c202a",
+            "file": "libs/ngx-tailwind-flex-ui/src/lib/paginator/paginator.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "lib-paginator",
+            "styleUrls": [],
+            "styles": [],
+            "templateUrl": [
+                "./paginator.component.html"
+            ],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [
+                {
+                    "name": "length",
+                    "defaultValue": "100",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 10,
+                    "type": "number",
+                    "decorators": []
+                },
+                {
+                    "name": "pageIndex",
+                    "defaultValue": "0",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 12,
+                    "type": "number",
+                    "decorators": []
+                },
+                {
+                    "name": "pageSize",
+                    "defaultValue": "10",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 11,
+                    "type": "number",
+                    "decorators": []
+                }
+            ],
+            "outputsClass": [
+                {
+                    "name": "pageChange",
+                    "defaultValue": "new EventEmitter<number>()",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 13,
+                    "type": "EventEmitter"
+                },
+                {
+                    "name": "pageSizeChange",
+                    "defaultValue": "new EventEmitter<number>()",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 14,
+                    "type": "EventEmitter"
+                }
+            ],
+            "propertiesClass": [
+                {
+                    "name": "pageSizeOptions",
+                    "defaultValue": "[10, 20, 50, 100]",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "[]",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 16
+                }
+            ],
+            "methodsClass": [
+                {
+                    "name": "changePage",
+                    "args": [
+                        {
+                            "name": "newIndex",
+                            "type": "number",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 42,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "newIndex",
+                            "type": "number",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "changePageSize",
+                    "args": [
+                        {
+                            "name": "event",
+                            "type": "Event",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 49,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "event",
+                            "type": "Event",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [
+                {
+                    "name": "class",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 18,
+                    "type": "string",
+                    "decorators": []
+                }
+            ],
+            "hostListeners": [],
+            "standalone": false,
+            "imports": [
+                {
+                    "name": "CommonModule",
+                    "type": "module"
+                }
+            ],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component, EventEmitter, HostBinding, Input, Output } from '@angular/core';\r\nimport { CommonModule } from '@angular/common';\r\n\r\n@Component({\r\n  selector: 'lib-paginator',\r\n  imports: [CommonModule],\r\n  templateUrl: './paginator.component.html',\r\n})\r\nexport class PaginatorComponent {\r\n  @Input() length = 100; // Total items\r\n  @Input() pageSize = 10; // Items per page\r\n  @Input() pageIndex = 0; // Current page\r\n  @Output() pageChange = new EventEmitter<number>();\r\n  @Output() pageSizeChange = new EventEmitter<number>();\r\n\r\n  pageSizeOptions = [10, 20, 50, 100];\r\n\r\n  @HostBinding('class') get hostClasses() {\r\n    return 'flex justify-between items-center p-4 bg-gray-100 rounded-lg shadow-sm w-full';\r\n  }\r\n\r\n  get totalPages(): number {\r\n    return Math.ceil(this.length / this.pageSize);\r\n  }\r\n\r\n  get isFirstPage(): boolean {\r\n    return this.pageIndex === 0;\r\n  }\r\n\r\n  get isLastPage(): boolean {\r\n    return this.pageIndex === this.totalPages - 1;\r\n  }\r\n\r\n  get startItem(): number {\r\n    return this.pageIndex * this.pageSize + 1;\r\n  }\r\n\r\n  get endItem(): number {\r\n    return Math.min((this.pageIndex + 1) * this.pageSize, this.length);\r\n  }\r\n\r\n  changePage(newIndex: number) {\r\n    if (newIndex >= 0 && newIndex < this.totalPages) {\r\n      this.pageIndex = newIndex;\r\n      this.pageChange.emit(this.pageIndex);\r\n    }\r\n  }\r\n\r\n  changePageSize(event: Event) {\r\n    const newSize = Number((event.target as HTMLSelectElement).value);\r\n    this.pageSize = newSize;\r\n    this.pageIndex = 0; // Reset to first page\r\n    this.pageSizeChange.emit(this.pageSize);\r\n    this.pageChange.emit(this.pageIndex);\r\n  }\r\n}\r\n",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "",
+            "extends": [],
+            "accessors": {
+                "hostClasses": {
+                    "name": "hostClasses",
+                    "getSignature": {
+                        "name": "hostClasses",
+                        "type": "",
+                        "returnType": "",
+                        "line": 18
+                    }
+                },
+                "totalPages": {
+                    "name": "totalPages",
+                    "getSignature": {
+                        "name": "totalPages",
+                        "type": "number",
+                        "returnType": "number",
+                        "line": 22
+                    }
+                },
+                "isFirstPage": {
+                    "name": "isFirstPage",
+                    "getSignature": {
+                        "name": "isFirstPage",
+                        "type": "boolean",
+                        "returnType": "boolean",
+                        "line": 26
+                    }
+                },
+                "isLastPage": {
+                    "name": "isLastPage",
+                    "getSignature": {
+                        "name": "isLastPage",
+                        "type": "boolean",
+                        "returnType": "boolean",
+                        "line": 30
+                    }
+                },
+                "startItem": {
+                    "name": "startItem",
+                    "getSignature": {
+                        "name": "startItem",
+                        "type": "number",
+                        "returnType": "number",
+                        "line": 34
+                    }
+                },
+                "endItem": {
+                    "name": "endItem",
+                    "getSignature": {
+                        "name": "endItem",
+                        "type": "number",
+                        "returnType": "number",
+                        "line": 38
+                    }
+                }
+            },
+            "templateData": "<!-- Page Size Selector -->\r\n<div class=\"flex items-center space-x-2\">\r\n  <label for=\"pageSizeSelect\" class=\"text-gray-600 text-sm\">Items per page:</label>\r\n  <select \r\n    id=\"pageSizeSelect\"\r\n    [value]=\"pageSize\"\r\n    (change)=\"changePageSize($event)\"\r\n    class=\"border border-gray-300 rounded-md px-2 py-2 bg-white text-gray-700\">\r\n    <option *ngFor=\"let size of pageSizeOptions\" [value]=\"size\">{{ size }}</option>\r\n  </select>\r\n</div>\r\n\r\n<!-- Page Information -->\r\n<span class=\"text-gray-500 text-sm\">\r\n  {{ startItem }} – {{ endItem }} of {{ length }}\r\n</span>\r\n\r\n<!-- Navigation Controls -->\r\n<button \r\n  [disabled]=\"isFirstPage\"\r\n  (click)=\"changePage(pageIndex - 1)\"\r\n  class=\"p-2 text-gray-500 hover:text-black disabled:opacity-50\">\r\n  ❮\r\n</button>\r\n\r\n<button \r\n  [disabled]=\"isLastPage\"\r\n  (click)=\"changePage(pageIndex + 1)\"\r\n  class=\"p-2 text-gray-500 hover:text-black disabled:opacity-50\">\r\n  ❯\r\n</button>\r\n"
+        },
+        {
+            "name": "ProgressBarComponent",
+            "id": "component-ProgressBarComponent-78a23a78d7e5b67e6bd83b89d04b177eb6698f57f51981bfe0118b9dd1fcdddb67a4e78ce9130775a7bf75367f5e52b60e2377e467afc22057006c6abaec4b6b",
+            "file": "libs/ngx-tailwind-flex-ui/src/lib/progress-bar/progress-bar.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "lib-progress-bar",
+            "styleUrls": [
+                "./progress-bar.component.css"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./progress-bar.component.html"
+            ],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [
+                {
+                    "name": "bufferProgress",
+                    "defaultValue": "100",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\nBuffer progress (for buffer variant, 0-100)",
+                    "description": "<p>Buffer progress (for buffer variant, 0-100)</p>\n",
+                    "line": 18,
+                    "type": "number",
+                    "decorators": []
+                },
+                {
+                    "name": "class",
+                    "defaultValue": "''",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 23,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "color",
+                    "defaultValue": "'primary'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\nColor options",
+                    "description": "<p>Color options</p>\n",
+                    "line": 21,
+                    "type": "\"primary\" | \"secondary\" | \"success\" | \"error\"",
+                    "decorators": []
+                },
+                {
+                    "name": "progress",
+                    "defaultValue": "80",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\nPrimary progress percentage (0-100)",
+                    "description": "<p>Primary progress percentage (0-100)</p>\n",
+                    "line": 15,
+                    "type": "number",
+                    "decorators": []
+                },
+                {
+                    "name": "variant",
+                    "defaultValue": "'determinate'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\nTypes: 'determinate' | 'indeterminate' | 'buffer' | 'query'",
+                    "description": "<p>Types: &#39;determinate&#39; | &#39;indeterminate&#39; | &#39;buffer&#39; | &#39;query&#39;</p>\n",
+                    "line": 12,
+                    "type": "\"determinate\" | \"indeterminate\" | \"buffer\" | \"query\"",
+                    "decorators": []
+                }
+            ],
+            "outputsClass": [],
+            "propertiesClass": [
+                {
+                    "name": "colorMap",
+                    "defaultValue": "{\r\n    primary: 'bg-blue-500', // Default\r\n    secondary: 'bg-yellow-500',\r\n    success: 'bg-green-500',\r\n    error: 'bg-red-500', // Warning\r\n  }",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "object",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 27,
+                    "modifierKind": [
+                        123,
+                        148
+                    ]
+                }
+            ],
+            "methodsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [
+                {
+                    "name": "class",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\nMap color variants to Tailwind CSS classes",
+                    "description": "<p>Map color variants to Tailwind CSS classes</p>\n",
+                    "line": 36,
+                    "type": "string",
+                    "decorators": []
+                }
+            ],
+            "hostListeners": [],
+            "standalone": false,
+            "imports": [
+                {
+                    "name": "CommonModule",
+                    "type": "module"
+                }
+            ],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { CommonModule } from '@angular/common';\r\nimport { Component, HostBinding, Input } from '@angular/core';\r\n\r\n@Component({\r\n  selector: 'lib-progress-bar',\r\n  templateUrl: './progress-bar.component.html',\r\n  styleUrls: ['./progress-bar.component.css'],\r\n  imports: [CommonModule],\r\n})\r\nexport class ProgressBarComponent {\r\n  /** Types: 'determinate' | 'indeterminate' | 'buffer' | 'query' */\r\n  @Input() variant: 'determinate' | 'indeterminate' | 'buffer' | 'query' = 'determinate';\r\n\r\n  /** Primary progress percentage (0-100) */\r\n  @Input() progress = 80;\r\n\r\n  /** Buffer progress (for buffer variant, 0-100) */\r\n  @Input() bufferProgress = 100;\r\n\r\n  /** Color options */\r\n  @Input() color: 'primary' | 'secondary' | 'success' | 'error' = 'primary';\r\n\r\n  @Input() class = ''; // Allow users to pass custom Tailwind classes\r\n\r\n  \r\n\r\n  private readonly colorMap = {\r\n    primary: 'bg-blue-500', // Default\r\n    secondary: 'bg-yellow-500',\r\n    success: 'bg-green-500',\r\n    error: 'bg-red-500', // Warning\r\n  };\r\n\r\n  /** Map color variants to Tailwind CSS classes */\r\n  @HostBinding('class')\r\n  get progressBarClass(): string {\r\n    return this.colorMap[this.color] || 'bg-blue-500';\r\n  }\r\n}\r\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": "@keyframes indeterminate {\r\n    0% {\r\n      left: -100%;\r\n    }\r\n    100% {\r\n      left: 100%;\r\n    }\r\n  }\r\n  \r\n  @keyframes query {\r\n    0% {\r\n      right: -100%;\r\n    }\r\n    100% {\r\n      right: 100%;\r\n    }\r\n  }\r\n\r\n  @keyframes bufferWave {\r\n    0% {\r\n      left: -100%;\r\n      width: 40%;\r\n    }\r\n    50% {\r\n      left: 50%;\r\n      width: 60%;\r\n    }\r\n    100% {\r\n      left: 100%;\r\n      width: 40%;\r\n    }\r\n  }\r\n  \r\n  .animate-indeterminate {\r\n    position: absolute;\r\n    left: -100%;\r\n    width: 40%;\r\n    animation: indeterminate 1.5s infinite linear;\r\n  }\r\n  \r\n  .animate-query {\r\n    position: absolute;\r\n    right: -100%;\r\n    width: 40%;\r\n    animation: query 1.5s infinite linear;\r\n  }\r\n\r\n  .buffer-wave {\r\n    position: absolute;\r\n    left: -100%;\r\n    height: 100%;\r\n    width: 40%;\r\n    background: linear-gradient(to right, rgba(0, 0, 0, 0.1), rgba(255, 255, 255, 0.3));\r\n    animation: bufferWave 2s infinite ease-in-out;\r\n  }\r\n\r\n  \r\n  ",
+                    "styleUrl": "./progress-bar.component.css"
+                }
+            ],
+            "stylesData": "",
+            "extends": [],
+            "accessors": {
+                "progressBarClass": {
+                    "name": "progressBarClass",
+                    "getSignature": {
+                        "name": "progressBarClass",
+                        "type": "string",
+                        "returnType": "string",
+                        "line": 36,
+                        "rawdescription": "\nMap color variants to Tailwind CSS classes",
+                        "description": "<p>Map color variants to Tailwind CSS classes</p>\n"
+                    }
+                }
+            },
+            "templateData": "<div class=\"w-full bg-gray-200 rounded-full h-4 overflow-hidden relative\">\r\n\r\n  <!-- Determinate & Buffer Primary Progress -->\r\n  <div\r\n    *ngIf=\"variant === 'determinate' || variant === 'buffer'\"\r\n    class=\"h-full transition-all duration-300\"\r\n    [ngClass]=\"progressBarClass\"\r\n    [style.width.%]=\"progress\"\r\n    role=\"progressbar\"\r\n    [attr.aria-valuenow]=\"progress\"\r\n    aria-valuemin=\"0\"\r\n    aria-valuemax=\"100\"\r\n  ></div>\r\n\r\n  <!-- Indeterminate Animation -->\r\n  <div\r\n    *ngIf=\"variant === 'indeterminate'\"\r\n    class=\"absolute top-0 left-0 h-full w-full overflow-hidden\"\r\n  >\r\n    <div\r\n      class=\"h-full w-1/3 animate-indeterminate\"\r\n      [ngClass]=\"progressBarClass\"\r\n    ></div>\r\n  </div>\r\n\r\n  <!-- Query Mode (Reversed Indeterminate) -->\r\n  <div\r\n    *ngIf=\"variant === 'query'\"\r\n    class=\"absolute top-0 left-0 h-full w-full overflow-hidden\"\r\n  >\r\n    <div\r\n      class=\"h-full w-1/3 animate-query\"\r\n      [ngClass]=\"progressBarClass\"\r\n    ></div>\r\n  </div>\r\n\r\n  <!-- Buffer Secondary Progress -->\r\n  <!-- Buffer Secondary Progress Background -->\r\n<div\r\n*ngIf=\"variant === 'buffer'\"\r\nclass=\"absolute top-0 left-0 h-full bg-gray-300 opacity-50\"\r\n[style.width.%]=\"bufferProgress\"\r\n></div>\r\n\r\n<!-- Buffer Animation Overlay -->\r\n<div\r\n*ngIf=\"variant === 'buffer'\"\r\nclass=\"absolute top-0 left-0 h-full w-full overflow-hidden\"\r\n>\r\n<div class=\"buffer-wave\"></div>\r\n</div>\r\n\r\n\r\n</div>\r\n"
         }
     ],
     "modules": [],
@@ -298,7 +888,27 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\n  args: {\n    variant: 'accent',\n    disabled: false,\n  },\n  render: (args) => ({\n    props: args,\n    template: `<lib-button [variant]=\"variant\" [disabled]=\"disabled\">Accent Button</lib-button>`,\n  }),\n}"
+                "defaultValue": "{\r\n  args: {\r\n    variant: 'accent',\r\n    disabled: false,\r\n  },\r\n  render: (args) => ({\r\n    props: args,\r\n    template: `<lib-button [variant]=\"variant\" [disabled]=\"disabled\">Accent Button</lib-button>`,\r\n  }),\r\n}"
+            },
+            {
+                "name": "Clickable",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/ngx-tailwind-flex-ui/src/lib/chip/chip.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "StoryObj<ChipComponent>",
+                "defaultValue": "{\r\n  args: {\r\n    clickable: true,\r\n    removable: false,\r\n    disabled: false,\r\n    icon: 'check_circle',\r\n  },\r\n}"
+            },
+            {
+                "name": "Colored",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/ngx-tailwind-flex-ui/src/lib/loadingSpinner/loadingSpinner.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\r\n  args: {\r\n    color: '#ef4444', // Tailwind red-500\r\n  },\r\n}"
             },
             {
                 "name": "config",
@@ -308,7 +918,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "StorybookConfig",
-                "defaultValue": "{\n  stories: ['../**/*.@(mdx|stories.@(js|jsx|ts|tsx))'],\n  addons: ['@storybook/addon-essentials', '@storybook/addon-interactions'],\n  framework: {\n    name: '@storybook/angular',\n    options: {},\n  },\n  docs: {\n    autodocs: true,\n    defaultName: 'Docs',\n  },\n}"
+                "defaultValue": "{\r\n  stories: ['../**/*.@(mdx|stories.@(js|jsx|ts|tsx))'],\r\n  addons: ['@storybook/addon-essentials', '@storybook/addon-interactions'],\r\n  framework: {\r\n    name: '@storybook/angular',\r\n    options: {},\r\n  },\r\n  docs: {\r\n    autodocs: true,\r\n    defaultName: 'Docs',\r\n  },\r\n}"
             },
             {
                 "name": "CustomStyled",
@@ -318,7 +928,27 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\n  args: {\n    variant: 'primary',\n    class: 'text-lg px-6 py-3 bg-green-500 hover:bg-green-600',\n  },\n  render: (args) => ({\n    props: args,\n    template: `<lib-button [variant]=\"variant\" [class]=\"class\">Custom Styled Button</lib-button>`,\n  }),\n}"
+                "defaultValue": "{\r\n  args: {\r\n    variant: 'primary',\r\n    class: 'text-lg px-6 py-3 bg-green-500 hover:bg-green-600',\r\n  },\r\n  render: (args) => ({\r\n    props: args,\r\n    template: `<lib-button [variant]=\"variant\" [class]=\"class\">Custom Styled Button</lib-button>`,\r\n  }),\r\n}"
+            },
+            {
+                "name": "CustomStyled",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/ngx-tailwind-flex-ui/src/lib/progress-bar/progress-bar.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\r\n  args: {\r\n    progress: 60,\r\n    color: 'primary',\r\n    variant: 'determinate',\r\n    class: 'h-6 rounded-lg',\r\n  },\r\n  render: (args) => ({\r\n    props: args,\r\n    template: `<lib-progress-bar [progress]=\"progress\" [color]=\"color\" [variant]=\"variant\" [class]=\"class\"></lib-progress-bar>`,\r\n  }),\r\n}"
+            },
+            {
+                "name": "Default",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/ngx-tailwind-flex-ui/src/lib/chip/chip.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "StoryObj<ChipComponent>",
+                "defaultValue": "{\r\n  args: {\r\n    clickable: false,\r\n    removable: false,\r\n    disabled: false,\r\n    icon: 'star', // Example icon\r\n  },\r\n}"
             },
             {
                 "name": "Default",
@@ -328,7 +958,57 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\n  args: {\n    name: 'home',\n    size: 'md',\n    color: 'text-gray-500',\n  },\n  render: (args) => ({\n    props: args,\n    template: `<lib-icon [name]=\"name\" [size]=\"size\" [color]=\"color\"></lib-icon>`,\n  }),\n}"
+                "defaultValue": "{\r\n  args: {\r\n    name: 'home',\r\n    size: 'md',\r\n    color: 'text-gray-500',\r\n  },\r\n  render: (args) => ({\r\n    props: args,\r\n    template: `<lib-icon [name]=\"name\" [size]=\"size\" [color]=\"color\"></lib-icon>`,\r\n  }),\r\n}"
+            },
+            {
+                "name": "Default",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/ngx-tailwind-flex-ui/src/lib/loadingSpinner/loadingSpinner.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\r\n  args: {},\r\n}"
+            },
+            {
+                "name": "Default",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/ngx-tailwind-flex-ui/src/lib/paginator/paginator.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "StoryObj<PaginatorComponent>",
+                "defaultValue": "{\r\n  args: {\r\n    length: 100,\r\n    pageSize: 10,\r\n    pageIndex: 0,\r\n  },\r\n}"
+            },
+            {
+                "name": "Default",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/ngx-tailwind-flex-ui/src/lib/progress-bar/progress-bar.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\r\n  args: {\r\n    progress: 25,\r\n    color: \"primary\",\r\n    variant: 'determinate',\r\n    bufferProgress: 0\r\n  },\r\n  render: (args) => ({\r\n    props: args,\r\n    template: `<lib-progress-bar [progress]=\"progress\" [color]=\"color\" [variant]=\"variant\"></lib-progress-bar>`,\r\n  }),\r\n}"
+            },
+            {
+                "name": "Determinate",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/ngx-tailwind-flex-ui/src/lib/loadingSpinner/loadingSpinner.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\r\n  args: {\r\n    mode: 'determinate',\r\n    value: 50,\r\n  },\r\n}"
+            },
+            {
+                "name": "DeterminateProgress",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/ngx-tailwind-flex-ui/src/lib/loadingSpinner/loadingSpinner.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\r\n  args: {\r\n    mode: 'determinate',\r\n    value: 75,\r\n    size: 50,\r\n    thickness: 5,\r\n    color: '#10b981', // Tailwind green-500\r\n  },\r\n}"
             },
             {
                 "name": "Disabled",
@@ -338,7 +1018,47 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\n  args: {\n    variant: 'primary',\n    disabled: true,\n  },\n  render: (args) => ({\n    props: args,\n    template: `<lib-button [variant]=\"variant\" [disabled]=\"disabled\">Disabled Button</lib-button>`,\n  }),\n}"
+                "defaultValue": "{\r\n  args: {\r\n    variant: 'primary',\r\n    disabled: true,\r\n  },\r\n  render: (args) => ({\r\n    props: args,\r\n    template: `<lib-button [variant]=\"variant\" [disabled]=\"disabled\">Disabled Button</lib-button>`,\r\n  }),\r\n}"
+            },
+            {
+                "name": "Disabled",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/ngx-tailwind-flex-ui/src/lib/chip/chip.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "StoryObj<ChipComponent>",
+                "defaultValue": "{\r\n  args: {\r\n    clickable: false,\r\n    removable: false,\r\n    disabled: true,\r\n    icon: 'block',\r\n  },\r\n}"
+            },
+            {
+                "name": "GreenBuffer",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/ngx-tailwind-flex-ui/src/lib/progress-bar/progress-bar.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\r\n  args: {\r\n    progress: 40,\r\n    bufferProgress: 5,\r\n    color: 'success',\r\n    variant: 'buffer',\r\n  },\r\n  render: (args) => ({\r\n    props: args,\r\n    template: `<lib-progress-bar [progress]=\"progress\" [buffer]=\"buffer\" [color]=\"color\" [variant]=\"variant\"></lib-progress-bar>`,\r\n  }),\r\n}"
+            },
+            {
+                "name": "GreenProgress",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/ngx-tailwind-flex-ui/src/lib/progress-bar/progress-bar.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\r\n  args: {\r\n    progress: 70,\r\n    color: 'success',\r\n    variant: 'determinate',\r\n  },\r\n  render: (args) => ({\r\n    props: args,\r\n    template: `<lib-progress-bar [progress]=\"progress\" [color]=\"color\" [variant]=\"variant\"></lib-progress-bar>`,\r\n  }),\r\n}"
+            },
+            {
+                "name": "Large",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/ngx-tailwind-flex-ui/src/lib/loadingSpinner/loadingSpinner.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\r\n  args: {\r\n    size: 60,\r\n  },\r\n}"
             },
             {
                 "name": "LargeRedIcon",
@@ -348,7 +1068,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\n  args: {\n    name: 'favorite',\n    size: 'xl',\n    color: 'text-red-500',\n  },\n  render: (args) => ({\n    props: args,\n    template: `<lib-icon [name]=\"name\" [size]=\"size\" [color]=\"color\"></lib-icon>`,\n  }),\n}"
+                "defaultValue": "{\r\n  args: {\r\n    name: 'favorite',\r\n    size: 'xl',\r\n    color: 'text-red-500',\r\n  },\r\n  render: (args) => ({\r\n    props: args,\r\n    template: `<lib-icon [name]=\"name\" [size]=\"size\" [color]=\"color\"></lib-icon>`,\r\n  }),\r\n}"
             },
             {
                 "name": "link",
@@ -368,7 +1088,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Meta<ButtonComponent>",
-                "defaultValue": "{\n  title: 'Components/Button',\n  component: ButtonComponent,\n  tags: ['autodocs'],\n  argTypes: {\n    variant: {\n      control: 'select',\n      options: ['primary', 'accent', 'outline', 'text'],\n      description: 'Button style variant',\n    },\n    disabled: {\n      control: 'boolean',\n      description: 'Disables the button',\n    },\n    class: {\n      control: 'text',\n      description: 'Additional Tailwind CSS classes for customization',\n    },\n  },\n}"
+                "defaultValue": "{\r\n  title: 'Components/Button',\r\n  component: ButtonComponent,\r\n  tags: ['autodocs'],\r\n  argTypes: {\r\n    variant: {\r\n      control: 'select',\r\n      options: ['primary', 'accent', 'outline', 'text'],\r\n      description: 'Button style variant',\r\n    },\r\n    disabled: {\r\n      control: 'boolean',\r\n      description: 'Disables the button',\r\n    },\r\n    class: {\r\n      control: 'text',\r\n      description: 'Additional Tailwind CSS classes for customization',\r\n    },\r\n  },\r\n}"
             },
             {
                 "name": "meta",
@@ -378,7 +1098,27 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Meta<IconComponent>",
-                "defaultValue": "{\n  title: 'Components/Icon',\n  component: IconComponent,\n  tags: ['autodocs'],\n  argTypes: {\n    name: { control: 'text', description: 'Icon name from Material Icons' },\n    size: { \n      control: 'radio', \n      options: ['sm', 'md', 'lg', 'xl'], \n      description: 'Size of the icon' \n    },\n    color: { control: 'text', description: 'Tailwind color classes' },\n  },\n}"
+                "defaultValue": "{\r\n  title: 'Components/Icon',\r\n  component: IconComponent,\r\n  tags: ['autodocs'],\r\n  argTypes: {\r\n    name: { control: 'text', description: 'Icon name from Material Icons' },\r\n    size: { \r\n      control: 'radio', \r\n      options: ['sm', 'md', 'lg', 'xl'], \r\n      description: 'Size of the icon' \r\n    },\r\n    color: { control: 'text', description: 'Tailwind color classes' },\r\n  },\r\n}"
+            },
+            {
+                "name": "meta",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/ngx-tailwind-flex-ui/src/lib/loadingSpinner/loadingSpinner.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Meta<LoadingSpinnerComponent>",
+                "defaultValue": "{\r\n  title: 'Components/LoadingSpinnerComponent',\r\n  component: LoadingSpinnerComponent,\r\n  tags: ['autodocs'],\r\n  argTypes: {\r\n    mode: {\r\n      control: 'select',\r\n      options: ['determinate', 'indeterminate'],\r\n      description: 'Loading state',\r\n    },\r\n    value: {\r\n      control: 'number',\r\n      description: 'Progress value (0-100) for determinate mode',\r\n    },\r\n    size: { control: 'number', description: 'Diameter in pixels' },\r\n    thickness: { control: 'number', description: 'Stroke width in pixels' },\r\n    color: {\r\n      control: 'color',\r\n      description: 'Spinner color (hex or Tailwind color)',\r\n    },\r\n  },\r\n}"
+            },
+            {
+                "name": "meta",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/ngx-tailwind-flex-ui/src/lib/progress-bar/progress-bar.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Meta<ProgressBarComponent>",
+                "defaultValue": "{\r\n  title: 'Components/Progress Bar',\r\n  component: ProgressBarComponent,\r\n  tags: ['autodocs'],\r\n  argTypes: {\r\n    progress: {\r\n      control: { type: 'range', min: 0, max: 100, step: 1 },\r\n      description: 'Progress percentage (0 to 100)',\r\n    },\r\n    // buffer: {\r\n    //   control: { type: 'range', min: 0, max: 100, step: 1 },\r\n    //   description: 'Buffer progress percentage (used in buffer variant)',\r\n    // },\r\n    color: {\r\n      control: 'select',\r\n      options: ['primary', 'secondary', 'success', 'error'],\r\n      description: 'Color of the progress bar',\r\n    },\r\n    variant: {\r\n      control: 'select',\r\n      options: ['determinate', 'indeterminate', 'buffer', 'query'],\r\n      description: 'Progress bar type',\r\n    },\r\n    // class: {\r\n    //   control: 'text',\r\n    //   description: 'Additional Tailwind CSS classes for customization',\r\n    // },\r\n  },\r\n}"
             },
             {
                 "name": "Outline",
@@ -388,7 +1128,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\n  args: {\n    variant: 'outline',\n    disabled: false,\n  },\n  render: (args) => ({\n    props: args,\n    template: `<lib-button [variant]=\"variant\" [disabled]=\"disabled\">Outline Button</lib-button>`,\n  }),\n}"
+                "defaultValue": "{\r\n  args: {\r\n    variant: 'outline',\r\n    disabled: false,\r\n  },\r\n  render: (args) => ({\r\n    props: args,\r\n    template: `<lib-button [variant]=\"variant\" [disabled]=\"disabled\">Outline Button</lib-button>`,\r\n  }),\r\n}"
             },
             {
                 "name": "parameters",
@@ -398,7 +1138,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "object",
-                "defaultValue": "{\n  actions: { argTypesRegex: '^on[A-Z].*' },\n  controls: {\n    matchers: {\n      color: /(background|color)$/i,\n      date: /Date$/,\n    },\n  },\n}"
+                "defaultValue": "{\r\n  actions: { argTypesRegex: '^on[A-Z].*' },\r\n  controls: {\r\n    matchers: {\r\n      color: /(background|color)$/i,\r\n      date: /Date$/,\r\n    },\r\n  },\r\n}"
             },
             {
                 "name": "Primary",
@@ -408,7 +1148,27 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\n  args: {\n    variant: 'primary',\n    disabled: false,\n  },\n  render: (args) => ({\n    props: args,\n    template: `<lib-button [variant]=\"variant\" [disabled]=\"disabled\">Primary Button</lib-button>`,\n  }),\n}"
+                "defaultValue": "{\r\n  args: {\r\n    variant: 'primary',\r\n    disabled: false,\r\n  },\r\n  render: (args) => ({\r\n    props: args,\r\n    template: `<lib-button [variant]=\"variant\" [disabled]=\"disabled\">Primary Button</lib-button>`,\r\n  }),\r\n}"
+            },
+            {
+                "name": "RedIndeterminate",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/ngx-tailwind-flex-ui/src/lib/progress-bar/progress-bar.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\r\n  args: {\r\n    color: 'error',\r\n    variant: 'indeterminate',\r\n  },\r\n  render: (args) => ({\r\n    props: args,\r\n    template: `<lib-progress-bar [color]=\"color\" [variant]=\"variant\"></lib-progress-bar>`,\r\n  }),\r\n}"
+            },
+            {
+                "name": "Removable",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/ngx-tailwind-flex-ui/src/lib/chip/chip.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "StoryObj<ChipComponent>",
+                "defaultValue": "{\r\n  args: {\r\n    clickable: false,\r\n    removable: true,\r\n    disabled: false,\r\n    icon: 'close',\r\n  },\r\n}"
             },
             {
                 "name": "SmallBlueIcon",
@@ -418,7 +1178,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\n  args: {\n    name: 'star',\n    size: 'sm',\n    color: 'text-blue-500',\n  },\n  render: (args) => ({\n    props: args,\n    template: `<lib-icon [name]=\"name\" [size]=\"size\" [color]=\"color\"></lib-icon>`,\n  }),\n}"
+                "defaultValue": "{\r\n  args: {\r\n    name: 'star',\r\n    size: 'sm',\r\n    color: 'text-blue-500',\r\n  },\r\n  render: (args) => ({\r\n    props: args,\r\n    template: `<lib-icon [name]=\"name\" [size]=\"size\" [color]=\"color\"></lib-icon>`,\r\n  }),\r\n}"
             },
             {
                 "name": "Text",
@@ -428,7 +1188,17 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\n  args: {\n    variant: 'text',\n    disabled: false,\n  },\n  render: (args) => ({\n    props: args,\n    template: `<lib-button [variant]=\"variant\" [disabled]=\"disabled\">Text Button</lib-button>`,\n  }),\n}"
+                "defaultValue": "{\r\n  args: {\r\n    variant: 'text',\r\n    disabled: false,\r\n  },\r\n  render: (args) => ({\r\n    props: args,\r\n    template: `<lib-button [variant]=\"variant\" [disabled]=\"disabled\">Text Button</lib-button>`,\r\n  }),\r\n}"
+            },
+            {
+                "name": "Thick",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/ngx-tailwind-flex-ui/src/lib/loadingSpinner/loadingSpinner.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\r\n  args: {\r\n    thickness: 6,\r\n  },\r\n}"
             }
         ],
         "functions": [],
@@ -454,6 +1224,28 @@
                 "deprecationMessage": "",
                 "description": "",
                 "kind": 183
+            },
+            {
+                "name": "Story",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "StoryObj<LoadingSpinnerComponent>",
+                "file": "libs/ngx-tailwind-flex-ui/src/lib/loadingSpinner/loadingSpinner.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 183
+            },
+            {
+                "name": "Story",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "StoryObj<ProgressBarComponent>",
+                "file": "libs/ngx-tailwind-flex-ui/src/lib/progress-bar/progress-bar.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 183
             }
         ],
         "enumerations": [],
@@ -467,7 +1259,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{\n  args: {\n    variant: 'accent',\n    disabled: false,\n  },\n  render: (args) => ({\n    props: args,\n    template: `<lib-button [variant]=\"variant\" [disabled]=\"disabled\">Accent Button</lib-button>`,\n  }),\n}"
+                    "defaultValue": "{\r\n  args: {\r\n    variant: 'accent',\r\n    disabled: false,\r\n  },\r\n  render: (args) => ({\r\n    props: args,\r\n    template: `<lib-button [variant]=\"variant\" [disabled]=\"disabled\">Accent Button</lib-button>`,\r\n  }),\r\n}"
                 },
                 {
                     "name": "CustomStyled",
@@ -477,7 +1269,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{\n  args: {\n    variant: 'primary',\n    class: 'text-lg px-6 py-3 bg-green-500 hover:bg-green-600',\n  },\n  render: (args) => ({\n    props: args,\n    template: `<lib-button [variant]=\"variant\" [class]=\"class\">Custom Styled Button</lib-button>`,\n  }),\n}"
+                    "defaultValue": "{\r\n  args: {\r\n    variant: 'primary',\r\n    class: 'text-lg px-6 py-3 bg-green-500 hover:bg-green-600',\r\n  },\r\n  render: (args) => ({\r\n    props: args,\r\n    template: `<lib-button [variant]=\"variant\" [class]=\"class\">Custom Styled Button</lib-button>`,\r\n  }),\r\n}"
                 },
                 {
                     "name": "Disabled",
@@ -487,7 +1279,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{\n  args: {\n    variant: 'primary',\n    disabled: true,\n  },\n  render: (args) => ({\n    props: args,\n    template: `<lib-button [variant]=\"variant\" [disabled]=\"disabled\">Disabled Button</lib-button>`,\n  }),\n}"
+                    "defaultValue": "{\r\n  args: {\r\n    variant: 'primary',\r\n    disabled: true,\r\n  },\r\n  render: (args) => ({\r\n    props: args,\r\n    template: `<lib-button [variant]=\"variant\" [disabled]=\"disabled\">Disabled Button</lib-button>`,\r\n  }),\r\n}"
                 },
                 {
                     "name": "meta",
@@ -497,7 +1289,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Meta<ButtonComponent>",
-                    "defaultValue": "{\n  title: 'Components/Button',\n  component: ButtonComponent,\n  tags: ['autodocs'],\n  argTypes: {\n    variant: {\n      control: 'select',\n      options: ['primary', 'accent', 'outline', 'text'],\n      description: 'Button style variant',\n    },\n    disabled: {\n      control: 'boolean',\n      description: 'Disables the button',\n    },\n    class: {\n      control: 'text',\n      description: 'Additional Tailwind CSS classes for customization',\n    },\n  },\n}"
+                    "defaultValue": "{\r\n  title: 'Components/Button',\r\n  component: ButtonComponent,\r\n  tags: ['autodocs'],\r\n  argTypes: {\r\n    variant: {\r\n      control: 'select',\r\n      options: ['primary', 'accent', 'outline', 'text'],\r\n      description: 'Button style variant',\r\n    },\r\n    disabled: {\r\n      control: 'boolean',\r\n      description: 'Disables the button',\r\n    },\r\n    class: {\r\n      control: 'text',\r\n      description: 'Additional Tailwind CSS classes for customization',\r\n    },\r\n  },\r\n}"
                 },
                 {
                     "name": "Outline",
@@ -507,7 +1299,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{\n  args: {\n    variant: 'outline',\n    disabled: false,\n  },\n  render: (args) => ({\n    props: args,\n    template: `<lib-button [variant]=\"variant\" [disabled]=\"disabled\">Outline Button</lib-button>`,\n  }),\n}"
+                    "defaultValue": "{\r\n  args: {\r\n    variant: 'outline',\r\n    disabled: false,\r\n  },\r\n  render: (args) => ({\r\n    props: args,\r\n    template: `<lib-button [variant]=\"variant\" [disabled]=\"disabled\">Outline Button</lib-button>`,\r\n  }),\r\n}"
                 },
                 {
                     "name": "Primary",
@@ -517,7 +1309,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{\n  args: {\n    variant: 'primary',\n    disabled: false,\n  },\n  render: (args) => ({\n    props: args,\n    template: `<lib-button [variant]=\"variant\" [disabled]=\"disabled\">Primary Button</lib-button>`,\n  }),\n}"
+                    "defaultValue": "{\r\n  args: {\r\n    variant: 'primary',\r\n    disabled: false,\r\n  },\r\n  render: (args) => ({\r\n    props: args,\r\n    template: `<lib-button [variant]=\"variant\" [disabled]=\"disabled\">Primary Button</lib-button>`,\r\n  }),\r\n}"
                 },
                 {
                     "name": "Text",
@@ -527,7 +1319,121 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{\n  args: {\n    variant: 'text',\n    disabled: false,\n  },\n  render: (args) => ({\n    props: args,\n    template: `<lib-button [variant]=\"variant\" [disabled]=\"disabled\">Text Button</lib-button>`,\n  }),\n}"
+                    "defaultValue": "{\r\n  args: {\r\n    variant: 'text',\r\n    disabled: false,\r\n  },\r\n  render: (args) => ({\r\n    props: args,\r\n    template: `<lib-button [variant]=\"variant\" [disabled]=\"disabled\">Text Button</lib-button>`,\r\n  }),\r\n}"
+                }
+            ],
+            "libs/ngx-tailwind-flex-ui/src/lib/chip/chip.component.stories.ts": [
+                {
+                    "name": "Clickable",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/ngx-tailwind-flex-ui/src/lib/chip/chip.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "StoryObj<ChipComponent>",
+                    "defaultValue": "{\r\n  args: {\r\n    clickable: true,\r\n    removable: false,\r\n    disabled: false,\r\n    icon: 'check_circle',\r\n  },\r\n}"
+                },
+                {
+                    "name": "Default",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/ngx-tailwind-flex-ui/src/lib/chip/chip.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "StoryObj<ChipComponent>",
+                    "defaultValue": "{\r\n  args: {\r\n    clickable: false,\r\n    removable: false,\r\n    disabled: false,\r\n    icon: 'star', // Example icon\r\n  },\r\n}"
+                },
+                {
+                    "name": "Disabled",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/ngx-tailwind-flex-ui/src/lib/chip/chip.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "StoryObj<ChipComponent>",
+                    "defaultValue": "{\r\n  args: {\r\n    clickable: false,\r\n    removable: false,\r\n    disabled: true,\r\n    icon: 'block',\r\n  },\r\n}"
+                },
+                {
+                    "name": "Removable",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/ngx-tailwind-flex-ui/src/lib/chip/chip.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "StoryObj<ChipComponent>",
+                    "defaultValue": "{\r\n  args: {\r\n    clickable: false,\r\n    removable: true,\r\n    disabled: false,\r\n    icon: 'close',\r\n  },\r\n}"
+                }
+            ],
+            "libs/ngx-tailwind-flex-ui/src/lib/loadingSpinner/loadingSpinner.component.stories.ts": [
+                {
+                    "name": "Colored",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/ngx-tailwind-flex-ui/src/lib/loadingSpinner/loadingSpinner.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\r\n  args: {\r\n    color: '#ef4444', // Tailwind red-500\r\n  },\r\n}"
+                },
+                {
+                    "name": "Default",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/ngx-tailwind-flex-ui/src/lib/loadingSpinner/loadingSpinner.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\r\n  args: {},\r\n}"
+                },
+                {
+                    "name": "Determinate",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/ngx-tailwind-flex-ui/src/lib/loadingSpinner/loadingSpinner.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\r\n  args: {\r\n    mode: 'determinate',\r\n    value: 50,\r\n  },\r\n}"
+                },
+                {
+                    "name": "DeterminateProgress",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/ngx-tailwind-flex-ui/src/lib/loadingSpinner/loadingSpinner.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\r\n  args: {\r\n    mode: 'determinate',\r\n    value: 75,\r\n    size: 50,\r\n    thickness: 5,\r\n    color: '#10b981', // Tailwind green-500\r\n  },\r\n}"
+                },
+                {
+                    "name": "Large",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/ngx-tailwind-flex-ui/src/lib/loadingSpinner/loadingSpinner.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\r\n  args: {\r\n    size: 60,\r\n  },\r\n}"
+                },
+                {
+                    "name": "meta",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/ngx-tailwind-flex-ui/src/lib/loadingSpinner/loadingSpinner.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Meta<LoadingSpinnerComponent>",
+                    "defaultValue": "{\r\n  title: 'Components/LoadingSpinnerComponent',\r\n  component: LoadingSpinnerComponent,\r\n  tags: ['autodocs'],\r\n  argTypes: {\r\n    mode: {\r\n      control: 'select',\r\n      options: ['determinate', 'indeterminate'],\r\n      description: 'Loading state',\r\n    },\r\n    value: {\r\n      control: 'number',\r\n      description: 'Progress value (0-100) for determinate mode',\r\n    },\r\n    size: { control: 'number', description: 'Diameter in pixels' },\r\n    thickness: { control: 'number', description: 'Stroke width in pixels' },\r\n    color: {\r\n      control: 'color',\r\n      description: 'Spinner color (hex or Tailwind color)',\r\n    },\r\n  },\r\n}"
+                },
+                {
+                    "name": "Thick",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/ngx-tailwind-flex-ui/src/lib/loadingSpinner/loadingSpinner.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\r\n  args: {\r\n    thickness: 6,\r\n  },\r\n}"
                 }
             ],
             "libs/ngx-tailwind-flex-ui/.storybook/main.ts": [
@@ -539,7 +1445,69 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "StorybookConfig",
-                    "defaultValue": "{\n  stories: ['../**/*.@(mdx|stories.@(js|jsx|ts|tsx))'],\n  addons: ['@storybook/addon-essentials', '@storybook/addon-interactions'],\n  framework: {\n    name: '@storybook/angular',\n    options: {},\n  },\n  docs: {\n    autodocs: true,\n    defaultName: 'Docs',\n  },\n}"
+                    "defaultValue": "{\r\n  stories: ['../**/*.@(mdx|stories.@(js|jsx|ts|tsx))'],\r\n  addons: ['@storybook/addon-essentials', '@storybook/addon-interactions'],\r\n  framework: {\r\n    name: '@storybook/angular',\r\n    options: {},\r\n  },\r\n  docs: {\r\n    autodocs: true,\r\n    defaultName: 'Docs',\r\n  },\r\n}"
+                }
+            ],
+            "libs/ngx-tailwind-flex-ui/src/lib/progress-bar/progress-bar.component.stories.ts": [
+                {
+                    "name": "CustomStyled",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/ngx-tailwind-flex-ui/src/lib/progress-bar/progress-bar.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\r\n  args: {\r\n    progress: 60,\r\n    color: 'primary',\r\n    variant: 'determinate',\r\n    class: 'h-6 rounded-lg',\r\n  },\r\n  render: (args) => ({\r\n    props: args,\r\n    template: `<lib-progress-bar [progress]=\"progress\" [color]=\"color\" [variant]=\"variant\" [class]=\"class\"></lib-progress-bar>`,\r\n  }),\r\n}"
+                },
+                {
+                    "name": "Default",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/ngx-tailwind-flex-ui/src/lib/progress-bar/progress-bar.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\r\n  args: {\r\n    progress: 25,\r\n    color: \"primary\",\r\n    variant: 'determinate',\r\n    bufferProgress: 0\r\n  },\r\n  render: (args) => ({\r\n    props: args,\r\n    template: `<lib-progress-bar [progress]=\"progress\" [color]=\"color\" [variant]=\"variant\"></lib-progress-bar>`,\r\n  }),\r\n}"
+                },
+                {
+                    "name": "GreenBuffer",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/ngx-tailwind-flex-ui/src/lib/progress-bar/progress-bar.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\r\n  args: {\r\n    progress: 40,\r\n    bufferProgress: 5,\r\n    color: 'success',\r\n    variant: 'buffer',\r\n  },\r\n  render: (args) => ({\r\n    props: args,\r\n    template: `<lib-progress-bar [progress]=\"progress\" [buffer]=\"buffer\" [color]=\"color\" [variant]=\"variant\"></lib-progress-bar>`,\r\n  }),\r\n}"
+                },
+                {
+                    "name": "GreenProgress",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/ngx-tailwind-flex-ui/src/lib/progress-bar/progress-bar.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\r\n  args: {\r\n    progress: 70,\r\n    color: 'success',\r\n    variant: 'determinate',\r\n  },\r\n  render: (args) => ({\r\n    props: args,\r\n    template: `<lib-progress-bar [progress]=\"progress\" [color]=\"color\" [variant]=\"variant\"></lib-progress-bar>`,\r\n  }),\r\n}"
+                },
+                {
+                    "name": "meta",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/ngx-tailwind-flex-ui/src/lib/progress-bar/progress-bar.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Meta<ProgressBarComponent>",
+                    "defaultValue": "{\r\n  title: 'Components/Progress Bar',\r\n  component: ProgressBarComponent,\r\n  tags: ['autodocs'],\r\n  argTypes: {\r\n    progress: {\r\n      control: { type: 'range', min: 0, max: 100, step: 1 },\r\n      description: 'Progress percentage (0 to 100)',\r\n    },\r\n    // buffer: {\r\n    //   control: { type: 'range', min: 0, max: 100, step: 1 },\r\n    //   description: 'Buffer progress percentage (used in buffer variant)',\r\n    // },\r\n    color: {\r\n      control: 'select',\r\n      options: ['primary', 'secondary', 'success', 'error'],\r\n      description: 'Color of the progress bar',\r\n    },\r\n    variant: {\r\n      control: 'select',\r\n      options: ['determinate', 'indeterminate', 'buffer', 'query'],\r\n      description: 'Progress bar type',\r\n    },\r\n    // class: {\r\n    //   control: 'text',\r\n    //   description: 'Additional Tailwind CSS classes for customization',\r\n    // },\r\n  },\r\n}"
+                },
+                {
+                    "name": "RedIndeterminate",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/ngx-tailwind-flex-ui/src/lib/progress-bar/progress-bar.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\r\n  args: {\r\n    color: 'error',\r\n    variant: 'indeterminate',\r\n  },\r\n  render: (args) => ({\r\n    props: args,\r\n    template: `<lib-progress-bar [color]=\"color\" [variant]=\"variant\"></lib-progress-bar>`,\r\n  }),\r\n}"
                 }
             ],
             "libs/ngx-tailwind-flex-ui/src/lib/icon/icon.stories.ts": [
@@ -551,7 +1519,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{\n  args: {\n    name: 'home',\n    size: 'md',\n    color: 'text-gray-500',\n  },\n  render: (args) => ({\n    props: args,\n    template: `<lib-icon [name]=\"name\" [size]=\"size\" [color]=\"color\"></lib-icon>`,\n  }),\n}"
+                    "defaultValue": "{\r\n  args: {\r\n    name: 'home',\r\n    size: 'md',\r\n    color: 'text-gray-500',\r\n  },\r\n  render: (args) => ({\r\n    props: args,\r\n    template: `<lib-icon [name]=\"name\" [size]=\"size\" [color]=\"color\"></lib-icon>`,\r\n  }),\r\n}"
                 },
                 {
                     "name": "LargeRedIcon",
@@ -561,7 +1529,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{\n  args: {\n    name: 'favorite',\n    size: 'xl',\n    color: 'text-red-500',\n  },\n  render: (args) => ({\n    props: args,\n    template: `<lib-icon [name]=\"name\" [size]=\"size\" [color]=\"color\"></lib-icon>`,\n  }),\n}"
+                    "defaultValue": "{\r\n  args: {\r\n    name: 'favorite',\r\n    size: 'xl',\r\n    color: 'text-red-500',\r\n  },\r\n  render: (args) => ({\r\n    props: args,\r\n    template: `<lib-icon [name]=\"name\" [size]=\"size\" [color]=\"color\"></lib-icon>`,\r\n  }),\r\n}"
                 },
                 {
                     "name": "meta",
@@ -571,7 +1539,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Meta<IconComponent>",
-                    "defaultValue": "{\n  title: 'Components/Icon',\n  component: IconComponent,\n  tags: ['autodocs'],\n  argTypes: {\n    name: { control: 'text', description: 'Icon name from Material Icons' },\n    size: { \n      control: 'radio', \n      options: ['sm', 'md', 'lg', 'xl'], \n      description: 'Size of the icon' \n    },\n    color: { control: 'text', description: 'Tailwind color classes' },\n  },\n}"
+                    "defaultValue": "{\r\n  title: 'Components/Icon',\r\n  component: IconComponent,\r\n  tags: ['autodocs'],\r\n  argTypes: {\r\n    name: { control: 'text', description: 'Icon name from Material Icons' },\r\n    size: { \r\n      control: 'radio', \r\n      options: ['sm', 'md', 'lg', 'xl'], \r\n      description: 'Size of the icon' \r\n    },\r\n    color: { control: 'text', description: 'Tailwind color classes' },\r\n  },\r\n}"
                 },
                 {
                     "name": "SmallBlueIcon",
@@ -581,7 +1549,19 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{\n  args: {\n    name: 'star',\n    size: 'sm',\n    color: 'text-blue-500',\n  },\n  render: (args) => ({\n    props: args,\n    template: `<lib-icon [name]=\"name\" [size]=\"size\" [color]=\"color\"></lib-icon>`,\n  }),\n}"
+                    "defaultValue": "{\r\n  args: {\r\n    name: 'star',\r\n    size: 'sm',\r\n    color: 'text-blue-500',\r\n  },\r\n  render: (args) => ({\r\n    props: args,\r\n    template: `<lib-icon [name]=\"name\" [size]=\"size\" [color]=\"color\"></lib-icon>`,\r\n  }),\r\n}"
+                }
+            ],
+            "libs/ngx-tailwind-flex-ui/src/lib/paginator/paginator.component.stories.ts": [
+                {
+                    "name": "Default",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/ngx-tailwind-flex-ui/src/lib/paginator/paginator.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "StoryObj<PaginatorComponent>",
+                    "defaultValue": "{\r\n  args: {\r\n    length: 100,\r\n    pageSize: 10,\r\n    pageIndex: 0,\r\n  },\r\n}"
                 }
             ],
             "libs/ngx-tailwind-flex-ui/.storybook/preview.ts": [
@@ -603,7 +1583,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "object",
-                    "defaultValue": "{\n  actions: { argTypesRegex: '^on[A-Z].*' },\n  controls: {\n    matchers: {\n      color: /(background|color)$/i,\n      date: /Date$/,\n    },\n  },\n}"
+                    "defaultValue": "{\r\n  actions: { argTypesRegex: '^on[A-Z].*' },\r\n  controls: {\r\n    matchers: {\r\n      color: /(background|color)$/i,\r\n      date: /Date$/,\r\n    },\r\n  },\r\n}"
                 }
             ]
         },
@@ -635,12 +1615,38 @@
                     "description": "",
                     "kind": 183
                 }
+            ],
+            "libs/ngx-tailwind-flex-ui/src/lib/loadingSpinner/loadingSpinner.component.stories.ts": [
+                {
+                    "name": "Story",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "StoryObj<LoadingSpinnerComponent>",
+                    "file": "libs/ngx-tailwind-flex-ui/src/lib/loadingSpinner/loadingSpinner.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 183
+                }
+            ],
+            "libs/ngx-tailwind-flex-ui/src/lib/progress-bar/progress-bar.component.stories.ts": [
+                {
+                    "name": "Story",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "StoryObj<ProgressBarComponent>",
+                    "file": "libs/ngx-tailwind-flex-ui/src/lib/progress-bar/progress-bar.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 183
+                }
             ]
         }
     },
     "routes": [],
     "coverage": {
-        "count": 0,
+        "count": 1,
         "status": "low",
         "files": [
             {
@@ -763,6 +1769,55 @@
                 "status": "low"
             },
             {
+                "filePath": "libs/ngx-tailwind-flex-ui/src/lib/chip/chip.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Clickable",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/ngx-tailwind-flex-ui/src/lib/chip/chip.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Default",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/ngx-tailwind-flex-ui/src/lib/chip/chip.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Disabled",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/ngx-tailwind-flex-ui/src/lib/chip/chip.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Removable",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/ngx-tailwind-flex-ui/src/lib/chip/chip.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "ChipComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/16",
+                "status": "low"
+            },
+            {
                 "filePath": "libs/ngx-tailwind-flex-ui/src/lib/icon/icon.component.ts",
                 "type": "component",
                 "linktype": "component",
@@ -820,6 +1875,193 @@
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
                 "status": "low"
+            },
+            {
+                "filePath": "libs/ngx-tailwind-flex-ui/src/lib/loadingSpinner/loadingSpinner.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Colored",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/ngx-tailwind-flex-ui/src/lib/loadingSpinner/loadingSpinner.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Default",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/ngx-tailwind-flex-ui/src/lib/loadingSpinner/loadingSpinner.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Determinate",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/ngx-tailwind-flex-ui/src/lib/loadingSpinner/loadingSpinner.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "DeterminateProgress",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/ngx-tailwind-flex-ui/src/lib/loadingSpinner/loadingSpinner.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Large",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/ngx-tailwind-flex-ui/src/lib/loadingSpinner/loadingSpinner.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "meta",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/ngx-tailwind-flex-ui/src/lib/loadingSpinner/loadingSpinner.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Thick",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/ngx-tailwind-flex-ui/src/lib/loadingSpinner/loadingSpinner.component.stories.ts",
+                "type": "type alias",
+                "linktype": "miscellaneous",
+                "linksubtype": "typealias",
+                "name": "Story",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/ngx-tailwind-flex-ui/src/lib/loadingSpinner/loadingSpinner.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "LoadingSpinnerComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/6",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/ngx-tailwind-flex-ui/src/lib/paginator/paginator.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Default",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/ngx-tailwind-flex-ui/src/lib/paginator/paginator.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "PaginatorComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/10",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/ngx-tailwind-flex-ui/src/lib/progress-bar/progress-bar.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "CustomStyled",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/ngx-tailwind-flex-ui/src/lib/progress-bar/progress-bar.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Default",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/ngx-tailwind-flex-ui/src/lib/progress-bar/progress-bar.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "GreenBuffer",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/ngx-tailwind-flex-ui/src/lib/progress-bar/progress-bar.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "GreenProgress",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/ngx-tailwind-flex-ui/src/lib/progress-bar/progress-bar.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "meta",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/ngx-tailwind-flex-ui/src/lib/progress-bar/progress-bar.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "RedIndeterminate",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/ngx-tailwind-flex-ui/src/lib/progress-bar/progress-bar.component.stories.ts",
+                "type": "type alias",
+                "linktype": "miscellaneous",
+                "linksubtype": "typealias",
+                "name": "Story",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/ngx-tailwind-flex-ui/src/lib/progress-bar/progress-bar.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "ProgressBarComponent",
+                "coveragePercent": 62,
+                "coverageCount": "5/8",
+                "status": "good"
             }
         ]
     }
