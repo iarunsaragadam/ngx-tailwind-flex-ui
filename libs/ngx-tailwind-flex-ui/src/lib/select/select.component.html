@@ -1,0 +1,65 @@
+<div class="relative w-full font-sans">
+  <div
+    (click)="toggleDropdown()"
+    (keydown)="handleKeyboard($event)"
+    tabindex="0"
+    class="flex items-center justify-between w-full px-4 py-2 border border-gray-300 rounded-md bg-white text-gray-700 cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500"
+    [class.opacity-50]="disabled"
+    [class.border-red-500]="isInvalid()"
+    [attr.aria-expanded]="isOpen"
+    [attr.aria-disabled]="disabled"
+    [attr.aria-required]="required"
+    [attr.aria-label]="placeholder"
+  >
+    <span class="flex-grow truncate">{{ displayValue }}</span>
+    <span
+      *ngIf="value !== null && value !== undefined && !disabled"
+      (click)="clearSelection($event)"
+      (keydown)="handleKeyboard($event)"
+      tabindex="0"
+      class="text-gray-400 hover:text-red-500 mr-2 focus:outline-none focus:ring-2 focus:ring-red-500"
+    >
+      ✕
+    </span>
+    <span class="text-gray-500">▼</span>
+  </div>
+
+  <div
+    #dropdown
+    *ngIf="isOpen"
+    class="absolute mt-1 w-full bg-white border border-gray-300 rounded-md shadow-lg z-50 max-h-60 overflow-auto"
+    role="listbox"
+    [attr.aria-multiselectable]="multiple"
+  >
+    <input
+      #searchInput
+      [(ngModel)]="searchText"
+      (ngModelChange)="filterOptions()"
+      class="w-full p-2 border-b border-gray-200 outline-none text-gray-700"
+      placeholder="Search..."
+      aria-label="Search options"
+    />
+    <ul>
+      <li
+        *ngFor="let option of filteredOptions; let i = index"
+        (click)="selectOption(option)"
+        (keydown)="handleKeyboard($event)"
+        tabindex="0"
+        class="px-4 py-2 hover:bg-blue-100 cursor-pointer focus:bg-blue-100 focus:outline-none"
+        [class.bg-blue-50]="isSelected(option)"
+        [class.bg-blue-100]="i === focusedOptionIndex"
+        [attr.aria-selected]="isSelected(option)"
+        role="option"
+      >
+        {{ option.label }}
+      </li>
+      <li *ngIf="filteredOptions.length === 0" class="px-4 py-2 text-gray-500">
+        No options found
+      </li>
+    </ul>
+  </div>
+
+  <div *ngIf="isInvalid()" class="text-red-500 text-sm mt-1">
+    Selection required.
+  </div>
+</div>
