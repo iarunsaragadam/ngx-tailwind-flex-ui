@@ -1,0 +1,30 @@
+<label class="flex items-center cursor-pointer select-none">
+  <input
+    type="checkbox"
+    class="sr-only"
+    [checked]="checked"
+    [disabled]="disabled"
+    (change)="toggle()"
+  />
+  <div class="relative">
+    <!-- Background -->
+    <div
+      [ngClass]="{
+        'bg-gray-300': !checked,
+        'bg-blue-600': checked,
+        'opacity-50': disabled
+      }"
+      class="w-10 h-6 rounded-full transition"
+    ></div>
+
+    <!-- Dot -->
+    <div
+      [ngClass]="{
+        'translate-x-0': !checked,
+        'translate-x-4': checked
+      }"
+      class="absolute top-0.5 left-0.5 w-5 h-5 bg-white rounded-full shadow transform transition"
+    ></div>
+  </div>
+  <span class="ml-3 text-sm text-gray-700">{{ label }}</span>
+</label>
