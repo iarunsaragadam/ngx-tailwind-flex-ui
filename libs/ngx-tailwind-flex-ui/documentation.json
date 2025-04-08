@@ -1031,7 +1031,7 @@
         },
         {
             "name": "ButtonComponent",
-            "id": "component-ButtonComponent-7b549b2939b9a34abd922e3a0255997fdcdc44e13e0d3149f6f081fd94e8328dfcef16d4b504efc25d22156e814a32fd37682ce25460fb63fbe9f89259f6c17c",
+            "id": "component-ButtonComponent-4a0e060db7ffd16a679766d8091dfca8a2ed6c08cda8975d4756d1434716949e4060c639031b77f2ca38977983acb0622a2fa77db817a21a979f35ebeca9f233",
             "file": "libs/ngx-tailwind-flex-ui/src/lib/button/button.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -1096,7 +1096,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, Input, HostBinding } from '@angular/core';\n\n@Component({\n  selector: 'lib-button',\n  standalone: true,\n  templateUrl: './button.component.html',\n  styles: [], // No inline styles; Tailwind handles it\n})\nexport class ButtonComponent {\n  @Input() variant: 'primary' | 'accent' | 'outline' | 'text' = 'primary';\n  @Input() disabled = false;\n  @Input() class = ''; // Allow users to pass custom Tailwind classes\n\n  @HostBinding('class') get hostClasses() {\n    const baseClasses =\n      'inline-flex items-center justify-center px-4 py-2 rounded-md font-medium transition-colors duration-200';\n    const variantClasses = {\n      primary:\n        'bg-blue-600 text-white hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2',\n      accent:\n        'bg-purple-600 text-white hover:bg-purple-700 focus:ring-2 focus:ring-purple-500 focus:ring-offset-2',\n      outline:\n        'border border-gray-300 text-gray-700 hover:bg-gray-100 focus:ring-2 focus:ring-gray-500 focus:ring-offset-2',\n      text: 'text-gray-700 hover:bg-gray-100 focus:ring-2 focus:ring-gray-500 focus:ring-offset-2',\n    };\n    const disabledClasses = this.disabled\n      ? 'opacity-50 cursor-not-allowed'\n      : '';\n\n    return `${baseClasses} ${variantClasses[this.variant]} ${disabledClasses} ${\n      this.class\n    }`.trim();\n  }\n}\n",
+            "sourceCode": "import { Component, Input, HostBinding } from '@angular/core';\r\n\r\n@Component({\r\n  selector: 'lib-button',\r\n  standalone: true,\r\n  templateUrl: './button.component.html',\r\n  styles: [], // No inline styles; Tailwind handles it\r\n})\r\nexport class ButtonComponent {\r\n  @Input() variant: 'primary' | 'accent' | 'outline' | 'text' = 'primary';\r\n  @Input() disabled = false;\r\n  @Input() class = ''; // Allow users to pass custom Tailwind classes\r\n\r\n  @HostBinding('class') get hostClasses() {\r\n    const baseClasses =\r\n      'inline-flex items-center justify-center px-4 py-2 rounded-md font-medium transition-colors duration-200';\r\n    const variantClasses = {\r\n      primary:\r\n        'bg-blue-600 text-white hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2',\r\n      accent:\r\n        'bg-purple-600 text-white hover:bg-purple-700 focus:ring-2 focus:ring-purple-500 focus:ring-offset-2',\r\n      outline:\r\n        'border border-gray-300 text-gray-700 hover:bg-gray-100 focus:ring-2 focus:ring-gray-500 focus:ring-offset-2',\r\n      text: 'text-gray-700 hover:bg-gray-100 focus:ring-2 focus:ring-gray-500 focus:ring-offset-2',\r\n    };\r\n    const disabledClasses = this.disabled\r\n      ? 'opacity-50 cursor-not-allowed'\r\n      : '';\r\n\r\n    return `${baseClasses} ${variantClasses[this.variant]} ${disabledClasses} ${\r\n      this.class\r\n    }`.trim();\r\n  }\r\n}\r\n",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
@@ -1112,7 +1112,7 @@
                     }
                 }
             },
-            "templateData": "<button [disabled]=\"disabled\">\n  <ng-content></ng-content>\n</button>\n"
+            "templateData": "<button [disabled]=\"disabled\">\r\n  <ng-content></ng-content>\r\n</button>\r\n"
         },
         {
             "name": "IconComponent",
@@ -1183,7 +1183,7 @@
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": ".material-icons {\n    display: inline-flex;\n    align-items: center;\n    justify-content: center;\n    vertical-align: middle;\n}",
+                    "data": ".material-icons {\r\n    display: inline-flex;\r\n    align-items: center;\r\n    justify-content: center;\r\n    vertical-align: middle;\r\n}",
                     "styleUrl": "./icon.component.css"
                 }
             ],
@@ -1862,7 +1862,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\n  args: {\n    name: 'favorite',\n    size: 'xl',\n    color: 'text-red-500',\n  },\n  render: (args) => ({\n    props: args,\n    template: `<lib-icon [name]=\"name\" [size]=\"size\" [color]=\"color\"></lib-icon>`,\n  }),\n}"
+                "defaultValue": "{\r\n  args: {\r\n    name: 'favorite',\r\n    size: 'xl',\r\n    color: 'text-red-500',\r\n  },\r\n  render: (args) => ({\r\n    props: args,\r\n    template: `<lib-icon [name]=\"name\" [size]=\"size\" [color]=\"color\"></lib-icon>`,\r\n  }),\r\n}"
             },
             {
                 "name": "link",
@@ -1902,7 +1902,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Meta<ButtonComponent>",
-                "defaultValue": "{\n  title: 'Components/Button',\n  component: ButtonComponent,\n  tags: ['autodocs'],\n  argTypes: {\n    variant: {\n      control: 'select',\n      options: ['primary', 'accent', 'outline', 'text'],\n      description: 'Button style variant',\n    },\n    disabled: {\n      control: 'boolean',\n      description: 'Disables the button',\n    },\n    class: {\n      control: 'text',\n      description: 'Additional Tailwind CSS classes for customization',\n    },\n  },\n}"
+                "defaultValue": "{\r\n  title: 'Components/Button',\r\n  component: ButtonComponent,\r\n  tags: ['autodocs'],\r\n  argTypes: {\r\n    variant: {\r\n      control: 'select',\r\n      options: ['primary', 'accent', 'outline', 'text'],\r\n      description: 'Button style variant',\r\n    },\r\n    disabled: {\r\n      control: 'boolean',\r\n      description: 'Disables the button',\r\n    },\r\n    class: {\r\n      control: 'text',\r\n      description: 'Additional Tailwind CSS classes for customization',\r\n    },\r\n  },\r\n}"
             },
             {
                 "name": "meta",
@@ -1952,7 +1952,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\n  args: {\n    variant: 'outline',\n    disabled: false,\n  },\n  render: (args) => ({\n    props: args,\n    template: `<lib-button [variant]=\"variant\" [disabled]=\"disabled\">Outline Button</lib-button>`,\n  }),\n}"
+                "defaultValue": "{\r\n  args: {\r\n    variant: 'outline',\r\n    disabled: false,\r\n  },\r\n  render: (args) => ({\r\n    props: args,\r\n    template: `<lib-button [variant]=\"variant\" [disabled]=\"disabled\">Outline Button</lib-button>`,\r\n  }),\r\n}"
             },
             {
                 "name": "parameters",
@@ -1962,7 +1962,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "object",
-                "defaultValue": "{\n  actions: { argTypesRegex: '^on[A-Z].*' },\n  controls: {\n    matchers: {\n      color: /(background|color)$/i,\n      date: /Date$/,\n    },\n  },\n}"
+                "defaultValue": "{\r\n  actions: { argTypesRegex: '^on[A-Z].*' },\r\n  controls: {\r\n    matchers: {\r\n      color: /(background|color)$/i,\r\n      date: /Date$/,\r\n    },\r\n  },\r\n}"
             },
             {
                 "name": "Primary",
@@ -2135,7 +2135,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{\n  args: {\n    variant: 'accent',\n    disabled: false,\n  },\n  render: (args) => ({\n    props: args,\n    template: `<lib-button [variant]=\"variant\" [disabled]=\"disabled\">Accent Button</lib-button>`,\n  }),\n}"
+                    "defaultValue": "{\r\n  args: {\r\n    variant: 'accent',\r\n    disabled: false,\r\n  },\r\n  render: (args) => ({\r\n    props: args,\r\n    template: `<lib-button [variant]=\"variant\" [disabled]=\"disabled\">Accent Button</lib-button>`,\r\n  }),\r\n}"
                 },
                 {
                     "name": "CustomStyled",
@@ -2145,7 +2145,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{\n  args: {\n    variant: 'primary',\n    class: 'text-lg px-6 py-3 bg-green-500 hover:bg-green-600',\n  },\n  render: (args) => ({\n    props: args,\n    template: `<lib-button [variant]=\"variant\" [class]=\"class\">Custom Styled Button</lib-button>`,\n  }),\n}"
+                    "defaultValue": "{\r\n  args: {\r\n    variant: 'primary',\r\n    class: 'text-lg px-6 py-3 bg-green-500 hover:bg-green-600',\r\n  },\r\n  render: (args) => ({\r\n    props: args,\r\n    template: `<lib-button [variant]=\"variant\" [class]=\"class\">Custom Styled Button</lib-button>`,\r\n  }),\r\n}"
                 },
                 {
                     "name": "Disabled",
@@ -2155,7 +2155,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{\n  args: {\n    variant: 'primary',\n    disabled: true,\n  },\n  render: (args) => ({\n    props: args,\n    template: `<lib-button [variant]=\"variant\" [disabled]=\"disabled\">Disabled Button</lib-button>`,\n  }),\n}"
+                    "defaultValue": "{\r\n  args: {\r\n    variant: 'primary',\r\n    disabled: true,\r\n  },\r\n  render: (args) => ({\r\n    props: args,\r\n    template: `<lib-button [variant]=\"variant\" [disabled]=\"disabled\">Disabled Button</lib-button>`,\r\n  }),\r\n}"
                 },
                 {
                     "name": "meta",
@@ -2165,7 +2165,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Meta<ButtonComponent>",
-                    "defaultValue": "{\n  title: 'Components/Button',\n  component: ButtonComponent,\n  tags: ['autodocs'],\n  argTypes: {\n    variant: {\n      control: 'select',\n      options: ['primary', 'accent', 'outline', 'text'],\n      description: 'Button style variant',\n    },\n    disabled: {\n      control: 'boolean',\n      description: 'Disables the button',\n    },\n    class: {\n      control: 'text',\n      description: 'Additional Tailwind CSS classes for customization',\n    },\n  },\n}"
+                    "defaultValue": "{\r\n  title: 'Components/Button',\r\n  component: ButtonComponent,\r\n  tags: ['autodocs'],\r\n  argTypes: {\r\n    variant: {\r\n      control: 'select',\r\n      options: ['primary', 'accent', 'outline', 'text'],\r\n      description: 'Button style variant',\r\n    },\r\n    disabled: {\r\n      control: 'boolean',\r\n      description: 'Disables the button',\r\n    },\r\n    class: {\r\n      control: 'text',\r\n      description: 'Additional Tailwind CSS classes for customization',\r\n    },\r\n  },\r\n}"
                 },
                 {
                     "name": "Outline",
@@ -2175,7 +2175,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{\n  args: {\n    variant: 'outline',\n    disabled: false,\n  },\n  render: (args) => ({\n    props: args,\n    template: `<lib-button [variant]=\"variant\" [disabled]=\"disabled\">Outline Button</lib-button>`,\n  }),\n}"
+                    "defaultValue": "{\r\n  args: {\r\n    variant: 'outline',\r\n    disabled: false,\r\n  },\r\n  render: (args) => ({\r\n    props: args,\r\n    template: `<lib-button [variant]=\"variant\" [disabled]=\"disabled\">Outline Button</lib-button>`,\r\n  }),\r\n}"
                 },
                 {
                     "name": "Primary",
@@ -2185,7 +2185,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{\n  args: {\n    variant: 'primary',\n    disabled: false,\n  },\n  render: (args) => ({\n    props: args,\n    template: `<lib-button [variant]=\"variant\" [disabled]=\"disabled\">Primary Button</lib-button>`,\n  }),\n}"
+                    "defaultValue": "{\r\n  args: {\r\n    variant: 'primary',\r\n    disabled: false,\r\n  },\r\n  render: (args) => ({\r\n    props: args,\r\n    template: `<lib-button [variant]=\"variant\" [disabled]=\"disabled\">Primary Button</lib-button>`,\r\n  }),\r\n}"
                 },
                 {
                     "name": "Text",
@@ -2425,7 +2425,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{\n  args: {\n    name: 'home',\n    size: 'md',\n    color: 'text-gray-500',\n  },\n  render: (args) => ({\n    props: args,\n    template: `<lib-icon [name]=\"name\" [size]=\"size\" [color]=\"color\"></lib-icon>`,\n  }),\n}"
+                    "defaultValue": "{\r\n  args: {\r\n    name: 'home',\r\n    size: 'md',\r\n    color: 'text-gray-500',\r\n  },\r\n  render: (args) => ({\r\n    props: args,\r\n    template: `<lib-icon [name]=\"name\" [size]=\"size\" [color]=\"color\"></lib-icon>`,\r\n  }),\r\n}"
                 },
                 {
                     "name": "LargeRedIcon",
@@ -2435,7 +2435,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{\n  args: {\n    name: 'favorite',\n    size: 'xl',\n    color: 'text-red-500',\n  },\n  render: (args) => ({\n    props: args,\n    template: `<lib-icon [name]=\"name\" [size]=\"size\" [color]=\"color\"></lib-icon>`,\n  }),\n}"
+                    "defaultValue": "{\r\n  args: {\r\n    name: 'favorite',\r\n    size: 'xl',\r\n    color: 'text-red-500',\r\n  },\r\n  render: (args) => ({\r\n    props: args,\r\n    template: `<lib-icon [name]=\"name\" [size]=\"size\" [color]=\"color\"></lib-icon>`,\r\n  }),\r\n}"
                 },
                 {
                     "name": "meta",
@@ -2445,7 +2445,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Meta<IconComponent>",
-                    "defaultValue": "{\n  title: 'Components/Icon',\n  component: IconComponent,\n  tags: ['autodocs'],\n  argTypes: {\n    name: { control: 'text', description: 'Icon name from Material Icons' },\n    size: { \n      control: 'radio', \n      options: ['sm', 'md', 'lg', 'xl'], \n      description: 'Size of the icon' \n    },\n    color: { control: 'text', description: 'Tailwind color classes' },\n  },\n}"
+                    "defaultValue": "{\r\n  title: 'Components/Icon',\r\n  component: IconComponent,\r\n  tags: ['autodocs'],\r\n  argTypes: {\r\n    name: { control: 'text', description: 'Icon name from Material Icons' },\r\n    size: { \r\n      control: 'radio', \r\n      options: ['sm', 'md', 'lg', 'xl'], \r\n      description: 'Size of the icon' \r\n    },\r\n    color: { control: 'text', description: 'Tailwind color classes' },\r\n  },\r\n}"
                 },
                 {
                     "name": "SmallBlueIcon",
