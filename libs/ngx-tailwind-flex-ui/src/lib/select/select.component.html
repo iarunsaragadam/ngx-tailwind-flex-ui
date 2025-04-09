@@ -1,65 +1,98 @@
-<div class="relative w-full font-sans">
-  <div
-    (click)="toggleDropdown()"
-    (keydown)="handleKeyboard($event)"
-    tabindex="0"
-    class="flex items-center justify-between w-full px-4 py-2 border border-gray-300 rounded-md bg-white text-gray-700 cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500"
-    [class.opacity-50]="disabled"
-    [class.border-red-500]="isInvalid()"
-    [attr.aria-expanded]="isOpen"
-    [attr.aria-disabled]="disabled"
-    [attr.aria-required]="required"
-    [attr.aria-label]="placeholder"
-  >
-    <span class="flex-grow truncate">{{ displayValue }}</span>
-    <span
-      *ngIf="value !== null && value !== undefined && !disabled"
-      (click)="clearSelection($event)"
-      (keydown)="handleKeyboard($event)"
-      tabindex="0"
-      class="text-gray-400 hover:text-red-500 mr-2 focus:outline-none focus:ring-2 focus:ring-red-500"
+<div class="relative w-full" #trigger>
+  <div class="relative">
+    <input
+      type="text"
+      [placeholder]="placeholder"
+      [disabled]="disabled"
+      [required]="required"
+      [readonly]="true"
+      [value]="displayValue"
+      [tabIndex]="tabIndex"
+      [attr.aria-label]="ariaLabel || null"
+      [attr.aria-labelledby]="ariaLabelledby || null"
+      class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 cursor-pointer"
+      (click)="togglePanel($event)"
+      (keydown)="handleKeydown($event)"
+    />
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      class="absolute right-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400 transition-transform duration-200"
+      [class.rotate-180]="isOpen"
+      viewBox="0 0 20 20"
+      fill="currentColor"
+      aria-hidden="true"
     >
-      ✕
-    </span>
-    <span class="text-gray-500">▼</span>
+      <path
+        fill-rule="evenodd"
+        d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+        clip-rule="evenodd"
+      />
+    </svg>
   </div>
 
   <div
-    #dropdown
     *ngIf="isOpen"
-    class="absolute mt-1 w-full bg-white border border-gray-300 rounded-md shadow-lg z-50 max-h-60 overflow-auto"
+    #panel
+    class="absolute z-10 mt-1 w-full bg-white border border-gray-200 rounded-md shadow-lg overflow-hidden"
+    [class]="panelClass"
+    [class.max-h-60]="!panelClass"
     role="listbox"
     [attr.aria-multiselectable]="multiple"
+    [attr.aria-activedescendant]="
+      focusedOptionIndex >= 0 ? 'option-' + focusedOptionIndex : null
+    "
   >
-    <input
-      #searchInput
-      [(ngModel)]="searchText"
-      (ngModelChange)="filterOptions()"
-      class="w-full p-2 border-b border-gray-200 outline-none text-gray-700"
-      placeholder="Search..."
-      aria-label="Search options"
-    />
-    <ul>
-      <li
-        *ngFor="let option of filteredOptions; let i = index"
-        (click)="selectOption(option)"
-        (keydown)="handleKeyboard($event)"
-        tabindex="0"
-        class="px-4 py-2 hover:bg-blue-100 cursor-pointer focus:bg-blue-100 focus:outline-none"
-        [class.bg-blue-50]="isSelected(option)"
-        [class.bg-blue-100]="i === focusedOptionIndex"
-        [attr.aria-selected]="isSelected(option)"
-        role="option"
-      >
-        {{ option.label }}
-      </li>
-      <li *ngIf="filteredOptions.length === 0" class="px-4 py-2 text-gray-500">
-        No options found
-      </li>
-    </ul>
-  </div>
+    <div
+      *ngIf="options && options.length > 5"
+      class="sticky top-0 bg-white p-2 border-b border-gray-200"
+    >
+      <input
+        #searchInput
+        [(ngModel)]="searchText"
+        class="w-full px-3 py-2 text-sm border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+        placeholder="Search..."
+        (click)="$event.stopPropagation()"
+        aria-label="Filter options"
+      />
+    </div>
 
-  <div *ngIf="isInvalid()" class="text-red-500 text-sm mt-1">
-    Selection required.
+    <div class="overflow-y-auto max-h-[244px]">
+      <ng-container *ngIf="filteredOptions.length > 0; else noOptions">
+        <lib-select-option
+          *ngFor="let option of filteredOptions; let i = index"
+          [value]="option.value"
+          [label]="option.label"
+          [disabled]="option.disabled"
+          [selected]="isSelected(option)"
+          (click)="selectOption(option, $event)"
+          [id]="'option-' + i"
+          [class.bg-blue-100]="i === focusedOptionIndex"
+        >
+          <ng-container *ngIf="multiple">
+            <svg
+              *ngIf="isSelected(option)"
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-5 w-5 mr-2 text-blue-600"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                clip-rule="evenodd"
+              />
+            </svg>
+            <span *ngIf="!isSelected(option)" class="w-5 mr-2"></span>
+          </ng-container>
+          {{ option.label }}
+        </lib-select-option>
+      </ng-container>
+
+      <ng-template #noOptions>
+        <div class="px-4 py-2 text-sm text-gray-500 text-center">
+          No options found
+        </div>
+      </ng-template>
+    </div>
   </div>
 </div>

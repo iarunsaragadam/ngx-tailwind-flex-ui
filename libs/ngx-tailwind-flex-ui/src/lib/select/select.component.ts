@@ -1,30 +1,29 @@
 import {
   Component,
+  HostListener,
+  ViewChild,
+  ElementRef,
+  ContentChildren,
+  QueryList,
+  AfterContentInit,
+  ChangeDetectorRef,
+  forwardRef,
   Input,
   Output,
   EventEmitter,
-  forwardRef,
-  ViewChild,
-  ElementRef,
-  OnInit,
-  HostListener,
-  ChangeDetectorRef,
+  Injector,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-
-export interface SelectOption {
-  label: string;
-  value: string | number | boolean | null;
-}
+import { SelectOptionComponent } from './select-option.component';
 
 @Component({
   selector: 'lib-select',
-  standalone: true,
-  imports: [CommonModule, FormsModule],
   templateUrl: './select.component.html',
   styleUrls: ['./select.component.css'],
+  standalone: true,
+  imports: [CommonModule, FormsModule, SelectOptionComponent],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -33,234 +32,278 @@ export interface SelectOption {
     },
   ],
 })
-export class SelectComponent implements ControlValueAccessor, OnInit {
-  @Input() options: SelectOption[] = [];
+export class SelectComponent implements ControlValueAccessor, AfterContentInit {
   @Input() placeholder = 'Select an option';
   @Input() disabled = false;
   @Input() multiple = false;
   @Input() required = false;
+  @Input() panelClass = '';
+  @Input() tabIndex = 0;
+  @Input() ariaLabel = '';
+  @Input() ariaLabelledby = '';
+  @Input() options: { value: string | number; label: string }[] = [];
 
-  @Output() selectionChange = new EventEmitter<
-    string | number | boolean | null | (string | number | boolean | null)[]
-  >();
   @Output() openedChange = new EventEmitter<boolean>();
+  @Output() selectionChange = new EventEmitter<string | string[] | null>();
+  @Output() closed = new EventEmitter<void>();
 
-  @ViewChild('searchInput') searchInput!: ElementRef<HTMLInputElement>;
-  @ViewChild('dropdown') dropdown!: ElementRef;
+  @ViewChild('trigger') trigger!: ElementRef;
+  @ViewChild('panel') panel!: ElementRef;
+  @ViewChild('searchInput') searchInput?: ElementRef<HTMLInputElement>;
+
+  @ContentChildren(SelectOptionComponent)
+  private optionsQueryList!: QueryList<SelectOptionComponent>;
 
   isOpen = false;
   searchText = '';
-  filteredOptions: SelectOption[] = [];
-  value:
-    | string
-    | number
-    | boolean
-    | null
-    | (string | number | boolean | null)[] = null;
-  touched = false;
   focusedOptionIndex = -1;
+  private _value: string | string[] | null = null;
+  private _onChange: (value: string | string[] | null) => void = () => {
+    // Initial placeholder - overridden by registerOnChange
+  };
+  private _onTouched = () => {
+    // Initial placeholder - overridden by registerOnTouched
+  };
 
-  constructor(private cdr: ChangeDetectorRef) {}
+  constructor(private cdr: ChangeDetectorRef, private injector: Injector) {}
 
-  ngOnInit() {
-    this.filteredOptions = [...this.options];
+  ngAfterContentInit() {
+    this.cdr.detectChanges();
+    if (this.options.length === 0 && this.optionsQueryList?.length) {
+      this.options = this.optionsQueryList.map((opt) => ({
+        value: opt.value,
+        label: opt.label,
+      }));
+    }
+  }
+
+  get value(): string | string[] | null {
+    return this._value;
+  }
+
+  set value(val: string | string[] | null) {
+    if (this._value !== val) {
+      this._value = val;
+      this._onChange(val);
+      this.selectionChange.emit(val);
+    }
   }
 
   get displayValue(): string {
-    if (this.value === null || this.value === undefined) {
-      return this.placeholder;
-    }
+    if (!this.value) return this.placeholder;
 
     if (this.multiple) {
-      if (Array.isArray(this.value) && this.value !== null) {
-        const selectedLabels = this.options
-          .filter((opt) =>
-            (this.value as (string | number | boolean | null)[]).includes(
-              opt.value
-            )
-          )
-          .map((opt) => opt.label);
-        return selectedLabels.length > 0
-          ? selectedLabels.join(', ')
-          : this.placeholder;
-      }
-      return this.placeholder;
+      if (!Array.isArray(this.value) || !this.options) return this.placeholder;
+      const selectedOptions = this.options.filter((opt) =>
+        (this.value as string[]).includes(opt.value.toString())
+      );
+      return (
+        selectedOptions.map((opt) => opt.label).join(', ') || this.placeholder
+      );
     }
 
-    const selectedOption = this.options.find((opt) => opt.value === this.value);
-    return selectedOption ? selectedOption.label : this.placeholder;
+    const selectedOption = this.options.find(
+      (opt) => opt.value.toString() === this.value
+    );
+    return selectedOption?.label ?? this.placeholder;
   }
 
-  // ControlValueAccessor methods
-  onChange: (
-    val: string | number | boolean | null | (string | number | boolean | null)[]
-  ) => void = () => {
-    // This empty implementation will be replaced by registerOnChange
-    // We intentionally don't use the val parameter here
-  };
-
-  onTouched: () => void = () => {
-    // This empty implementation will be replaced by registerOnTouched
-  };
-
-  writeValue(
-    val: string | number | boolean | null | (string | number | boolean | null)[]
-  ): void {
-    this.value = val;
-    this.onChange(this.value);
-    this.cdr.detectChanges();
+  writeValue(value: string | string[] | null): void {
+    this._value = value;
+    this.cdr.markForCheck();
   }
 
-  registerOnChange(
-    fn: (
-      val:
-        | string
-        | number
-        | boolean
-        | null
-        | (string | number | boolean | null)[]
-    ) => void
-  ): void {
-    this.onChange = fn;
+  registerOnChange(fn: (value: string | string[] | null) => void): void {
+    this._onChange = fn;
   }
 
   registerOnTouched(fn: () => void): void {
-    this.onTouched = fn;
+    this._onTouched = fn;
   }
 
   setDisabledState(isDisabled: boolean): void {
     this.disabled = isDisabled;
+    this.cdr.markForCheck();
   }
 
-  toggleDropdown(): void {
+  togglePanel(event?: Event): void {
+    event?.stopPropagation();
     if (this.disabled) return;
+
     this.isOpen = !this.isOpen;
     this.openedChange.emit(this.isOpen);
+
     if (this.isOpen) {
       setTimeout(() => this.searchInput?.nativeElement.focus(), 0);
       this.focusedOptionIndex = -1;
-    }
-  }
-
-  selectOption(option: SelectOption): void {
-    if (this.disabled) return;
-    if (this.multiple) {
-      const current = Array.isArray(this.value) ? this.value : [];
-      this.value = current.includes(option.value)
-        ? current.filter((v) => v !== option.value)
-        : [...current, option.value];
     } else {
-      this.value = option.value;
+      this.closed.emit();
+    }
+  }
+
+  selectOption(option: SelectOptionComponent, event?: Event): void {
+    event?.stopPropagation();
+    if (this.disabled) return;
+
+    if (this.multiple) {
+      const current = Array.isArray(this.value) ? [...this.value] : [];
+      this._value = current.includes(option.value.toString())
+        ? current.filter((v) => v !== option.value.toString())
+        : [...current, option.value.toString()];
+      this._onChange(this._value);
+      this.selectionChange.emit(this._value);
+    } else {
+      this._value = option.value.toString();
+      this._onChange(this._value);
       this.isOpen = false;
-      this.openedChange.emit(false);
+      this.closed.emit();
+      this.selectionChange.emit(this._value);
     }
-    this.markTouched();
-    this.onChange(this.value);
-    this.selectionChange.emit(this.value);
+
+    this._onTouched();
+    this.cdr.detectChanges();
   }
 
-  isSelected(option: SelectOption): boolean {
-    if (this.multiple && Array.isArray(this.value)) {
-      return this.value.includes(option.value);
+  isSelected(option: SelectOptionComponent): boolean {
+    if (!this.value) return false;
+
+    if (this.multiple) {
+      return (
+        Array.isArray(this.value) &&
+        this.value.includes(option.value.toString())
+      );
     }
-    return this.value === option.value;
+    return this.value === option.value.toString();
   }
 
-  filterOptions(): void {
-    this.filteredOptions = this.options.filter((opt) =>
+  get filteredOptions(): SelectOptionComponent[] {
+    let opts: SelectOptionComponent[] = [];
+
+    if (this.optionsQueryList?.length > 0) {
+      // Use content-projected options if available
+      opts = this.optionsQueryList.toArray();
+    } else if (this.options.length > 0) {
+      // Fallback to input options if no content children
+      opts = this.options.map((opt) => {
+        const comp = new SelectOptionComponent(this.injector.get(ElementRef));
+        comp.value = opt.value;
+        comp.label = opt.label;
+        comp.disabled = false;
+        comp.hidden = false;
+        comp.selected = this.isSelected(comp);
+        return comp;
+      });
+    }
+
+    if (!this.searchText) return opts;
+    return opts.filter((opt) =>
       opt.label.toLowerCase().includes(this.searchText.toLowerCase())
     );
-    this.focusedOptionIndex = -1;
   }
 
-  clearSelection(event: Event): void {
-    event.stopPropagation();
-    this.value = this.multiple ? [] : null;
-    this.searchText = '';
-    this.filteredOptions = [...this.options];
-    this.onChange(this.value);
-    this.selectionChange.emit(this.value);
-    this.markTouched();
+  // Public getters for test access
+  get optionCount(): number {
+    return this.optionsQueryList.length;
   }
 
-  markTouched(): void {
-    this.touched = true;
-    this.onTouched();
+  get firstOption(): SelectOptionComponent | undefined {
+    return this.optionsQueryList.first;
   }
 
-  isInvalid(): boolean {
-    return (
-      this.required &&
-      (this.value === null ||
-        (Array.isArray(this.value) && this.value.length === 0)) &&
-      this.touched
-    );
+  get optionsArray(): SelectOptionComponent[] {
+    return this.getOptionsArray();
+  }
+
+  private getOptionsArray(): SelectOptionComponent[] {
+    return this.optionsQueryList.toArray();
   }
 
   @HostListener('document:click', ['$event'])
-  handleClickOutside(event: MouseEvent): void {
-    const target = event.target as HTMLElement;
-    if (this.isOpen && !target.closest('lib-select')) {
+  onDocumentClick(event: MouseEvent): void {
+    if (!this.trigger.nativeElement.contains(event.target)) {
+      this.closePanel();
+    }
+  }
+
+  closePanel(): void {
+    if (this.isOpen) {
       this.isOpen = false;
-      this.openedChange.emit(this.isOpen);
+      this.openedChange.emit(false);
+      this.closed.emit();
     }
   }
 
-  private scrollToFocusedOption(): void {
-    if (this.focusedOptionIndex >= 0 && this.dropdown?.nativeElement) {
-      const options = this.dropdown.nativeElement.querySelectorAll('li');
-      if (options[this.focusedOptionIndex]) {
-        options[this.focusedOptionIndex].scrollIntoView({
-          behavior: 'smooth',
-          block: 'nearest',
-        });
-      }
+  handleKeydown(event: KeyboardEvent): void {
+    if (
+      !this.isOpen &&
+      ['ArrowDown', 'ArrowUp', 'Enter', ' '].includes(event.key)
+    ) {
+      event.preventDefault();
+      this.togglePanel();
+      return;
     }
-  }
-
-  @HostListener('keydown', ['$event'])
-  handleKeyboard(event: KeyboardEvent): void {
-    if (!this.isOpen) return;
 
     switch (event.key) {
       case 'ArrowDown':
         event.preventDefault();
-        if (this.focusedOptionIndex < this.filteredOptions.length - 1) {
-          this.focusedOptionIndex++;
-        } else {
-          this.focusedOptionIndex = 0; // Wrap around to start
-        }
-        this.scrollToFocusedOption();
+        this.focusNextOption();
         break;
-
       case 'ArrowUp':
         event.preventDefault();
-        if (this.focusedOptionIndex > 0) {
-          this.focusedOptionIndex--;
-        } else {
-          this.focusedOptionIndex = this.filteredOptions.length - 1; // Wrap around to end
-        }
-        this.scrollToFocusedOption();
+        this.focusPrevOption();
         break;
-
       case 'Enter':
+      case ' ':
         event.preventDefault();
-        if (
-          this.focusedOptionIndex >= 0 &&
-          this.focusedOptionIndex < this.filteredOptions.length
-        ) {
-          this.selectOption(this.filteredOptions[this.focusedOptionIndex]);
-        }
+        this.selectFocusedOption();
         break;
-
       case 'Escape':
         event.preventDefault();
-        this.isOpen = false;
-        this.openedChange.emit(false);
+        this.closePanel();
         break;
+      case 'Tab':
+        this.closePanel();
+        break;
+    }
+  }
 
-      default:
-        break;
+  private focusNextOption(): void {
+    if (this.filteredOptions.length === 0) return;
+
+    this.focusedOptionIndex =
+      this.focusedOptionIndex < this.filteredOptions.length - 1
+        ? this.focusedOptionIndex + 1
+        : 0;
+    this.scrollToOption();
+  }
+
+  private focusPrevOption(): void {
+    if (this.filteredOptions.length === 0) return;
+
+    this.focusedOptionIndex =
+      this.focusedOptionIndex > 0
+        ? this.focusedOptionIndex - 1
+        : this.filteredOptions.length - 1;
+    this.scrollToOption();
+  }
+
+  private selectFocusedOption(): void {
+    if (
+      this.focusedOptionIndex >= 0 &&
+      this.focusedOptionIndex < this.filteredOptions.length
+    ) {
+      this.selectOption(this.filteredOptions[this.focusedOptionIndex]);
+    }
+  }
+
+  private scrollToOption(): void {
+    const options =
+      this.panel.nativeElement.querySelectorAll('lib-select-option');
+    if (options[this.focusedOptionIndex]) {
+      options[this.focusedOptionIndex].scrollIntoView({
+        behavior: 'smooth',
+        block: 'nearest',
+      });
     }
   }
 }
