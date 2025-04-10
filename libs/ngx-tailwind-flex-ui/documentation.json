@@ -1773,16 +1773,6 @@
                 "name": "Default",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "libs/ngx-tailwind-flex-ui/src/lib/paginator/paginator.component.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "StoryObj<PaginatorComponent>",
-                "defaultValue": "{\r\n  args: {\r\n    length: 100,\r\n    pageSize: 10,\r\n    pageIndex: 0,\r\n  },\r\n}"
-            },
-            {
-                "name": "Default",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "libs/ngx-tailwind-flex-ui/src/lib/loadingSpinner/loadingSpinner.component.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
@@ -1798,6 +1788,16 @@
                 "deprecationMessage": "",
                 "type": "Story",
                 "defaultValue": "{\r\n  args: {\r\n    progress: 25,\r\n    color: \"primary\",\r\n    variant: 'determinate',\r\n    bufferProgress: 0\r\n  },\r\n  render: (args) => ({\r\n    props: args,\r\n    template: `<lib-progress-bar [progress]=\"progress\" [color]=\"color\" [variant]=\"variant\"></lib-progress-bar>`,\r\n  }),\r\n}"
+            },
+            {
+                "name": "Default",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/ngx-tailwind-flex-ui/src/lib/paginator/paginator.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "StoryObj<PaginatorComponent>",
+                "defaultValue": "{\r\n  args: {\r\n    length: 100,\r\n    pageSize: 10,\r\n    pageIndex: 0,\r\n  },\r\n}"
             },
             {
                 "name": "Default",

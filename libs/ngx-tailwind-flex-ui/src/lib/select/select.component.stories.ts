@@ -24,25 +24,13 @@ export default {
     placeholder: { control: 'text' },
     disabled: { control: 'boolean' },
     multiple: { control: 'boolean' },
-    required: { control: 'boolean' },
-    panelClass: { control: 'text' },
-    tabIndex: { control: 'number' },
-    ariaLabel: { control: 'text' },
-    ariaLabelledby: { control: 'text' },
     options: { control: 'object' },
-    openedChange: { action: 'openedChange' },
     selectionChange: { action: 'selectionChange' },
-    closed: { action: 'closed' },
   },
   args: {
     placeholder: 'Select an option',
     disabled: false,
     multiple: false,
-    required: false,
-    panelClass: '',
-    tabIndex: 0,
-    ariaLabel: '',
-    ariaLabelledby: '',
     options: [
       { value: '1', label: 'Option 1' },
       { value: '2', label: 'Option 2' },
@@ -59,15 +47,8 @@ export const Default: StoryObj<SelectComponent> = {
         [placeholder]="placeholder"
         [disabled]="disabled"
         [multiple]="multiple"
-        [required]="required"
-        [panelClass]="panelClass"
-        [tabIndex]="tabIndex"
-        [ariaLabel]="ariaLabel"
-        [ariaLabelledby]="ariaLabelledby"
         [options]="options"
-        (openedChange)="openedChange($event)"
         (selectionChange)="selectionChange($event)"
-        (closed)="closed()"
       >
         <lib-select-option *ngFor="let opt of options" [value]="opt.value" [label]="opt.label"></lib-select-option>
       </lib-select>
@@ -84,15 +65,8 @@ export const Multiple: StoryObj<SelectComponent> = {
         [placeholder]="placeholder"
         [disabled]="disabled"
         [multiple]="multiple"
-        [required]="required"
-        [panelClass]="panelClass"
-        [tabIndex]="tabIndex"
-        [ariaLabel]="ariaLabel"
-        [ariaLabelledby]="ariaLabelledby"
         [options]="options"
-        (openedChange)="openedChange($event)"
         (selectionChange)="selectionChange($event)"
-        (closed)="closed()"
       >
         <lib-select-option *ngFor="let opt of options" [value]="opt.value" [label]="opt.label"></lib-select-option>
       </lib-select>
