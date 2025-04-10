@@ -1,6 +1,52 @@
 {
     "pipes": [],
-    "interfaces": [],
+    "interfaces": [
+        {
+            "name": "OptionGroup",
+            "id": "interface-OptionGroup-2c6ed101cd769351f58d16eaef01083f1d4886bd5bb00dfecd6c08917182215501a8225011b42d4f630aedfad2426fe6a59d3d63201b4aa05d381d03bad7913e",
+            "file": "libs/ngx-tailwind-flex-ui/src/lib/select/select.component.ts",
+            "deprecated": false,
+            "deprecationMessage": "",
+            "type": "interface",
+            "sourceCode": "import {\r\n  Component,\r\n  HostListener,\r\n  ViewChild,\r\n  ElementRef,\r\n  ContentChildren,\r\n  QueryList,\r\n  AfterContentInit,\r\n  ChangeDetectorRef,\r\n  forwardRef,\r\n  Input,\r\n  Output,\r\n  EventEmitter,\r\n  Injector,\r\n  ChangeDetectionStrategy,\r\n} from '@angular/core';\r\nimport { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';\r\nimport { CommonModule } from '@angular/common';\r\nimport { FormsModule } from '@angular/forms';\r\nimport { SelectOptionComponent } from './select-option.component';\r\n\r\ninterface OptionGroup {\r\n  label: string;\r\n  options: { value: string | number; label: string; disabled?: boolean }[];\r\n  disabled?: boolean;\r\n}\r\n\r\n@Component({\r\n  selector: 'lib-select',\r\n  templateUrl: './select.component.html',\r\n  styleUrls: ['./select.component.css'],\r\n  standalone: true,\r\n  imports: [CommonModule, FormsModule, SelectOptionComponent],\r\n  providers: [\r\n    {\r\n      provide: NG_VALUE_ACCESSOR,\r\n      useExisting: forwardRef(() => SelectComponent),\r\n      multi: true,\r\n    },\r\n  ],\r\n  changeDetection: ChangeDetectionStrategy.OnPush,\r\n})\r\nexport class SelectComponent implements ControlValueAccessor, AfterContentInit {\r\n  @Input() placeholder = 'Select an option';\r\n  @Input() disabled = false;\r\n  @Input() multiple = false;\r\n  @Input() required = false;\r\n  @Input() panelClass = '';\r\n  @Input() tabIndex = 0;\r\n  @Input() ariaLabel = '';\r\n  @Input() ariaLabelledby = '';\r\n  @Input() options: (\r\n    | { value: string | number; label: string; disabled?: boolean }\r\n    | OptionGroup\r\n  )[] = [];\r\n  @Input() searchThreshold: number | null = 10; // Show search only when options >= 10\r\n  @Input() loading = false;\r\n  @Input() isOpen = false;\r\n\r\n  @Output() openedChange = new EventEmitter<boolean>();\r\n  @Output() selectionChange = new EventEmitter<string | string[] | null>();\r\n  @Output() closed = new EventEmitter<void>();\r\n\r\n  @ViewChild('trigger') trigger!: ElementRef;\r\n  @ViewChild('panel') panel!: ElementRef;\r\n  @ViewChild('searchInput') searchInput?: ElementRef<HTMLInputElement>;\r\n\r\n  @ContentChildren(SelectOptionComponent)\r\n  private optionsQueryList!: QueryList<SelectOptionComponent>;\r\n\r\n  searchText = '';\r\n  focusedOptionIndex = -1;\r\n  private _value: string | string[] | null = null;\r\n  private _onChange!: (value: string | string[] | null) => void;\r\n  private _onTouched!: () => void;\r\n\r\n  constructor(private cdr: ChangeDetectorRef, private injector: Injector) {}\r\n\r\n  ngAfterContentInit() {\r\n    if (this.options.length === 0 && this.optionsQueryList?.length) {\r\n      this.options = this.optionsQueryList.map((opt) => ({\r\n        value: opt.value,\r\n        label: opt.label,\r\n        disabled: opt.disabled,\r\n      }));\r\n    }\r\n    this.cdr.detectChanges();\r\n  }\r\n\r\n  get value(): string | string[] | null {\r\n    return this._value;\r\n  }\r\n\r\n  set value(val: string | string[] | null) {\r\n    if (this._value !== val) {\r\n      this._value = val;\r\n      if (this._onChange) {\r\n        this._onChange(val);\r\n      }\r\n      this.selectionChange.emit(val);\r\n    }\r\n  }\r\n\r\n  get displayValue(): string {\r\n    if (!this.value) return this.placeholder;\r\n\r\n    if (this.multiple) {\r\n      if (!Array.isArray(this.value)) return this.placeholder;\r\n      const selectedOptions = this.flatOptions.filter((opt) =>\r\n        (this.value as string[]).includes(opt.value.toString())\r\n      );\r\n      return (\r\n        selectedOptions.map((opt) => opt.label).join(', ') || this.placeholder\r\n      );\r\n    }\r\n\r\n    const selectedOption = this.flatOptions.find(\r\n      (opt) => opt.value.toString() === this.value\r\n    );\r\n    return selectedOption?.label ?? this.placeholder;\r\n  }\r\n\r\n  writeValue(value: string | string[] | null): void {\r\n    this._value = value;\r\n    this.cdr.markForCheck();\r\n  }\r\n\r\n  registerOnChange(fn: (value: string | string[] | null) => void): void {\r\n    this._onChange = fn;\r\n  }\r\n\r\n  registerOnTouched(fn: () => void): void {\r\n    this._onTouched = fn;\r\n  }\r\n\r\n  setDisabledState(isDisabled: boolean): void {\r\n    this.disabled = isDisabled;\r\n    this.cdr.markForCheck();\r\n  }\r\n\r\n  togglePanel(event?: Event): void {\r\n    event?.stopPropagation();\r\n    if (this.disabled) return;\r\n\r\n    this.isOpen = !this.isOpen;\r\n    this.openedChange.emit(this.isOpen);\r\n\r\n    if (this.isOpen) {\r\n      setTimeout(() => this.searchInput?.nativeElement.focus(), 0);\r\n      this.focusedOptionIndex = -1;\r\n    } else {\r\n      this.closed.emit();\r\n    }\r\n    this.cdr.detectChanges();\r\n  }\r\n\r\n  selectOption(option: SelectOptionComponent, event?: Event): void {\r\n    event?.stopPropagation();\r\n    if (this.disabled || option.disabled) return;\r\n\r\n    if (this.multiple) {\r\n      const current = Array.isArray(this._value) ? [...this._value] : [];\r\n      const optionValue = option.value.toString();\r\n\r\n      const newValue = current.includes(optionValue)\r\n        ? current.filter((v) => v !== optionValue)\r\n        : [...current, optionValue];\r\n\r\n      this._value = newValue;\r\n    } else {\r\n      this._value = option.value.toString();\r\n      this.isOpen = false;\r\n      this.closed.emit();\r\n    }\r\n\r\n    if (this._onChange) {\r\n      this._onChange(this._value);\r\n    }\r\n    this.selectionChange.emit(this._value);\r\n    if (this._onTouched) {\r\n      this._onTouched();\r\n    }\r\n    this.cdr.detectChanges();\r\n  }\r\n\r\n  clearSelection(event: Event): void {\r\n    event.stopPropagation();\r\n    this._value = this.multiple ? [] : null;\r\n    if (this._onChange) {\r\n      this._onChange(this._value);\r\n    }\r\n    this.selectionChange.emit(this._value);\r\n    if (this._onTouched) {\r\n      this._onTouched();\r\n    }\r\n    this.cdr.detectChanges();\r\n  }\r\n\r\n  isSelected(option: SelectOptionComponent): boolean {\r\n    if (!this.value) return false;\r\n\r\n    if (this.multiple) {\r\n      return (\r\n        Array.isArray(this.value) &&\r\n        this.value.includes(option.value.toString())\r\n      );\r\n    }\r\n    return this.value === option.value.toString();\r\n  }\r\n\r\n  get flatOptions(): {\r\n    value: string | number;\r\n    label: string;\r\n    disabled?: boolean;\r\n  }[] {\r\n    return this.options.reduce((acc, item) => {\r\n      if ('options' in item) {\r\n        return [\r\n          ...acc,\r\n          ...item.options.map((opt) => ({\r\n            ...opt,\r\n            disabled: opt.disabled || item.disabled,\r\n          })),\r\n        ];\r\n      }\r\n      return [...acc, item];\r\n    }, [] as { value: string | number; label: string; disabled?: boolean }[]);\r\n  }\r\n\r\n  get filteredOptions(): {\r\n    group?: string;\r\n    options: SelectOptionComponent[];\r\n  }[] {\r\n    let opts: SelectOptionComponent[] = [];\r\n\r\n    if (this.optionsQueryList?.length > 0) {\r\n      opts = this.optionsQueryList.toArray();\r\n    } else if (this.options.length > 0) {\r\n      opts = this.flatOptions.map((opt) => {\r\n        const comp = new SelectOptionComponent(this.injector.get(ElementRef));\r\n        comp.value = opt.value;\r\n        comp.label = opt.label;\r\n        comp.disabled = opt.disabled || false;\r\n        comp.hidden = false;\r\n        comp.selected = this.isSelected(comp);\r\n        return comp;\r\n      });\r\n    }\r\n\r\n    if (!this.searchText) {\r\n      return this.groupOptions(opts);\r\n    }\r\n\r\n    const filtered = opts.filter((opt) =>\r\n      opt.label.toLowerCase().includes(this.searchText.toLowerCase())\r\n    );\r\n    return this.groupOptions(filtered);\r\n  }\r\n\r\n  private groupOptions(\r\n    opts: SelectOptionComponent[]\r\n  ): { group?: string; options: SelectOptionComponent[] }[] {\r\n    if (\r\n      this.optionsQueryList?.length > 0 ||\r\n      !this.options.some((opt) => 'options' in opt)\r\n    ) {\r\n      return [{ options: opts }];\r\n    }\r\n\r\n    const grouped: { [key: string]: SelectOptionComponent[] } = {};\r\n    const ungrouped: SelectOptionComponent[] = [];\r\n\r\n    opts.forEach((opt) => {\r\n      const parentGroup = this.options.find(\r\n        (group) =>\r\n          'options' in group && group.options.some((o) => o.value === opt.value)\r\n      ) as OptionGroup | undefined;\r\n\r\n      if (parentGroup) {\r\n        const key = parentGroup.label;\r\n        grouped[key] = grouped[key] || [];\r\n        grouped[key].push(opt);\r\n      } else {\r\n        ungrouped.push(opt);\r\n      }\r\n    });\r\n\r\n    const result: { group?: string; options: SelectOptionComponent[] }[] =\r\n      Object.entries(grouped).map(([group, options]) => ({\r\n        group,\r\n        options,\r\n      }));\r\n\r\n    if (ungrouped.length > 0) {\r\n      result.push({ options: ungrouped });\r\n    }\r\n\r\n    return result;\r\n  }\r\n\r\n  get optionCount(): number {\r\n    return this.optionsQueryList.length || this.flatOptions.length;\r\n  }\r\n\r\n  get firstOption(): SelectOptionComponent | undefined {\r\n    return this.optionsQueryList.first || this.filteredOptions[0]?.options[0];\r\n  }\r\n\r\n  get optionsArray(): SelectOptionComponent[] {\r\n    return this.flatOptions.map((opt) => {\r\n      const comp = new SelectOptionComponent(this.injector.get(ElementRef));\r\n      comp.value = opt.value;\r\n      comp.label = opt.label;\r\n      comp.disabled = opt.disabled || false;\r\n      return comp;\r\n    });\r\n  }\r\n\r\n  @HostListener('document:click', ['$event'])\r\n  onDocumentClick(event: MouseEvent): void {\r\n    if (!this.trigger.nativeElement.contains(event.target) && this.isOpen) {\r\n      this.closePanel();\r\n    }\r\n  }\r\n\r\n  closePanel(): void {\r\n    if (this.isOpen) {\r\n      this.isOpen = false;\r\n      this.openedChange.emit(false);\r\n      this.closed.emit();\r\n    }\r\n  }\r\n\r\n  handleKeydown(event: KeyboardEvent): void {\r\n    if (\r\n      !this.isOpen &&\r\n      ['ArrowDown', 'ArrowUp', 'Enter', ' '].includes(event.key)\r\n    ) {\r\n      event.preventDefault();\r\n      this.togglePanel();\r\n      return;\r\n    }\r\n\r\n    switch (event.key) {\r\n      case 'ArrowDown':\r\n        event.preventDefault();\r\n        this.focusNextOption();\r\n        break;\r\n      case 'ArrowUp':\r\n        event.preventDefault();\r\n        this.focusPrevOption();\r\n        break;\r\n      case 'Enter':\r\n      case ' ':\r\n        event.preventDefault();\r\n        this.selectFocusedOption();\r\n        break;\r\n      case 'Escape':\r\n        event.preventDefault();\r\n        this.closePanel();\r\n        break;\r\n      case 'Tab':\r\n        this.closePanel();\r\n        break;\r\n    }\r\n  }\r\n\r\n  private focusNextOption(): void {\r\n    const flatFiltered = this.filteredOptions.flatMap((group) => group.options);\r\n    if (flatFiltered.length === 0) return;\r\n\r\n    this.focusedOptionIndex =\r\n      this.focusedOptionIndex < flatFiltered.length - 1\r\n        ? this.focusedOptionIndex + 1\r\n        : 0;\r\n    this.scrollToOption();\r\n  }\r\n\r\n  private focusPrevOption(): void {\r\n    const flatFiltered = this.filteredOptions.flatMap((group) => group.options);\r\n    if (flatFiltered.length === 0) return;\r\n\r\n    this.focusedOptionIndex =\r\n      this.focusedOptionIndex > 0\r\n        ? this.focusedOptionIndex - 1\r\n        : flatFiltered.length - 1;\r\n    this.scrollToOption();\r\n  }\r\n\r\n  private selectFocusedOption(): void {\r\n    const flatFiltered = this.filteredOptions.flatMap((group) => group.options);\r\n    if (\r\n      this.focusedOptionIndex >= 0 &&\r\n      this.focusedOptionIndex < flatFiltered.length\r\n    ) {\r\n      this.selectOption(flatFiltered[this.focusedOptionIndex]);\r\n    }\r\n  }\r\n\r\n  private scrollToOption(): void {\r\n    const options =\r\n      this.panel.nativeElement.querySelectorAll('lib-select-option');\r\n    if (options[this.focusedOptionIndex]) {\r\n      options[this.focusedOptionIndex].scrollIntoView({\r\n        behavior: 'smooth',\r\n        block: 'nearest',\r\n      });\r\n    }\r\n  }\r\n\r\n  showSearch(): boolean {\r\n    return (\r\n      this.searchThreshold === null || this.optionCount >= this.searchThreshold\r\n    );\r\n  }\r\n}\r\n",
+            "properties": [
+                {
+                    "name": "disabled",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "boolean",
+                    "indexKey": "",
+                    "optional": true,
+                    "description": "",
+                    "line": 25
+                },
+                {
+                    "name": "label",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 23
+                },
+                {
+                    "name": "options",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "literal type[]",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 24
+                }
+            ],
+            "indexSignatures": [],
+            "kind": 171,
+            "methods": [],
+            "extends": []
+        }
+    ],
     "injectables": [],
     "guards": [],
     "interceptors": [],
@@ -650,8 +696,9 @@
         },
         {
             "name": "SelectComponent",
-            "id": "component-SelectComponent-35bc698adca78795981cd86ef9cbf70fc92c681738b5691faad74fb79b10c0a4764299784187b8c5e6ff391a94636be1589c0d24f62d721de9ef350163690be0",
+            "id": "component-SelectComponent-2c6ed101cd769351f58d16eaef01083f1d4886bd5bb00dfecd6c08917182215501a8225011b42d4f630aedfad2426fe6a59d3d63201b4aa05d381d03bad7913e",
             "file": "libs/ngx-tailwind-flex-ui/src/lib/select/select.component.ts",
+            "changeDetection": "ChangeDetectionStrategy.OnPush",
             "encapsulation": [],
             "entryComponents": [],
             "inputs": [],
@@ -678,7 +725,7 @@
                     "defaultValue": "''",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 42,
+                    "line": 50,
                     "type": "string",
                     "decorators": []
                 },
@@ -687,7 +734,7 @@
                     "defaultValue": "''",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 43,
+                    "line": 51,
                     "type": "string",
                     "decorators": []
                 },
@@ -696,7 +743,25 @@
                     "defaultValue": "false",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 37,
+                    "line": 45,
+                    "type": "boolean",
+                    "decorators": []
+                },
+                {
+                    "name": "isOpen",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 58,
+                    "type": "boolean",
+                    "decorators": []
+                },
+                {
+                    "name": "loading",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 57,
                     "type": "boolean",
                     "decorators": []
                 },
@@ -705,7 +770,7 @@
                     "defaultValue": "false",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 38,
+                    "line": 46,
                     "type": "boolean",
                     "decorators": []
                 },
@@ -714,8 +779,8 @@
                     "defaultValue": "[]",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 44,
-                    "type": "literal type[]",
+                    "line": 52,
+                    "type": "(literal type | OptionGroup)[]",
                     "decorators": []
                 },
                 {
@@ -723,7 +788,7 @@
                     "defaultValue": "''",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 40,
+                    "line": 48,
                     "type": "string",
                     "decorators": []
                 },
@@ -732,7 +797,7 @@
                     "defaultValue": "'Select an option'",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 36,
+                    "line": 44,
                     "type": "string",
                     "decorators": []
                 },
@@ -741,8 +806,17 @@
                     "defaultValue": "false",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 39,
+                    "line": 47,
                     "type": "boolean",
+                    "decorators": []
+                },
+                {
+                    "name": "searchThreshold",
+                    "defaultValue": "10",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 56,
+                    "type": "number | null",
                     "decorators": []
                 },
                 {
@@ -750,7 +824,7 @@
                     "defaultValue": "0",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 41,
+                    "line": 49,
                     "type": "number",
                     "decorators": []
                 }
@@ -761,7 +835,7 @@
                     "defaultValue": "new EventEmitter<void>()",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 48,
+                    "line": 62,
                     "type": "EventEmitter"
                 },
                 {
@@ -769,7 +843,7 @@
                     "defaultValue": "new EventEmitter<boolean>()",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 46,
+                    "line": 60,
                     "type": "EventEmitter"
                 },
                 {
@@ -777,35 +851,33 @@
                     "defaultValue": "new EventEmitter<string | string[] | null>()",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 47,
+                    "line": 61,
                     "type": "EventEmitter"
                 }
             ],
             "propertiesClass": [
                 {
                     "name": "_onChange",
-                    "defaultValue": "() => {...}",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "function",
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 61,
+                    "line": 74,
                     "modifierKind": [
                         123
                     ]
                 },
                 {
                     "name": "_onTouched",
-                    "defaultValue": "() => {...}",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "type": "",
+                    "type": "function",
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 64,
+                    "line": 75,
                     "modifierKind": [
                         123
                     ]
@@ -819,7 +891,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 60,
+                    "line": 73,
                     "modifierKind": [
                         123
                     ]
@@ -833,18 +905,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 59
-                },
-                {
-                    "name": "isOpen",
-                    "defaultValue": "false",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "",
-                    "indexKey": "",
-                    "optional": false,
-                    "description": "",
-                    "line": 57
+                    "line": 72
                 },
                 {
                     "name": "optionsQueryList",
@@ -854,7 +915,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 55,
+                    "line": 69,
                     "decorators": [
                         {
                             "name": "ContentChildren",
@@ -874,7 +935,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 51,
+                    "line": 65,
                     "decorators": [
                         {
                             "name": "ViewChild",
@@ -893,7 +954,7 @@
                     "indexKey": "",
                     "optional": true,
                     "description": "",
-                    "line": 52,
+                    "line": 66,
                     "decorators": [
                         {
                             "name": "ViewChild",
@@ -913,7 +974,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 58
+                    "line": 71
                 },
                 {
                     "name": "trigger",
@@ -923,7 +984,7 @@
                     "indexKey": "",
                     "optional": false,
                     "description": "",
-                    "line": 50,
+                    "line": 64,
                     "decorators": [
                         {
                             "name": "ViewChild",
@@ -937,12 +998,40 @@
             ],
             "methodsClass": [
                 {
+                    "name": "clearSelection",
+                    "args": [
+                        {
+                            "name": "event",
+                            "type": "Event",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 186,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "event",
+                            "type": "Event",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
                     "name": "closePanel",
                     "args": [],
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 228,
+                    "line": 326,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
@@ -952,7 +1041,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 270,
+                    "line": 368,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "modifierKind": [
@@ -965,7 +1054,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 280,
+                    "line": 379,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "modifierKind": [
@@ -973,16 +1062,34 @@
                     ]
                 },
                 {
-                    "name": "getOptionsArray",
-                    "args": [],
+                    "name": "groupOptions",
+                    "args": [
+                        {
+                            "name": "opts",
+                            "type": "SelectOptionComponent[]",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
                     "optional": false,
-                    "returnType": "SelectOptionComponent[]",
+                    "returnType": "literal type[]",
                     "typeParameters": [],
-                    "line": 217,
+                    "line": 260,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "modifierKind": [
                         123
+                    ],
+                    "jsdoctags": [
+                        {
+                            "name": "opts",
+                            "type": "SelectOptionComponent[]",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
                     ]
                 },
                 {
@@ -998,7 +1105,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 236,
+                    "line": 334,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -1026,7 +1133,7 @@
                     "optional": false,
                     "returnType": "boolean",
                     "typeParameters": [],
-                    "line": 167,
+                    "line": 199,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -1047,7 +1154,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 70,
+                    "line": 79,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
@@ -1064,7 +1171,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 222,
+                    "line": 320,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "decorators": [
@@ -1109,7 +1216,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 116,
+                    "line": 128,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -1146,7 +1253,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 120,
+                    "line": 132,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -1168,7 +1275,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 299,
+                    "line": 400,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "modifierKind": [
@@ -1181,7 +1288,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 290,
+                    "line": 390,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "modifierKind": [
@@ -1208,7 +1315,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 144,
+                    "line": 157,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -1246,7 +1353,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 124,
+                    "line": 136,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -1262,6 +1369,16 @@
                     ]
                 },
                 {
+                    "name": "showSearch",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "boolean",
+                    "typeParameters": [],
+                    "line": 411,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
+                {
                     "name": "togglePanel",
                     "args": [
                         {
@@ -1275,7 +1392,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 129,
+                    "line": 141,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -1304,7 +1421,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 111,
+                    "line": 123,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -1339,7 +1456,7 @@
                     ],
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 222
+                    "line": 320
                 }
             ],
             "standalone": true,
@@ -1360,7 +1477,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import {\r\n  Component,\r\n  HostListener,\r\n  ViewChild,\r\n  ElementRef,\r\n  ContentChildren,\r\n  QueryList,\r\n  AfterContentInit,\r\n  ChangeDetectorRef,\r\n  forwardRef,\r\n  Input,\r\n  Output,\r\n  EventEmitter,\r\n  Injector,\r\n} from '@angular/core';\r\nimport { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';\r\nimport { CommonModule } from '@angular/common';\r\nimport { FormsModule } from '@angular/forms';\r\nimport { SelectOptionComponent } from './select-option.component';\r\n\r\n@Component({\r\n  selector: 'lib-select',\r\n  templateUrl: './select.component.html',\r\n  styleUrls: ['./select.component.css'],\r\n  standalone: true,\r\n  imports: [CommonModule, FormsModule, SelectOptionComponent],\r\n  providers: [\r\n    {\r\n      provide: NG_VALUE_ACCESSOR,\r\n      useExisting: forwardRef(() => SelectComponent),\r\n      multi: true,\r\n    },\r\n  ],\r\n})\r\nexport class SelectComponent implements ControlValueAccessor, AfterContentInit {\r\n  @Input() placeholder = 'Select an option';\r\n  @Input() disabled = false;\r\n  @Input() multiple = false;\r\n  @Input() required = false;\r\n  @Input() panelClass = '';\r\n  @Input() tabIndex = 0;\r\n  @Input() ariaLabel = '';\r\n  @Input() ariaLabelledby = '';\r\n  @Input() options: { value: string | number; label: string }[] = [];\r\n\r\n  @Output() openedChange = new EventEmitter<boolean>();\r\n  @Output() selectionChange = new EventEmitter<string | string[] | null>();\r\n  @Output() closed = new EventEmitter<void>();\r\n\r\n  @ViewChild('trigger') trigger!: ElementRef;\r\n  @ViewChild('panel') panel!: ElementRef;\r\n  @ViewChild('searchInput') searchInput?: ElementRef<HTMLInputElement>;\r\n\r\n  @ContentChildren(SelectOptionComponent)\r\n  private optionsQueryList!: QueryList<SelectOptionComponent>;\r\n\r\n  isOpen = false;\r\n  searchText = '';\r\n  focusedOptionIndex = -1;\r\n  private _value: string | string[] | null = null;\r\n  private _onChange: (value: string | string[] | null) => void = () => {\r\n    // Initial placeholder - overridden by registerOnChange\r\n  };\r\n  private _onTouched = () => {\r\n    // Initial placeholder - overridden by registerOnTouched\r\n  };\r\n\r\n  constructor(private cdr: ChangeDetectorRef, private injector: Injector) {}\r\n\r\n  ngAfterContentInit() {\r\n    this.cdr.detectChanges();\r\n    if (this.options.length === 0 && this.optionsQueryList?.length) {\r\n      this.options = this.optionsQueryList.map((opt) => ({\r\n        value: opt.value,\r\n        label: opt.label,\r\n      }));\r\n    }\r\n  }\r\n\r\n  get value(): string | string[] | null {\r\n    return this._value;\r\n  }\r\n\r\n  set value(val: string | string[] | null) {\r\n    if (this._value !== val) {\r\n      this._value = val;\r\n      this._onChange(val);\r\n      this.selectionChange.emit(val);\r\n    }\r\n  }\r\n\r\n  get displayValue(): string {\r\n    if (!this.value) return this.placeholder;\r\n\r\n    if (this.multiple) {\r\n      if (!Array.isArray(this.value) || !this.options) return this.placeholder;\r\n      const selectedOptions = this.options.filter((opt) =>\r\n        (this.value as string[]).includes(opt.value.toString())\r\n      );\r\n      return (\r\n        selectedOptions.map((opt) => opt.label).join(', ') || this.placeholder\r\n      );\r\n    }\r\n\r\n    const selectedOption = this.options.find(\r\n      (opt) => opt.value.toString() === this.value\r\n    );\r\n    return selectedOption?.label ?? this.placeholder;\r\n  }\r\n\r\n  writeValue(value: string | string[] | null): void {\r\n    this._value = value;\r\n    this.cdr.markForCheck();\r\n  }\r\n\r\n  registerOnChange(fn: (value: string | string[] | null) => void): void {\r\n    this._onChange = fn;\r\n  }\r\n\r\n  registerOnTouched(fn: () => void): void {\r\n    this._onTouched = fn;\r\n  }\r\n\r\n  setDisabledState(isDisabled: boolean): void {\r\n    this.disabled = isDisabled;\r\n    this.cdr.markForCheck();\r\n  }\r\n\r\n  togglePanel(event?: Event): void {\r\n    event?.stopPropagation();\r\n    if (this.disabled) return;\r\n\r\n    this.isOpen = !this.isOpen;\r\n    this.openedChange.emit(this.isOpen);\r\n\r\n    if (this.isOpen) {\r\n      setTimeout(() => this.searchInput?.nativeElement.focus(), 0);\r\n      this.focusedOptionIndex = -1;\r\n    } else {\r\n      this.closed.emit();\r\n    }\r\n  }\r\n\r\n  selectOption(option: SelectOptionComponent, event?: Event): void {\r\n    event?.stopPropagation();\r\n    if (this.disabled) return;\r\n\r\n    if (this.multiple) {\r\n      const current = Array.isArray(this.value) ? [...this.value] : [];\r\n      this._value = current.includes(option.value.toString())\r\n        ? current.filter((v) => v !== option.value.toString())\r\n        : [...current, option.value.toString()];\r\n      this._onChange(this._value);\r\n      this.selectionChange.emit(this._value);\r\n    } else {\r\n      this._value = option.value.toString();\r\n      this._onChange(this._value);\r\n      this.isOpen = false;\r\n      this.closed.emit();\r\n      this.selectionChange.emit(this._value);\r\n    }\r\n\r\n    this._onTouched();\r\n    this.cdr.detectChanges();\r\n  }\r\n\r\n  isSelected(option: SelectOptionComponent): boolean {\r\n    if (!this.value) return false;\r\n\r\n    if (this.multiple) {\r\n      return (\r\n        Array.isArray(this.value) &&\r\n        this.value.includes(option.value.toString())\r\n      );\r\n    }\r\n    return this.value === option.value.toString();\r\n  }\r\n\r\n  get filteredOptions(): SelectOptionComponent[] {\r\n    let opts: SelectOptionComponent[] = [];\r\n\r\n    if (this.optionsQueryList?.length > 0) {\r\n      // Use content-projected options if available\r\n      opts = this.optionsQueryList.toArray();\r\n    } else if (this.options.length > 0) {\r\n      // Fallback to input options if no content children\r\n      opts = this.options.map((opt) => {\r\n        const comp = new SelectOptionComponent(this.injector.get(ElementRef));\r\n        comp.value = opt.value;\r\n        comp.label = opt.label;\r\n        comp.disabled = false;\r\n        comp.hidden = false;\r\n        comp.selected = this.isSelected(comp);\r\n        return comp;\r\n      });\r\n    }\r\n\r\n    if (!this.searchText) return opts;\r\n    return opts.filter((opt) =>\r\n      opt.label.toLowerCase().includes(this.searchText.toLowerCase())\r\n    );\r\n  }\r\n\r\n  // Public getters for test access\r\n  get optionCount(): number {\r\n    return this.optionsQueryList.length;\r\n  }\r\n\r\n  get firstOption(): SelectOptionComponent | undefined {\r\n    return this.optionsQueryList.first;\r\n  }\r\n\r\n  get optionsArray(): SelectOptionComponent[] {\r\n    return this.getOptionsArray();\r\n  }\r\n\r\n  private getOptionsArray(): SelectOptionComponent[] {\r\n    return this.optionsQueryList.toArray();\r\n  }\r\n\r\n  @HostListener('document:click', ['$event'])\r\n  onDocumentClick(event: MouseEvent): void {\r\n    if (!this.trigger.nativeElement.contains(event.target)) {\r\n      this.closePanel();\r\n    }\r\n  }\r\n\r\n  closePanel(): void {\r\n    if (this.isOpen) {\r\n      this.isOpen = false;\r\n      this.openedChange.emit(false);\r\n      this.closed.emit();\r\n    }\r\n  }\r\n\r\n  handleKeydown(event: KeyboardEvent): void {\r\n    if (\r\n      !this.isOpen &&\r\n      ['ArrowDown', 'ArrowUp', 'Enter', ' '].includes(event.key)\r\n    ) {\r\n      event.preventDefault();\r\n      this.togglePanel();\r\n      return;\r\n    }\r\n\r\n    switch (event.key) {\r\n      case 'ArrowDown':\r\n        event.preventDefault();\r\n        this.focusNextOption();\r\n        break;\r\n      case 'ArrowUp':\r\n        event.preventDefault();\r\n        this.focusPrevOption();\r\n        break;\r\n      case 'Enter':\r\n      case ' ':\r\n        event.preventDefault();\r\n        this.selectFocusedOption();\r\n        break;\r\n      case 'Escape':\r\n        event.preventDefault();\r\n        this.closePanel();\r\n        break;\r\n      case 'Tab':\r\n        this.closePanel();\r\n        break;\r\n    }\r\n  }\r\n\r\n  private focusNextOption(): void {\r\n    if (this.filteredOptions.length === 0) return;\r\n\r\n    this.focusedOptionIndex =\r\n      this.focusedOptionIndex < this.filteredOptions.length - 1\r\n        ? this.focusedOptionIndex + 1\r\n        : 0;\r\n    this.scrollToOption();\r\n  }\r\n\r\n  private focusPrevOption(): void {\r\n    if (this.filteredOptions.length === 0) return;\r\n\r\n    this.focusedOptionIndex =\r\n      this.focusedOptionIndex > 0\r\n        ? this.focusedOptionIndex - 1\r\n        : this.filteredOptions.length - 1;\r\n    this.scrollToOption();\r\n  }\r\n\r\n  private selectFocusedOption(): void {\r\n    if (\r\n      this.focusedOptionIndex >= 0 &&\r\n      this.focusedOptionIndex < this.filteredOptions.length\r\n    ) {\r\n      this.selectOption(this.filteredOptions[this.focusedOptionIndex]);\r\n    }\r\n  }\r\n\r\n  private scrollToOption(): void {\r\n    const options =\r\n      this.panel.nativeElement.querySelectorAll('lib-select-option');\r\n    if (options[this.focusedOptionIndex]) {\r\n      options[this.focusedOptionIndex].scrollIntoView({\r\n        behavior: 'smooth',\r\n        block: 'nearest',\r\n      });\r\n    }\r\n  }\r\n}\r\n",
+            "sourceCode": "import {\r\n  Component,\r\n  HostListener,\r\n  ViewChild,\r\n  ElementRef,\r\n  ContentChildren,\r\n  QueryList,\r\n  AfterContentInit,\r\n  ChangeDetectorRef,\r\n  forwardRef,\r\n  Input,\r\n  Output,\r\n  EventEmitter,\r\n  Injector,\r\n  ChangeDetectionStrategy,\r\n} from '@angular/core';\r\nimport { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';\r\nimport { CommonModule } from '@angular/common';\r\nimport { FormsModule } from '@angular/forms';\r\nimport { SelectOptionComponent } from './select-option.component';\r\n\r\ninterface OptionGroup {\r\n  label: string;\r\n  options: { value: string | number; label: string; disabled?: boolean }[];\r\n  disabled?: boolean;\r\n}\r\n\r\n@Component({\r\n  selector: 'lib-select',\r\n  templateUrl: './select.component.html',\r\n  styleUrls: ['./select.component.css'],\r\n  standalone: true,\r\n  imports: [CommonModule, FormsModule, SelectOptionComponent],\r\n  providers: [\r\n    {\r\n      provide: NG_VALUE_ACCESSOR,\r\n      useExisting: forwardRef(() => SelectComponent),\r\n      multi: true,\r\n    },\r\n  ],\r\n  changeDetection: ChangeDetectionStrategy.OnPush,\r\n})\r\nexport class SelectComponent implements ControlValueAccessor, AfterContentInit {\r\n  @Input() placeholder = 'Select an option';\r\n  @Input() disabled = false;\r\n  @Input() multiple = false;\r\n  @Input() required = false;\r\n  @Input() panelClass = '';\r\n  @Input() tabIndex = 0;\r\n  @Input() ariaLabel = '';\r\n  @Input() ariaLabelledby = '';\r\n  @Input() options: (\r\n    | { value: string | number; label: string; disabled?: boolean }\r\n    | OptionGroup\r\n  )[] = [];\r\n  @Input() searchThreshold: number | null = 10; // Show search only when options >= 10\r\n  @Input() loading = false;\r\n  @Input() isOpen = false;\r\n\r\n  @Output() openedChange = new EventEmitter<boolean>();\r\n  @Output() selectionChange = new EventEmitter<string | string[] | null>();\r\n  @Output() closed = new EventEmitter<void>();\r\n\r\n  @ViewChild('trigger') trigger!: ElementRef;\r\n  @ViewChild('panel') panel!: ElementRef;\r\n  @ViewChild('searchInput') searchInput?: ElementRef<HTMLInputElement>;\r\n\r\n  @ContentChildren(SelectOptionComponent)\r\n  private optionsQueryList!: QueryList<SelectOptionComponent>;\r\n\r\n  searchText = '';\r\n  focusedOptionIndex = -1;\r\n  private _value: string | string[] | null = null;\r\n  private _onChange!: (value: string | string[] | null) => void;\r\n  private _onTouched!: () => void;\r\n\r\n  constructor(private cdr: ChangeDetectorRef, private injector: Injector) {}\r\n\r\n  ngAfterContentInit() {\r\n    if (this.options.length === 0 && this.optionsQueryList?.length) {\r\n      this.options = this.optionsQueryList.map((opt) => ({\r\n        value: opt.value,\r\n        label: opt.label,\r\n        disabled: opt.disabled,\r\n      }));\r\n    }\r\n    this.cdr.detectChanges();\r\n  }\r\n\r\n  get value(): string | string[] | null {\r\n    return this._value;\r\n  }\r\n\r\n  set value(val: string | string[] | null) {\r\n    if (this._value !== val) {\r\n      this._value = val;\r\n      if (this._onChange) {\r\n        this._onChange(val);\r\n      }\r\n      this.selectionChange.emit(val);\r\n    }\r\n  }\r\n\r\n  get displayValue(): string {\r\n    if (!this.value) return this.placeholder;\r\n\r\n    if (this.multiple) {\r\n      if (!Array.isArray(this.value)) return this.placeholder;\r\n      const selectedOptions = this.flatOptions.filter((opt) =>\r\n        (this.value as string[]).includes(opt.value.toString())\r\n      );\r\n      return (\r\n        selectedOptions.map((opt) => opt.label).join(', ') || this.placeholder\r\n      );\r\n    }\r\n\r\n    const selectedOption = this.flatOptions.find(\r\n      (opt) => opt.value.toString() === this.value\r\n    );\r\n    return selectedOption?.label ?? this.placeholder;\r\n  }\r\n\r\n  writeValue(value: string | string[] | null): void {\r\n    this._value = value;\r\n    this.cdr.markForCheck();\r\n  }\r\n\r\n  registerOnChange(fn: (value: string | string[] | null) => void): void {\r\n    this._onChange = fn;\r\n  }\r\n\r\n  registerOnTouched(fn: () => void): void {\r\n    this._onTouched = fn;\r\n  }\r\n\r\n  setDisabledState(isDisabled: boolean): void {\r\n    this.disabled = isDisabled;\r\n    this.cdr.markForCheck();\r\n  }\r\n\r\n  togglePanel(event?: Event): void {\r\n    event?.stopPropagation();\r\n    if (this.disabled) return;\r\n\r\n    this.isOpen = !this.isOpen;\r\n    this.openedChange.emit(this.isOpen);\r\n\r\n    if (this.isOpen) {\r\n      setTimeout(() => this.searchInput?.nativeElement.focus(), 0);\r\n      this.focusedOptionIndex = -1;\r\n    } else {\r\n      this.closed.emit();\r\n    }\r\n    this.cdr.detectChanges();\r\n  }\r\n\r\n  selectOption(option: SelectOptionComponent, event?: Event): void {\r\n    event?.stopPropagation();\r\n    if (this.disabled || option.disabled) return;\r\n\r\n    if (this.multiple) {\r\n      const current = Array.isArray(this._value) ? [...this._value] : [];\r\n      const optionValue = option.value.toString();\r\n\r\n      const newValue = current.includes(optionValue)\r\n        ? current.filter((v) => v !== optionValue)\r\n        : [...current, optionValue];\r\n\r\n      this._value = newValue;\r\n    } else {\r\n      this._value = option.value.toString();\r\n      this.isOpen = false;\r\n      this.closed.emit();\r\n    }\r\n\r\n    if (this._onChange) {\r\n      this._onChange(this._value);\r\n    }\r\n    this.selectionChange.emit(this._value);\r\n    if (this._onTouched) {\r\n      this._onTouched();\r\n    }\r\n    this.cdr.detectChanges();\r\n  }\r\n\r\n  clearSelection(event: Event): void {\r\n    event.stopPropagation();\r\n    this._value = this.multiple ? [] : null;\r\n    if (this._onChange) {\r\n      this._onChange(this._value);\r\n    }\r\n    this.selectionChange.emit(this._value);\r\n    if (this._onTouched) {\r\n      this._onTouched();\r\n    }\r\n    this.cdr.detectChanges();\r\n  }\r\n\r\n  isSelected(option: SelectOptionComponent): boolean {\r\n    if (!this.value) return false;\r\n\r\n    if (this.multiple) {\r\n      return (\r\n        Array.isArray(this.value) &&\r\n        this.value.includes(option.value.toString())\r\n      );\r\n    }\r\n    return this.value === option.value.toString();\r\n  }\r\n\r\n  get flatOptions(): {\r\n    value: string | number;\r\n    label: string;\r\n    disabled?: boolean;\r\n  }[] {\r\n    return this.options.reduce((acc, item) => {\r\n      if ('options' in item) {\r\n        return [\r\n          ...acc,\r\n          ...item.options.map((opt) => ({\r\n            ...opt,\r\n            disabled: opt.disabled || item.disabled,\r\n          })),\r\n        ];\r\n      }\r\n      return [...acc, item];\r\n    }, [] as { value: string | number; label: string; disabled?: boolean }[]);\r\n  }\r\n\r\n  get filteredOptions(): {\r\n    group?: string;\r\n    options: SelectOptionComponent[];\r\n  }[] {\r\n    let opts: SelectOptionComponent[] = [];\r\n\r\n    if (this.optionsQueryList?.length > 0) {\r\n      opts = this.optionsQueryList.toArray();\r\n    } else if (this.options.length > 0) {\r\n      opts = this.flatOptions.map((opt) => {\r\n        const comp = new SelectOptionComponent(this.injector.get(ElementRef));\r\n        comp.value = opt.value;\r\n        comp.label = opt.label;\r\n        comp.disabled = opt.disabled || false;\r\n        comp.hidden = false;\r\n        comp.selected = this.isSelected(comp);\r\n        return comp;\r\n      });\r\n    }\r\n\r\n    if (!this.searchText) {\r\n      return this.groupOptions(opts);\r\n    }\r\n\r\n    const filtered = opts.filter((opt) =>\r\n      opt.label.toLowerCase().includes(this.searchText.toLowerCase())\r\n    );\r\n    return this.groupOptions(filtered);\r\n  }\r\n\r\n  private groupOptions(\r\n    opts: SelectOptionComponent[]\r\n  ): { group?: string; options: SelectOptionComponent[] }[] {\r\n    if (\r\n      this.optionsQueryList?.length > 0 ||\r\n      !this.options.some((opt) => 'options' in opt)\r\n    ) {\r\n      return [{ options: opts }];\r\n    }\r\n\r\n    const grouped: { [key: string]: SelectOptionComponent[] } = {};\r\n    const ungrouped: SelectOptionComponent[] = [];\r\n\r\n    opts.forEach((opt) => {\r\n      const parentGroup = this.options.find(\r\n        (group) =>\r\n          'options' in group && group.options.some((o) => o.value === opt.value)\r\n      ) as OptionGroup | undefined;\r\n\r\n      if (parentGroup) {\r\n        const key = parentGroup.label;\r\n        grouped[key] = grouped[key] || [];\r\n        grouped[key].push(opt);\r\n      } else {\r\n        ungrouped.push(opt);\r\n      }\r\n    });\r\n\r\n    const result: { group?: string; options: SelectOptionComponent[] }[] =\r\n      Object.entries(grouped).map(([group, options]) => ({\r\n        group,\r\n        options,\r\n      }));\r\n\r\n    if (ungrouped.length > 0) {\r\n      result.push({ options: ungrouped });\r\n    }\r\n\r\n    return result;\r\n  }\r\n\r\n  get optionCount(): number {\r\n    return this.optionsQueryList.length || this.flatOptions.length;\r\n  }\r\n\r\n  get firstOption(): SelectOptionComponent | undefined {\r\n    return this.optionsQueryList.first || this.filteredOptions[0]?.options[0];\r\n  }\r\n\r\n  get optionsArray(): SelectOptionComponent[] {\r\n    return this.flatOptions.map((opt) => {\r\n      const comp = new SelectOptionComponent(this.injector.get(ElementRef));\r\n      comp.value = opt.value;\r\n      comp.label = opt.label;\r\n      comp.disabled = opt.disabled || false;\r\n      return comp;\r\n    });\r\n  }\r\n\r\n  @HostListener('document:click', ['$event'])\r\n  onDocumentClick(event: MouseEvent): void {\r\n    if (!this.trigger.nativeElement.contains(event.target) && this.isOpen) {\r\n      this.closePanel();\r\n    }\r\n  }\r\n\r\n  closePanel(): void {\r\n    if (this.isOpen) {\r\n      this.isOpen = false;\r\n      this.openedChange.emit(false);\r\n      this.closed.emit();\r\n    }\r\n  }\r\n\r\n  handleKeydown(event: KeyboardEvent): void {\r\n    if (\r\n      !this.isOpen &&\r\n      ['ArrowDown', 'ArrowUp', 'Enter', ' '].includes(event.key)\r\n    ) {\r\n      event.preventDefault();\r\n      this.togglePanel();\r\n      return;\r\n    }\r\n\r\n    switch (event.key) {\r\n      case 'ArrowDown':\r\n        event.preventDefault();\r\n        this.focusNextOption();\r\n        break;\r\n      case 'ArrowUp':\r\n        event.preventDefault();\r\n        this.focusPrevOption();\r\n        break;\r\n      case 'Enter':\r\n      case ' ':\r\n        event.preventDefault();\r\n        this.selectFocusedOption();\r\n        break;\r\n      case 'Escape':\r\n        event.preventDefault();\r\n        this.closePanel();\r\n        break;\r\n      case 'Tab':\r\n        this.closePanel();\r\n        break;\r\n    }\r\n  }\r\n\r\n  private focusNextOption(): void {\r\n    const flatFiltered = this.filteredOptions.flatMap((group) => group.options);\r\n    if (flatFiltered.length === 0) return;\r\n\r\n    this.focusedOptionIndex =\r\n      this.focusedOptionIndex < flatFiltered.length - 1\r\n        ? this.focusedOptionIndex + 1\r\n        : 0;\r\n    this.scrollToOption();\r\n  }\r\n\r\n  private focusPrevOption(): void {\r\n    const flatFiltered = this.filteredOptions.flatMap((group) => group.options);\r\n    if (flatFiltered.length === 0) return;\r\n\r\n    this.focusedOptionIndex =\r\n      this.focusedOptionIndex > 0\r\n        ? this.focusedOptionIndex - 1\r\n        : flatFiltered.length - 1;\r\n    this.scrollToOption();\r\n  }\r\n\r\n  private selectFocusedOption(): void {\r\n    const flatFiltered = this.filteredOptions.flatMap((group) => group.options);\r\n    if (\r\n      this.focusedOptionIndex >= 0 &&\r\n      this.focusedOptionIndex < flatFiltered.length\r\n    ) {\r\n      this.selectOption(flatFiltered[this.focusedOptionIndex]);\r\n    }\r\n  }\r\n\r\n  private scrollToOption(): void {\r\n    const options =\r\n      this.panel.nativeElement.querySelectorAll('lib-select-option');\r\n    if (options[this.focusedOptionIndex]) {\r\n      options[this.focusedOptionIndex].scrollIntoView({\r\n        behavior: 'smooth',\r\n        block: 'nearest',\r\n      });\r\n    }\r\n  }\r\n\r\n  showSearch(): boolean {\r\n    return (\r\n      this.searchThreshold === null || this.optionCount >= this.searchThreshold\r\n    );\r\n  }\r\n}\r\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
@@ -1388,7 +1505,7 @@
                         "deprecationMessage": ""
                     }
                 ],
-                "line": 66,
+                "line": 75,
                 "jsdoctags": [
                     {
                         "name": "cdr",
@@ -1432,7 +1549,7 @@
                             }
                         ],
                         "returnType": "void",
-                        "line": 84,
+                        "line": 94,
                         "jsdoctags": [
                             {
                                 "name": "val",
@@ -1449,7 +1566,7 @@
                         "name": "value",
                         "type": "",
                         "returnType": "string | [] | null",
-                        "line": 80
+                        "line": 90
                     }
                 },
                 "displayValue": {
@@ -1458,7 +1575,16 @@
                         "name": "displayValue",
                         "type": "string",
                         "returnType": "string",
-                        "line": 92
+                        "line": 104
+                    }
+                },
+                "flatOptions": {
+                    "name": "flatOptions",
+                    "getSignature": {
+                        "name": "flatOptions",
+                        "type": "[]",
+                        "returnType": "literal type[]",
+                        "line": 211
                     }
                 },
                 "filteredOptions": {
@@ -1466,8 +1592,8 @@
                     "getSignature": {
                         "name": "filteredOptions",
                         "type": "[]",
-                        "returnType": "SelectOptionComponent[]",
-                        "line": 179
+                        "returnType": "literal type[]",
+                        "line": 230
                     }
                 },
                 "optionCount": {
@@ -1476,7 +1602,7 @@
                         "name": "optionCount",
                         "type": "number",
                         "returnType": "number",
-                        "line": 205
+                        "line": 301
                     }
                 },
                 "firstOption": {
@@ -1485,7 +1611,7 @@
                         "name": "firstOption",
                         "type": "",
                         "returnType": "SelectOptionComponent | undefined",
-                        "line": 209
+                        "line": 305
                     }
                 },
                 "optionsArray": {
@@ -1494,15 +1620,15 @@
                         "name": "optionsArray",
                         "type": "[]",
                         "returnType": "SelectOptionComponent[]",
-                        "line": 213
+                        "line": 309
                     }
                 }
             },
-            "templateData": "<div class=\"relative w-full\" #trigger>\r\n  <div class=\"relative\">\r\n    <input\r\n      type=\"text\"\r\n      [placeholder]=\"placeholder\"\r\n      [disabled]=\"disabled\"\r\n      [required]=\"required\"\r\n      [readonly]=\"true\"\r\n      [value]=\"displayValue\"\r\n      [tabIndex]=\"tabIndex\"\r\n      [attr.aria-label]=\"ariaLabel || null\"\r\n      [attr.aria-labelledby]=\"ariaLabelledby || null\"\r\n      class=\"w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 cursor-pointer\"\r\n      (click)=\"togglePanel($event)\"\r\n      (keydown)=\"handleKeydown($event)\"\r\n    />\r\n    <svg\r\n      xmlns=\"http://www.w3.org/2000/svg\"\r\n      class=\"absolute right-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400 transition-transform duration-200\"\r\n      [class.rotate-180]=\"isOpen\"\r\n      viewBox=\"0 0 20 20\"\r\n      fill=\"currentColor\"\r\n      aria-hidden=\"true\"\r\n    >\r\n      <path\r\n        fill-rule=\"evenodd\"\r\n        d=\"M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z\"\r\n        clip-rule=\"evenodd\"\r\n      />\r\n    </svg>\r\n  </div>\r\n\r\n  <div\r\n    *ngIf=\"isOpen\"\r\n    #panel\r\n    class=\"absolute z-10 mt-1 w-full bg-white border border-gray-200 rounded-md shadow-lg overflow-hidden\"\r\n    [class]=\"panelClass\"\r\n    [class.max-h-60]=\"!panelClass\"\r\n    role=\"listbox\"\r\n    [attr.aria-multiselectable]=\"multiple\"\r\n    [attr.aria-activedescendant]=\"\r\n      focusedOptionIndex >= 0 ? 'option-' + focusedOptionIndex : null\r\n    \"\r\n  >\r\n    <div\r\n      *ngIf=\"options && options.length > 5\"\r\n      class=\"sticky top-0 bg-white p-2 border-b border-gray-200\"\r\n    >\r\n      <input\r\n        #searchInput\r\n        [(ngModel)]=\"searchText\"\r\n        class=\"w-full px-3 py-2 text-sm border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500\"\r\n        placeholder=\"Search...\"\r\n        (click)=\"$event.stopPropagation()\"\r\n        aria-label=\"Filter options\"\r\n      />\r\n    </div>\r\n\r\n    <div class=\"overflow-y-auto max-h-[244px]\">\r\n      <ng-container *ngIf=\"filteredOptions.length > 0; else noOptions\">\r\n        <lib-select-option\r\n          *ngFor=\"let option of filteredOptions; let i = index\"\r\n          [value]=\"option.value\"\r\n          [label]=\"option.label\"\r\n          [disabled]=\"option.disabled\"\r\n          [selected]=\"isSelected(option)\"\r\n          (click)=\"selectOption(option, $event)\"\r\n          [id]=\"'option-' + i\"\r\n          [class.bg-blue-100]=\"i === focusedOptionIndex\"\r\n        >\r\n          <ng-container *ngIf=\"multiple\">\r\n            <svg\r\n              *ngIf=\"isSelected(option)\"\r\n              xmlns=\"http://www.w3.org/2000/svg\"\r\n              class=\"h-5 w-5 mr-2 text-blue-600\"\r\n              viewBox=\"0 0 20 20\"\r\n              fill=\"currentColor\"\r\n            >\r\n              <path\r\n                fill-rule=\"evenodd\"\r\n                d=\"M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z\"\r\n                clip-rule=\"evenodd\"\r\n              />\r\n            </svg>\r\n            <span *ngIf=\"!isSelected(option)\" class=\"w-5 mr-2\"></span>\r\n          </ng-container>\r\n          {{ option.label }}\r\n        </lib-select-option>\r\n      </ng-container>\r\n\r\n      <ng-template #noOptions>\r\n        <div class=\"px-4 py-2 text-sm text-gray-500 text-center\">\r\n          No options found\r\n        </div>\r\n      </ng-template>\r\n    </div>\r\n  </div>\r\n</div>\r\n"
+            "templateData": "<div class=\"relative w-full\" #trigger>\r\n  <div class=\"relative\">\r\n    <input\r\n      type=\"text\"\r\n      [placeholder]=\"placeholder\"\r\n      [disabled]=\"disabled\"\r\n      [required]=\"required\"\r\n      [readonly]=\"true\"\r\n      [value]=\"displayValue\"\r\n      [tabIndex]=\"tabIndex\"\r\n      [attr.aria-label]=\"ariaLabel || null\"\r\n      [attr.aria-labelledby]=\"ariaLabelledby || null\"\r\n      class=\"w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 cursor-pointer pr-16\"\r\n      (click)=\"togglePanel($event)\"\r\n      (keydown)=\"handleKeydown($event)\"\r\n    />\r\n    <div\r\n      class=\"absolute right-3 top-1/2 transform -translate-y-1/2 flex items-center space-x-2\"\r\n    >\r\n      <button\r\n        *ngIf=\"value && !disabled\"\r\n        (click)=\"clearSelection($event)\"\r\n        class=\"text-gray-400 hover:text-gray-600 focus:outline-none\"\r\n        aria-label=\"Clear selection\"\r\n      >\r\n        <svg\r\n          xmlns=\"http://www.w3.org/2000/svg\"\r\n          class=\"h-5 w-5\"\r\n          viewBox=\"0 0 20 20\"\r\n          fill=\"currentColor\"\r\n        >\r\n          <path\r\n            fill-rule=\"evenodd\"\r\n            d=\"M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z\"\r\n            clip-rule=\"evenodd\"\r\n          />\r\n        </svg>\r\n      </button>\r\n      <svg\r\n        xmlns=\"http://www.w3.org/2000/svg\"\r\n        class=\"h-5 w-5 text-gray-400 transition-transform duration-200\"\r\n        [class.rotate-180]=\"isOpen\"\r\n        viewBox=\"0 0 20 20\"\r\n        fill=\"currentColor\"\r\n        aria-hidden=\"true\"\r\n      >\r\n        <path\r\n          fill-rule=\"evenodd\"\r\n          d=\"M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z\"\r\n          clip-rule=\"evenodd\"\r\n        />\r\n      </svg>\r\n    </div>\r\n  </div>\r\n\r\n  <div\r\n    *ngIf=\"isOpen\"\r\n    #panel\r\n    class=\"absolute z-10 mt-1 w-full bg-white border border-gray-200 rounded-md shadow-lg overflow-hidden\"\r\n    [class]=\"panelClass\"\r\n    [class.max-h-60]=\"!panelClass\"\r\n    role=\"listbox\"\r\n    [attr.aria-multiselectable]=\"multiple\"\r\n    [attr.aria-activedescendant]=\"\r\n      focusedOptionIndex >= 0 ? 'option-' + focusedOptionIndex : null\r\n    \"\r\n  >\r\n    <div\r\n      *ngIf=\"showSearch()\"\r\n      class=\"sticky top-0 bg-white p-2 border-b border-gray-200\"\r\n    >\r\n      <input\r\n        #searchInput\r\n        [(ngModel)]=\"searchText\"\r\n        class=\"w-full px-3 py-2 text-sm border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500\"\r\n        placeholder=\"Search...\"\r\n        (click)=\"$event.stopPropagation()\"\r\n        aria-label=\"Filter options\"\r\n      />\r\n    </div>\r\n\r\n    <div class=\"overflow-y-auto max-h-[244px] min-h-[40px]\">\r\n      <ng-container *ngIf=\"loading\">\r\n        <div class=\"px-4 py-2 text-sm text-gray-500 text-center\">\r\n          Loading...\r\n        </div>\r\n      </ng-container>\r\n\r\n      <ng-container\r\n        *ngIf=\"!loading && filteredOptions.length > 0; else noOptions\"\r\n      >\r\n        <ng-container\r\n          *ngFor=\"let group of filteredOptions; let groupIndex = index\"\r\n        >\r\n          <div\r\n            *ngIf=\"group.group\"\r\n            class=\"px-4 py-1 text-xs font-semibold text-gray-500 bg-gray-50 border-b border-gray-200\"\r\n          >\r\n            {{ group.group }}\r\n          </div>\r\n          <lib-select-option\r\n            *ngFor=\"let option of group.options; let i = index\"\r\n            [value]=\"option.value\"\r\n            [label]=\"option.label\"\r\n            [disabled]=\"option.disabled\"\r\n            [selected]=\"isSelected(option)\"\r\n            (click)=\"selectOption(option, $event)\"\r\n            [id]=\"'option-' + (groupIndex * 1000 + i)\"\r\n            [class.bg-blue-100]=\"groupIndex * 1000 + i === focusedOptionIndex\"\r\n          >\r\n            <ng-container *ngIf=\"multiple\">\r\n              <svg\r\n                *ngIf=\"isSelected(option)\"\r\n                xmlns=\"http://www.w3.org/2000/svg\"\r\n                class=\"h-5 w-5 mr-2 text-blue-600\"\r\n                viewBox=\"0 0 20 20\"\r\n                fill=\"currentColor\"\r\n              >\r\n                <path\r\n                  fill-rule=\"evenodd\"\r\n                  d=\"M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z\"\r\n                  clip-rule=\"evenodd\"\r\n                />\r\n              </svg>\r\n              <span *ngIf=\"!isSelected(option)\" class=\"w-5 mr-2\"></span>\r\n            </ng-container>\r\n            {{ option.label }}\r\n          </lib-select-option>\r\n        </ng-container>\r\n      </ng-container>\r\n\r\n      <ng-template #noOptions>\r\n        <div\r\n          *ngIf=\"!loading\"\r\n          class=\"px-4 py-2 text-sm text-gray-500 text-center\"\r\n        >\r\n          No options found\r\n        </div>\r\n      </ng-template>\r\n    </div>\r\n  </div>\r\n</div>\r\n"
         },
         {
             "name": "SelectOptionComponent",
-            "id": "component-SelectOptionComponent-862bcb70a9251cc660a439dfbc8aa2869841a782208ed33e0f4aa56de84909cfa01e09b2f8f61314de0240060a19c3565f739795baf1b54e7c2cbfef57cb30ad",
+            "id": "component-SelectOptionComponent-79eaf107c00d4c472fe16b97875a1836af71d64053dcbda74be8df3f4ba68a1851972f67e0cd6fe6bb1b09c87e549028a1dde4fe7157066e3fe9bc3475c4967d",
             "file": "libs/ngx-tailwind-flex-ui/src/lib/select/select-option.component.ts",
             "changeDetection": "ChangeDetectionStrategy.OnPush",
             "encapsulation": [],
@@ -1586,7 +1712,7 @@
                     "optional": false,
                     "returnType": "boolean",
                     "typeParameters": [],
-                    "line": 52,
+                    "line": 53,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "modifierKind": [
@@ -1673,7 +1799,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import {\r\n  Component,\r\n  Input,\r\n  HostBinding,\r\n  HostListener,\r\n  ChangeDetectionStrategy,\r\n  ElementRef,\r\n} from '@angular/core';\r\nimport { CommonModule } from '@angular/common';\r\n\r\n@Component({\r\n  selector: 'lib-select-option',\r\n  template: `\r\n    <ng-content></ng-content>\r\n    <span *ngIf=\"label && !isContentProjected()\" class=\"ml-2\">{{ label }}</span>\r\n  `,\r\n  changeDetection: ChangeDetectionStrategy.OnPush,\r\n  host: {\r\n    class:\r\n      'flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer',\r\n    '[class.bg-blue-50]': 'selected',\r\n    '[class.font-medium]': 'selected',\r\n    '[class.text-blue-600]': 'selected',\r\n    '[class.opacity-50]': 'disabled',\r\n    '[class.cursor-not-allowed]': 'disabled',\r\n    role: 'option',\r\n    '[attr.aria-selected]': 'selected',\r\n    '[attr.aria-disabled]': 'disabled',\r\n    '[class.hidden]': 'hidden',\r\n  },\r\n  standalone: true,\r\n  imports: [CommonModule],\r\n})\r\nexport class SelectOptionComponent {\r\n  @Input() value: string | number = '';\r\n  @Input() label = '';\r\n  @Input() disabled = false;\r\n  @Input() selected = false;\r\n  @HostBinding('class.hidden') hidden = false;\r\n\r\n  constructor(private elementRef: ElementRef) {}\r\n\r\n  @HostListener('click', ['$event'])\r\n  onClick(event: MouseEvent) {\r\n    if (this.disabled) {\r\n      event.preventDefault();\r\n      event.stopPropagation();\r\n    }\r\n  }\r\n\r\n  // Made public to be accessible in the template\r\n  public isContentProjected(): boolean {\r\n    return !!this.elementRef.nativeElement.firstChild;\r\n  }\r\n}\r\n",
+            "sourceCode": "import {\r\n  Component,\r\n  Input,\r\n  HostBinding,\r\n  HostListener,\r\n  ChangeDetectionStrategy,\r\n  ElementRef,\r\n} from '@angular/core';\r\nimport { CommonModule } from '@angular/common';\r\n\r\n@Component({\r\n  selector: 'lib-select-option',\r\n  template: `\r\n    <ng-content></ng-content>\r\n    <span *ngIf=\"label && !isContentProjected()\" class=\"ml-2\">{{ label }}</span>\r\n  `,\r\n  changeDetection: ChangeDetectionStrategy.OnPush,\r\n  host: {\r\n    class:\r\n      'flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer',\r\n    '[class.bg-blue-50]': 'selected',\r\n    '[class.font-medium]': 'selected',\r\n    '[class.text-blue-600]': 'selected',\r\n    '[class.opacity-50]': 'disabled',\r\n    '[class.cursor-not-allowed]': 'disabled',\r\n    role: 'option',\r\n    '[attr.aria-selected]': 'selected',\r\n    '[attr.aria-disabled]': 'disabled',\r\n    '[class.hidden]': 'hidden',\r\n  },\r\n  standalone: true,\r\n  imports: [CommonModule],\r\n})\r\nexport class SelectOptionComponent {\r\n  @Input() value: string | number = '';\r\n  @Input() label = '';\r\n  @Input() disabled = false;\r\n  @Input() selected = false;\r\n  @HostBinding('class.hidden') hidden = false;\r\n\r\n  constructor(private elementRef: ElementRef) {}\r\n\r\n  @HostListener('click', ['$event'])\r\n  onClick(event: MouseEvent) {\r\n    if (this.disabled) {\r\n      event.preventDefault();\r\n      event.stopPropagation();\r\n    } else {\r\n      event.stopPropagation();\r\n    }\r\n  }\r\n\r\n  public isContentProjected(): boolean {\r\n    return !!this.elementRef.nativeElement.firstChild;\r\n  }\r\n}\r\n",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
@@ -1763,6 +1889,26 @@
                 "name": "Default",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
+                "file": "libs/ngx-tailwind-flex-ui/src/lib/paginator/paginator.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "StoryObj<PaginatorComponent>",
+                "defaultValue": "{\r\n  args: {\r\n    length: 100,\r\n    pageSize: 10,\r\n    pageIndex: 0,\r\n  },\r\n}"
+            },
+            {
+                "name": "Default",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/ngx-tailwind-flex-ui/src/lib/progress-bar/progress-bar.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\r\n  args: {\r\n    progress: 25,\r\n    color: \"primary\",\r\n    variant: 'determinate',\r\n    bufferProgress: 0\r\n  },\r\n  render: (args) => ({\r\n    props: args,\r\n    template: `<lib-progress-bar [progress]=\"progress\" [color]=\"color\" [variant]=\"variant\"></lib-progress-bar>`,\r\n  }),\r\n}"
+            },
+            {
+                "name": "Default",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
                 "file": "libs/ngx-tailwind-flex-ui/src/lib/icon/icon.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
@@ -1783,31 +1929,11 @@
                 "name": "Default",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "libs/ngx-tailwind-flex-ui/src/lib/progress-bar/progress-bar.component.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{\r\n  args: {\r\n    progress: 25,\r\n    color: \"primary\",\r\n    variant: 'determinate',\r\n    bufferProgress: 0\r\n  },\r\n  render: (args) => ({\r\n    props: args,\r\n    template: `<lib-progress-bar [progress]=\"progress\" [color]=\"color\" [variant]=\"variant\"></lib-progress-bar>`,\r\n  }),\r\n}"
-            },
-            {
-                "name": "Default",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "libs/ngx-tailwind-flex-ui/src/lib/paginator/paginator.component.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "StoryObj<PaginatorComponent>",
-                "defaultValue": "{\r\n  args: {\r\n    length: 100,\r\n    pageSize: 10,\r\n    pageIndex: 0,\r\n  },\r\n}"
-            },
-            {
-                "name": "Default",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "libs/ngx-tailwind-flex-ui/src/lib/select/select.component.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "StoryObj<SelectComponent>",
-                "defaultValue": "{\r\n  render: (args) => ({\r\n    props: args,\r\n    template: `\r\n      <lib-select\r\n        [placeholder]=\"placeholder\"\r\n        [disabled]=\"disabled\"\r\n        [multiple]=\"multiple\"\r\n        [required]=\"required\"\r\n        [panelClass]=\"panelClass\"\r\n        [tabIndex]=\"tabIndex\"\r\n        [ariaLabel]=\"ariaLabel\"\r\n        [ariaLabelledby]=\"ariaLabelledby\"\r\n        [options]=\"options\"\r\n        (openedChange)=\"openedChange($event)\"\r\n        (selectionChange)=\"selectionChange($event)\"\r\n        (closed)=\"closed()\"\r\n      >\r\n        <lib-select-option *ngFor=\"let opt of options\" [value]=\"opt.value\" [label]=\"opt.label\"></lib-select-option>\r\n      </lib-select>\r\n    `,\r\n  }),\r\n}"
+                "defaultValue": "{\r\n  render: (args) => ({\r\n    props: args,\r\n    template: `\r\n      <lib-select\r\n        [placeholder]=\"placeholder\"\r\n        [disabled]=\"disabled\"\r\n        [multiple]=\"multiple\"\r\n        [options]=\"options\"\r\n        [(isOpen)]=\"isOpen\"\r\n        (selectionChange)=\"selectionChange($event)\"\r\n      >\r\n        <lib-select-option *ngFor=\"let opt of options\" [value]=\"opt.value\" [label]=\"opt.label\"></lib-select-option>\r\n      </lib-select>\r\n    `,\r\n  }),\r\n}"
             },
             {
                 "name": "Determinate",
@@ -1838,6 +1964,16 @@
                 "deprecationMessage": "",
                 "type": "Story",
                 "defaultValue": "{\r\n  args: {\r\n    variant: 'primary',\r\n    disabled: true,\r\n  },\r\n  render: (args) => ({\r\n    props: args,\r\n    template: `<lib-button [variant]=\"variant\" [disabled]=\"disabled\">Disabled Button</lib-button>`,\r\n  }),\r\n}"
+            },
+            {
+                "name": "Disabled",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/ngx-tailwind-flex-ui/src/lib/select/select.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "StoryObj<SelectComponent>",
+                "defaultValue": "{\r\n  args: {\r\n    disabled: true,\r\n  },\r\n  render: (args) => ({\r\n    props: args,\r\n    template: `\r\n      <lib-select\r\n        [placeholder]=\"placeholder\"\r\n        [disabled]=\"disabled\"\r\n        [multiple]=\"multiple\"\r\n        [options]=\"options\"\r\n        [(isOpen)]=\"isOpen\"\r\n        (selectionChange)=\"selectionChange($event)\"\r\n      >\r\n        <lib-select-option *ngFor=\"let opt of options\" [value]=\"opt.value\" [label]=\"opt.label\"></lib-select-option>\r\n      </lib-select>\r\n    `,\r\n  }),\r\n}"
             },
             {
                 "name": "GreenBuffer",
@@ -1890,6 +2026,16 @@
                 "defaultValue": "document.createElement('link')"
             },
             {
+                "name": "Loading",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/ngx-tailwind-flex-ui/src/lib/select/select.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "StoryObj<SelectComponent>",
+                "defaultValue": "{\r\n  args: {\r\n    loading: true,\r\n    isOpen: true,\r\n  },\r\n  render: (args) => ({\r\n    props: args,\r\n    template: `\r\n      <lib-select\r\n        [placeholder]=\"placeholder\"\r\n        [disabled]=\"disabled\"\r\n        [multiple]=\"multiple\"\r\n        [options]=\"options\"\r\n        [loading]=\"loading\"\r\n        [(isOpen)]=\"isOpen\"\r\n        (selectionChange)=\"selectionChange($event)\"\r\n      >\r\n        <lib-select-option *ngFor=\"let opt of options\" [value]=\"opt.value\" [label]=\"opt.label\"></lib-select-option>\r\n      </lib-select>\r\n    `,\r\n  }),\r\n  play: async ({ canvasElement, args }) => {\r\n    // Wait for initial render\r\n    await new Promise((resolve) => setTimeout(resolve, 0));\r\n\r\n    // Force change detection to ensure loading state is applied\r\n    const component = canvasElement.querySelector('lib-select');\r\n    if (component) {\r\n      component.dispatchEvent(new Event('change')); // Trigger change detection\r\n    }\r\n\r\n    // Simulate loading delay and update\r\n    await new Promise((resolve) => setTimeout(resolve, 3500)); // Wait 3.5 seconds to see both states\r\n    args.loading = false;\r\n\r\n    // Force re-render\r\n    if (component) {\r\n      component.dispatchEvent(new Event('change'));\r\n    }\r\n  },\r\n}"
+            },
+            {
                 "name": "meta",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
@@ -1898,6 +2044,16 @@
                 "deprecationMessage": "",
                 "type": "Meta<ButtonComponent>",
                 "defaultValue": "{\r\n  title: 'Components/Button',\r\n  component: ButtonComponent,\r\n  tags: ['autodocs'],\r\n  argTypes: {\r\n    variant: {\r\n      control: 'select',\r\n      options: ['primary', 'accent', 'outline', 'text'],\r\n      description: 'Button style variant',\r\n    },\r\n    disabled: {\r\n      control: 'boolean',\r\n      description: 'Disables the button',\r\n    },\r\n    class: {\r\n      control: 'text',\r\n      description: 'Additional Tailwind CSS classes for customization',\r\n    },\r\n  },\r\n}"
+            },
+            {
+                "name": "meta",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/ngx-tailwind-flex-ui/src/lib/progress-bar/progress-bar.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Meta<ProgressBarComponent>",
+                "defaultValue": "{\r\n  title: 'Components/Progress Bar',\r\n  component: ProgressBarComponent,\r\n  tags: ['autodocs'],\r\n  argTypes: {\r\n    progress: {\r\n      control: { type: 'range', min: 0, max: 100, step: 1 },\r\n      description: 'Progress percentage (0 to 100)',\r\n    },\r\n    // buffer: {\r\n    //   control: { type: 'range', min: 0, max: 100, step: 1 },\r\n    //   description: 'Buffer progress percentage (used in buffer variant)',\r\n    // },\r\n    color: {\r\n      control: 'select',\r\n      options: ['primary', 'secondary', 'success', 'error'],\r\n      description: 'Color of the progress bar',\r\n    },\r\n    variant: {\r\n      control: 'select',\r\n      options: ['determinate', 'indeterminate', 'buffer', 'query'],\r\n      description: 'Progress bar type',\r\n    },\r\n    // class: {\r\n    //   control: 'text',\r\n    //   description: 'Additional Tailwind CSS classes for customization',\r\n    // },\r\n  },\r\n}"
             },
             {
                 "name": "meta",
@@ -1920,16 +2076,6 @@
                 "defaultValue": "{\r\n  title: 'Components/LoadingSpinnerComponent',\r\n  component: LoadingSpinnerComponent,\r\n  tags: ['autodocs'],\r\n  argTypes: {\r\n    mode: {\r\n      control: 'select',\r\n      options: ['determinate', 'indeterminate'],\r\n      description: 'Loading state',\r\n    },\r\n    value: {\r\n      control: 'number',\r\n      description: 'Progress value (0-100) for determinate mode',\r\n    },\r\n    size: { control: 'number', description: 'Diameter in pixels' },\r\n    thickness: { control: 'number', description: 'Stroke width in pixels' },\r\n    color: {\r\n      control: 'color',\r\n      description: 'Spinner color (hex or Tailwind color)',\r\n    },\r\n  },\r\n}"
             },
             {
-                "name": "meta",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "libs/ngx-tailwind-flex-ui/src/lib/progress-bar/progress-bar.component.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Meta<ProgressBarComponent>",
-                "defaultValue": "{\r\n  title: 'Components/Progress Bar',\r\n  component: ProgressBarComponent,\r\n  tags: ['autodocs'],\r\n  argTypes: {\r\n    progress: {\r\n      control: { type: 'range', min: 0, max: 100, step: 1 },\r\n      description: 'Progress percentage (0 to 100)',\r\n    },\r\n    // buffer: {\r\n    //   control: { type: 'range', min: 0, max: 100, step: 1 },\r\n    //   description: 'Buffer progress percentage (used in buffer variant)',\r\n    // },\r\n    color: {\r\n      control: 'select',\r\n      options: ['primary', 'secondary', 'success', 'error'],\r\n      description: 'Color of the progress bar',\r\n    },\r\n    variant: {\r\n      control: 'select',\r\n      options: ['determinate', 'indeterminate', 'buffer', 'query'],\r\n      description: 'Progress bar type',\r\n    },\r\n    // class: {\r\n    //   control: 'text',\r\n    //   description: 'Additional Tailwind CSS classes for customization',\r\n    // },\r\n  },\r\n}"
-            },
-            {
                 "name": "Multiple",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
@@ -1937,7 +2083,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "StoryObj<SelectComponent>",
-                "defaultValue": "{\r\n  args: { multiple: true },\r\n  render: (args) => ({\r\n    props: args,\r\n    template: `\r\n      <lib-select\r\n        [placeholder]=\"placeholder\"\r\n        [disabled]=\"disabled\"\r\n        [multiple]=\"multiple\"\r\n        [required]=\"required\"\r\n        [panelClass]=\"panelClass\"\r\n        [tabIndex]=\"tabIndex\"\r\n        [ariaLabel]=\"ariaLabel\"\r\n        [ariaLabelledby]=\"ariaLabelledby\"\r\n        [options]=\"options\"\r\n        (openedChange)=\"openedChange($event)\"\r\n        (selectionChange)=\"selectionChange($event)\"\r\n        (closed)=\"closed()\"\r\n      >\r\n        <lib-select-option *ngFor=\"let opt of options\" [value]=\"opt.value\" [label]=\"opt.label\"></lib-select-option>\r\n      </lib-select>\r\n    `,\r\n  }),\r\n}"
+                "defaultValue": "{\r\n  args: {\r\n    multiple: true,\r\n    searchThreshold: null,\r\n  },\r\n  render: (args) => ({\r\n    props: args,\r\n    template: `\r\n      <lib-select\r\n        [placeholder]=\"placeholder\"\r\n        [disabled]=\"disabled\"\r\n        [multiple]=\"multiple\"\r\n        [options]=\"options\"\r\n        [(isOpen)]=\"isOpen\"\r\n        (selectionChange)=\"selectionChange($event)\"\r\n      >\r\n        <lib-select-option *ngFor=\"let opt of options\" [value]=\"opt.value\" [label]=\"opt.label\"></lib-select-option>\r\n      </lib-select>\r\n    `,\r\n  }),\r\n}"
             },
             {
                 "name": "Outline",
@@ -1978,6 +2124,16 @@
                 "deprecationMessage": "",
                 "type": "Story",
                 "defaultValue": "{\r\n  args: {\r\n    color: 'error',\r\n    variant: 'indeterminate',\r\n  },\r\n  render: (args) => ({\r\n    props: args,\r\n    template: `<lib-progress-bar [color]=\"color\" [variant]=\"variant\"></lib-progress-bar>`,\r\n  }),\r\n}"
+            },
+            {
+                "name": "Search",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/ngx-tailwind-flex-ui/src/lib/select/select.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "StoryObj<SelectComponent>",
+                "defaultValue": "{\r\n  args: {\r\n    searchThreshold: null,\r\n    options: [\r\n      { value: '1', label: 'Apple' },\r\n      { value: '2', label: 'Banana' },\r\n      { value: '3', label: 'Orange' },\r\n      { value: '4', label: 'Mango' },\r\n      { value: '5', label: 'Grapes' },\r\n      { value: '6', label: 'Pineapple' },\r\n      { value: '7', label: 'Watermelon' },\r\n    ],\r\n  },\r\n  render: (args) => ({\r\n    props: args,\r\n    template: `\r\n      <lib-select\r\n        [placeholder]=\"placeholder\"\r\n        [disabled]=\"disabled\"\r\n        [multiple]=\"multiple\"\r\n        [searchThreshold]=\"searchThreshold\"\r\n        [options]=\"options\"\r\n        [(isOpen)]=\"isOpen\"\r\n        (selectionChange)=\"selectionChange($event)\"\r\n      >\r\n        <lib-select-option *ngFor=\"let opt of options\" [value]=\"opt.value\" [label]=\"opt.label\"></lib-select-option>\r\n      </lib-select>\r\n    `,\r\n  }),\r\n}"
             },
             {
                 "name": "SmallBlueIcon",
@@ -2027,6 +2183,17 @@
                 "name": "Story",
                 "ctype": "miscellaneous",
                 "subtype": "typealias",
+                "rawtype": "StoryObj<ProgressBarComponent>",
+                "file": "libs/ngx-tailwind-flex-ui/src/lib/progress-bar/progress-bar.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 183
+            },
+            {
+                "name": "Story",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
                 "rawtype": "StoryObj<IconComponent>",
                 "file": "libs/ngx-tailwind-flex-ui/src/lib/icon/icon.stories.ts",
                 "deprecated": false,
@@ -2040,17 +2207,6 @@
                 "subtype": "typealias",
                 "rawtype": "StoryObj<LoadingSpinnerComponent>",
                 "file": "libs/ngx-tailwind-flex-ui/src/lib/loadingSpinner/loadingSpinner.component.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "description": "",
-                "kind": 183
-            },
-            {
-                "name": "Story",
-                "ctype": "miscellaneous",
-                "subtype": "typealias",
-                "rawtype": "StoryObj<ProgressBarComponent>",
-                "file": "libs/ngx-tailwind-flex-ui/src/lib/progress-bar/progress-bar.component.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "description": "",
@@ -2277,6 +2433,18 @@
                     "defaultValue": "{\r\n  args: {\r\n    color: 'error',\r\n    variant: 'indeterminate',\r\n  },\r\n  render: (args) => ({\r\n    props: args,\r\n    template: `<lib-progress-bar [color]=\"color\" [variant]=\"variant\"></lib-progress-bar>`,\r\n  }),\r\n}"
                 }
             ],
+            "libs/ngx-tailwind-flex-ui/src/lib/paginator/paginator.component.stories.ts": [
+                {
+                    "name": "Default",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/ngx-tailwind-flex-ui/src/lib/paginator/paginator.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "StoryObj<PaginatorComponent>",
+                    "defaultValue": "{\r\n  args: {\r\n    length: 100,\r\n    pageSize: 10,\r\n    pageIndex: 0,\r\n  },\r\n}"
+                }
+            ],
             "libs/ngx-tailwind-flex-ui/src/lib/icon/icon.stories.ts": [
                 {
                     "name": "Default",
@@ -2319,18 +2487,6 @@
                     "defaultValue": "{\r\n  args: {\r\n    name: 'star',\r\n    size: 'sm',\r\n    color: 'text-blue-500',\r\n  },\r\n  render: (args) => ({\r\n    props: args,\r\n    template: `<lib-icon [name]=\"name\" [size]=\"size\" [color]=\"color\"></lib-icon>`,\r\n  }),\r\n}"
                 }
             ],
-            "libs/ngx-tailwind-flex-ui/src/lib/paginator/paginator.component.stories.ts": [
-                {
-                    "name": "Default",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "libs/ngx-tailwind-flex-ui/src/lib/paginator/paginator.component.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "StoryObj<PaginatorComponent>",
-                    "defaultValue": "{\r\n  args: {\r\n    length: 100,\r\n    pageSize: 10,\r\n    pageIndex: 0,\r\n  },\r\n}"
-                }
-            ],
             "libs/ngx-tailwind-flex-ui/src/lib/select/select.component.stories.ts": [
                 {
                     "name": "Default",
@@ -2340,7 +2496,27 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "StoryObj<SelectComponent>",
-                    "defaultValue": "{\r\n  render: (args) => ({\r\n    props: args,\r\n    template: `\r\n      <lib-select\r\n        [placeholder]=\"placeholder\"\r\n        [disabled]=\"disabled\"\r\n        [multiple]=\"multiple\"\r\n        [required]=\"required\"\r\n        [panelClass]=\"panelClass\"\r\n        [tabIndex]=\"tabIndex\"\r\n        [ariaLabel]=\"ariaLabel\"\r\n        [ariaLabelledby]=\"ariaLabelledby\"\r\n        [options]=\"options\"\r\n        (openedChange)=\"openedChange($event)\"\r\n        (selectionChange)=\"selectionChange($event)\"\r\n        (closed)=\"closed()\"\r\n      >\r\n        <lib-select-option *ngFor=\"let opt of options\" [value]=\"opt.value\" [label]=\"opt.label\"></lib-select-option>\r\n      </lib-select>\r\n    `,\r\n  }),\r\n}"
+                    "defaultValue": "{\r\n  render: (args) => ({\r\n    props: args,\r\n    template: `\r\n      <lib-select\r\n        [placeholder]=\"placeholder\"\r\n        [disabled]=\"disabled\"\r\n        [multiple]=\"multiple\"\r\n        [options]=\"options\"\r\n        [(isOpen)]=\"isOpen\"\r\n        (selectionChange)=\"selectionChange($event)\"\r\n      >\r\n        <lib-select-option *ngFor=\"let opt of options\" [value]=\"opt.value\" [label]=\"opt.label\"></lib-select-option>\r\n      </lib-select>\r\n    `,\r\n  }),\r\n}"
+                },
+                {
+                    "name": "Disabled",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/ngx-tailwind-flex-ui/src/lib/select/select.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "StoryObj<SelectComponent>",
+                    "defaultValue": "{\r\n  args: {\r\n    disabled: true,\r\n  },\r\n  render: (args) => ({\r\n    props: args,\r\n    template: `\r\n      <lib-select\r\n        [placeholder]=\"placeholder\"\r\n        [disabled]=\"disabled\"\r\n        [multiple]=\"multiple\"\r\n        [options]=\"options\"\r\n        [(isOpen)]=\"isOpen\"\r\n        (selectionChange)=\"selectionChange($event)\"\r\n      >\r\n        <lib-select-option *ngFor=\"let opt of options\" [value]=\"opt.value\" [label]=\"opt.label\"></lib-select-option>\r\n      </lib-select>\r\n    `,\r\n  }),\r\n}"
+                },
+                {
+                    "name": "Loading",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/ngx-tailwind-flex-ui/src/lib/select/select.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "StoryObj<SelectComponent>",
+                    "defaultValue": "{\r\n  args: {\r\n    loading: true,\r\n    isOpen: true,\r\n  },\r\n  render: (args) => ({\r\n    props: args,\r\n    template: `\r\n      <lib-select\r\n        [placeholder]=\"placeholder\"\r\n        [disabled]=\"disabled\"\r\n        [multiple]=\"multiple\"\r\n        [options]=\"options\"\r\n        [loading]=\"loading\"\r\n        [(isOpen)]=\"isOpen\"\r\n        (selectionChange)=\"selectionChange($event)\"\r\n      >\r\n        <lib-select-option *ngFor=\"let opt of options\" [value]=\"opt.value\" [label]=\"opt.label\"></lib-select-option>\r\n      </lib-select>\r\n    `,\r\n  }),\r\n  play: async ({ canvasElement, args }) => {\r\n    // Wait for initial render\r\n    await new Promise((resolve) => setTimeout(resolve, 0));\r\n\r\n    // Force change detection to ensure loading state is applied\r\n    const component = canvasElement.querySelector('lib-select');\r\n    if (component) {\r\n      component.dispatchEvent(new Event('change')); // Trigger change detection\r\n    }\r\n\r\n    // Simulate loading delay and update\r\n    await new Promise((resolve) => setTimeout(resolve, 3500)); // Wait 3.5 seconds to see both states\r\n    args.loading = false;\r\n\r\n    // Force re-render\r\n    if (component) {\r\n      component.dispatchEvent(new Event('change'));\r\n    }\r\n  },\r\n}"
                 },
                 {
                     "name": "Multiple",
@@ -2350,7 +2526,17 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "StoryObj<SelectComponent>",
-                    "defaultValue": "{\r\n  args: { multiple: true },\r\n  render: (args) => ({\r\n    props: args,\r\n    template: `\r\n      <lib-select\r\n        [placeholder]=\"placeholder\"\r\n        [disabled]=\"disabled\"\r\n        [multiple]=\"multiple\"\r\n        [required]=\"required\"\r\n        [panelClass]=\"panelClass\"\r\n        [tabIndex]=\"tabIndex\"\r\n        [ariaLabel]=\"ariaLabel\"\r\n        [ariaLabelledby]=\"ariaLabelledby\"\r\n        [options]=\"options\"\r\n        (openedChange)=\"openedChange($event)\"\r\n        (selectionChange)=\"selectionChange($event)\"\r\n        (closed)=\"closed()\"\r\n      >\r\n        <lib-select-option *ngFor=\"let opt of options\" [value]=\"opt.value\" [label]=\"opt.label\"></lib-select-option>\r\n      </lib-select>\r\n    `,\r\n  }),\r\n}"
+                    "defaultValue": "{\r\n  args: {\r\n    multiple: true,\r\n    searchThreshold: null,\r\n  },\r\n  render: (args) => ({\r\n    props: args,\r\n    template: `\r\n      <lib-select\r\n        [placeholder]=\"placeholder\"\r\n        [disabled]=\"disabled\"\r\n        [multiple]=\"multiple\"\r\n        [options]=\"options\"\r\n        [(isOpen)]=\"isOpen\"\r\n        (selectionChange)=\"selectionChange($event)\"\r\n      >\r\n        <lib-select-option *ngFor=\"let opt of options\" [value]=\"opt.value\" [label]=\"opt.label\"></lib-select-option>\r\n      </lib-select>\r\n    `,\r\n  }),\r\n}"
+                },
+                {
+                    "name": "Search",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/ngx-tailwind-flex-ui/src/lib/select/select.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "StoryObj<SelectComponent>",
+                    "defaultValue": "{\r\n  args: {\r\n    searchThreshold: null,\r\n    options: [\r\n      { value: '1', label: 'Apple' },\r\n      { value: '2', label: 'Banana' },\r\n      { value: '3', label: 'Orange' },\r\n      { value: '4', label: 'Mango' },\r\n      { value: '5', label: 'Grapes' },\r\n      { value: '6', label: 'Pineapple' },\r\n      { value: '7', label: 'Watermelon' },\r\n    ],\r\n  },\r\n  render: (args) => ({\r\n    props: args,\r\n    template: `\r\n      <lib-select\r\n        [placeholder]=\"placeholder\"\r\n        [disabled]=\"disabled\"\r\n        [multiple]=\"multiple\"\r\n        [searchThreshold]=\"searchThreshold\"\r\n        [options]=\"options\"\r\n        [(isOpen)]=\"isOpen\"\r\n        (selectionChange)=\"selectionChange($event)\"\r\n      >\r\n        <lib-select-option *ngFor=\"let opt of options\" [value]=\"opt.value\" [label]=\"opt.label\"></lib-select-option>\r\n      </lib-select>\r\n    `,\r\n  }),\r\n}"
                 }
             ],
             "libs/ngx-tailwind-flex-ui/.storybook/preview.ts": [
@@ -2392,6 +2578,19 @@
                     "kind": 183
                 }
             ],
+            "libs/ngx-tailwind-flex-ui/src/lib/progress-bar/progress-bar.component.stories.ts": [
+                {
+                    "name": "Story",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "StoryObj<ProgressBarComponent>",
+                    "file": "libs/ngx-tailwind-flex-ui/src/lib/progress-bar/progress-bar.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 183
+                }
+            ],
             "libs/ngx-tailwind-flex-ui/src/lib/icon/icon.stories.ts": [
                 {
                     "name": "Story",
@@ -2412,19 +2611,6 @@
                     "subtype": "typealias",
                     "rawtype": "StoryObj<LoadingSpinnerComponent>",
                     "file": "libs/ngx-tailwind-flex-ui/src/lib/loadingSpinner/loadingSpinner.component.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "description": "",
-                    "kind": 183
-                }
-            ],
-            "libs/ngx-tailwind-flex-ui/src/lib/progress-bar/progress-bar.component.stories.ts": [
-                {
-                    "name": "Story",
-                    "ctype": "miscellaneous",
-                    "subtype": "typealias",
-                    "rawtype": "StoryObj<ProgressBarComponent>",
-                    "file": "libs/ngx-tailwind-flex-ui/src/lib/progress-bar/progress-bar.component.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "description": "",
@@ -2827,7 +3013,37 @@
                 "type": "variable",
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
+                "name": "Disabled",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/ngx-tailwind-flex-ui/src/lib/select/select.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Loading",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/ngx-tailwind-flex-ui/src/lib/select/select.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
                 "name": "Multiple",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/ngx-tailwind-flex-ui/src/lib/select/select.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Search",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
                 "status": "low"
@@ -2838,7 +3054,16 @@
                 "linktype": "component",
                 "name": "SelectComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/41",
+                "coverageCount": "0/45",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/ngx-tailwind-flex-ui/src/lib/select/select.component.ts",
+                "type": "interface",
+                "linktype": "interface",
+                "name": "OptionGroup",
+                "coveragePercent": 0,
+                "coverageCount": "0/4",
                 "status": "low"
             }
         ]

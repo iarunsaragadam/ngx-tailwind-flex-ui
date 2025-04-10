@@ -45,10 +45,11 @@ export class SelectOptionComponent {
     if (this.disabled) {
       event.preventDefault();
       event.stopPropagation();
+    } else {
+      event.stopPropagation();
     }
   }
 
-  // Made public to be accessible in the template
   public isContentProjected(): boolean {
     return !!this.elementRef.nativeElement.firstChild;
   }
