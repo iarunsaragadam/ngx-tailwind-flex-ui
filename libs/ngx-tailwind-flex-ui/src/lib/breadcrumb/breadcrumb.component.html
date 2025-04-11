@@ -1,0 +1,22 @@
+<nav aria-label="breadcrumb" class="py-2">
+    <ol class="flex flex-wrap items-center space-x-2 text-sm">
+      <ng-container *ngFor="let breadcrumb of routes; let i = index">
+        <li class="flex items-center">
+          <ng-container *ngIf="breadcrumb.url && i !== lastIndex; else currentBreadcrumb">
+            <a
+              [routerLink]="breadcrumb.url"
+              [attr.aria-label]="breadcrumb.ariaLabel || breadcrumb.label"
+              class="text-blue-600 hover:underline"
+            >
+              {{ breadcrumb.label }}
+            </a>
+          </ng-container>
+          <ng-template #currentBreadcrumb>
+            <span class="text-gray-500" aria-current="page">{{ breadcrumb.label }}</span>
+          </ng-template>
+          <span *ngIf="i !== lastIndex" class="text-gray-400 mx-2">{{ separator }}</span>
+        </li>
+      </ng-container>
+    </ol>
+  </nav>
+  
