@@ -665,7 +665,7 @@
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": "@import url('https://fonts.googleapis.com/icon?family=Material+Icons');\r\n\r\n@import 'tailwindcss/base';\r\n@import 'tailwindcss/components';\r\n@import 'tailwindcss/utilities';\r\n\r\n.material-icons {\r\n  font-family: 'Material Icons';\r\n  font-size: 18px; /* Matches text-lg in Tailwind */\r\n  font-weight: normal;\r\n  font-style: normal;\r\n  display: inline-block;\r\n  line-height: 1;\r\n  text-transform: none;\r\n  letter-spacing: normal;\r\n  word-wrap: normal;\r\n  white-space: nowrap;\r\n  direction: ltr;\r\n}\r\n\r\n.message {\r\n  max-width: 300px; /* Adjust as needed */\r\n  white-space: nowrap;\r\n  overflow: hidden;\r\n  text-overflow: ellipsis;\r\n}\r\n\r\n.material-icons--custom-color {\r\n  color: inherit !important;\r\n}\r\n",
+                    "data": "@import url('https://fonts.googleapis.com/icon?family=Material+Icons');\r\n\r\n.material-icons {\r\n  font-family: 'Material Icons';\r\n  font-size: 18px; /* Matches text-lg in Tailwind */\r\n  font-weight: normal;\r\n  font-style: normal;\r\n  display: inline-block;\r\n  line-height: 1;\r\n  text-transform: none;\r\n  letter-spacing: normal;\r\n  word-wrap: normal;\r\n  white-space: nowrap;\r\n  direction: ltr;\r\n}\r\n\r\n.message {\r\n  max-width: 300px; /* Adjust as needed */\r\n  white-space: nowrap;\r\n  overflow: hidden;\r\n  text-overflow: ellipsis;\r\n}\r\n\r\n.material-icons--custom-color {\r\n  color: inherit !important;\r\n}\r\n",
                     "styleUrl": "./alert.component.css"
                 }
             ],
@@ -1498,6 +1498,1063 @@
                 }
             },
             "templateData": "<div class=\"w-full bg-gray-200 rounded-full h-4 overflow-hidden relative\">\r\n\r\n  <!-- Determinate & Buffer Primary Progress -->\r\n  <div\r\n    *ngIf=\"variant === 'determinate' || variant === 'buffer'\"\r\n    class=\"h-full transition-all duration-300\"\r\n    [ngClass]=\"progressBarClass\"\r\n    [style.width.%]=\"progress\"\r\n    role=\"progressbar\"\r\n    [attr.aria-valuenow]=\"progress\"\r\n    aria-valuemin=\"0\"\r\n    aria-valuemax=\"100\"\r\n  ></div>\r\n\r\n  <!-- Indeterminate Animation -->\r\n  <div\r\n    *ngIf=\"variant === 'indeterminate'\"\r\n    class=\"absolute top-0 left-0 h-full w-full overflow-hidden\"\r\n  >\r\n    <div\r\n      class=\"h-full w-1/3 animate-indeterminate\"\r\n      [ngClass]=\"progressBarClass\"\r\n    ></div>\r\n  </div>\r\n\r\n  <!-- Query Mode (Reversed Indeterminate) -->\r\n  <div\r\n    *ngIf=\"variant === 'query'\"\r\n    class=\"absolute top-0 left-0 h-full w-full overflow-hidden\"\r\n  >\r\n    <div\r\n      class=\"h-full w-1/3 animate-query\"\r\n      [ngClass]=\"progressBarClass\"\r\n    ></div>\r\n  </div>\r\n\r\n  <!-- Buffer Secondary Progress -->\r\n  <!-- Buffer Secondary Progress Background -->\r\n<div\r\n*ngIf=\"variant === 'buffer'\"\r\nclass=\"absolute top-0 left-0 h-full bg-gray-300 opacity-50\"\r\n[style.width.%]=\"bufferProgress\"\r\n></div>\r\n\r\n<!-- Buffer Animation Overlay -->\r\n<div\r\n*ngIf=\"variant === 'buffer'\"\r\nclass=\"absolute top-0 left-0 h-full w-full overflow-hidden\"\r\n>\r\n<div class=\"buffer-wave\"></div>\r\n</div>\r\n\r\n\r\n</div>\r\n"
+        },
+        {
+            "name": "SelectComponent",
+            "id": "component-SelectComponent-35bc698adca78795981cd86ef9cbf70fc92c681738b5691faad74fb79b10c0a4764299784187b8c5e6ff391a94636be1589c0d24f62d721de9ef350163690be0",
+            "file": "libs/ngx-tailwind-flex-ui/src/lib/select/select.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [
+                {
+                    "name": "{\n    provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => SelectComponent), multi: true,\n}",
+                    "type": "component"
+                }
+            ],
+            "selector": "lib-select",
+            "styleUrls": [
+                "./select.component.css"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./select.component.html"
+            ],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [
+                {
+                    "name": "ariaLabel",
+                    "defaultValue": "''",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 42,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "ariaLabelledby",
+                    "defaultValue": "''",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 43,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "disabled",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 37,
+                    "type": "boolean",
+                    "decorators": []
+                },
+                {
+                    "name": "multiple",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 38,
+                    "type": "boolean",
+                    "decorators": []
+                },
+                {
+                    "name": "options",
+                    "defaultValue": "[]",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 44,
+                    "type": "literal type[]",
+                    "decorators": []
+                },
+                {
+                    "name": "panelClass",
+                    "defaultValue": "''",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 40,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "placeholder",
+                    "defaultValue": "'Select an option'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 36,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "required",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 39,
+                    "type": "boolean",
+                    "decorators": []
+                },
+                {
+                    "name": "tabIndex",
+                    "defaultValue": "0",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 41,
+                    "type": "number",
+                    "decorators": []
+                }
+            ],
+            "outputsClass": [
+                {
+                    "name": "closed",
+                    "defaultValue": "new EventEmitter<void>()",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 48,
+                    "type": "EventEmitter"
+                },
+                {
+                    "name": "openedChange",
+                    "defaultValue": "new EventEmitter<boolean>()",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 46,
+                    "type": "EventEmitter"
+                },
+                {
+                    "name": "selectionChange",
+                    "defaultValue": "new EventEmitter<string | string[] | null>()",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 47,
+                    "type": "EventEmitter"
+                }
+            ],
+            "propertiesClass": [
+                {
+                    "name": "_onChange",
+                    "defaultValue": "() => {...}",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "function",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 61,
+                    "modifierKind": [
+                        123
+                    ]
+                },
+                {
+                    "name": "_onTouched",
+                    "defaultValue": "() => {...}",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 64,
+                    "modifierKind": [
+                        123
+                    ]
+                },
+                {
+                    "name": "_value",
+                    "defaultValue": "null",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string | string[] | null",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 60,
+                    "modifierKind": [
+                        123
+                    ]
+                },
+                {
+                    "name": "focusedOptionIndex",
+                    "defaultValue": "-1",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 59
+                },
+                {
+                    "name": "isOpen",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 57
+                },
+                {
+                    "name": "optionsQueryList",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "QueryList<SelectOptionComponent>",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 55,
+                    "decorators": [
+                        {
+                            "name": "ContentChildren",
+                            "stringifiedArguments": "SelectOptionComponent"
+                        }
+                    ],
+                    "modifierKind": [
+                        170,
+                        123
+                    ]
+                },
+                {
+                    "name": "panel",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "ElementRef",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 51,
+                    "decorators": [
+                        {
+                            "name": "ViewChild",
+                            "stringifiedArguments": "'panel'"
+                        }
+                    ],
+                    "modifierKind": [
+                        170
+                    ]
+                },
+                {
+                    "name": "searchInput",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "ElementRef<HTMLInputElement>",
+                    "indexKey": "",
+                    "optional": true,
+                    "description": "",
+                    "line": 52,
+                    "decorators": [
+                        {
+                            "name": "ViewChild",
+                            "stringifiedArguments": "'searchInput'"
+                        }
+                    ],
+                    "modifierKind": [
+                        170
+                    ]
+                },
+                {
+                    "name": "searchText",
+                    "defaultValue": "''",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 58
+                },
+                {
+                    "name": "trigger",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "ElementRef",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 50,
+                    "decorators": [
+                        {
+                            "name": "ViewChild",
+                            "stringifiedArguments": "'trigger'"
+                        }
+                    ],
+                    "modifierKind": [
+                        170
+                    ]
+                }
+            ],
+            "methodsClass": [
+                {
+                    "name": "closePanel",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 228,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
+                {
+                    "name": "focusNextOption",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 270,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "modifierKind": [
+                        123
+                    ]
+                },
+                {
+                    "name": "focusPrevOption",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 280,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "modifierKind": [
+                        123
+                    ]
+                },
+                {
+                    "name": "getOptionsArray",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "SelectOptionComponent[]",
+                    "typeParameters": [],
+                    "line": 217,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "modifierKind": [
+                        123
+                    ]
+                },
+                {
+                    "name": "handleKeydown",
+                    "args": [
+                        {
+                            "name": "event",
+                            "type": "KeyboardEvent",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 236,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "event",
+                            "type": "KeyboardEvent",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "isSelected",
+                    "args": [
+                        {
+                            "name": "option",
+                            "type": "SelectOptionComponent",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "boolean",
+                    "typeParameters": [],
+                    "line": 167,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "option",
+                            "type": "SelectOptionComponent",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "ngAfterContentInit",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 70,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
+                {
+                    "name": "onDocumentClick",
+                    "args": [
+                        {
+                            "name": "event",
+                            "type": "MouseEvent",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 222,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "decorators": [
+                        {
+                            "name": "HostListener",
+                            "stringifiedArguments": "'document:click', ['$event']"
+                        }
+                    ],
+                    "modifierKind": [
+                        170
+                    ],
+                    "jsdoctags": [
+                        {
+                            "name": "event",
+                            "type": "MouseEvent",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "registerOnChange",
+                    "args": [
+                        {
+                            "name": "fn",
+                            "type": "function",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "function": [
+                                {
+                                    "name": "value",
+                                    "type": "string | string[] | null",
+                                    "deprecated": false,
+                                    "deprecationMessage": ""
+                                }
+                            ]
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 116,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "fn",
+                            "type": "function",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "function": [
+                                {
+                                    "name": "value",
+                                    "type": "string | string[] | null",
+                                    "deprecated": false,
+                                    "deprecationMessage": ""
+                                }
+                            ],
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "registerOnTouched",
+                    "args": [
+                        {
+                            "name": "fn",
+                            "type": "function",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "function": []
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 120,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "fn",
+                            "type": "function",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "function": [],
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "scrollToOption",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 299,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "modifierKind": [
+                        123
+                    ]
+                },
+                {
+                    "name": "selectFocusedOption",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 290,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "modifierKind": [
+                        123
+                    ]
+                },
+                {
+                    "name": "selectOption",
+                    "args": [
+                        {
+                            "name": "option",
+                            "type": "SelectOptionComponent",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        },
+                        {
+                            "name": "event",
+                            "type": "Event",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "optional": true
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 144,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "option",
+                            "type": "SelectOptionComponent",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        },
+                        {
+                            "name": "event",
+                            "type": "Event",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "optional": true,
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "setDisabledState",
+                    "args": [
+                        {
+                            "name": "isDisabled",
+                            "type": "boolean",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 124,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "isDisabled",
+                            "type": "boolean",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "togglePanel",
+                    "args": [
+                        {
+                            "name": "event",
+                            "type": "Event",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "optional": true
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 129,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "event",
+                            "type": "Event",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "optional": true,
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "writeValue",
+                    "args": [
+                        {
+                            "name": "value",
+                            "type": "string | string[] | null",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 111,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "value",
+                            "type": "string | string[] | null",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [
+                {
+                    "name": "document:click",
+                    "args": [
+                        {
+                            "name": "event",
+                            "type": "MouseEvent",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "argsDecorator": [
+                        "$event"
+                    ],
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 222
+                }
+            ],
+            "standalone": true,
+            "imports": [
+                {
+                    "name": "CommonModule",
+                    "type": "module"
+                },
+                {
+                    "name": "FormsModule",
+                    "type": "module"
+                },
+                {
+                    "name": "SelectOptionComponent",
+                    "type": "component"
+                }
+            ],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import {\r\n  Component,\r\n  HostListener,\r\n  ViewChild,\r\n  ElementRef,\r\n  ContentChildren,\r\n  QueryList,\r\n  AfterContentInit,\r\n  ChangeDetectorRef,\r\n  forwardRef,\r\n  Input,\r\n  Output,\r\n  EventEmitter,\r\n  Injector,\r\n} from '@angular/core';\r\nimport { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';\r\nimport { CommonModule } from '@angular/common';\r\nimport { FormsModule } from '@angular/forms';\r\nimport { SelectOptionComponent } from './select-option.component';\r\n\r\n@Component({\r\n  selector: 'lib-select',\r\n  templateUrl: './select.component.html',\r\n  styleUrls: ['./select.component.css'],\r\n  standalone: true,\r\n  imports: [CommonModule, FormsModule, SelectOptionComponent],\r\n  providers: [\r\n    {\r\n      provide: NG_VALUE_ACCESSOR,\r\n      useExisting: forwardRef(() => SelectComponent),\r\n      multi: true,\r\n    },\r\n  ],\r\n})\r\nexport class SelectComponent implements ControlValueAccessor, AfterContentInit {\r\n  @Input() placeholder = 'Select an option';\r\n  @Input() disabled = false;\r\n  @Input() multiple = false;\r\n  @Input() required = false;\r\n  @Input() panelClass = '';\r\n  @Input() tabIndex = 0;\r\n  @Input() ariaLabel = '';\r\n  @Input() ariaLabelledby = '';\r\n  @Input() options: { value: string | number; label: string }[] = [];\r\n\r\n  @Output() openedChange = new EventEmitter<boolean>();\r\n  @Output() selectionChange = new EventEmitter<string | string[] | null>();\r\n  @Output() closed = new EventEmitter<void>();\r\n\r\n  @ViewChild('trigger') trigger!: ElementRef;\r\n  @ViewChild('panel') panel!: ElementRef;\r\n  @ViewChild('searchInput') searchInput?: ElementRef<HTMLInputElement>;\r\n\r\n  @ContentChildren(SelectOptionComponent)\r\n  private optionsQueryList!: QueryList<SelectOptionComponent>;\r\n\r\n  isOpen = false;\r\n  searchText = '';\r\n  focusedOptionIndex = -1;\r\n  private _value: string | string[] | null = null;\r\n  private _onChange: (value: string | string[] | null) => void = () => {\r\n    // Initial placeholder - overridden by registerOnChange\r\n  };\r\n  private _onTouched = () => {\r\n    // Initial placeholder - overridden by registerOnTouched\r\n  };\r\n\r\n  constructor(private cdr: ChangeDetectorRef, private injector: Injector) {}\r\n\r\n  ngAfterContentInit() {\r\n    this.cdr.detectChanges();\r\n    if (this.options.length === 0 && this.optionsQueryList?.length) {\r\n      this.options = this.optionsQueryList.map((opt) => ({\r\n        value: opt.value,\r\n        label: opt.label,\r\n      }));\r\n    }\r\n  }\r\n\r\n  get value(): string | string[] | null {\r\n    return this._value;\r\n  }\r\n\r\n  set value(val: string | string[] | null) {\r\n    if (this._value !== val) {\r\n      this._value = val;\r\n      this._onChange(val);\r\n      this.selectionChange.emit(val);\r\n    }\r\n  }\r\n\r\n  get displayValue(): string {\r\n    if (!this.value) return this.placeholder;\r\n\r\n    if (this.multiple) {\r\n      if (!Array.isArray(this.value) || !this.options) return this.placeholder;\r\n      const selectedOptions = this.options.filter((opt) =>\r\n        (this.value as string[]).includes(opt.value.toString())\r\n      );\r\n      return (\r\n        selectedOptions.map((opt) => opt.label).join(', ') || this.placeholder\r\n      );\r\n    }\r\n\r\n    const selectedOption = this.options.find(\r\n      (opt) => opt.value.toString() === this.value\r\n    );\r\n    return selectedOption?.label ?? this.placeholder;\r\n  }\r\n\r\n  writeValue(value: string | string[] | null): void {\r\n    this._value = value;\r\n    this.cdr.markForCheck();\r\n  }\r\n\r\n  registerOnChange(fn: (value: string | string[] | null) => void): void {\r\n    this._onChange = fn;\r\n  }\r\n\r\n  registerOnTouched(fn: () => void): void {\r\n    this._onTouched = fn;\r\n  }\r\n\r\n  setDisabledState(isDisabled: boolean): void {\r\n    this.disabled = isDisabled;\r\n    this.cdr.markForCheck();\r\n  }\r\n\r\n  togglePanel(event?: Event): void {\r\n    event?.stopPropagation();\r\n    if (this.disabled) return;\r\n\r\n    this.isOpen = !this.isOpen;\r\n    this.openedChange.emit(this.isOpen);\r\n\r\n    if (this.isOpen) {\r\n      setTimeout(() => this.searchInput?.nativeElement.focus(), 0);\r\n      this.focusedOptionIndex = -1;\r\n    } else {\r\n      this.closed.emit();\r\n    }\r\n  }\r\n\r\n  selectOption(option: SelectOptionComponent, event?: Event): void {\r\n    event?.stopPropagation();\r\n    if (this.disabled) return;\r\n\r\n    if (this.multiple) {\r\n      const current = Array.isArray(this.value) ? [...this.value] : [];\r\n      this._value = current.includes(option.value.toString())\r\n        ? current.filter((v) => v !== option.value.toString())\r\n        : [...current, option.value.toString()];\r\n      this._onChange(this._value);\r\n      this.selectionChange.emit(this._value);\r\n    } else {\r\n      this._value = option.value.toString();\r\n      this._onChange(this._value);\r\n      this.isOpen = false;\r\n      this.closed.emit();\r\n      this.selectionChange.emit(this._value);\r\n    }\r\n\r\n    this._onTouched();\r\n    this.cdr.detectChanges();\r\n  }\r\n\r\n  isSelected(option: SelectOptionComponent): boolean {\r\n    if (!this.value) return false;\r\n\r\n    if (this.multiple) {\r\n      return (\r\n        Array.isArray(this.value) &&\r\n        this.value.includes(option.value.toString())\r\n      );\r\n    }\r\n    return this.value === option.value.toString();\r\n  }\r\n\r\n  get filteredOptions(): SelectOptionComponent[] {\r\n    let opts: SelectOptionComponent[] = [];\r\n\r\n    if (this.optionsQueryList?.length > 0) {\r\n      // Use content-projected options if available\r\n      opts = this.optionsQueryList.toArray();\r\n    } else if (this.options.length > 0) {\r\n      // Fallback to input options if no content children\r\n      opts = this.options.map((opt) => {\r\n        const comp = new SelectOptionComponent(this.injector.get(ElementRef));\r\n        comp.value = opt.value;\r\n        comp.label = opt.label;\r\n        comp.disabled = false;\r\n        comp.hidden = false;\r\n        comp.selected = this.isSelected(comp);\r\n        return comp;\r\n      });\r\n    }\r\n\r\n    if (!this.searchText) return opts;\r\n    return opts.filter((opt) =>\r\n      opt.label.toLowerCase().includes(this.searchText.toLowerCase())\r\n    );\r\n  }\r\n\r\n  // Public getters for test access\r\n  get optionCount(): number {\r\n    return this.optionsQueryList.length;\r\n  }\r\n\r\n  get firstOption(): SelectOptionComponent | undefined {\r\n    return this.optionsQueryList.first;\r\n  }\r\n\r\n  get optionsArray(): SelectOptionComponent[] {\r\n    return this.getOptionsArray();\r\n  }\r\n\r\n  private getOptionsArray(): SelectOptionComponent[] {\r\n    return this.optionsQueryList.toArray();\r\n  }\r\n\r\n  @HostListener('document:click', ['$event'])\r\n  onDocumentClick(event: MouseEvent): void {\r\n    if (!this.trigger.nativeElement.contains(event.target)) {\r\n      this.closePanel();\r\n    }\r\n  }\r\n\r\n  closePanel(): void {\r\n    if (this.isOpen) {\r\n      this.isOpen = false;\r\n      this.openedChange.emit(false);\r\n      this.closed.emit();\r\n    }\r\n  }\r\n\r\n  handleKeydown(event: KeyboardEvent): void {\r\n    if (\r\n      !this.isOpen &&\r\n      ['ArrowDown', 'ArrowUp', 'Enter', ' '].includes(event.key)\r\n    ) {\r\n      event.preventDefault();\r\n      this.togglePanel();\r\n      return;\r\n    }\r\n\r\n    switch (event.key) {\r\n      case 'ArrowDown':\r\n        event.preventDefault();\r\n        this.focusNextOption();\r\n        break;\r\n      case 'ArrowUp':\r\n        event.preventDefault();\r\n        this.focusPrevOption();\r\n        break;\r\n      case 'Enter':\r\n      case ' ':\r\n        event.preventDefault();\r\n        this.selectFocusedOption();\r\n        break;\r\n      case 'Escape':\r\n        event.preventDefault();\r\n        this.closePanel();\r\n        break;\r\n      case 'Tab':\r\n        this.closePanel();\r\n        break;\r\n    }\r\n  }\r\n\r\n  private focusNextOption(): void {\r\n    if (this.filteredOptions.length === 0) return;\r\n\r\n    this.focusedOptionIndex =\r\n      this.focusedOptionIndex < this.filteredOptions.length - 1\r\n        ? this.focusedOptionIndex + 1\r\n        : 0;\r\n    this.scrollToOption();\r\n  }\r\n\r\n  private focusPrevOption(): void {\r\n    if (this.filteredOptions.length === 0) return;\r\n\r\n    this.focusedOptionIndex =\r\n      this.focusedOptionIndex > 0\r\n        ? this.focusedOptionIndex - 1\r\n        : this.filteredOptions.length - 1;\r\n    this.scrollToOption();\r\n  }\r\n\r\n  private selectFocusedOption(): void {\r\n    if (\r\n      this.focusedOptionIndex >= 0 &&\r\n      this.focusedOptionIndex < this.filteredOptions.length\r\n    ) {\r\n      this.selectOption(this.filteredOptions[this.focusedOptionIndex]);\r\n    }\r\n  }\r\n\r\n  private scrollToOption(): void {\r\n    const options =\r\n      this.panel.nativeElement.querySelectorAll('lib-select-option');\r\n    if (options[this.focusedOptionIndex]) {\r\n      options[this.focusedOptionIndex].scrollIntoView({\r\n        behavior: 'smooth',\r\n        block: 'nearest',\r\n      });\r\n    }\r\n  }\r\n}\r\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": ":host {\r\n  display: block;\r\n  min-width: 180px;\r\n}\r\n\r\n[role='listbox'] {\r\n  animation: fadeIn 0.15s ease-out;\r\n  transform-origin: top center;\r\n}\r\n\r\n@keyframes fadeIn {\r\n  from {\r\n    opacity: 0;\r\n    transform: scale(0.95) translateY(-5px);\r\n  }\r\n  to {\r\n    opacity: 1;\r\n    transform: scale(1) translateY(0);\r\n  }\r\n}\r\n",
+                    "styleUrl": "./select.component.css"
+                }
+            ],
+            "stylesData": "",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "args": [
+                    {
+                        "name": "cdr",
+                        "type": "ChangeDetectorRef",
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    },
+                    {
+                        "name": "injector",
+                        "type": "Injector",
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    }
+                ],
+                "line": 66,
+                "jsdoctags": [
+                    {
+                        "name": "cdr",
+                        "type": "ChangeDetectorRef",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    },
+                    {
+                        "name": "injector",
+                        "type": "Injector",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    }
+                ]
+            },
+            "extends": [],
+            "implements": [
+                "ControlValueAccessor",
+                "AfterContentInit"
+            ],
+            "accessors": {
+                "value": {
+                    "name": "value",
+                    "setSignature": {
+                        "name": "value",
+                        "type": "void",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "args": [
+                            {
+                                "name": "val",
+                                "type": "string | string[] | null",
+                                "deprecated": false,
+                                "deprecationMessage": ""
+                            }
+                        ],
+                        "returnType": "void",
+                        "line": 84,
+                        "jsdoctags": [
+                            {
+                                "name": "val",
+                                "type": "string | string[] | null",
+                                "deprecated": false,
+                                "deprecationMessage": "",
+                                "tagName": {
+                                    "text": "param"
+                                }
+                            }
+                        ]
+                    },
+                    "getSignature": {
+                        "name": "value",
+                        "type": "",
+                        "returnType": "string | [] | null",
+                        "line": 80
+                    }
+                },
+                "displayValue": {
+                    "name": "displayValue",
+                    "getSignature": {
+                        "name": "displayValue",
+                        "type": "string",
+                        "returnType": "string",
+                        "line": 92
+                    }
+                },
+                "filteredOptions": {
+                    "name": "filteredOptions",
+                    "getSignature": {
+                        "name": "filteredOptions",
+                        "type": "[]",
+                        "returnType": "SelectOptionComponent[]",
+                        "line": 179
+                    }
+                },
+                "optionCount": {
+                    "name": "optionCount",
+                    "getSignature": {
+                        "name": "optionCount",
+                        "type": "number",
+                        "returnType": "number",
+                        "line": 205
+                    }
+                },
+                "firstOption": {
+                    "name": "firstOption",
+                    "getSignature": {
+                        "name": "firstOption",
+                        "type": "",
+                        "returnType": "SelectOptionComponent | undefined",
+                        "line": 209
+                    }
+                },
+                "optionsArray": {
+                    "name": "optionsArray",
+                    "getSignature": {
+                        "name": "optionsArray",
+                        "type": "[]",
+                        "returnType": "SelectOptionComponent[]",
+                        "line": 213
+                    }
+                }
+            },
+            "templateData": "<div class=\"relative w-full\" #trigger>\r\n  <div class=\"relative\">\r\n    <input\r\n      type=\"text\"\r\n      [placeholder]=\"placeholder\"\r\n      [disabled]=\"disabled\"\r\n      [required]=\"required\"\r\n      [readonly]=\"true\"\r\n      [value]=\"displayValue\"\r\n      [tabIndex]=\"tabIndex\"\r\n      [attr.aria-label]=\"ariaLabel || null\"\r\n      [attr.aria-labelledby]=\"ariaLabelledby || null\"\r\n      class=\"w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 cursor-pointer\"\r\n      (click)=\"togglePanel($event)\"\r\n      (keydown)=\"handleKeydown($event)\"\r\n    />\r\n    <svg\r\n      xmlns=\"http://www.w3.org/2000/svg\"\r\n      class=\"absolute right-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400 transition-transform duration-200\"\r\n      [class.rotate-180]=\"isOpen\"\r\n      viewBox=\"0 0 20 20\"\r\n      fill=\"currentColor\"\r\n      aria-hidden=\"true\"\r\n    >\r\n      <path\r\n        fill-rule=\"evenodd\"\r\n        d=\"M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z\"\r\n        clip-rule=\"evenodd\"\r\n      />\r\n    </svg>\r\n  </div>\r\n\r\n  <div\r\n    *ngIf=\"isOpen\"\r\n    #panel\r\n    class=\"absolute z-10 mt-1 w-full bg-white border border-gray-200 rounded-md shadow-lg overflow-hidden\"\r\n    [class]=\"panelClass\"\r\n    [class.max-h-60]=\"!panelClass\"\r\n    role=\"listbox\"\r\n    [attr.aria-multiselectable]=\"multiple\"\r\n    [attr.aria-activedescendant]=\"\r\n      focusedOptionIndex >= 0 ? 'option-' + focusedOptionIndex : null\r\n    \"\r\n  >\r\n    <div\r\n      *ngIf=\"options && options.length > 5\"\r\n      class=\"sticky top-0 bg-white p-2 border-b border-gray-200\"\r\n    >\r\n      <input\r\n        #searchInput\r\n        [(ngModel)]=\"searchText\"\r\n        class=\"w-full px-3 py-2 text-sm border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500\"\r\n        placeholder=\"Search...\"\r\n        (click)=\"$event.stopPropagation()\"\r\n        aria-label=\"Filter options\"\r\n      />\r\n    </div>\r\n\r\n    <div class=\"overflow-y-auto max-h-[244px]\">\r\n      <ng-container *ngIf=\"filteredOptions.length > 0; else noOptions\">\r\n        <lib-select-option\r\n          *ngFor=\"let option of filteredOptions; let i = index\"\r\n          [value]=\"option.value\"\r\n          [label]=\"option.label\"\r\n          [disabled]=\"option.disabled\"\r\n          [selected]=\"isSelected(option)\"\r\n          (click)=\"selectOption(option, $event)\"\r\n          [id]=\"'option-' + i\"\r\n          [class.bg-blue-100]=\"i === focusedOptionIndex\"\r\n        >\r\n          <ng-container *ngIf=\"multiple\">\r\n            <svg\r\n              *ngIf=\"isSelected(option)\"\r\n              xmlns=\"http://www.w3.org/2000/svg\"\r\n              class=\"h-5 w-5 mr-2 text-blue-600\"\r\n              viewBox=\"0 0 20 20\"\r\n              fill=\"currentColor\"\r\n            >\r\n              <path\r\n                fill-rule=\"evenodd\"\r\n                d=\"M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z\"\r\n                clip-rule=\"evenodd\"\r\n              />\r\n            </svg>\r\n            <span *ngIf=\"!isSelected(option)\" class=\"w-5 mr-2\"></span>\r\n          </ng-container>\r\n          {{ option.label }}\r\n        </lib-select-option>\r\n      </ng-container>\r\n\r\n      <ng-template #noOptions>\r\n        <div class=\"px-4 py-2 text-sm text-gray-500 text-center\">\r\n          No options found\r\n        </div>\r\n      </ng-template>\r\n    </div>\r\n  </div>\r\n</div>\r\n"
+        },
+        {
+            "name": "SelectOptionComponent",
+            "id": "component-SelectOptionComponent-862bcb70a9251cc660a439dfbc8aa2869841a782208ed33e0f4aa56de84909cfa01e09b2f8f61314de0240060a19c3565f739795baf1b54e7c2cbfef57cb30ad",
+            "file": "libs/ngx-tailwind-flex-ui/src/lib/select/select-option.component.ts",
+            "changeDetection": "ChangeDetectionStrategy.OnPush",
+            "encapsulation": [],
+            "entryComponents": [],
+            "host": {},
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "lib-select-option",
+            "styleUrls": [],
+            "styles": [],
+            "template": "<ng-content></ng-content>\n<span *ngIf=\"label && !isContentProjected()\" class=\"ml-2\">{{ label }}</span>\n",
+            "templateUrl": [],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [
+                {
+                    "name": "disabled",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 37,
+                    "type": "boolean",
+                    "decorators": []
+                },
+                {
+                    "name": "label",
+                    "defaultValue": "''",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 36,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "selected",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 38,
+                    "type": "boolean",
+                    "decorators": []
+                },
+                {
+                    "name": "value",
+                    "defaultValue": "''",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 35,
+                    "type": "string | number",
+                    "decorators": []
+                }
+            ],
+            "outputsClass": [],
+            "propertiesClass": [
+                {
+                    "name": "hidden",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 39,
+                    "decorators": [
+                        {
+                            "name": "HostBinding",
+                            "stringifiedArguments": "'class.hidden'"
+                        }
+                    ],
+                    "modifierKind": [
+                        170
+                    ]
+                }
+            ],
+            "methodsClass": [
+                {
+                    "name": "isContentProjected",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "boolean",
+                    "typeParameters": [],
+                    "line": 52,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "modifierKind": [
+                        125
+                    ]
+                },
+                {
+                    "name": "onClick",
+                    "args": [
+                        {
+                            "name": "event",
+                            "type": "MouseEvent",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 44,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "decorators": [
+                        {
+                            "name": "HostListener",
+                            "stringifiedArguments": "'click', ['$event']"
+                        }
+                    ],
+                    "modifierKind": [
+                        170
+                    ],
+                    "jsdoctags": [
+                        {
+                            "name": "event",
+                            "type": "MouseEvent",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [
+                {
+                    "name": "class.hidden",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 39,
+                    "type": "boolean",
+                    "decorators": []
+                }
+            ],
+            "hostListeners": [
+                {
+                    "name": "click",
+                    "args": [
+                        {
+                            "name": "event",
+                            "type": "MouseEvent",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "argsDecorator": [
+                        "$event"
+                    ],
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 44
+                }
+            ],
+            "standalone": true,
+            "imports": [
+                {
+                    "name": "CommonModule",
+                    "type": "module"
+                }
+            ],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import {\r\n  Component,\r\n  Input,\r\n  HostBinding,\r\n  HostListener,\r\n  ChangeDetectionStrategy,\r\n  ElementRef,\r\n} from '@angular/core';\r\nimport { CommonModule } from '@angular/common';\r\n\r\n@Component({\r\n  selector: 'lib-select-option',\r\n  template: `\r\n    <ng-content></ng-content>\r\n    <span *ngIf=\"label && !isContentProjected()\" class=\"ml-2\">{{ label }}</span>\r\n  `,\r\n  changeDetection: ChangeDetectionStrategy.OnPush,\r\n  host: {\r\n    class:\r\n      'flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer',\r\n    '[class.bg-blue-50]': 'selected',\r\n    '[class.font-medium]': 'selected',\r\n    '[class.text-blue-600]': 'selected',\r\n    '[class.opacity-50]': 'disabled',\r\n    '[class.cursor-not-allowed]': 'disabled',\r\n    role: 'option',\r\n    '[attr.aria-selected]': 'selected',\r\n    '[attr.aria-disabled]': 'disabled',\r\n    '[class.hidden]': 'hidden',\r\n  },\r\n  standalone: true,\r\n  imports: [CommonModule],\r\n})\r\nexport class SelectOptionComponent {\r\n  @Input() value: string | number = '';\r\n  @Input() label = '';\r\n  @Input() disabled = false;\r\n  @Input() selected = false;\r\n  @HostBinding('class.hidden') hidden = false;\r\n\r\n  constructor(private elementRef: ElementRef) {}\r\n\r\n  @HostListener('click', ['$event'])\r\n  onClick(event: MouseEvent) {\r\n    if (this.disabled) {\r\n      event.preventDefault();\r\n      event.stopPropagation();\r\n    }\r\n  }\r\n\r\n  // Made public to be accessible in the template\r\n  public isContentProjected(): boolean {\r\n    return !!this.elementRef.nativeElement.firstChild;\r\n  }\r\n}\r\n",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "args": [
+                    {
+                        "name": "elementRef",
+                        "type": "ElementRef",
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    }
+                ],
+                "line": 39,
+                "jsdoctags": [
+                    {
+                        "name": "elementRef",
+                        "type": "ElementRef",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    }
+                ]
+            },
+            "extends": []
         }
     ],
     "modules": [],
@@ -1587,16 +2644,6 @@
                 "name": "Default",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "libs/ngx-tailwind-flex-ui/src/lib/loadingSpinner/loadingSpinner.component.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{\r\n  args: {},\r\n}"
-            },
-            {
-                "name": "Default",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "libs/ngx-tailwind-flex-ui/src/lib/paginator/paginator.component.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
@@ -1607,11 +2654,31 @@
                 "name": "Default",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
+                "file": "libs/ngx-tailwind-flex-ui/src/lib/loadingSpinner/loadingSpinner.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\r\n  args: {},\r\n}"
+            },
+            {
+                "name": "Default",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
                 "file": "libs/ngx-tailwind-flex-ui/src/lib/progress-bar/progress-bar.component.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
                 "defaultValue": "{\r\n  args: {\r\n    progress: 25,\r\n    color: \"primary\",\r\n    variant: 'determinate',\r\n    bufferProgress: 0\r\n  },\r\n  render: (args) => ({\r\n    props: args,\r\n    template: `<lib-progress-bar [progress]=\"progress\" [color]=\"color\" [variant]=\"variant\"></lib-progress-bar>`,\r\n  }),\r\n}"
+            },
+            {
+                "name": "Default",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/ngx-tailwind-flex-ui/src/lib/select/select.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "StoryObj<SelectComponent>",
+                "defaultValue": "{\r\n  render: (args) => ({\r\n    props: args,\r\n    template: `\r\n      <lib-select\r\n        [placeholder]=\"placeholder\"\r\n        [disabled]=\"disabled\"\r\n        [multiple]=\"multiple\"\r\n        [options]=\"options\"\r\n        (selectionChange)=\"selectionChange($event)\"\r\n      >\r\n        <lib-select-option *ngFor=\"let opt of options\" [value]=\"opt.value\" [label]=\"opt.label\"></lib-select-option>\r\n      </lib-select>\r\n    `,\r\n  }),\r\n}"
             },
             {
                 "name": "Determinate",
@@ -1752,6 +2819,16 @@
                 "deprecationMessage": "",
                 "type": "Meta<ProgressBarComponent>",
                 "defaultValue": "{\r\n  title: 'Components/Progress Bar',\r\n  component: ProgressBarComponent,\r\n  tags: ['autodocs'],\r\n  argTypes: {\r\n    progress: {\r\n      control: { type: 'range', min: 0, max: 100, step: 1 },\r\n      description: 'Progress percentage (0 to 100)',\r\n    },\r\n    // buffer: {\r\n    //   control: { type: 'range', min: 0, max: 100, step: 1 },\r\n    //   description: 'Buffer progress percentage (used in buffer variant)',\r\n    // },\r\n    color: {\r\n      control: 'select',\r\n      options: ['primary', 'secondary', 'success', 'error'],\r\n      description: 'Color of the progress bar',\r\n    },\r\n    variant: {\r\n      control: 'select',\r\n      options: ['determinate', 'indeterminate', 'buffer', 'query'],\r\n      description: 'Progress bar type',\r\n    },\r\n    // class: {\r\n    //   control: 'text',\r\n    //   description: 'Additional Tailwind CSS classes for customization',\r\n    // },\r\n  },\r\n}"
+            },
+            {
+                "name": "Multiple",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/ngx-tailwind-flex-ui/src/lib/select/select.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "StoryObj<SelectComponent>",
+                "defaultValue": "{\r\n  args: { multiple: true },\r\n  render: (args) => ({\r\n    props: args,\r\n    template: `\r\n      <lib-select\r\n        [placeholder]=\"placeholder\"\r\n        [disabled]=\"disabled\"\r\n        [multiple]=\"multiple\"\r\n        [options]=\"options\"\r\n        (selectionChange)=\"selectionChange($event)\"\r\n      >\r\n        <lib-select-option *ngFor=\"let opt of options\" [value]=\"opt.value\" [label]=\"opt.label\"></lib-select-option>\r\n      </lib-select>\r\n    `,\r\n  }),\r\n}"
             },
             {
                 "name": "Outline",
@@ -2256,6 +3333,28 @@
                     "deprecationMessage": "",
                     "type": "StoryObj<PaginatorComponent>",
                     "defaultValue": "{\r\n  args: {\r\n    length: 100,\r\n    pageSize: 10,\r\n    pageIndex: 0,\r\n  },\r\n}"
+                }
+            ],
+            "libs/ngx-tailwind-flex-ui/src/lib/select/select.component.stories.ts": [
+                {
+                    "name": "Default",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/ngx-tailwind-flex-ui/src/lib/select/select.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "StoryObj<SelectComponent>",
+                    "defaultValue": "{\r\n  render: (args) => ({\r\n    props: args,\r\n    template: `\r\n      <lib-select\r\n        [placeholder]=\"placeholder\"\r\n        [disabled]=\"disabled\"\r\n        [multiple]=\"multiple\"\r\n        [options]=\"options\"\r\n        (selectionChange)=\"selectionChange($event)\"\r\n      >\r\n        <lib-select-option *ngFor=\"let opt of options\" [value]=\"opt.value\" [label]=\"opt.label\"></lib-select-option>\r\n      </lib-select>\r\n    `,\r\n  }),\r\n}"
+                },
+                {
+                    "name": "Multiple",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/ngx-tailwind-flex-ui/src/lib/select/select.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "StoryObj<SelectComponent>",
+                    "defaultValue": "{\r\n  args: { multiple: true },\r\n  render: (args) => ({\r\n    props: args,\r\n    template: `\r\n      <lib-select\r\n        [placeholder]=\"placeholder\"\r\n        [disabled]=\"disabled\"\r\n        [multiple]=\"multiple\"\r\n        [options]=\"options\"\r\n        (selectionChange)=\"selectionChange($event)\"\r\n      >\r\n        <lib-select-option *ngFor=\"let opt of options\" [value]=\"opt.value\" [label]=\"opt.label\"></lib-select-option>\r\n      </lib-select>\r\n    `,\r\n  }),\r\n}"
                 }
             ],
             "libs/ngx-tailwind-flex-ui/.storybook/preview.ts": [
@@ -2818,6 +3917,44 @@
                 "coveragePercent": 62,
                 "coverageCount": "5/8",
                 "status": "good"
+            },
+            {
+                "filePath": "libs/ngx-tailwind-flex-ui/src/lib/select/select-option.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "SelectOptionComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/11",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/ngx-tailwind-flex-ui/src/lib/select/select.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Default",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/ngx-tailwind-flex-ui/src/lib/select/select.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Multiple",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/ngx-tailwind-flex-ui/src/lib/select/select.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "SelectComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/41",
+                "status": "low"
             }
         ]
     }
