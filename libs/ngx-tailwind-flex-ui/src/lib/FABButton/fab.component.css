@@ -1,0 +1,32 @@
+.fab-button {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #6200ea;
+    color: white;
+    font-size: 24px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0.25);
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    }
+
+    .fab-button:hover {
+        transform: scale(1.1);
+    }
+
+    .fab-item {
+        background-color: #6200ea;
+        border-radius: 50%;
+        margin: 5px 0;
+        padding: 10px;
+        cursor: pointer;
+    }
+
+    .fab-item:hover {
+        background-color: #3700b3;
+    }
+
+    

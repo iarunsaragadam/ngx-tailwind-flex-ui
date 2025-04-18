@@ -1,0 +1,15 @@
+<!-- Main FAB Button -->
+<button 
+  class="fab-button"
+  [ngClass]="[positionClass, sizeClass]"
+  [ngStyle]="{ 'background-color': color }"
+  (click)="onActionClick()"
+  [attr.title]="tooltip"
+>
+  <i class="material-icons">{{ icon }}</i>
+</button>
+
+<!-- Speed Dial Items (if Mini FAB is enabled and open) -->
+<div *ngIf="isMini && isSpeedDialOpen" class="fab-items">
+  <ng-content></ng-content>
+</div>
