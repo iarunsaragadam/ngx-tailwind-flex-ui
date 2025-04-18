@@ -1,0 +1,18 @@
+<button 
+class="fab-button"
+[ngClass]="{
+  'fixed': isFixed,
+  'absolute': isAbsolute,
+  'bottom-0': position === 'bottom-right',
+  'right-0': position === 'bottom-right' || position === 'top-right',
+  'top-0': position === 'top-left' || position === 'top-right',
+  'left-0': position === 'bottom-left' || position === 'top-left'
+}"
+(click)="onActionClick()">
+<i class="material-icons">{{ icon }}</i> 
+</button>
+
+<!-- Speed Dial Items (If Mini FAB is enabled)   -->
+ <div *ngIf="isMini && isSpeedDialOpen" class="fab-items">
+  <ng-content></ng-content>
+ </div>
