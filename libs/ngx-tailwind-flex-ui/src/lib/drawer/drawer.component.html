@@ -1,0 +1,46 @@
+<!-- Drawer Container -->
+<div
+  [class]="drawerClasses"
+  [class.hidden]="!open"
+  role="dialog"
+  aria-labelledby="drawer-title"
+  [attr.aria-hidden]="!open"
+>
+  <!-- Drawer Content -->
+  <div class="relative flex flex-col h-full bg-white shadow-xl p-4">
+    <!-- Close Button -->
+    <button
+      *ngIf="isClosable"
+      class="absolute top-4 right-4 text-gray-600 hover:text-gray-800"
+      (click)="close()"
+      aria-label="Close Drawer"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        class="h-6 w-6"
+        viewBox="0 0 20 20"
+        fill="currentColor"
+        aria-hidden="true"
+      >
+        <path
+          fill-rule="evenodd"
+          d="M10 9.293l5.147-5.146a1 1 0 111.414 1.414L11.414 10l5.147 5.146a1 1 0 11-1.414 1.414L10 11.414l-5.146 5.147a1 1 0 11-1.414-1.414L8.586 10 3.439 4.854a1 1 0 111.414-1.414L10 9.293z"
+          clip-rule="evenodd"
+        />
+      </svg>
+    </button>
+
+    <!-- Custom Content -->
+    <ng-content></ng-content>
+  </div>
+</div>
+
+<!-- Backdrop Overlay -->
+<div
+  *ngIf="backdrop"
+  class="fixed inset-0 bg-black bg-opacity-50 z-30"
+  (click)="close()"
+  [attr.aria-hidden]="true"
+  role="button"
+  tabindex="0"
+></div>
