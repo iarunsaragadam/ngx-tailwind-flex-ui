@@ -3,12 +3,12 @@
     "interfaces": [
         {
             "name": "StackedAlertsArgs",
-            "id": "interface-StackedAlertsArgs-e4387f63dea172eb1a19f7906012e497d3884d459eab3517eb0429bbd3bb2e0a7bb7f32725bc43dde4de6e49a89bbe3cb3edc1a4c61c69f9e9ccd8b738b3969c",
+            "id": "interface-StackedAlertsArgs-2bf227294fee5bbf0e939c8715814248c4c84cd46a2d1ad187790f1e8e8fb5ae47b4591ceafb9a1887cbfb5075bf4e0b81936417f6fade71d2c912c5198ea07a",
             "file": "libs/ngx-tailwind-flex-ui/src/lib/alert/alert.component.stories.ts",
             "deprecated": false,
             "deprecationMessage": "",
             "type": "interface",
-            "sourceCode": "import { Meta, StoryObj } from '@storybook/angular';\r\nimport { AlertComponent } from './alert.component';\r\nimport { applicationConfig } from '@storybook/angular';\r\nimport { provideAnimations } from '@angular/platform-browser/animations';\r\n\r\n// Define the interface for the StackedAlerts story with flat properties\r\ninterface StackedAlertsArgs {\r\n  firstMessage: string;\r\n  firstType: 'success' | 'error' | 'warning' | 'info';\r\n  firstAction: string | null;\r\n  firstDismissible: boolean;\r\n  firstIcon: string | null;\r\n  firstDuration: number;\r\n  firstAnimation: 'fade' | 'slide';\r\n  firstPosition:\r\n    | 'top-left'\r\n    | 'top-center'\r\n    | 'top-right'\r\n    | 'bottom-left'\r\n    | 'bottom-center'\r\n    | 'bottom-right';\r\n\r\n  secondMessage: string;\r\n  secondType: 'success' | 'error' | 'warning' | 'info';\r\n  secondAction: string | null;\r\n  secondDismissible: boolean;\r\n  secondIcon: string | null;\r\n  secondDuration: number;\r\n  secondAnimation: 'fade' | 'slide';\r\n  secondPosition:\r\n    | 'top-left'\r\n    | 'top-center'\r\n    | 'top-right'\r\n    | 'bottom-left'\r\n    | 'bottom-center'\r\n    | 'bottom-right';\r\n\r\n  thirdMessage: string;\r\n  thirdType: 'success' | 'error' | 'warning' | 'info';\r\n  thirdAction: string | null;\r\n  thirdDismissible: boolean;\r\n  thirdIcon: string | null;\r\n  thirdDuration: number;\r\n  thirdAnimation: 'fade' | 'slide';\r\n  thirdPosition:\r\n    | 'top-left'\r\n    | 'top-center'\r\n    | 'top-right'\r\n    | 'bottom-left'\r\n    | 'bottom-center'\r\n    | 'bottom-right';\r\n}\r\n\r\nconst meta: Meta<AlertComponent> = {\r\n  title: 'Components/Alert',\r\n  component: AlertComponent,\r\n  decorators: [\r\n    applicationConfig({\r\n      providers: [provideAnimations()],\r\n    }),\r\n  ],\r\n  args: {},\r\n  argTypes: {\r\n    message: { control: 'text' },\r\n    type: {\r\n      control: 'select',\r\n      options: ['success', 'warning', 'error', 'info'],\r\n    },\r\n    duration: { control: 'number' },\r\n    action: { control: 'text' },\r\n    dismissible: { control: 'boolean' },\r\n    position: {\r\n      control: 'select',\r\n      options: [\r\n        'top-left',\r\n        'top-center',\r\n        'top-right',\r\n        'bottom-left',\r\n        'bottom-center',\r\n        'bottom-right',\r\n      ],\r\n    },\r\n    icon: {\r\n      control: 'select',\r\n      options: [\r\n        '',\r\n        'pizza',\r\n        'mood',\r\n        'star',\r\n        'favorite',\r\n        'thumb_up',\r\n        'lightbulb',\r\n        'coffee',\r\n        'cloud',\r\n        'music_note',\r\n        'pets',\r\n        'rocket',\r\n        'beach_access',\r\n      ],\r\n    },\r\n    animation: { control: 'select', options: ['fade', 'slide'] },\r\n  },\r\n};\r\n\r\nexport default meta;\r\n\r\ntype Story = StoryObj<AlertComponent>;\r\n\r\nexport const BasicSnackBar: Story = {\r\n  args: {\r\n    message: 'Disco party!',\r\n    type: 'info',\r\n    action: 'Dance',\r\n    duration: 5000,\r\n    position: 'bottom-center',\r\n  },\r\n};\r\n\r\nexport const ConfigurablePosition: Story = {\r\n  args: {\r\n    message: 'Pool party!',\r\n    type: 'info',\r\n    duration: 5000,\r\n    position: 'bottom-right',\r\n  },\r\n};\r\n\r\nexport const DismissibleError: Story = {\r\n  args: {\r\n    message: 'Something went wrong',\r\n    type: 'error',\r\n    dismissible: true,\r\n    duration: 0,\r\n    position: 'top-right',\r\n  },\r\n};\r\n\r\nexport const SuccessWithAction: Story = {\r\n  args: {\r\n    message: 'Data saved successfully',\r\n    type: 'success',\r\n    action: 'Undo',\r\n    duration: 3000,\r\n    position: 'bottom-center',\r\n  },\r\n};\r\n\r\nexport const WarningWithCustomIcon: Story = {\r\n  args: {\r\n    message: 'Custom icon alert',\r\n    type: 'warning',\r\n    icon: 'star',\r\n    dismissible: true,\r\n    duration: 5000,\r\n    position: 'top-center',\r\n  },\r\n};\r\n\r\nexport const StackedAlerts: StoryObj<AlertComponent & StackedAlertsArgs> = {\r\n  render: (args: StackedAlertsArgs) => ({\r\n    props: args,\r\n    template: `\r\n      <lib-alert\r\n        [message]=\"firstMessage\"\r\n        [type]=\"firstType\"\r\n        [action]=\"firstAction\"\r\n        [dismissible]=\"firstDismissible\"\r\n        [icon]=\"firstIcon\"\r\n        [duration]=\"firstDuration\"\r\n        [animation]=\"firstAnimation\"\r\n        [position]=\"firstPosition\"\r\n        [bypassDuplicateCheck]=\"true\"\r\n      ></lib-alert>\r\n      <lib-alert\r\n        [message]=\"secondMessage\"\r\n        [type]=\"secondType\"\r\n        [action]=\"secondAction\"\r\n        [dismissible]=\"secondDismissible\"\r\n        [icon]=\"secondIcon\"\r\n        [duration]=\"secondDuration\"\r\n        [animation]=\"secondAnimation\"\r\n        [position]=\"secondPosition\"\r\n        [bypassDuplicateCheck]=\"true\"\r\n      ></lib-alert>\r\n      <lib-alert\r\n        [message]=\"thirdMessage\"\r\n        [type]=\"thirdType\"\r\n        [action]=\"thirdAction\"\r\n        [dismissible]=\"thirdDismissible\"\r\n        [icon]=\"thirdIcon\"\r\n        [duration]=\"thirdDuration\"\r\n        [animation]=\"thirdAnimation\"\r\n        [position]=\"thirdPosition\"\r\n        [bypassDuplicateCheck]=\"true\"\r\n      ></lib-alert>\r\n    `,\r\n  }),\r\n  args: {\r\n    firstMessage: 'First alert',\r\n    firstType: 'success',\r\n    firstAction: null,\r\n    firstDismissible: true,\r\n    firstIcon: 'star',\r\n    firstDuration: 50000,\r\n    firstAnimation: 'slide',\r\n    firstPosition: 'top-right',\r\n\r\n    secondMessage: 'Second alert',\r\n    secondType: 'warning',\r\n    secondAction: null,\r\n    secondDismissible: true,\r\n    secondIcon: null,\r\n    secondDuration: 50000,\r\n    secondAnimation: 'slide',\r\n    secondPosition: 'top-right',\r\n\r\n    thirdMessage: 'Third alert',\r\n    thirdType: 'error',\r\n    thirdAction: null,\r\n    thirdDismissible: true,\r\n    thirdIcon: null,\r\n    thirdDuration: 50000,\r\n    thirdAnimation: 'slide',\r\n    thirdPosition: 'top-right',\r\n  } as StackedAlertsArgs,\r\n  argTypes: {\r\n    // First Alert Controls\r\n    firstMessage: {\r\n      control: { type: 'text', disable: false },\r\n      name: 'First Alert Message',\r\n    },\r\n    firstType: {\r\n      control: 'select',\r\n      options: ['success', 'error', 'warning', 'info'],\r\n      name: 'First Alert Type',\r\n    },\r\n    firstAction: {\r\n      control: { type: 'text', disable: false },\r\n      name: 'First Alert Action',\r\n    },\r\n    firstDismissible: { control: 'boolean', name: 'First Alert Dismissible' },\r\n    firstIcon: {\r\n      control: 'select',\r\n      options: [\r\n        '',\r\n        'pizza',\r\n        'mood',\r\n        'star',\r\n        'favorite',\r\n        'thumb_up',\r\n        'lightbulb',\r\n        'coffee',\r\n        'cloud',\r\n        'music_note',\r\n        'pets',\r\n        'rocket',\r\n        'beach_access',\r\n      ],\r\n      name: 'First Alert Icon',\r\n    },\r\n    firstDuration: { control: 'number', name: 'First Alert Duration' },\r\n    firstAnimation: {\r\n      control: 'select',\r\n      options: ['fade', 'slide'],\r\n      name: 'First Alert Animation',\r\n    },\r\n    firstPosition: {\r\n      control: 'select',\r\n      options: [\r\n        'top-left',\r\n        'top-center',\r\n        'top-right',\r\n        'bottom-left',\r\n        'bottom-center',\r\n        'bottom-right',\r\n      ],\r\n      name: 'First Alert Position',\r\n    },\r\n\r\n    // Second Alert Controls\r\n    secondMessage: {\r\n      control: { type: 'text', disable: false },\r\n      name: 'Second Alert Message',\r\n    },\r\n    secondType: {\r\n      control: 'select',\r\n      options: ['success', 'error', 'warning', 'info'],\r\n      name: 'Second Alert Type',\r\n    },\r\n    secondAction: {\r\n      control: { type: 'text', disable: false },\r\n      name: 'Second Alert Action',\r\n    },\r\n    secondDismissible: { control: 'boolean', name: 'Second Alert Dismissible' },\r\n    secondIcon: {\r\n      control: 'select',\r\n      options: [\r\n        '',\r\n        'pizza',\r\n        'mood',\r\n        'star',\r\n        'favorite',\r\n        'thumb_up',\r\n        'lightbulb',\r\n        'coffee',\r\n        'cloud',\r\n        'music_note',\r\n        'pets',\r\n        'rocket',\r\n        'beach_access',\r\n      ],\r\n      name: 'Second Alert Icon',\r\n    },\r\n    secondDuration: { control: 'number', name: 'Second Alert Duration' },\r\n    secondAnimation: {\r\n      control: 'select',\r\n      options: ['fade', 'slide'],\r\n      name: 'Second Alert Animation',\r\n    },\r\n    secondPosition: {\r\n      control: 'select',\r\n      options: [\r\n        'top-left',\r\n        'top-center',\r\n        'top-right',\r\n        'bottom-left',\r\n        'bottom-center',\r\n        'bottom-right',\r\n      ],\r\n      name: 'Second Alert Position',\r\n    },\r\n\r\n    // Third Alert Controls\r\n    thirdMessage: {\r\n      control: { type: 'text', disable: false },\r\n      name: 'Third Alert Message',\r\n    },\r\n    thirdType: {\r\n      control: 'select',\r\n      options: ['success', 'error', 'warning', 'info'],\r\n      name: 'Third Alert Type',\r\n    },\r\n    thirdAction: {\r\n      control: { type: 'text', disable: false },\r\n      name: 'Third Alert Action',\r\n    },\r\n    thirdDismissible: { control: 'boolean', name: 'Third Alert Dismissible' },\r\n    thirdIcon: {\r\n      control: 'select',\r\n      options: [\r\n        '',\r\n        'pizza',\r\n        'mood',\r\n        'star',\r\n        'favorite',\r\n        'thumb_up',\r\n        'lightbulb',\r\n        'coffee',\r\n        'cloud',\r\n        'music_note',\r\n        'pets',\r\n        'rocket',\r\n        'beach_access',\r\n      ],\r\n      name: 'Third Alert Icon',\r\n    },\r\n    thirdDuration: { control: 'number', name: 'Third Alert Duration' },\r\n    thirdAnimation: {\r\n      control: 'select',\r\n      options: ['fade', 'slide'],\r\n      name: 'Third Alert Animation',\r\n    },\r\n    thirdPosition: {\r\n      control: 'select',\r\n      options: [\r\n        'top-left',\r\n        'top-center',\r\n        'top-right',\r\n        'bottom-left',\r\n        'bottom-center',\r\n        'bottom-right',\r\n      ],\r\n      name: 'Third Alert Position',\r\n    },\r\n\r\n    // Remove inherited fields that are not used in this story\r\n    message: { table: { disable: true } },\r\n    type: { table: { disable: true } },\r\n    duration: { table: { disable: true } },\r\n    action: { table: { disable: true } },\r\n    dismissible: { table: { disable: true } },\r\n    position: { table: { disable: true } },\r\n    icon: { table: { disable: true } },\r\n    animation: { table: { disable: true } },\r\n  },\r\n};\r\n",
+            "sourceCode": "import { Meta, StoryObj } from '@storybook/angular';\nimport { AlertComponent } from './alert.component';\nimport { applicationConfig } from '@storybook/angular';\nimport { provideAnimations } from '@angular/platform-browser/animations';\n\n// Define the interface for the StackedAlerts story with flat properties\ninterface StackedAlertsArgs {\n  firstMessage: string;\n  firstType: 'success' | 'error' | 'warning' | 'info';\n  firstAction: string | null;\n  firstDismissible: boolean;\n  firstIcon: string | null;\n  firstDuration: number;\n  firstAnimation: 'fade' | 'slide';\n  firstPosition:\n    | 'top-left'\n    | 'top-center'\n    | 'top-right'\n    | 'bottom-left'\n    | 'bottom-center'\n    | 'bottom-right';\n\n  secondMessage: string;\n  secondType: 'success' | 'error' | 'warning' | 'info';\n  secondAction: string | null;\n  secondDismissible: boolean;\n  secondIcon: string | null;\n  secondDuration: number;\n  secondAnimation: 'fade' | 'slide';\n  secondPosition:\n    | 'top-left'\n    | 'top-center'\n    | 'top-right'\n    | 'bottom-left'\n    | 'bottom-center'\n    | 'bottom-right';\n\n  thirdMessage: string;\n  thirdType: 'success' | 'error' | 'warning' | 'info';\n  thirdAction: string | null;\n  thirdDismissible: boolean;\n  thirdIcon: string | null;\n  thirdDuration: number;\n  thirdAnimation: 'fade' | 'slide';\n  thirdPosition:\n    | 'top-left'\n    | 'top-center'\n    | 'top-right'\n    | 'bottom-left'\n    | 'bottom-center'\n    | 'bottom-right';\n}\n\nconst meta: Meta<AlertComponent> = {\n  title: 'Components/Alert',\n  component: AlertComponent,\n  decorators: [\n    applicationConfig({\n      providers: [provideAnimations()],\n    }),\n  ],\n  args: {},\n  argTypes: {\n    message: { control: 'text' },\n    type: {\n      control: 'select',\n      options: ['success', 'warning', 'error', 'info'],\n    },\n    duration: { control: 'number' },\n    action: { control: 'text' },\n    dismissible: { control: 'boolean' },\n    position: {\n      control: 'select',\n      options: [\n        'top-left',\n        'top-center',\n        'top-right',\n        'bottom-left',\n        'bottom-center',\n        'bottom-right',\n      ],\n    },\n    icon: {\n      control: 'select',\n      options: [\n        '',\n        'pizza',\n        'mood',\n        'star',\n        'favorite',\n        'thumb_up',\n        'lightbulb',\n        'coffee',\n        'cloud',\n        'music_note',\n        'pets',\n        'rocket',\n        'beach_access',\n      ],\n    },\n    animation: { control: 'select', options: ['fade', 'slide'] },\n  },\n};\n\nexport default meta;\n\ntype Story = StoryObj<AlertComponent>;\n\nexport const BasicSnackBar: Story = {\n  args: {\n    message: 'Disco party!',\n    type: 'info',\n    action: 'Dance',\n    duration: 5000,\n    position: 'bottom-center',\n  },\n};\n\nexport const ConfigurablePosition: Story = {\n  args: {\n    message: 'Pool party!',\n    type: 'info',\n    duration: 5000,\n    position: 'bottom-right',\n  },\n};\n\nexport const DismissibleError: Story = {\n  args: {\n    message: 'Something went wrong',\n    type: 'error',\n    dismissible: true,\n    duration: 0,\n    position: 'top-right',\n  },\n};\n\nexport const SuccessWithAction: Story = {\n  args: {\n    message: 'Data saved successfully',\n    type: 'success',\n    action: 'Undo',\n    duration: 3000,\n    position: 'bottom-center',\n  },\n};\n\nexport const WarningWithCustomIcon: Story = {\n  args: {\n    message: 'Custom icon alert',\n    type: 'warning',\n    icon: 'star',\n    dismissible: true,\n    duration: 5000,\n    position: 'top-center',\n  },\n};\n\nexport const StackedAlerts: StoryObj<AlertComponent & StackedAlertsArgs> = {\n  render: (args: StackedAlertsArgs) => ({\n    props: args,\n    template: `\n      <lib-alert\n        [message]=\"firstMessage\"\n        [type]=\"firstType\"\n        [action]=\"firstAction\"\n        [dismissible]=\"firstDismissible\"\n        [icon]=\"firstIcon\"\n        [duration]=\"firstDuration\"\n        [animation]=\"firstAnimation\"\n        [position]=\"firstPosition\"\n        [bypassDuplicateCheck]=\"true\"\n      ></lib-alert>\n      <lib-alert\n        [message]=\"secondMessage\"\n        [type]=\"secondType\"\n        [action]=\"secondAction\"\n        [dismissible]=\"secondDismissible\"\n        [icon]=\"secondIcon\"\n        [duration]=\"secondDuration\"\n        [animation]=\"secondAnimation\"\n        [position]=\"secondPosition\"\n        [bypassDuplicateCheck]=\"true\"\n      ></lib-alert>\n      <lib-alert\n        [message]=\"thirdMessage\"\n        [type]=\"thirdType\"\n        [action]=\"thirdAction\"\n        [dismissible]=\"thirdDismissible\"\n        [icon]=\"thirdIcon\"\n        [duration]=\"thirdDuration\"\n        [animation]=\"thirdAnimation\"\n        [position]=\"thirdPosition\"\n        [bypassDuplicateCheck]=\"true\"\n      ></lib-alert>\n    `,\n  }),\n  args: {\n    firstMessage: 'First alert',\n    firstType: 'success',\n    firstAction: null,\n    firstDismissible: true,\n    firstIcon: 'star',\n    firstDuration: 50000,\n    firstAnimation: 'slide',\n    firstPosition: 'top-right',\n\n    secondMessage: 'Second alert',\n    secondType: 'warning',\n    secondAction: null,\n    secondDismissible: true,\n    secondIcon: null,\n    secondDuration: 50000,\n    secondAnimation: 'slide',\n    secondPosition: 'top-right',\n\n    thirdMessage: 'Third alert',\n    thirdType: 'error',\n    thirdAction: null,\n    thirdDismissible: true,\n    thirdIcon: null,\n    thirdDuration: 50000,\n    thirdAnimation: 'slide',\n    thirdPosition: 'top-right',\n  } as StackedAlertsArgs,\n  argTypes: {\n    // First Alert Controls\n    firstMessage: {\n      control: { type: 'text', disable: false },\n      name: 'First Alert Message',\n    },\n    firstType: {\n      control: 'select',\n      options: ['success', 'error', 'warning', 'info'],\n      name: 'First Alert Type',\n    },\n    firstAction: {\n      control: { type: 'text', disable: false },\n      name: 'First Alert Action',\n    },\n    firstDismissible: { control: 'boolean', name: 'First Alert Dismissible' },\n    firstIcon: {\n      control: 'select',\n      options: [\n        '',\n        'pizza',\n        'mood',\n        'star',\n        'favorite',\n        'thumb_up',\n        'lightbulb',\n        'coffee',\n        'cloud',\n        'music_note',\n        'pets',\n        'rocket',\n        'beach_access',\n      ],\n      name: 'First Alert Icon',\n    },\n    firstDuration: { control: 'number', name: 'First Alert Duration' },\n    firstAnimation: {\n      control: 'select',\n      options: ['fade', 'slide'],\n      name: 'First Alert Animation',\n    },\n    firstPosition: {\n      control: 'select',\n      options: [\n        'top-left',\n        'top-center',\n        'top-right',\n        'bottom-left',\n        'bottom-center',\n        'bottom-right',\n      ],\n      name: 'First Alert Position',\n    },\n\n    // Second Alert Controls\n    secondMessage: {\n      control: { type: 'text', disable: false },\n      name: 'Second Alert Message',\n    },\n    secondType: {\n      control: 'select',\n      options: ['success', 'error', 'warning', 'info'],\n      name: 'Second Alert Type',\n    },\n    secondAction: {\n      control: { type: 'text', disable: false },\n      name: 'Second Alert Action',\n    },\n    secondDismissible: { control: 'boolean', name: 'Second Alert Dismissible' },\n    secondIcon: {\n      control: 'select',\n      options: [\n        '',\n        'pizza',\n        'mood',\n        'star',\n        'favorite',\n        'thumb_up',\n        'lightbulb',\n        'coffee',\n        'cloud',\n        'music_note',\n        'pets',\n        'rocket',\n        'beach_access',\n      ],\n      name: 'Second Alert Icon',\n    },\n    secondDuration: { control: 'number', name: 'Second Alert Duration' },\n    secondAnimation: {\n      control: 'select',\n      options: ['fade', 'slide'],\n      name: 'Second Alert Animation',\n    },\n    secondPosition: {\n      control: 'select',\n      options: [\n        'top-left',\n        'top-center',\n        'top-right',\n        'bottom-left',\n        'bottom-center',\n        'bottom-right',\n      ],\n      name: 'Second Alert Position',\n    },\n\n    // Third Alert Controls\n    thirdMessage: {\n      control: { type: 'text', disable: false },\n      name: 'Third Alert Message',\n    },\n    thirdType: {\n      control: 'select',\n      options: ['success', 'error', 'warning', 'info'],\n      name: 'Third Alert Type',\n    },\n    thirdAction: {\n      control: { type: 'text', disable: false },\n      name: 'Third Alert Action',\n    },\n    thirdDismissible: { control: 'boolean', name: 'Third Alert Dismissible' },\n    thirdIcon: {\n      control: 'select',\n      options: [\n        '',\n        'pizza',\n        'mood',\n        'star',\n        'favorite',\n        'thumb_up',\n        'lightbulb',\n        'coffee',\n        'cloud',\n        'music_note',\n        'pets',\n        'rocket',\n        'beach_access',\n      ],\n      name: 'Third Alert Icon',\n    },\n    thirdDuration: { control: 'number', name: 'Third Alert Duration' },\n    thirdAnimation: {\n      control: 'select',\n      options: ['fade', 'slide'],\n      name: 'Third Alert Animation',\n    },\n    thirdPosition: {\n      control: 'select',\n      options: [\n        'top-left',\n        'top-center',\n        'top-right',\n        'bottom-left',\n        'bottom-center',\n        'bottom-right',\n      ],\n      name: 'Third Alert Position',\n    },\n\n    // Remove inherited fields that are not used in this story\n    message: { table: { disable: true } },\n    type: { table: { disable: true } },\n    duration: { table: { disable: true } },\n    action: { table: { disable: true } },\n    dismissible: { table: { disable: true } },\n    position: { table: { disable: true } },\n    icon: { table: { disable: true } },\n    animation: { table: { disable: true } },\n  },\n};\n",
             "properties": [
                 {
                     "name": "firstAction",
@@ -265,7 +265,7 @@
     "components": [
         {
             "name": "AlertComponent",
-            "id": "component-AlertComponent-2a9b209821bc6a9a2f45202259c4c85ef089278fbbd9bb1bbcad0ae0d87d7bbe40d7771efc2b1727088ff7ece7a9aab4f00bc109759f5ef8b15f27bf9e807a00",
+            "id": "component-AlertComponent-f8efc4b250e8195d469ebf0fa661fd8dc1d2e8f168b72b0f005038f0e49c98b308dc583c2ce76b000724af704ee7b239a73f68bd096417d01e34c471c6e31ebf",
             "file": "libs/ngx-tailwind-flex-ui/src/lib/alert/alert.component.ts",
             "changeDetection": "ChangeDetectionStrategy.OnPush",
             "encapsulation": [],
@@ -661,11 +661,11 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import {\r\n  Component,\r\n  Input,\r\n  ChangeDetectionStrategy,\r\n  ChangeDetectorRef,\r\n  AfterViewInit,\r\n  OnDestroy,\r\n  TemplateRef,\r\n  Output,\r\n  EventEmitter,\r\n} from '@angular/core';\r\nimport { CommonModule } from '@angular/common';\r\nimport { animate, style, transition, trigger } from '@angular/animations';\r\n\r\n@Component({\r\n  selector: 'lib-alert',\r\n  standalone: true,\r\n  imports: [CommonModule],\r\n  templateUrl: './alert.component.html',\r\n  styleUrls: ['./alert.component.css'],\r\n  changeDetection: ChangeDetectionStrategy.OnPush,\r\n  animations: [\r\n    trigger('fadeInOut', [\r\n      transition(':enter', [\r\n        style({ opacity: 0 }),\r\n        animate('300ms ease-in', style({ opacity: 1 })),\r\n      ]),\r\n      transition(':leave', [animate('300ms ease-out', style({ opacity: 0 }))]),\r\n    ]),\r\n    trigger('slideInOut', [\r\n      transition(\r\n        ':enter',\r\n        [\r\n          style({ transform: '{{startTransform}}' }),\r\n          animate('300ms ease-in', style({ transform: '{{endTransform}}' })),\r\n        ],\r\n        {\r\n          params: {\r\n            startTransform: 'translateY(-100%)',\r\n            endTransform: 'translateY(0%)',\r\n          },\r\n        }\r\n      ),\r\n      transition(\r\n        ':leave',\r\n        [animate('300ms ease-out', style({ transform: '{{startTransform}}' }))],\r\n        {\r\n          params: {\r\n            startTransform: 'translateY(-100%)',\r\n            endTransform: 'translateY(0%)',\r\n          },\r\n        }\r\n      ),\r\n    ]),\r\n  ],\r\n})\r\nexport class AlertComponent implements AfterViewInit, OnDestroy {\r\n  private static activeAlerts: AlertComponent[] = [];\r\n  private _type: 'success' | 'error' | 'warning' | 'info' = 'info';\r\n  private _position:\r\n    | 'top-left'\r\n    | 'top-center'\r\n    | 'top-right'\r\n    | 'bottom-left'\r\n    | 'bottom-center'\r\n    | 'bottom-right' = 'top-right';\r\n  private _iconColor: string | null = null;\r\n  private _customClass: string | null = null;\r\n\r\n  @Input() message = '';\r\n  @Input()\r\n  set type(value: 'success' | 'error' | 'warning' | 'info') {\r\n    if (!['success', 'error', 'warning', 'info'].includes(value)) {\r\n      throw new Error(\r\n        `Invalid type: ${value}. Must be one of 'success', 'error', 'warning', 'info'.`\r\n      );\r\n    }\r\n    this._type = value;\r\n    this.cdr.markForCheck();\r\n  }\r\n  get type(): 'success' | 'error' | 'warning' | 'info' {\r\n    return this._type;\r\n  }\r\n\r\n  @Input() duration = 5000;\r\n  @Input() action: string | null = null;\r\n  @Input() dismissible = false;\r\n  @Input()\r\n  set position(\r\n    value:\r\n      | 'top-left'\r\n      | 'top-center'\r\n      | 'top-right'\r\n      | 'bottom-left'\r\n      | 'bottom-center'\r\n      | 'bottom-right'\r\n  ) {\r\n    if (\r\n      ![\r\n        'top-left',\r\n        'top-center',\r\n        'top-right',\r\n        'bottom-left',\r\n        'bottom-center',\r\n        'bottom-right',\r\n      ].includes(value)\r\n    ) {\r\n      throw new Error(\r\n        `Invalid position: ${value}. Must be one of 'top-left', 'top-center', 'top-right', 'bottom-left', 'bottom-center', 'bottom-right'.`\r\n      );\r\n    }\r\n    this._position = value;\r\n    this.cdr.markForCheck();\r\n  }\r\n  get position():\r\n    | 'top-left'\r\n    | 'top-center'\r\n    | 'top-right'\r\n    | 'bottom-left'\r\n    | 'bottom-center'\r\n    | 'bottom-right' {\r\n    return this._position;\r\n  }\r\n\r\n  @Input() icon: string | null = null;\r\n  @Input()\r\n  set iconColor(value: string | null) {\r\n    this._iconColor = value;\r\n    this.cdr.detectChanges(); // Force change detection\r\n  }\r\n  get iconColor(): string | null {\r\n    return this._iconColor;\r\n  }\r\n\r\n  @Input()\r\n  set customClass(value: string | null) {\r\n    this._customClass = value;\r\n    this.cdr.detectChanges(); // Force change detection\r\n  }\r\n  get customClass(): string | null {\r\n    return this._customClass;\r\n  }\r\n\r\n  @Input() animation: 'fade' | 'slide' = 'fade';\r\n  @Input() actionTemplate: TemplateRef<unknown> | null = null;\r\n  @Input() bypassDuplicateCheck = false;\r\n\r\n  @Output() actionClicked = new EventEmitter<void>();\r\n  @Output() closed = new EventEmitter<void>();\r\n\r\n  isVisible = true;\r\n  offset = 0;\r\n  private timer: ReturnType<typeof setTimeout> | null = null;\r\n\r\n  constructor(private cdr: ChangeDetectorRef) {}\r\n\r\n  ngAfterViewInit(): void {\r\n    if (!this.bypassDuplicateCheck) {\r\n      const duplicate = AlertComponent.activeAlerts.find(\r\n        (alert) =>\r\n          alert.message === this.message && alert.position === this.position\r\n      );\r\n      if (duplicate) {\r\n        this.isVisible = false;\r\n        this.cdr.markForCheck();\r\n        return;\r\n      }\r\n    }\r\n\r\n    AlertComponent.activeAlerts.push(this);\r\n    this.updatePositions();\r\n    if (this.duration > 0) {\r\n      this.startTimer();\r\n    }\r\n  }\r\n\r\n  ngOnDestroy(): void {\r\n    const index = AlertComponent.activeAlerts.indexOf(this);\r\n    if (index !== -1) {\r\n      AlertComponent.activeAlerts.splice(index, 1);\r\n      this.updatePositions();\r\n    }\r\n    this.clearTimer();\r\n  }\r\n\r\n  getClasses(): string[] {\r\n    const classes: string[] = [];\r\n\r\n    switch (this.type) {\r\n      case 'success':\r\n        classes.push(\r\n          'bg-green-100 border-green-500 text-green-800 dark:bg-green-900 dark:border-green-600 dark:text-green-200'\r\n        );\r\n        break;\r\n      case 'error':\r\n        classes.push(\r\n          'bg-red-100 border-red-500 text-red-800 dark:bg-red-900 dark:border-red-600 dark:text-red-200'\r\n        );\r\n        break;\r\n      case 'warning':\r\n        classes.push(\r\n          'bg-yellow-100 border-yellow-500 text-yellow-800 dark:bg-yellow-900 dark:border-yellow-600 dark:text-yellow-200'\r\n        );\r\n        break;\r\n      case 'info':\r\n        classes.push(\r\n          'bg-blue-100 border-blue-500 text-blue-800 dark:bg-blue-900 dark:border-blue-600 dark:text-blue-200'\r\n        );\r\n        break;\r\n    }\r\n\r\n    if (this.position === 'top-left' || this.position === 'bottom-left') {\r\n      classes.push('left-4');\r\n    } else if (\r\n      this.position === 'top-center' ||\r\n      this.position === 'bottom-center'\r\n    ) {\r\n      classes.push('left-1/2', '-translate-x-1/2');\r\n    } else if (\r\n      this.position === 'top-right' ||\r\n      this.position === 'bottom-right'\r\n    ) {\r\n      classes.push('right-4');\r\n    }\r\n\r\n    if (this.customClass) {\r\n      classes.push(this.customClass);\r\n    }\r\n\r\n    return classes;\r\n  }\r\n\r\n  getIcon(): string {\r\n    if (this.icon) {\r\n      return this.icon;\r\n    }\r\n    switch (this.type) {\r\n      case 'success':\r\n        return 'check_circle';\r\n      case 'error':\r\n        return 'error';\r\n      case 'warning':\r\n        return 'warning';\r\n      case 'info':\r\n        return 'info';\r\n      default:\r\n        return 'info';\r\n    }\r\n  }\r\n\r\n  getAnimationParams() {\r\n    const isTop = this.position.includes('top');\r\n    const isLeft = this.position.includes('left');\r\n    const isRight = this.position.includes('right');\r\n    return {\r\n      startTransform: isTop\r\n        ? 'translateY(-100%)'\r\n        : isLeft\r\n        ? 'translateX(-100%)'\r\n        : isRight\r\n        ? 'translateX(100%)'\r\n        : 'translateY(100%)',\r\n      endTransform: 'translateY(0%) translateX(0%)',\r\n    };\r\n  }\r\n\r\n  get ariaLabel(): string {\r\n    return `${this.type} alert: ${this.message}${\r\n      this.action ? ', with action: ' + this.action : ''\r\n    }`;\r\n  }\r\n\r\n  onAction(): void {\r\n    this.actionClicked.emit();\r\n  }\r\n\r\n  close(): void {\r\n    this.isVisible = false;\r\n    this.closed.emit();\r\n    this.cdr.markForCheck();\r\n  }\r\n\r\n  pauseTimer(): void {\r\n    this.clearTimer();\r\n  }\r\n\r\n  resumeTimer(): void {\r\n    if (this.duration > 0) {\r\n      this.startTimer();\r\n    }\r\n  }\r\n\r\n  private startTimer(): void {\r\n    this.clearTimer();\r\n    this.timer = setTimeout(() => {\r\n      this.close();\r\n    }, this.duration);\r\n  }\r\n\r\n  private clearTimer(): void {\r\n    if (this.timer) {\r\n      clearTimeout(this.timer);\r\n      this.timer = null;\r\n    }\r\n  }\r\n\r\n  private updatePositions(): void {\r\n    const alertsAtPosition = AlertComponent.activeAlerts.filter(\r\n      (alert) => alert.position === this.position && alert.isVisible\r\n    );\r\n    let offset = 0;\r\n    for (const alert of alertsAtPosition) {\r\n      alert.offset = offset;\r\n      offset += 60; // Adjust based on alert height + margin\r\n      alert.cdr.markForCheck();\r\n    }\r\n  }\r\n}\r\n",
+            "sourceCode": "import {\n  Component,\n  Input,\n  ChangeDetectionStrategy,\n  ChangeDetectorRef,\n  AfterViewInit,\n  OnDestroy,\n  TemplateRef,\n  Output,\n  EventEmitter,\n} from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { animate, style, transition, trigger } from '@angular/animations';\n\n@Component({\n  selector: 'lib-alert',\n  standalone: true,\n  imports: [CommonModule],\n  templateUrl: './alert.component.html',\n  styleUrls: ['./alert.component.css'],\n  changeDetection: ChangeDetectionStrategy.OnPush,\n  animations: [\n    trigger('fadeInOut', [\n      transition(':enter', [\n        style({ opacity: 0 }),\n        animate('300ms ease-in', style({ opacity: 1 })),\n      ]),\n      transition(':leave', [animate('300ms ease-out', style({ opacity: 0 }))]),\n    ]),\n    trigger('slideInOut', [\n      transition(\n        ':enter',\n        [\n          style({ transform: '{{startTransform}}' }),\n          animate('300ms ease-in', style({ transform: '{{endTransform}}' })),\n        ],\n        {\n          params: {\n            startTransform: 'translateY(-100%)',\n            endTransform: 'translateY(0%)',\n          },\n        }\n      ),\n      transition(\n        ':leave',\n        [animate('300ms ease-out', style({ transform: '{{startTransform}}' }))],\n        {\n          params: {\n            startTransform: 'translateY(-100%)',\n            endTransform: 'translateY(0%)',\n          },\n        }\n      ),\n    ]),\n  ],\n})\nexport class AlertComponent implements AfterViewInit, OnDestroy {\n  private static activeAlerts: AlertComponent[] = [];\n  private _type: 'success' | 'error' | 'warning' | 'info' = 'info';\n  private _position:\n    | 'top-left'\n    | 'top-center'\n    | 'top-right'\n    | 'bottom-left'\n    | 'bottom-center'\n    | 'bottom-right' = 'top-right';\n  private _iconColor: string | null = null;\n  private _customClass: string | null = null;\n\n  @Input() message = '';\n  @Input()\n  set type(value: 'success' | 'error' | 'warning' | 'info') {\n    if (!['success', 'error', 'warning', 'info'].includes(value)) {\n      throw new Error(\n        `Invalid type: ${value}. Must be one of 'success', 'error', 'warning', 'info'.`\n      );\n    }\n    this._type = value;\n    this.cdr.markForCheck();\n  }\n  get type(): 'success' | 'error' | 'warning' | 'info' {\n    return this._type;\n  }\n\n  @Input() duration = 5000;\n  @Input() action: string | null = null;\n  @Input() dismissible = false;\n  @Input()\n  set position(\n    value:\n      | 'top-left'\n      | 'top-center'\n      | 'top-right'\n      | 'bottom-left'\n      | 'bottom-center'\n      | 'bottom-right'\n  ) {\n    if (\n      ![\n        'top-left',\n        'top-center',\n        'top-right',\n        'bottom-left',\n        'bottom-center',\n        'bottom-right',\n      ].includes(value)\n    ) {\n      throw new Error(\n        `Invalid position: ${value}. Must be one of 'top-left', 'top-center', 'top-right', 'bottom-left', 'bottom-center', 'bottom-right'.`\n      );\n    }\n    this._position = value;\n    this.cdr.markForCheck();\n  }\n  get position():\n    | 'top-left'\n    | 'top-center'\n    | 'top-right'\n    | 'bottom-left'\n    | 'bottom-center'\n    | 'bottom-right' {\n    return this._position;\n  }\n\n  @Input() icon: string | null = null;\n  @Input()\n  set iconColor(value: string | null) {\n    this._iconColor = value;\n    this.cdr.detectChanges(); // Force change detection\n  }\n  get iconColor(): string | null {\n    return this._iconColor;\n  }\n\n  @Input()\n  set customClass(value: string | null) {\n    this._customClass = value;\n    this.cdr.detectChanges(); // Force change detection\n  }\n  get customClass(): string | null {\n    return this._customClass;\n  }\n\n  @Input() animation: 'fade' | 'slide' = 'fade';\n  @Input() actionTemplate: TemplateRef<unknown> | null = null;\n  @Input() bypassDuplicateCheck = false;\n\n  @Output() actionClicked = new EventEmitter<void>();\n  @Output() closed = new EventEmitter<void>();\n\n  isVisible = true;\n  offset = 0;\n  private timer: ReturnType<typeof setTimeout> | null = null;\n\n  constructor(private cdr: ChangeDetectorRef) {}\n\n  ngAfterViewInit(): void {\n    if (!this.bypassDuplicateCheck) {\n      const duplicate = AlertComponent.activeAlerts.find(\n        (alert) =>\n          alert.message === this.message && alert.position === this.position\n      );\n      if (duplicate) {\n        this.isVisible = false;\n        this.cdr.markForCheck();\n        return;\n      }\n    }\n\n    AlertComponent.activeAlerts.push(this);\n    this.updatePositions();\n    if (this.duration > 0) {\n      this.startTimer();\n    }\n  }\n\n  ngOnDestroy(): void {\n    const index = AlertComponent.activeAlerts.indexOf(this);\n    if (index !== -1) {\n      AlertComponent.activeAlerts.splice(index, 1);\n      this.updatePositions();\n    }\n    this.clearTimer();\n  }\n\n  getClasses(): string[] {\n    const classes: string[] = [];\n\n    switch (this.type) {\n      case 'success':\n        classes.push(\n          'bg-green-100 border-green-500 text-green-800 dark:bg-green-900 dark:border-green-600 dark:text-green-200'\n        );\n        break;\n      case 'error':\n        classes.push(\n          'bg-red-100 border-red-500 text-red-800 dark:bg-red-900 dark:border-red-600 dark:text-red-200'\n        );\n        break;\n      case 'warning':\n        classes.push(\n          'bg-yellow-100 border-yellow-500 text-yellow-800 dark:bg-yellow-900 dark:border-yellow-600 dark:text-yellow-200'\n        );\n        break;\n      case 'info':\n        classes.push(\n          'bg-blue-100 border-blue-500 text-blue-800 dark:bg-blue-900 dark:border-blue-600 dark:text-blue-200'\n        );\n        break;\n    }\n\n    if (this.position === 'top-left' || this.position === 'bottom-left') {\n      classes.push('left-4');\n    } else if (\n      this.position === 'top-center' ||\n      this.position === 'bottom-center'\n    ) {\n      classes.push('left-1/2', '-translate-x-1/2');\n    } else if (\n      this.position === 'top-right' ||\n      this.position === 'bottom-right'\n    ) {\n      classes.push('right-4');\n    }\n\n    if (this.customClass) {\n      classes.push(this.customClass);\n    }\n\n    return classes;\n  }\n\n  getIcon(): string {\n    if (this.icon) {\n      return this.icon;\n    }\n    switch (this.type) {\n      case 'success':\n        return 'check_circle';\n      case 'error':\n        return 'error';\n      case 'warning':\n        return 'warning';\n      case 'info':\n        return 'info';\n      default:\n        return 'info';\n    }\n  }\n\n  getAnimationParams() {\n    const isTop = this.position.includes('top');\n    const isLeft = this.position.includes('left');\n    const isRight = this.position.includes('right');\n    return {\n      startTransform: isTop\n        ? 'translateY(-100%)'\n        : isLeft\n        ? 'translateX(-100%)'\n        : isRight\n        ? 'translateX(100%)'\n        : 'translateY(100%)',\n      endTransform: 'translateY(0%) translateX(0%)',\n    };\n  }\n\n  get ariaLabel(): string {\n    return `${this.type} alert: ${this.message}${\n      this.action ? ', with action: ' + this.action : ''\n    }`;\n  }\n\n  onAction(): void {\n    this.actionClicked.emit();\n  }\n\n  close(): void {\n    this.isVisible = false;\n    this.closed.emit();\n    this.cdr.markForCheck();\n  }\n\n  pauseTimer(): void {\n    this.clearTimer();\n  }\n\n  resumeTimer(): void {\n    if (this.duration > 0) {\n      this.startTimer();\n    }\n  }\n\n  private startTimer(): void {\n    this.clearTimer();\n    this.timer = setTimeout(() => {\n      this.close();\n    }, this.duration);\n  }\n\n  private clearTimer(): void {\n    if (this.timer) {\n      clearTimeout(this.timer);\n      this.timer = null;\n    }\n  }\n\n  private updatePositions(): void {\n    const alertsAtPosition = AlertComponent.activeAlerts.filter(\n      (alert) => alert.position === this.position && alert.isVisible\n    );\n    let offset = 0;\n    for (const alert of alertsAtPosition) {\n      alert.offset = offset;\n      offset += 60; // Adjust based on alert height + margin\n      alert.cdr.markForCheck();\n    }\n  }\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": "@import url('https://fonts.googleapis.com/icon?family=Material+Icons');\r\n\r\n@import 'tailwindcss/base';\r\n@import 'tailwindcss/components';\r\n@import 'tailwindcss/utilities';\r\n\r\n.material-icons {\r\n  font-family: 'Material Icons';\r\n  font-size: 18px; /* Matches text-lg in Tailwind */\r\n  font-weight: normal;\r\n  font-style: normal;\r\n  display: inline-block;\r\n  line-height: 1;\r\n  text-transform: none;\r\n  letter-spacing: normal;\r\n  word-wrap: normal;\r\n  white-space: nowrap;\r\n  direction: ltr;\r\n}\r\n\r\n.message {\r\n  max-width: 300px; /* Adjust as needed */\r\n  white-space: nowrap;\r\n  overflow: hidden;\r\n  text-overflow: ellipsis;\r\n}\r\n\r\n.material-icons--custom-color {\r\n  color: inherit !important;\r\n}\r\n",
+                    "data": "@import url('https://fonts.googleapis.com/icon?family=Material+Icons');\n\n.material-icons {\n  font-family: 'Material Icons';\n  font-size: 18px; /* Matches text-lg in Tailwind */\n  font-weight: normal;\n  font-style: normal;\n  display: inline-block;\n  line-height: 1;\n  text-transform: none;\n  letter-spacing: normal;\n  word-wrap: normal;\n  white-space: nowrap;\n  direction: ltr;\n}\n\n.message {\n  max-width: 300px; /* Adjust as needed */\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n}\n\n.material-icons--custom-color {\n  color: inherit !important;\n}\n",
                     "styleUrl": "./alert.component.css"
                 }
             ],
@@ -856,11 +856,11 @@
                     }
                 }
             },
-            "templateData": "<div\r\n  *ngIf=\"isVisible\"\r\n  class=\"alert fixed z-50 p-4 rounded-lg shadow-lg flex justify-between items-center max-w-md mx-auto bg-gray-100 border border-gray-300 dark:bg-gray-800 dark:border-gray-600 dark:text-gray-200\"\r\n  [ngClass]=\"getClasses()\"\r\n  [style.top]=\"position.includes('top') ? 4 + offset + 'px' : null\"\r\n  [style.bottom]=\"position.includes('bottom') ? 4 + offset + 'px' : null\"\r\n  role=\"alert\"\r\n  aria-live=\"polite\"\r\n  [attr.aria-label]=\"ariaLabel\"\r\n  [@fadeInOut]=\"animation === 'fade' ? { value: '' } : null\"\r\n  [@slideInOut]=\"\r\n    animation === 'slide' ? { value: '', params: getAnimationParams() } : null\r\n  \"\r\n  (mouseenter)=\"pauseTimer()\"\r\n  (mouseleave)=\"resumeTimer()\"\r\n>\r\n  <div class=\"flex items-center space-x-2\">\r\n    <span\r\n      class=\"material-icons text-lg\"\r\n      [ngClass]=\"\r\n        iconColor\r\n          ? 'material-icons--custom-color ' + iconColor\r\n          : type === 'success'\r\n          ? 'text-green-600 dark:text-green-400'\r\n          : type === 'error'\r\n          ? 'text-red-600 dark:text-red-400'\r\n          : type === 'warning'\r\n          ? 'text-yellow-600 dark:text-yellow-400'\r\n          : 'text-blue-600 dark:text-blue-400'\r\n      \"\r\n    >\r\n      {{ getIcon() }}\r\n    </span>\r\n    <span class=\"message\">{{ message }}</span>\r\n  </div>\r\n  <div class=\"flex space-x-2\">\r\n    <ng-container *ngIf=\"action\">\r\n      <ng-container\r\n        *ngTemplateOutlet=\"actionTemplate || defaultActionTemplate\"\r\n      ></ng-container>\r\n    </ng-container>\r\n    <button\r\n      *ngIf=\"dismissible\"\r\n      (click)=\"close()\"\r\n      (keydown.enter)=\"close()\"\r\n      (keydown.space)=\"close()\"\r\n      class=\"text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300 focus:outline-none text-xl\"\r\n      aria-label=\"Close alert\"\r\n      tabindex=\"0\"\r\n    >\r\n      ✕\r\n    </button>\r\n  </div>\r\n</div>\r\n\r\n<ng-template #defaultActionTemplate>\r\n  <button\r\n    (click)=\"onAction()\"\r\n    (keydown.enter)=\"onAction()\"\r\n    (keydown.space)=\"onAction()\"\r\n    class=\"text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 focus:outline-none underline\"\r\n    [attr.aria-label]=\"action + ' action'\"\r\n    tabindex=\"0\"\r\n  >\r\n    {{ action }}\r\n  </button>\r\n</ng-template>\r\n"
+            "templateData": "<div\n  *ngIf=\"isVisible\"\n  class=\"alert fixed z-50 p-4 rounded-lg shadow-lg flex justify-between items-center max-w-md mx-auto bg-gray-100 border border-gray-300 dark:bg-gray-800 dark:border-gray-600 dark:text-gray-200\"\n  [ngClass]=\"getClasses()\"\n  [style.top]=\"position.includes('top') ? 4 + offset + 'px' : null\"\n  [style.bottom]=\"position.includes('bottom') ? 4 + offset + 'px' : null\"\n  role=\"alert\"\n  aria-live=\"polite\"\n  [attr.aria-label]=\"ariaLabel\"\n  [@fadeInOut]=\"animation === 'fade' ? { value: '' } : null\"\n  [@slideInOut]=\"\n    animation === 'slide' ? { value: '', params: getAnimationParams() } : null\n  \"\n  (mouseenter)=\"pauseTimer()\"\n  (mouseleave)=\"resumeTimer()\"\n>\n  <div class=\"flex items-center space-x-2\">\n    <span\n      class=\"material-icons text-lg\"\n      [ngClass]=\"\n        iconColor\n          ? 'material-icons--custom-color ' + iconColor\n          : type === 'success'\n          ? 'text-green-600 dark:text-green-400'\n          : type === 'error'\n          ? 'text-red-600 dark:text-red-400'\n          : type === 'warning'\n          ? 'text-yellow-600 dark:text-yellow-400'\n          : 'text-blue-600 dark:text-blue-400'\n      \"\n    >\n      {{ getIcon() }}\n    </span>\n    <span class=\"message\">{{ message }}</span>\n  </div>\n  <div class=\"flex space-x-2\">\n    <ng-container *ngIf=\"action\">\n      <ng-container\n        *ngTemplateOutlet=\"actionTemplate || defaultActionTemplate\"\n      ></ng-container>\n    </ng-container>\n    <button\n      *ngIf=\"dismissible\"\n      (click)=\"close()\"\n      (keydown.enter)=\"close()\"\n      (keydown.space)=\"close()\"\n      class=\"text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300 focus:outline-none text-xl\"\n      aria-label=\"Close alert\"\n      tabindex=\"0\"\n    >\n      ✕\n    </button>\n  </div>\n</div>\n\n<ng-template #defaultActionTemplate>\n  <button\n    (click)=\"onAction()\"\n    (keydown.enter)=\"onAction()\"\n    (keydown.space)=\"onAction()\"\n    class=\"text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 focus:outline-none underline\"\n    [attr.aria-label]=\"action + ' action'\"\n    tabindex=\"0\"\n  >\n    {{ action }}\n  </button>\n</ng-template>\n"
         },
         {
             "name": "ButtonComponent",
-            "id": "component-ButtonComponent-4a0e060db7ffd16a679766d8091dfca8a2ed6c08cda8975d4756d1434716949e4060c639031b77f2ca38977983acb0622a2fa77db817a21a979f35ebeca9f233",
+            "id": "component-ButtonComponent-7b549b2939b9a34abd922e3a0255997fdcdc44e13e0d3149f6f081fd94e8328dfcef16d4b504efc25d22156e814a32fd37682ce25460fb63fbe9f89259f6c17c",
             "file": "libs/ngx-tailwind-flex-ui/src/lib/button/button.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -925,7 +925,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, Input, HostBinding } from '@angular/core';\r\n\r\n@Component({\r\n  selector: 'lib-button',\r\n  standalone: true,\r\n  templateUrl: './button.component.html',\r\n  styles: [], // No inline styles; Tailwind handles it\r\n})\r\nexport class ButtonComponent {\r\n  @Input() variant: 'primary' | 'accent' | 'outline' | 'text' = 'primary';\r\n  @Input() disabled = false;\r\n  @Input() class = ''; // Allow users to pass custom Tailwind classes\r\n\r\n  @HostBinding('class') get hostClasses() {\r\n    const baseClasses =\r\n      'inline-flex items-center justify-center px-4 py-2 rounded-md font-medium transition-colors duration-200';\r\n    const variantClasses = {\r\n      primary:\r\n        'bg-blue-600 text-white hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2',\r\n      accent:\r\n        'bg-purple-600 text-white hover:bg-purple-700 focus:ring-2 focus:ring-purple-500 focus:ring-offset-2',\r\n      outline:\r\n        'border border-gray-300 text-gray-700 hover:bg-gray-100 focus:ring-2 focus:ring-gray-500 focus:ring-offset-2',\r\n      text: 'text-gray-700 hover:bg-gray-100 focus:ring-2 focus:ring-gray-500 focus:ring-offset-2',\r\n    };\r\n    const disabledClasses = this.disabled\r\n      ? 'opacity-50 cursor-not-allowed'\r\n      : '';\r\n\r\n    return `${baseClasses} ${variantClasses[this.variant]} ${disabledClasses} ${\r\n      this.class\r\n    }`.trim();\r\n  }\r\n}\r\n",
+            "sourceCode": "import { Component, Input, HostBinding } from '@angular/core';\n\n@Component({\n  selector: 'lib-button',\n  standalone: true,\n  templateUrl: './button.component.html',\n  styles: [], // No inline styles; Tailwind handles it\n})\nexport class ButtonComponent {\n  @Input() variant: 'primary' | 'accent' | 'outline' | 'text' = 'primary';\n  @Input() disabled = false;\n  @Input() class = ''; // Allow users to pass custom Tailwind classes\n\n  @HostBinding('class') get hostClasses() {\n    const baseClasses =\n      'inline-flex items-center justify-center px-4 py-2 rounded-md font-medium transition-colors duration-200';\n    const variantClasses = {\n      primary:\n        'bg-blue-600 text-white hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2',\n      accent:\n        'bg-purple-600 text-white hover:bg-purple-700 focus:ring-2 focus:ring-purple-500 focus:ring-offset-2',\n      outline:\n        'border border-gray-300 text-gray-700 hover:bg-gray-100 focus:ring-2 focus:ring-gray-500 focus:ring-offset-2',\n      text: 'text-gray-700 hover:bg-gray-100 focus:ring-2 focus:ring-gray-500 focus:ring-offset-2',\n    };\n    const disabledClasses = this.disabled\n      ? 'opacity-50 cursor-not-allowed'\n      : '';\n\n    return `${baseClasses} ${variantClasses[this.variant]} ${disabledClasses} ${\n      this.class\n    }`.trim();\n  }\n}\n",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
@@ -941,11 +941,11 @@
                     }
                 }
             },
-            "templateData": "<button [disabled]=\"disabled\">\r\n  <ng-content></ng-content>\r\n</button>\r\n"
+            "templateData": "<button [disabled]=\"disabled\">\n  <ng-content></ng-content>\n</button>\n"
         },
         {
             "name": "IconComponent",
-            "id": "component-IconComponent-f8319707c4db8c28b1c60cee96154c58150cc29b3cf08e5d353aea2d6c0988772ae60eaf015395a6d4d3e8fb7cf4bea0e18774b39cae83d9e473d3a30a4a0fe0",
+            "id": "component-IconComponent-f4ffddc67d4dc8cdcc909de572d3660df47682439e6a9f4405942573613c1afc2dac2183ba5b0f69bbb0568ec3eb59ac6e3bfa8c56f5eecf072b8b573f060f08",
             "file": "libs/ngx-tailwind-flex-ui/src/lib/icon/icon.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -1008,11 +1008,11 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, Input } from '@angular/core';\r\nimport { CommonModule } from '@angular/common';\r\n\r\n@Component({\r\n  selector: 'lib-icon',\r\n  standalone: true,\r\n  imports: [CommonModule],\r\n  templateUrl: './icon.component.html',\r\n  styleUrls: ['./icon.component.css'],\r\n})\r\nexport class IconComponent {\r\n  @Input() name = 'home';\r\n  @Input() size: 'sm' | 'md' | 'lg' | 'xl' = 'md';\r\n  @Input() color = 'text-gray-500';\r\n\r\n  get sizePx(): number {\r\n    const sizeMap: Record<string, number> = {\r\n      sm: 16,\r\n      md: 24,  // Default Material Icon size\r\n      lg: 32,\r\n      xl: 48,\r\n    };\r\n    return sizeMap[this.size] || sizeMap['md'];\r\n  }\r\n\r\n  get colorClass(): string {\r\n    return this.color;\r\n  }\r\n}\r\n",
+            "sourceCode": "import { Component, Input } from '@angular/core';\nimport { CommonModule } from '@angular/common';\n\n@Component({\n  selector: 'lib-icon',\n  standalone: true,\n  imports: [CommonModule],\n  templateUrl: './icon.component.html',\n  styleUrls: ['./icon.component.css'],\n})\nexport class IconComponent {\n  @Input() name = 'home';\n  @Input() size: 'sm' | 'md' | 'lg' | 'xl' = 'md';\n  @Input() color = 'text-gray-500';\n\n  get sizePx(): number {\n    const sizeMap: Record<string, number> = {\n      sm: 16,\n      md: 24,  // Default Material Icon size\n      lg: 32,\n      xl: 48,\n    };\n    return sizeMap[this.size] || sizeMap['md'];\n  }\n\n  get colorClass(): string {\n    return this.color;\n  }\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": ".material-icons {\r\n    display: inline-flex;\r\n    align-items: center;\r\n    justify-content: center;\r\n    vertical-align: middle;\r\n}",
+                    "data": ".material-icons {\n    display: inline-flex;\n    align-items: center;\n    justify-content: center;\n    vertical-align: middle;\n}",
                     "styleUrl": "./icon.component.css"
                 }
             ],
@@ -1038,11 +1038,146 @@
                     }
                 }
             },
-            "templateData": "<span \r\n  class=\"material-icons\"\r\n  [ngClass]=\"colorClass\"\r\n  [style.font-size.px]=\"sizePx\">\r\n  {{ name }}\r\n</span>\r\n"
+            "templateData": "<span \n  class=\"material-icons\"\n  [ngClass]=\"colorClass\"\n  [style.font-size.px]=\"sizePx\">\n  {{ name }}\n</span>\n"
+        },
+        {
+            "name": "InputComponent",
+            "id": "component-InputComponent-1fdaf3e6353e432502bca061ee25725ff03f67508fe5f778842c1764fb50a46a9239c0863872b3fced46d5ee101297d6fa9fd52da80c0e003473a6e557e178a1",
+            "file": "libs/ngx-tailwind-flex-ui/src/lib/input/input.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "lib-input",
+            "styleUrls": [],
+            "styles": [],
+            "templateUrl": [
+                "./input.component.html"
+            ],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [
+                {
+                    "name": "class",
+                    "defaultValue": "''",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 15,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "disabled",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 18,
+                    "type": "boolean",
+                    "decorators": []
+                },
+                {
+                    "name": "placeholder",
+                    "defaultValue": "''",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 17,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "size",
+                    "defaultValue": "'md'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 13,
+                    "type": "\"sm\" | \"md\" | \"lg\"",
+                    "decorators": []
+                },
+                {
+                    "name": "state",
+                    "defaultValue": "'default'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 14,
+                    "type": "\"default\" | \"error\" | \"success\"",
+                    "decorators": []
+                },
+                {
+                    "name": "type",
+                    "defaultValue": "'text'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 16,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "value",
+                    "defaultValue": "null",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 19,
+                    "type": "string | number | null",
+                    "decorators": []
+                },
+                {
+                    "name": "variant",
+                    "defaultValue": "'outline'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 12,
+                    "type": "\"outline\" | \"filled\"",
+                    "decorators": []
+                }
+            ],
+            "outputsClass": [],
+            "propertiesClass": [],
+            "methodsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [
+                {
+                    "name": "class",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 21,
+                    "type": "any",
+                    "decorators": []
+                }
+            ],
+            "hostListeners": [],
+            "standalone": true,
+            "imports": [
+                {
+                    "name": "CommonModule",
+                    "type": "module"
+                }
+            ],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component, Input, HostBinding } from '@angular/core';\nimport { CommonModule } from '@angular/common';\n\n@Component({\n  selector: 'lib-input',\n  standalone: true,\n  imports: [CommonModule],\n  templateUrl: './input.component.html',\n  styles: [], // Tailwind only\n})\nexport class InputComponent {\n  @Input() variant: 'outline' | 'filled' = 'outline';\n  @Input() size: 'sm' | 'md' | 'lg' = 'md';\n  @Input() state: 'default' | 'error' | 'success' = 'default';\n  @Input() class = '';\n  @Input() type = 'text';\n  @Input() placeholder = '';\n  @Input() disabled = false;\n  @Input() value: string | number | null = null;\n\n  @HostBinding('class') get hostClasses() {\n    const base = 'block w-full focus:outline-none transition-colors';\n    const variantMap = {\n      outline: 'bg-white border border-gray-300 focus:border-blue-500',\n      filled: 'bg-gray-100 border border-transparent focus:border-blue-500',\n    };\n    const sizeMap = {\n      sm: 'px-2 py-1 text-sm rounded',\n      md: 'px-3 py-2 text-base rounded-md',\n      lg: 'px-4 py-3 text-lg rounded-lg',\n    };\n    const stateMap = {\n      default: '',\n      error: 'border-red-500 focus:border-red-600',\n      success: 'border-green-500 focus:border-green-600',\n    };\n    const disabled = this.disabled ? 'opacity-50 cursor-not-allowed' : '';\n    return `${base} ${variantMap[this.variant]} ${sizeMap[this.size]} ${stateMap[this.state]} ${disabled} ${this.class}`.trim();\n  }\n}\n",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "",
+            "extends": [],
+            "accessors": {
+                "hostClasses": {
+                    "name": "hostClasses",
+                    "getSignature": {
+                        "name": "hostClasses",
+                        "type": "",
+                        "returnType": "",
+                        "line": 21
+                    }
+                }
+            },
+            "templateData": "<input\n  [type]=\"type\"\n  [placeholder]=\"placeholder\"\n  [disabled]=\"disabled\"\n  [ngModel]=\"value\"\n  class=\"w-full bg-transparent\"\n/>\n"
         },
         {
             "name": "LoadingSpinnerComponent",
-            "id": "component-LoadingSpinnerComponent-87646e3e0b77bb88f2ed95a1c78b1b56876072354a4b59a95947194859bc52044d1abe3d30b75bb063d39e64c4a3b386c488745ad2424f51f0603f821834f0ca",
+            "id": "component-LoadingSpinnerComponent-10509c463c4902342a644ec0f29cb262b6513479ebdd929cfacec37856de1d1ef4beb814f63ac3f69346f425e71fbf1fbe354f8313e1b711ac3f038fe8fd695d",
             "file": "libs/ngx-tailwind-flex-ui/src/lib/loadingSpinner/loadingSpinner.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -1123,21 +1258,21 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, Input } from '@angular/core';\r\nimport { CommonModule } from '@angular/common';\r\n\r\n@Component({\r\n  selector: 'lib-loading-spinner',\r\n  standalone: true,\r\n  imports: [CommonModule],\r\n  templateUrl: './loadingSpinner.component.html',\r\n  styleUrls: ['./loadingSpinner.component.css'],\r\n})\r\nexport class LoadingSpinnerComponent {\r\n  @Input() mode: 'determinate' | 'indeterminate' = 'indeterminate'; // Loading state\r\n  @Input() value = 0; // Progress value (0-100) for determinate mode\r\n  @Input() size = 40; // Diameter in pixels\r\n  @Input() thickness = 4; // Stroke width in pixels\r\n  @Input() color = '#3b82f6'; // Default Tailwind blue-500\r\n}\r\n",
+            "sourceCode": "import { Component, Input } from '@angular/core';\nimport { CommonModule } from '@angular/common';\n\n@Component({\n  selector: 'lib-loading-spinner',\n  standalone: true,\n  imports: [CommonModule],\n  templateUrl: './loadingSpinner.component.html',\n  styleUrls: ['./loadingSpinner.component.css'],\n})\nexport class LoadingSpinnerComponent {\n  @Input() mode: 'determinate' | 'indeterminate' = 'indeterminate'; // Loading state\n  @Input() value = 0; // Progress value (0-100) for determinate mode\n  @Input() size = 40; // Diameter in pixels\n  @Input() thickness = 4; // Stroke width in pixels\n  @Input() color = '#3b82f6'; // Default Tailwind blue-500\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": ":host {\r\n  display: inline-block;\r\n}\r\n\r\nsvg {\r\n  display: block;\r\n}\r\n",
+                    "data": ":host {\n  display: inline-block;\n}\n\nsvg {\n  display: block;\n}\n",
                     "styleUrl": "./loadingSpinner.component.css"
                 }
             ],
             "stylesData": "",
             "extends": [],
-            "templateData": "<div\r\n  class=\"relative inline-block\"\r\n  [style.width.px]=\"size\"\r\n  [style.height.px]=\"size\"\r\n  role=\"progressbar\"\r\n  [attr.aria-valuenow]=\"mode === 'determinate' ? value : null\"\r\n  [attr.aria-valuemin]=\"0\"\r\n  [attr.aria-valuemax]=\"100\"\r\n  [attr.aria-label]=\"mode === 'determinate' ? 'Loading progress' : 'Loading'\"\r\n>\r\n  <!-- Indeterminate Spinner -->\r\n  <svg\r\n    *ngIf=\"mode === 'indeterminate'\"\r\n    class=\"animate-spin\"\r\n    [style.width.px]=\"size\"\r\n    [style.height.px]=\"size\"\r\n    viewBox=\"0 0 100 100\"\r\n    xmlns=\"http://www.w3.org/2000/svg\"\r\n  >\r\n    <circle\r\n      class=\"opacity-25\"\r\n      cx=\"50\"\r\n      cy=\"50\"\r\n      r=\"40\"\r\n      [style.stroke]=\"color\"\r\n      [style.stroke-width]=\"thickness\"\r\n      fill=\"none\"\r\n    />\r\n    <circle\r\n      cx=\"50\"\r\n      cy=\"50\"\r\n      r=\"40\"\r\n      [style.stroke]=\"color\"\r\n      [style.stroke-width]=\"thickness\"\r\n      fill=\"none\"\r\n      stroke-linecap=\"round\"\r\n      stroke-dasharray=\"251.2\"\r\n      stroke-dashoffset=\"62.8\"\r\n    />\r\n  </svg>\r\n\r\n  <!-- Determinate Spinner -->\r\n  <svg\r\n    *ngIf=\"mode === 'determinate'\"\r\n    [style.width.px]=\"size\"\r\n    [style.height.px]=\"size\"\r\n    viewBox=\"0 0 100 100\"\r\n    xmlns=\"http://www.w3.org/2000/svg\"\r\n  >\r\n    <circle\r\n      class=\"opacity-25\"\r\n      cx=\"50\"\r\n      cy=\"50\"\r\n      r=\"40\"\r\n      [style.stroke]=\"color\"\r\n      [style.stroke-width]=\"thickness\"\r\n      fill=\"none\"\r\n    />\r\n    <circle\r\n      class=\"transition-all duration-300 ease-in-out\"\r\n      cx=\"50\"\r\n      cy=\"50\"\r\n      r=\"40\"\r\n      [style.stroke]=\"color\"\r\n      [style.stroke-width]=\"thickness\"\r\n      fill=\"none\"\r\n      stroke-linecap=\"round\"\r\n      [style.stroke-dasharray]=\"251.2\"\r\n      [style.stroke-dashoffset]=\"251.2 - 251.2 * (value / 100)\"\r\n    />\r\n  </svg>\r\n</div>\r\n"
+            "templateData": "<div\n  class=\"relative inline-block\"\n  [style.width.px]=\"size\"\n  [style.height.px]=\"size\"\n  role=\"progressbar\"\n  [attr.aria-valuenow]=\"mode === 'determinate' ? value : null\"\n  [attr.aria-valuemin]=\"0\"\n  [attr.aria-valuemax]=\"100\"\n  [attr.aria-label]=\"mode === 'determinate' ? 'Loading progress' : 'Loading'\"\n>\n  <!-- Indeterminate Spinner -->\n  <svg\n    *ngIf=\"mode === 'indeterminate'\"\n    class=\"animate-spin\"\n    [style.width.px]=\"size\"\n    [style.height.px]=\"size\"\n    viewBox=\"0 0 100 100\"\n    xmlns=\"http://www.w3.org/2000/svg\"\n  >\n    <circle\n      class=\"opacity-25\"\n      cx=\"50\"\n      cy=\"50\"\n      r=\"40\"\n      [style.stroke]=\"color\"\n      [style.stroke-width]=\"thickness\"\n      fill=\"none\"\n    />\n    <circle\n      cx=\"50\"\n      cy=\"50\"\n      r=\"40\"\n      [style.stroke]=\"color\"\n      [style.stroke-width]=\"thickness\"\n      fill=\"none\"\n      stroke-linecap=\"round\"\n      stroke-dasharray=\"251.2\"\n      stroke-dashoffset=\"62.8\"\n    />\n  </svg>\n\n  <!-- Determinate Spinner -->\n  <svg\n    *ngIf=\"mode === 'determinate'\"\n    [style.width.px]=\"size\"\n    [style.height.px]=\"size\"\n    viewBox=\"0 0 100 100\"\n    xmlns=\"http://www.w3.org/2000/svg\"\n  >\n    <circle\n      class=\"opacity-25\"\n      cx=\"50\"\n      cy=\"50\"\n      r=\"40\"\n      [style.stroke]=\"color\"\n      [style.stroke-width]=\"thickness\"\n      fill=\"none\"\n    />\n    <circle\n      class=\"transition-all duration-300 ease-in-out\"\n      cx=\"50\"\n      cy=\"50\"\n      r=\"40\"\n      [style.stroke]=\"color\"\n      [style.stroke-width]=\"thickness\"\n      fill=\"none\"\n      stroke-linecap=\"round\"\n      [style.stroke-dasharray]=\"251.2\"\n      [style.stroke-dashoffset]=\"251.2 - 251.2 * (value / 100)\"\n    />\n  </svg>\n</div>\n"
         },
         {
             "name": "PaginatorComponent",
-            "id": "component-PaginatorComponent-90b8fefde7adb6bec711d3f364730b24718220abba32876ee3d21559d81f12801224e20268295ba5dbd3ab79e2ad599801201dd2d9d9868c944d2902a33c202a",
+            "id": "component-PaginatorComponent-1fb3bb93af7f13625b403ab0e2e05642b5aec29b96c7e71e6542a29cfbd4095e3b2ed2f1be3be82e3ab53ba30d53b56fd48871308a8c9c6149074034d7330bd0",
             "file": "libs/ngx-tailwind-flex-ui/src/lib/paginator/paginator.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -1293,7 +1428,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, EventEmitter, HostBinding, Input, Output } from '@angular/core';\r\nimport { CommonModule } from '@angular/common';\r\n\r\n@Component({\r\n  selector: 'lib-paginator',\r\n  imports: [CommonModule],\r\n  templateUrl: './paginator.component.html',\r\n})\r\nexport class PaginatorComponent {\r\n  @Input() length = 100; // Total items\r\n  @Input() pageSize = 10; // Items per page\r\n  @Input() pageIndex = 0; // Current page\r\n  @Output() pageChange = new EventEmitter<number>();\r\n  @Output() pageSizeChange = new EventEmitter<number>();\r\n\r\n  pageSizeOptions = [10, 20, 50, 100];\r\n\r\n  @HostBinding('class') get hostClasses() {\r\n    return 'flex justify-between items-center p-4 bg-gray-100 rounded-lg shadow-sm w-full';\r\n  }\r\n\r\n  get totalPages(): number {\r\n    return Math.ceil(this.length / this.pageSize);\r\n  }\r\n\r\n  get isFirstPage(): boolean {\r\n    return this.pageIndex === 0;\r\n  }\r\n\r\n  get isLastPage(): boolean {\r\n    return this.pageIndex === this.totalPages - 1;\r\n  }\r\n\r\n  get startItem(): number {\r\n    return this.pageIndex * this.pageSize + 1;\r\n  }\r\n\r\n  get endItem(): number {\r\n    return Math.min((this.pageIndex + 1) * this.pageSize, this.length);\r\n  }\r\n\r\n  changePage(newIndex: number) {\r\n    if (newIndex >= 0 && newIndex < this.totalPages) {\r\n      this.pageIndex = newIndex;\r\n      this.pageChange.emit(this.pageIndex);\r\n    }\r\n  }\r\n\r\n  changePageSize(event: Event) {\r\n    const newSize = Number((event.target as HTMLSelectElement).value);\r\n    this.pageSize = newSize;\r\n    this.pageIndex = 0; // Reset to first page\r\n    this.pageSizeChange.emit(this.pageSize);\r\n    this.pageChange.emit(this.pageIndex);\r\n  }\r\n}\r\n",
+            "sourceCode": "import { Component, EventEmitter, HostBinding, Input, Output } from '@angular/core';\nimport { CommonModule } from '@angular/common';\n\n@Component({\n  selector: 'lib-paginator',\n  imports: [CommonModule],\n  templateUrl: './paginator.component.html',\n})\nexport class PaginatorComponent {\n  @Input() length = 100; // Total items\n  @Input() pageSize = 10; // Items per page\n  @Input() pageIndex = 0; // Current page\n  @Output() pageChange = new EventEmitter<number>();\n  @Output() pageSizeChange = new EventEmitter<number>();\n\n  pageSizeOptions = [10, 20, 50, 100];\n\n  @HostBinding('class') get hostClasses() {\n    return 'flex justify-between items-center p-4 bg-gray-100 rounded-lg shadow-sm w-full';\n  }\n\n  get totalPages(): number {\n    return Math.ceil(this.length / this.pageSize);\n  }\n\n  get isFirstPage(): boolean {\n    return this.pageIndex === 0;\n  }\n\n  get isLastPage(): boolean {\n    return this.pageIndex === this.totalPages - 1;\n  }\n\n  get startItem(): number {\n    return this.pageIndex * this.pageSize + 1;\n  }\n\n  get endItem(): number {\n    return Math.min((this.pageIndex + 1) * this.pageSize, this.length);\n  }\n\n  changePage(newIndex: number) {\n    if (newIndex >= 0 && newIndex < this.totalPages) {\n      this.pageIndex = newIndex;\n      this.pageChange.emit(this.pageIndex);\n    }\n  }\n\n  changePageSize(event: Event) {\n    const newSize = Number((event.target as HTMLSelectElement).value);\n    this.pageSize = newSize;\n    this.pageIndex = 0; // Reset to first page\n    this.pageSizeChange.emit(this.pageSize);\n    this.pageChange.emit(this.pageIndex);\n  }\n}\n",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
@@ -1354,11 +1489,11 @@
                     }
                 }
             },
-            "templateData": "<!-- Page Size Selector -->\r\n<div class=\"flex items-center space-x-2\">\r\n  <label for=\"pageSizeSelect\" class=\"text-gray-600 text-sm\">Items per page:</label>\r\n  <select \r\n    id=\"pageSizeSelect\"\r\n    [value]=\"pageSize\"\r\n    (change)=\"changePageSize($event)\"\r\n    class=\"border border-gray-300 rounded-md px-2 py-2 bg-white text-gray-700\">\r\n    <option *ngFor=\"let size of pageSizeOptions\" [value]=\"size\">{{ size }}</option>\r\n  </select>\r\n</div>\r\n\r\n<!-- Page Information -->\r\n<span class=\"text-gray-500 text-sm\">\r\n  {{ startItem }} – {{ endItem }} of {{ length }}\r\n</span>\r\n\r\n<!-- Navigation Controls -->\r\n<button \r\n  [disabled]=\"isFirstPage\"\r\n  (click)=\"changePage(pageIndex - 1)\"\r\n  class=\"p-2 text-gray-500 hover:text-black disabled:opacity-50\">\r\n  ❮\r\n</button>\r\n\r\n<button \r\n  [disabled]=\"isLastPage\"\r\n  (click)=\"changePage(pageIndex + 1)\"\r\n  class=\"p-2 text-gray-500 hover:text-black disabled:opacity-50\">\r\n  ❯\r\n</button>\r\n"
+            "templateData": "<!-- Page Size Selector -->\n<div class=\"flex items-center space-x-2\">\n  <label for=\"pageSizeSelect\" class=\"text-gray-600 text-sm\">Items per page:</label>\n  <select \n    id=\"pageSizeSelect\"\n    [value]=\"pageSize\"\n    (change)=\"changePageSize($event)\"\n    class=\"border border-gray-300 rounded-md px-2 py-2 bg-white text-gray-700\">\n    <option *ngFor=\"let size of pageSizeOptions\" [value]=\"size\">{{ size }}</option>\n  </select>\n</div>\n\n<!-- Page Information -->\n<span class=\"text-gray-500 text-sm\">\n  {{ startItem }} – {{ endItem }} of {{ length }}\n</span>\n\n<!-- Navigation Controls -->\n<button \n  [disabled]=\"isFirstPage\"\n  (click)=\"changePage(pageIndex - 1)\"\n  class=\"p-2 text-gray-500 hover:text-black disabled:opacity-50\">\n  ❮\n</button>\n\n<button \n  [disabled]=\"isLastPage\"\n  (click)=\"changePage(pageIndex + 1)\"\n  class=\"p-2 text-gray-500 hover:text-black disabled:opacity-50\">\n  ❯\n</button>\n"
         },
         {
             "name": "ProgressBarComponent",
-            "id": "component-ProgressBarComponent-78a23a78d7e5b67e6bd83b89d04b177eb6698f57f51981bfe0118b9dd1fcdddb67a4e78ce9130775a7bf75367f5e52b60e2377e467afc22057006c6abaec4b6b",
+            "id": "component-ProgressBarComponent-7d8a8dfd44a8cfebe1879bdfbcc8957089d0d26cfee79d6f7748440be200c61047da266a2203c71c427ad422483a890436b6d3cb771694e1537c50fa2c6d8bec",
             "file": "libs/ngx-tailwind-flex-ui/src/lib/progress-bar/progress-bar.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -1434,7 +1569,7 @@
             "propertiesClass": [
                 {
                     "name": "colorMap",
-                    "defaultValue": "{\r\n    primary: 'bg-blue-500', // Default\r\n    secondary: 'bg-yellow-500',\r\n    success: 'bg-green-500',\r\n    error: 'bg-red-500', // Warning\r\n  }",
+                    "defaultValue": "{\n    primary: 'bg-blue-500', // Default\n    secondary: 'bg-yellow-500',\n    success: 'bg-green-500',\n    error: 'bg-red-500', // Warning\n  }",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "object",
@@ -1474,11 +1609,11 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { CommonModule } from '@angular/common';\r\nimport { Component, HostBinding, Input } from '@angular/core';\r\n\r\n@Component({\r\n  selector: 'lib-progress-bar',\r\n  templateUrl: './progress-bar.component.html',\r\n  styleUrls: ['./progress-bar.component.css'],\r\n  imports: [CommonModule],\r\n})\r\nexport class ProgressBarComponent {\r\n  /** Types: 'determinate' | 'indeterminate' | 'buffer' | 'query' */\r\n  @Input() variant: 'determinate' | 'indeterminate' | 'buffer' | 'query' = 'determinate';\r\n\r\n  /** Primary progress percentage (0-100) */\r\n  @Input() progress = 80;\r\n\r\n  /** Buffer progress (for buffer variant, 0-100) */\r\n  @Input() bufferProgress = 100;\r\n\r\n  /** Color options */\r\n  @Input() color: 'primary' | 'secondary' | 'success' | 'error' = 'primary';\r\n\r\n  @Input() class = ''; // Allow users to pass custom Tailwind classes\r\n\r\n  \r\n\r\n  private readonly colorMap = {\r\n    primary: 'bg-blue-500', // Default\r\n    secondary: 'bg-yellow-500',\r\n    success: 'bg-green-500',\r\n    error: 'bg-red-500', // Warning\r\n  };\r\n\r\n  /** Map color variants to Tailwind CSS classes */\r\n  @HostBinding('class')\r\n  get progressBarClass(): string {\r\n    return this.colorMap[this.color] || 'bg-blue-500';\r\n  }\r\n}\r\n",
+            "sourceCode": "import { CommonModule } from '@angular/common';\nimport { Component, HostBinding, Input } from '@angular/core';\n\n@Component({\n  selector: 'lib-progress-bar',\n  templateUrl: './progress-bar.component.html',\n  styleUrls: ['./progress-bar.component.css'],\n  imports: [CommonModule],\n})\nexport class ProgressBarComponent {\n  /** Types: 'determinate' | 'indeterminate' | 'buffer' | 'query' */\n  @Input() variant: 'determinate' | 'indeterminate' | 'buffer' | 'query' = 'determinate';\n\n  /** Primary progress percentage (0-100) */\n  @Input() progress = 80;\n\n  /** Buffer progress (for buffer variant, 0-100) */\n  @Input() bufferProgress = 100;\n\n  /** Color options */\n  @Input() color: 'primary' | 'secondary' | 'success' | 'error' = 'primary';\n\n  @Input() class = ''; // Allow users to pass custom Tailwind classes\n\n  \n\n  private readonly colorMap = {\n    primary: 'bg-blue-500', // Default\n    secondary: 'bg-yellow-500',\n    success: 'bg-green-500',\n    error: 'bg-red-500', // Warning\n  };\n\n  /** Map color variants to Tailwind CSS classes */\n  @HostBinding('class')\n  get progressBarClass(): string {\n    return this.colorMap[this.color] || 'bg-blue-500';\n  }\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": "@keyframes indeterminate {\r\n    0% {\r\n      left: -100%;\r\n    }\r\n    100% {\r\n      left: 100%;\r\n    }\r\n  }\r\n  \r\n  @keyframes query {\r\n    0% {\r\n      right: -100%;\r\n    }\r\n    100% {\r\n      right: 100%;\r\n    }\r\n  }\r\n\r\n  @keyframes bufferWave {\r\n    0% {\r\n      left: -100%;\r\n      width: 40%;\r\n    }\r\n    50% {\r\n      left: 50%;\r\n      width: 60%;\r\n    }\r\n    100% {\r\n      left: 100%;\r\n      width: 40%;\r\n    }\r\n  }\r\n  \r\n  .animate-indeterminate {\r\n    position: absolute;\r\n    left: -100%;\r\n    width: 40%;\r\n    animation: indeterminate 1.5s infinite linear;\r\n  }\r\n  \r\n  .animate-query {\r\n    position: absolute;\r\n    right: -100%;\r\n    width: 40%;\r\n    animation: query 1.5s infinite linear;\r\n  }\r\n\r\n  .buffer-wave {\r\n    position: absolute;\r\n    left: -100%;\r\n    height: 100%;\r\n    width: 40%;\r\n    background: linear-gradient(to right, rgba(0, 0, 0, 0.1), rgba(255, 255, 255, 0.3));\r\n    animation: bufferWave 2s infinite ease-in-out;\r\n  }\r\n\r\n  \r\n  ",
+                    "data": "@keyframes indeterminate {\n    0% {\n      left: -100%;\n    }\n    100% {\n      left: 100%;\n    }\n  }\n  \n  @keyframes query {\n    0% {\n      right: -100%;\n    }\n    100% {\n      right: 100%;\n    }\n  }\n\n  @keyframes bufferWave {\n    0% {\n      left: -100%;\n      width: 40%;\n    }\n    50% {\n      left: 50%;\n      width: 60%;\n    }\n    100% {\n      left: 100%;\n      width: 40%;\n    }\n  }\n  \n  .animate-indeterminate {\n    position: absolute;\n    left: -100%;\n    width: 40%;\n    animation: indeterminate 1.5s infinite linear;\n  }\n  \n  .animate-query {\n    position: absolute;\n    right: -100%;\n    width: 40%;\n    animation: query 1.5s infinite linear;\n  }\n\n  .buffer-wave {\n    position: absolute;\n    left: -100%;\n    height: 100%;\n    width: 40%;\n    background: linear-gradient(to right, rgba(0, 0, 0, 0.1), rgba(255, 255, 255, 0.3));\n    animation: bufferWave 2s infinite ease-in-out;\n  }\n\n  \n  ",
                     "styleUrl": "./progress-bar.component.css"
                 }
             ],
@@ -1497,7 +1632,7 @@
                     }
                 }
             },
-            "templateData": "<div class=\"w-full bg-gray-200 rounded-full h-4 overflow-hidden relative\">\r\n\r\n  <!-- Determinate & Buffer Primary Progress -->\r\n  <div\r\n    *ngIf=\"variant === 'determinate' || variant === 'buffer'\"\r\n    class=\"h-full transition-all duration-300\"\r\n    [ngClass]=\"progressBarClass\"\r\n    [style.width.%]=\"progress\"\r\n    role=\"progressbar\"\r\n    [attr.aria-valuenow]=\"progress\"\r\n    aria-valuemin=\"0\"\r\n    aria-valuemax=\"100\"\r\n  ></div>\r\n\r\n  <!-- Indeterminate Animation -->\r\n  <div\r\n    *ngIf=\"variant === 'indeterminate'\"\r\n    class=\"absolute top-0 left-0 h-full w-full overflow-hidden\"\r\n  >\r\n    <div\r\n      class=\"h-full w-1/3 animate-indeterminate\"\r\n      [ngClass]=\"progressBarClass\"\r\n    ></div>\r\n  </div>\r\n\r\n  <!-- Query Mode (Reversed Indeterminate) -->\r\n  <div\r\n    *ngIf=\"variant === 'query'\"\r\n    class=\"absolute top-0 left-0 h-full w-full overflow-hidden\"\r\n  >\r\n    <div\r\n      class=\"h-full w-1/3 animate-query\"\r\n      [ngClass]=\"progressBarClass\"\r\n    ></div>\r\n  </div>\r\n\r\n  <!-- Buffer Secondary Progress -->\r\n  <!-- Buffer Secondary Progress Background -->\r\n<div\r\n*ngIf=\"variant === 'buffer'\"\r\nclass=\"absolute top-0 left-0 h-full bg-gray-300 opacity-50\"\r\n[style.width.%]=\"bufferProgress\"\r\n></div>\r\n\r\n<!-- Buffer Animation Overlay -->\r\n<div\r\n*ngIf=\"variant === 'buffer'\"\r\nclass=\"absolute top-0 left-0 h-full w-full overflow-hidden\"\r\n>\r\n<div class=\"buffer-wave\"></div>\r\n</div>\r\n\r\n\r\n</div>\r\n"
+            "templateData": "<div class=\"w-full bg-gray-200 rounded-full h-4 overflow-hidden relative\">\n\n  <!-- Determinate & Buffer Primary Progress -->\n  <div\n    *ngIf=\"variant === 'determinate' || variant === 'buffer'\"\n    class=\"h-full transition-all duration-300\"\n    [ngClass]=\"progressBarClass\"\n    [style.width.%]=\"progress\"\n    role=\"progressbar\"\n    [attr.aria-valuenow]=\"progress\"\n    aria-valuemin=\"0\"\n    aria-valuemax=\"100\"\n  ></div>\n\n  <!-- Indeterminate Animation -->\n  <div\n    *ngIf=\"variant === 'indeterminate'\"\n    class=\"absolute top-0 left-0 h-full w-full overflow-hidden\"\n  >\n    <div\n      class=\"h-full w-1/3 animate-indeterminate\"\n      [ngClass]=\"progressBarClass\"\n    ></div>\n  </div>\n\n  <!-- Query Mode (Reversed Indeterminate) -->\n  <div\n    *ngIf=\"variant === 'query'\"\n    class=\"absolute top-0 left-0 h-full w-full overflow-hidden\"\n  >\n    <div\n      class=\"h-full w-1/3 animate-query\"\n      [ngClass]=\"progressBarClass\"\n    ></div>\n  </div>\n\n  <!-- Buffer Secondary Progress -->\n  <!-- Buffer Secondary Progress Background -->\n<div\n*ngIf=\"variant === 'buffer'\"\nclass=\"absolute top-0 left-0 h-full bg-gray-300 opacity-50\"\n[style.width.%]=\"bufferProgress\"\n></div>\n\n<!-- Buffer Animation Overlay -->\n<div\n*ngIf=\"variant === 'buffer'\"\nclass=\"absolute top-0 left-0 h-full w-full overflow-hidden\"\n>\n<div class=\"buffer-wave\"></div>\n</div>\n\n\n</div>\n"
         }
     ],
     "modules": [],
@@ -1511,7 +1646,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\r\n  args: {\r\n    variant: 'accent',\r\n    disabled: false,\r\n  },\r\n  render: (args) => ({\r\n    props: args,\r\n    template: `<lib-button [variant]=\"variant\" [disabled]=\"disabled\">Accent Button</lib-button>`,\r\n  }),\r\n}"
+                "defaultValue": "{\n  args: {\n    variant: 'accent',\n    disabled: false,\n  },\n  render: (args) => ({\n    props: args,\n    template: `<lib-button [variant]=\"variant\" [disabled]=\"disabled\">Accent Button</lib-button>`,\n  }),\n}"
             },
             {
                 "name": "BasicSnackBar",
@@ -1521,7 +1656,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\r\n  args: {\r\n    message: 'Disco party!',\r\n    type: 'info',\r\n    action: 'Dance',\r\n    duration: 5000,\r\n    position: 'bottom-center',\r\n  },\r\n}"
+                "defaultValue": "{\n  args: {\n    message: 'Disco party!',\n    type: 'info',\n    action: 'Dance',\n    duration: 5000,\n    position: 'bottom-center',\n  },\n}"
             },
             {
                 "name": "Colored",
@@ -1531,7 +1666,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\r\n  args: {\r\n    color: '#ef4444', // Tailwind red-500\r\n  },\r\n}"
+                "defaultValue": "{\n  args: {\n    color: '#ef4444', // Tailwind red-500\n  },\n}"
             },
             {
                 "name": "config",
@@ -1541,7 +1676,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "StorybookConfig",
-                "defaultValue": "{\r\n  stories: ['../**/*.@(mdx|stories.@(js|jsx|ts|tsx))'],\r\n  addons: ['@storybook/addon-essentials', '@storybook/addon-interactions'],\r\n  framework: {\r\n    name: '@storybook/angular',\r\n    options: {},\r\n  },\r\n  docs: {\r\n    autodocs: true,\r\n    defaultName: 'Docs',\r\n  },\r\n}"
+                "defaultValue": "{\n  stories: ['../**/*.@(mdx|stories.@(js|jsx|ts|tsx))'],\n  addons: ['@storybook/addon-essentials', '@storybook/addon-interactions'],\n  framework: {\n    name: '@storybook/angular',\n    options: {},\n  },\n  docs: {\n    autodocs: true,\n    defaultName: 'Docs',\n  },\n}"
             },
             {
                 "name": "ConfigurablePosition",
@@ -1551,7 +1686,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\r\n  args: {\r\n    message: 'Pool party!',\r\n    type: 'info',\r\n    duration: 5000,\r\n    position: 'bottom-right',\r\n  },\r\n}"
+                "defaultValue": "{\n  args: {\n    message: 'Pool party!',\n    type: 'info',\n    duration: 5000,\n    position: 'bottom-right',\n  },\n}"
             },
             {
                 "name": "CustomStyled",
@@ -1561,7 +1696,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\r\n  args: {\r\n    variant: 'primary',\r\n    class: 'text-lg px-6 py-3 bg-green-500 hover:bg-green-600',\r\n  },\r\n  render: (args) => ({\r\n    props: args,\r\n    template: `<lib-button [variant]=\"variant\" [class]=\"class\">Custom Styled Button</lib-button>`,\r\n  }),\r\n}"
+                "defaultValue": "{\n  args: {\n    variant: 'primary',\n    class: 'text-lg px-6 py-3 bg-green-500 hover:bg-green-600',\n  },\n  render: (args) => ({\n    props: args,\n    template: `<lib-button [variant]=\"variant\" [class]=\"class\">Custom Styled Button</lib-button>`,\n  }),\n}"
             },
             {
                 "name": "CustomStyled",
@@ -1571,17 +1706,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\r\n  args: {\r\n    progress: 60,\r\n    color: 'primary',\r\n    variant: 'determinate',\r\n    class: 'h-6 rounded-lg',\r\n  },\r\n  render: (args) => ({\r\n    props: args,\r\n    template: `<lib-progress-bar [progress]=\"progress\" [color]=\"color\" [variant]=\"variant\" [class]=\"class\"></lib-progress-bar>`,\r\n  }),\r\n}"
-            },
-            {
-                "name": "Default",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "libs/ngx-tailwind-flex-ui/src/lib/icon/icon.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "{\r\n  args: {\r\n    name: 'home',\r\n    size: 'md',\r\n    color: 'text-gray-500',\r\n  },\r\n  render: (args) => ({\r\n    props: args,\r\n    template: `<lib-icon [name]=\"name\" [size]=\"size\" [color]=\"color\"></lib-icon>`,\r\n  }),\r\n}"
+                "defaultValue": "{\n  args: {\n    progress: 60,\n    color: 'primary',\n    variant: 'determinate',\n    class: 'h-6 rounded-lg',\n  },\n  render: (args) => ({\n    props: args,\n    template: `<lib-progress-bar [progress]=\"progress\" [color]=\"color\" [variant]=\"variant\" [class]=\"class\"></lib-progress-bar>`,\n  }),\n}"
             },
             {
                 "name": "Default",
@@ -1591,7 +1716,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\r\n  args: {},\r\n}"
+                "defaultValue": "{\n  args: {},\n}"
             },
             {
                 "name": "Default",
@@ -1601,7 +1726,17 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "StoryObj<PaginatorComponent>",
-                "defaultValue": "{\r\n  args: {\r\n    length: 100,\r\n    pageSize: 10,\r\n    pageIndex: 0,\r\n  },\r\n}"
+                "defaultValue": "{\n  args: {\n    length: 100,\n    pageSize: 10,\n    pageIndex: 0,\n  },\n}"
+            },
+            {
+                "name": "Default",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/ngx-tailwind-flex-ui/src/lib/icon/icon.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  args: {\n    name: 'home',\n    size: 'md',\n    color: 'text-gray-500',\n  },\n  render: (args) => ({\n    props: args,\n    template: `<lib-icon [name]=\"name\" [size]=\"size\" [color]=\"color\"></lib-icon>`,\n  }),\n}"
             },
             {
                 "name": "Default",
@@ -1611,7 +1746,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\r\n  args: {\r\n    progress: 25,\r\n    color: \"primary\",\r\n    variant: 'determinate',\r\n    bufferProgress: 0\r\n  },\r\n  render: (args) => ({\r\n    props: args,\r\n    template: `<lib-progress-bar [progress]=\"progress\" [color]=\"color\" [variant]=\"variant\"></lib-progress-bar>`,\r\n  }),\r\n}"
+                "defaultValue": "{\n  args: {\n    progress: 25,\n    color: \"primary\",\n    variant: 'determinate',\n    bufferProgress: 0\n  },\n  render: (args) => ({\n    props: args,\n    template: `<lib-progress-bar [progress]=\"progress\" [color]=\"color\" [variant]=\"variant\"></lib-progress-bar>`,\n  }),\n}"
             },
             {
                 "name": "Determinate",
@@ -1621,7 +1756,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\r\n  args: {\r\n    mode: 'determinate',\r\n    value: 50,\r\n  },\r\n}"
+                "defaultValue": "{\n  args: {\n    mode: 'determinate',\n    value: 50,\n  },\n}"
             },
             {
                 "name": "DeterminateProgress",
@@ -1631,7 +1766,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\r\n  args: {\r\n    mode: 'determinate',\r\n    value: 75,\r\n    size: 50,\r\n    thickness: 5,\r\n    color: '#10b981', // Tailwind green-500\r\n  },\r\n}"
+                "defaultValue": "{\n  args: {\n    mode: 'determinate',\n    value: 75,\n    size: 50,\n    thickness: 5,\n    color: '#10b981', // Tailwind green-500\n  },\n}"
             },
             {
                 "name": "Disabled",
@@ -1641,7 +1776,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\r\n  args: {\r\n    variant: 'primary',\r\n    disabled: true,\r\n  },\r\n  render: (args) => ({\r\n    props: args,\r\n    template: `<lib-button [variant]=\"variant\" [disabled]=\"disabled\">Disabled Button</lib-button>`,\r\n  }),\r\n}"
+                "defaultValue": "{\n  args: {\n    variant: 'primary',\n    disabled: true,\n  },\n  render: (args) => ({\n    props: args,\n    template: `<lib-button [variant]=\"variant\" [disabled]=\"disabled\">Disabled Button</lib-button>`,\n  }),\n}"
             },
             {
                 "name": "DismissibleError",
@@ -1651,7 +1786,27 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\r\n  args: {\r\n    message: 'Something went wrong',\r\n    type: 'error',\r\n    dismissible: true,\r\n    duration: 0,\r\n    position: 'top-right',\r\n  },\r\n}"
+                "defaultValue": "{\n  args: {\n    message: 'Something went wrong',\n    type: 'error',\n    dismissible: true,\n    duration: 0,\n    position: 'top-right',\n  },\n}"
+            },
+            {
+                "name": "Error",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/ngx-tailwind-flex-ui/src/lib/input/input.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  args: {\n    state: 'error',\n    placeholder: 'Error state',\n  },\n}"
+            },
+            {
+                "name": "Filled",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/ngx-tailwind-flex-ui/src/lib/input/input.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  args: {\n    variant: 'filled',\n    placeholder: 'Filled input',\n  },\n}"
             },
             {
                 "name": "GreenBuffer",
@@ -1661,7 +1816,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\r\n  args: {\r\n    progress: 40,\r\n    bufferProgress: 5,\r\n    color: 'success',\r\n    variant: 'buffer',\r\n  },\r\n  render: (args) => ({\r\n    props: args,\r\n    template: `<lib-progress-bar [progress]=\"progress\" [buffer]=\"buffer\" [color]=\"color\" [variant]=\"variant\"></lib-progress-bar>`,\r\n  }),\r\n}"
+                "defaultValue": "{\n  args: {\n    progress: 40,\n    bufferProgress: 5,\n    color: 'success',\n    variant: 'buffer',\n  },\n  render: (args) => ({\n    props: args,\n    template: `<lib-progress-bar [progress]=\"progress\" [buffer]=\"buffer\" [color]=\"color\" [variant]=\"variant\"></lib-progress-bar>`,\n  }),\n}"
             },
             {
                 "name": "GreenProgress",
@@ -1671,7 +1826,17 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\r\n  args: {\r\n    progress: 70,\r\n    color: 'success',\r\n    variant: 'determinate',\r\n  },\r\n  render: (args) => ({\r\n    props: args,\r\n    template: `<lib-progress-bar [progress]=\"progress\" [color]=\"color\" [variant]=\"variant\"></lib-progress-bar>`,\r\n  }),\r\n}"
+                "defaultValue": "{\n  args: {\n    progress: 70,\n    color: 'success',\n    variant: 'determinate',\n  },\n  render: (args) => ({\n    props: args,\n    template: `<lib-progress-bar [progress]=\"progress\" [color]=\"color\" [variant]=\"variant\"></lib-progress-bar>`,\n  }),\n}"
+            },
+            {
+                "name": "Large",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/ngx-tailwind-flex-ui/src/lib/input/input.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  args: {\n    size: 'lg',\n    placeholder: 'Large input',\n  },\n}"
             },
             {
                 "name": "Large",
@@ -1681,7 +1846,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\r\n  args: {\r\n    size: 60,\r\n  },\r\n}"
+                "defaultValue": "{\n  args: {\n    size: 60,\n  },\n}"
             },
             {
                 "name": "LargeRedIcon",
@@ -1691,7 +1856,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\r\n  args: {\r\n    name: 'favorite',\r\n    size: 'xl',\r\n    color: 'text-red-500',\r\n  },\r\n  render: (args) => ({\r\n    props: args,\r\n    template: `<lib-icon [name]=\"name\" [size]=\"size\" [color]=\"color\"></lib-icon>`,\r\n  }),\r\n}"
+                "defaultValue": "{\n  args: {\n    name: 'favorite',\n    size: 'xl',\n    color: 'text-red-500',\n  },\n  render: (args) => ({\n    props: args,\n    template: `<lib-icon [name]=\"name\" [size]=\"size\" [color]=\"color\"></lib-icon>`,\n  }),\n}"
             },
             {
                 "name": "link",
@@ -1707,31 +1872,31 @@
                 "name": "meta",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "libs/ngx-tailwind-flex-ui/src/lib/alert/alert.component.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Meta<AlertComponent>",
-                "defaultValue": "{\r\n  title: 'Components/Alert',\r\n  component: AlertComponent,\r\n  decorators: [\r\n    applicationConfig({\r\n      providers: [provideAnimations()],\r\n    }),\r\n  ],\r\n  args: {},\r\n  argTypes: {\r\n    message: { control: 'text' },\r\n    type: {\r\n      control: 'select',\r\n      options: ['success', 'warning', 'error', 'info'],\r\n    },\r\n    duration: { control: 'number' },\r\n    action: { control: 'text' },\r\n    dismissible: { control: 'boolean' },\r\n    position: {\r\n      control: 'select',\r\n      options: [\r\n        'top-left',\r\n        'top-center',\r\n        'top-right',\r\n        'bottom-left',\r\n        'bottom-center',\r\n        'bottom-right',\r\n      ],\r\n    },\r\n    icon: {\r\n      control: 'select',\r\n      options: [\r\n        '',\r\n        'pizza',\r\n        'mood',\r\n        'star',\r\n        'favorite',\r\n        'thumb_up',\r\n        'lightbulb',\r\n        'coffee',\r\n        'cloud',\r\n        'music_note',\r\n        'pets',\r\n        'rocket',\r\n        'beach_access',\r\n      ],\r\n    },\r\n    animation: { control: 'select', options: ['fade', 'slide'] },\r\n  },\r\n}"
-            },
-            {
-                "name": "meta",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "libs/ngx-tailwind-flex-ui/src/lib/button/button.component.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Meta<ButtonComponent>",
-                "defaultValue": "{\r\n  title: 'Components/Button',\r\n  component: ButtonComponent,\r\n  tags: ['autodocs'],\r\n  argTypes: {\r\n    variant: {\r\n      control: 'select',\r\n      options: ['primary', 'accent', 'outline', 'text'],\r\n      description: 'Button style variant',\r\n    },\r\n    disabled: {\r\n      control: 'boolean',\r\n      description: 'Disables the button',\r\n    },\r\n    class: {\r\n      control: 'text',\r\n      description: 'Additional Tailwind CSS classes for customization',\r\n    },\r\n  },\r\n}"
+                "defaultValue": "{\n  title: 'Components/Button',\n  component: ButtonComponent,\n  tags: ['autodocs'],\n  argTypes: {\n    variant: {\n      control: 'select',\n      options: ['primary', 'accent', 'outline', 'text'],\n      description: 'Button style variant',\n    },\n    disabled: {\n      control: 'boolean',\n      description: 'Disables the button',\n    },\n    class: {\n      control: 'text',\n      description: 'Additional Tailwind CSS classes for customization',\n    },\n  },\n}"
             },
             {
                 "name": "meta",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "libs/ngx-tailwind-flex-ui/src/lib/icon/icon.stories.ts",
+                "file": "libs/ngx-tailwind-flex-ui/src/lib/alert/alert.component.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
-                "type": "Meta<IconComponent>",
-                "defaultValue": "{\r\n  title: 'Components/Icon',\r\n  component: IconComponent,\r\n  tags: ['autodocs'],\r\n  argTypes: {\r\n    name: { control: 'text', description: 'Icon name from Material Icons' },\r\n    size: { \r\n      control: 'radio', \r\n      options: ['sm', 'md', 'lg', 'xl'], \r\n      description: 'Size of the icon' \r\n    },\r\n    color: { control: 'text', description: 'Tailwind color classes' },\r\n  },\r\n}"
+                "type": "Meta<AlertComponent>",
+                "defaultValue": "{\n  title: 'Components/Alert',\n  component: AlertComponent,\n  decorators: [\n    applicationConfig({\n      providers: [provideAnimations()],\n    }),\n  ],\n  args: {},\n  argTypes: {\n    message: { control: 'text' },\n    type: {\n      control: 'select',\n      options: ['success', 'warning', 'error', 'info'],\n    },\n    duration: { control: 'number' },\n    action: { control: 'text' },\n    dismissible: { control: 'boolean' },\n    position: {\n      control: 'select',\n      options: [\n        'top-left',\n        'top-center',\n        'top-right',\n        'bottom-left',\n        'bottom-center',\n        'bottom-right',\n      ],\n    },\n    icon: {\n      control: 'select',\n      options: [\n        '',\n        'pizza',\n        'mood',\n        'star',\n        'favorite',\n        'thumb_up',\n        'lightbulb',\n        'coffee',\n        'cloud',\n        'music_note',\n        'pets',\n        'rocket',\n        'beach_access',\n      ],\n    },\n    animation: { control: 'select', options: ['fade', 'slide'] },\n  },\n}"
+            },
+            {
+                "name": "meta",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/ngx-tailwind-flex-ui/src/lib/input/input.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Meta<InputComponent>",
+                "defaultValue": "{\n  title: 'Form/Input',\n  component: InputComponent,\n  tags: ['autodocs'],\n  render: (args: InputComponent) => ({ props: args }),\n}"
             },
             {
                 "name": "meta",
@@ -1741,7 +1906,17 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Meta<LoadingSpinnerComponent>",
-                "defaultValue": "{\r\n  title: 'Components/LoadingSpinnerComponent',\r\n  component: LoadingSpinnerComponent,\r\n  tags: ['autodocs'],\r\n  argTypes: {\r\n    mode: {\r\n      control: 'select',\r\n      options: ['determinate', 'indeterminate'],\r\n      description: 'Loading state',\r\n    },\r\n    value: {\r\n      control: 'number',\r\n      description: 'Progress value (0-100) for determinate mode',\r\n    },\r\n    size: { control: 'number', description: 'Diameter in pixels' },\r\n    thickness: { control: 'number', description: 'Stroke width in pixels' },\r\n    color: {\r\n      control: 'color',\r\n      description: 'Spinner color (hex or Tailwind color)',\r\n    },\r\n  },\r\n}"
+                "defaultValue": "{\n  title: 'Components/LoadingSpinnerComponent',\n  component: LoadingSpinnerComponent,\n  tags: ['autodocs'],\n  argTypes: {\n    mode: {\n      control: 'select',\n      options: ['determinate', 'indeterminate'],\n      description: 'Loading state',\n    },\n    value: {\n      control: 'number',\n      description: 'Progress value (0-100) for determinate mode',\n    },\n    size: { control: 'number', description: 'Diameter in pixels' },\n    thickness: { control: 'number', description: 'Stroke width in pixels' },\n    color: {\n      control: 'color',\n      description: 'Spinner color (hex or Tailwind color)',\n    },\n  },\n}"
+            },
+            {
+                "name": "meta",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/ngx-tailwind-flex-ui/src/lib/icon/icon.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Meta<IconComponent>",
+                "defaultValue": "{\n  title: 'Components/Icon',\n  component: IconComponent,\n  tags: ['autodocs'],\n  argTypes: {\n    name: { control: 'text', description: 'Icon name from Material Icons' },\n    size: { \n      control: 'radio', \n      options: ['sm', 'md', 'lg', 'xl'], \n      description: 'Size of the icon' \n    },\n    color: { control: 'text', description: 'Tailwind color classes' },\n  },\n}"
             },
             {
                 "name": "meta",
@@ -1751,7 +1926,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Meta<ProgressBarComponent>",
-                "defaultValue": "{\r\n  title: 'Components/Progress Bar',\r\n  component: ProgressBarComponent,\r\n  tags: ['autodocs'],\r\n  argTypes: {\r\n    progress: {\r\n      control: { type: 'range', min: 0, max: 100, step: 1 },\r\n      description: 'Progress percentage (0 to 100)',\r\n    },\r\n    // buffer: {\r\n    //   control: { type: 'range', min: 0, max: 100, step: 1 },\r\n    //   description: 'Buffer progress percentage (used in buffer variant)',\r\n    // },\r\n    color: {\r\n      control: 'select',\r\n      options: ['primary', 'secondary', 'success', 'error'],\r\n      description: 'Color of the progress bar',\r\n    },\r\n    variant: {\r\n      control: 'select',\r\n      options: ['determinate', 'indeterminate', 'buffer', 'query'],\r\n      description: 'Progress bar type',\r\n    },\r\n    // class: {\r\n    //   control: 'text',\r\n    //   description: 'Additional Tailwind CSS classes for customization',\r\n    // },\r\n  },\r\n}"
+                "defaultValue": "{\n  title: 'Components/Progress Bar',\n  component: ProgressBarComponent,\n  tags: ['autodocs'],\n  argTypes: {\n    progress: {\n      control: { type: 'range', min: 0, max: 100, step: 1 },\n      description: 'Progress percentage (0 to 100)',\n    },\n    // buffer: {\n    //   control: { type: 'range', min: 0, max: 100, step: 1 },\n    //   description: 'Buffer progress percentage (used in buffer variant)',\n    // },\n    color: {\n      control: 'select',\n      options: ['primary', 'secondary', 'success', 'error'],\n      description: 'Color of the progress bar',\n    },\n    variant: {\n      control: 'select',\n      options: ['determinate', 'indeterminate', 'buffer', 'query'],\n      description: 'Progress bar type',\n    },\n    // class: {\n    //   control: 'text',\n    //   description: 'Additional Tailwind CSS classes for customization',\n    // },\n  },\n}"
             },
             {
                 "name": "Outline",
@@ -1761,7 +1936,17 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\r\n  args: {\r\n    variant: 'outline',\r\n    disabled: false,\r\n  },\r\n  render: (args) => ({\r\n    props: args,\r\n    template: `<lib-button [variant]=\"variant\" [disabled]=\"disabled\">Outline Button</lib-button>`,\r\n  }),\r\n}"
+                "defaultValue": "{\n  args: {\n    variant: 'outline',\n    disabled: false,\n  },\n  render: (args) => ({\n    props: args,\n    template: `<lib-button [variant]=\"variant\" [disabled]=\"disabled\">Outline Button</lib-button>`,\n  }),\n}"
+            },
+            {
+                "name": "Outline",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/ngx-tailwind-flex-ui/src/lib/input/input.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  args: {\n    variant: 'outline',\n    placeholder: 'Outline input',\n  },\n}"
             },
             {
                 "name": "parameters",
@@ -1771,7 +1956,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "object",
-                "defaultValue": "{\r\n  actions: { argTypesRegex: '^on[A-Z].*' },\r\n  controls: {\r\n    matchers: {\r\n      color: /(background|color)$/i,\r\n      date: /Date$/,\r\n    },\r\n  },\r\n}"
+                "defaultValue": "{\n  actions: { argTypesRegex: '^on[A-Z].*' },\n  controls: {\n    matchers: {\n      color: /(background|color)$/i,\n      date: /Date$/,\n    },\n  },\n}"
             },
             {
                 "name": "Primary",
@@ -1781,7 +1966,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\r\n  args: {\r\n    variant: 'primary',\r\n    disabled: false,\r\n  },\r\n  render: (args) => ({\r\n    props: args,\r\n    template: `<lib-button [variant]=\"variant\" [disabled]=\"disabled\">Primary Button</lib-button>`,\r\n  }),\r\n}"
+                "defaultValue": "{\n  args: {\n    variant: 'primary',\n    disabled: false,\n  },\n  render: (args) => ({\n    props: args,\n    template: `<lib-button [variant]=\"variant\" [disabled]=\"disabled\">Primary Button</lib-button>`,\n  }),\n}"
             },
             {
                 "name": "RedIndeterminate",
@@ -1791,7 +1976,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\r\n  args: {\r\n    color: 'error',\r\n    variant: 'indeterminate',\r\n  },\r\n  render: (args) => ({\r\n    props: args,\r\n    template: `<lib-progress-bar [color]=\"color\" [variant]=\"variant\"></lib-progress-bar>`,\r\n  }),\r\n}"
+                "defaultValue": "{\n  args: {\n    color: 'error',\n    variant: 'indeterminate',\n  },\n  render: (args) => ({\n    props: args,\n    template: `<lib-progress-bar [color]=\"color\" [variant]=\"variant\"></lib-progress-bar>`,\n  }),\n}"
             },
             {
                 "name": "SmallBlueIcon",
@@ -1801,7 +1986,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\r\n  args: {\r\n    name: 'star',\r\n    size: 'sm',\r\n    color: 'text-blue-500',\r\n  },\r\n  render: (args) => ({\r\n    props: args,\r\n    template: `<lib-icon [name]=\"name\" [size]=\"size\" [color]=\"color\"></lib-icon>`,\r\n  }),\r\n}"
+                "defaultValue": "{\n  args: {\n    name: 'star',\n    size: 'sm',\n    color: 'text-blue-500',\n  },\n  render: (args) => ({\n    props: args,\n    template: `<lib-icon [name]=\"name\" [size]=\"size\" [color]=\"color\"></lib-icon>`,\n  }),\n}"
             },
             {
                 "name": "StackedAlerts",
@@ -1811,7 +1996,17 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "StoryObj<>",
-                "defaultValue": "{\r\n  render: (args: StackedAlertsArgs) => ({\r\n    props: args,\r\n    template: `\r\n      <lib-alert\r\n        [message]=\"firstMessage\"\r\n        [type]=\"firstType\"\r\n        [action]=\"firstAction\"\r\n        [dismissible]=\"firstDismissible\"\r\n        [icon]=\"firstIcon\"\r\n        [duration]=\"firstDuration\"\r\n        [animation]=\"firstAnimation\"\r\n        [position]=\"firstPosition\"\r\n        [bypassDuplicateCheck]=\"true\"\r\n      ></lib-alert>\r\n      <lib-alert\r\n        [message]=\"secondMessage\"\r\n        [type]=\"secondType\"\r\n        [action]=\"secondAction\"\r\n        [dismissible]=\"secondDismissible\"\r\n        [icon]=\"secondIcon\"\r\n        [duration]=\"secondDuration\"\r\n        [animation]=\"secondAnimation\"\r\n        [position]=\"secondPosition\"\r\n        [bypassDuplicateCheck]=\"true\"\r\n      ></lib-alert>\r\n      <lib-alert\r\n        [message]=\"thirdMessage\"\r\n        [type]=\"thirdType\"\r\n        [action]=\"thirdAction\"\r\n        [dismissible]=\"thirdDismissible\"\r\n        [icon]=\"thirdIcon\"\r\n        [duration]=\"thirdDuration\"\r\n        [animation]=\"thirdAnimation\"\r\n        [position]=\"thirdPosition\"\r\n        [bypassDuplicateCheck]=\"true\"\r\n      ></lib-alert>\r\n    `,\r\n  }),\r\n  args: {\r\n    firstMessage: 'First alert',\r\n    firstType: 'success',\r\n    firstAction: null,\r\n    firstDismissible: true,\r\n    firstIcon: 'star',\r\n    firstDuration: 50000,\r\n    firstAnimation: 'slide',\r\n    firstPosition: 'top-right',\r\n\r\n    secondMessage: 'Second alert',\r\n    secondType: 'warning',\r\n    secondAction: null,\r\n    secondDismissible: true,\r\n    secondIcon: null,\r\n    secondDuration: 50000,\r\n    secondAnimation: 'slide',\r\n    secondPosition: 'top-right',\r\n\r\n    thirdMessage: 'Third alert',\r\n    thirdType: 'error',\r\n    thirdAction: null,\r\n    thirdDismissible: true,\r\n    thirdIcon: null,\r\n    thirdDuration: 50000,\r\n    thirdAnimation: 'slide',\r\n    thirdPosition: 'top-right',\r\n  } as StackedAlertsArgs,\r\n  argTypes: {\r\n    // First Alert Controls\r\n    firstMessage: {\r\n      control: { type: 'text', disable: false },\r\n      name: 'First Alert Message',\r\n    },\r\n    firstType: {\r\n      control: 'select',\r\n      options: ['success', 'error', 'warning', 'info'],\r\n      name: 'First Alert Type',\r\n    },\r\n    firstAction: {\r\n      control: { type: 'text', disable: false },\r\n      name: 'First Alert Action',\r\n    },\r\n    firstDismissible: { control: 'boolean', name: 'First Alert Dismissible' },\r\n    firstIcon: {\r\n      control: 'select',\r\n      options: [\r\n        '',\r\n        'pizza',\r\n        'mood',\r\n        'star',\r\n        'favorite',\r\n        'thumb_up',\r\n        'lightbulb',\r\n        'coffee',\r\n        'cloud',\r\n        'music_note',\r\n        'pets',\r\n        'rocket',\r\n        'beach_access',\r\n      ],\r\n      name: 'First Alert Icon',\r\n    },\r\n    firstDuration: { control: 'number', name: 'First Alert Duration' },\r\n    firstAnimation: {\r\n      control: 'select',\r\n      options: ['fade', 'slide'],\r\n      name: 'First Alert Animation',\r\n    },\r\n    firstPosition: {\r\n      control: 'select',\r\n      options: [\r\n        'top-left',\r\n        'top-center',\r\n        'top-right',\r\n        'bottom-left',\r\n        'bottom-center',\r\n        'bottom-right',\r\n      ],\r\n      name: 'First Alert Position',\r\n    },\r\n\r\n    // Second Alert Controls\r\n    secondMessage: {\r\n      control: { type: 'text', disable: false },\r\n      name: 'Second Alert Message',\r\n    },\r\n    secondType: {\r\n      control: 'select',\r\n      options: ['success', 'error', 'warning', 'info'],\r\n      name: 'Second Alert Type',\r\n    },\r\n    secondAction: {\r\n      control: { type: 'text', disable: false },\r\n      name: 'Second Alert Action',\r\n    },\r\n    secondDismissible: { control: 'boolean', name: 'Second Alert Dismissible' },\r\n    secondIcon: {\r\n      control: 'select',\r\n      options: [\r\n        '',\r\n        'pizza',\r\n        'mood',\r\n        'star',\r\n        'favorite',\r\n        'thumb_up',\r\n        'lightbulb',\r\n        'coffee',\r\n        'cloud',\r\n        'music_note',\r\n        'pets',\r\n        'rocket',\r\n        'beach_access',\r\n      ],\r\n      name: 'Second Alert Icon',\r\n    },\r\n    secondDuration: { control: 'number', name: 'Second Alert Duration' },\r\n    secondAnimation: {\r\n      control: 'select',\r\n      options: ['fade', 'slide'],\r\n      name: 'Second Alert Animation',\r\n    },\r\n    secondPosition: {\r\n      control: 'select',\r\n      options: [\r\n        'top-left',\r\n        'top-center',\r\n        'top-right',\r\n        'bottom-left',\r\n        'bottom-center',\r\n        'bottom-right',\r\n      ],\r\n      name: 'Second Alert Position',\r\n    },\r\n\r\n    // Third Alert Controls\r\n    thirdMessage: {\r\n      control: { type: 'text', disable: false },\r\n      name: 'Third Alert Message',\r\n    },\r\n    thirdType: {\r\n      control: 'select',\r\n      options: ['success', 'error', 'warning', 'info'],\r\n      name: 'Third Alert Type',\r\n    },\r\n    thirdAction: {\r\n      control: { type: 'text', disable: false },\r\n      name: 'Third Alert Action',\r\n    },\r\n    thirdDismissible: { control: 'boolean', name: 'Third Alert Dismissible' },\r\n    thirdIcon: {\r\n      control: 'select',\r\n      options: [\r\n        '',\r\n        'pizza',\r\n        'mood',\r\n        'star',\r\n        'favorite',\r\n        'thumb_up',\r\n        'lightbulb',\r\n        'coffee',\r\n        'cloud',\r\n        'music_note',\r\n        'pets',\r\n        'rocket',\r\n        'beach_access',\r\n      ],\r\n      name: 'Third Alert Icon',\r\n    },\r\n    thirdDuration: { control: 'number', name: 'Third Alert Duration' },\r\n    thirdAnimation: {\r\n      control: 'select',\r\n      options: ['fade', 'slide'],\r\n      name: 'Third Alert Animation',\r\n    },\r\n    thirdPosition: {\r\n      control: 'select',\r\n      options: [\r\n        'top-left',\r\n        'top-center',\r\n        'top-right',\r\n        'bottom-left',\r\n        'bottom-center',\r\n        'bottom-right',\r\n      ],\r\n      name: 'Third Alert Position',\r\n    },\r\n\r\n    // Remove inherited fields that are not used in this story\r\n    message: { table: { disable: true } },\r\n    type: { table: { disable: true } },\r\n    duration: { table: { disable: true } },\r\n    action: { table: { disable: true } },\r\n    dismissible: { table: { disable: true } },\r\n    position: { table: { disable: true } },\r\n    icon: { table: { disable: true } },\r\n    animation: { table: { disable: true } },\r\n  },\r\n}"
+                "defaultValue": "{\n  render: (args: StackedAlertsArgs) => ({\n    props: args,\n    template: `\n      <lib-alert\n        [message]=\"firstMessage\"\n        [type]=\"firstType\"\n        [action]=\"firstAction\"\n        [dismissible]=\"firstDismissible\"\n        [icon]=\"firstIcon\"\n        [duration]=\"firstDuration\"\n        [animation]=\"firstAnimation\"\n        [position]=\"firstPosition\"\n        [bypassDuplicateCheck]=\"true\"\n      ></lib-alert>\n      <lib-alert\n        [message]=\"secondMessage\"\n        [type]=\"secondType\"\n        [action]=\"secondAction\"\n        [dismissible]=\"secondDismissible\"\n        [icon]=\"secondIcon\"\n        [duration]=\"secondDuration\"\n        [animation]=\"secondAnimation\"\n        [position]=\"secondPosition\"\n        [bypassDuplicateCheck]=\"true\"\n      ></lib-alert>\n      <lib-alert\n        [message]=\"thirdMessage\"\n        [type]=\"thirdType\"\n        [action]=\"thirdAction\"\n        [dismissible]=\"thirdDismissible\"\n        [icon]=\"thirdIcon\"\n        [duration]=\"thirdDuration\"\n        [animation]=\"thirdAnimation\"\n        [position]=\"thirdPosition\"\n        [bypassDuplicateCheck]=\"true\"\n      ></lib-alert>\n    `,\n  }),\n  args: {\n    firstMessage: 'First alert',\n    firstType: 'success',\n    firstAction: null,\n    firstDismissible: true,\n    firstIcon: 'star',\n    firstDuration: 50000,\n    firstAnimation: 'slide',\n    firstPosition: 'top-right',\n\n    secondMessage: 'Second alert',\n    secondType: 'warning',\n    secondAction: null,\n    secondDismissible: true,\n    secondIcon: null,\n    secondDuration: 50000,\n    secondAnimation: 'slide',\n    secondPosition: 'top-right',\n\n    thirdMessage: 'Third alert',\n    thirdType: 'error',\n    thirdAction: null,\n    thirdDismissible: true,\n    thirdIcon: null,\n    thirdDuration: 50000,\n    thirdAnimation: 'slide',\n    thirdPosition: 'top-right',\n  } as StackedAlertsArgs,\n  argTypes: {\n    // First Alert Controls\n    firstMessage: {\n      control: { type: 'text', disable: false },\n      name: 'First Alert Message',\n    },\n    firstType: {\n      control: 'select',\n      options: ['success', 'error', 'warning', 'info'],\n      name: 'First Alert Type',\n    },\n    firstAction: {\n      control: { type: 'text', disable: false },\n      name: 'First Alert Action',\n    },\n    firstDismissible: { control: 'boolean', name: 'First Alert Dismissible' },\n    firstIcon: {\n      control: 'select',\n      options: [\n        '',\n        'pizza',\n        'mood',\n        'star',\n        'favorite',\n        'thumb_up',\n        'lightbulb',\n        'coffee',\n        'cloud',\n        'music_note',\n        'pets',\n        'rocket',\n        'beach_access',\n      ],\n      name: 'First Alert Icon',\n    },\n    firstDuration: { control: 'number', name: 'First Alert Duration' },\n    firstAnimation: {\n      control: 'select',\n      options: ['fade', 'slide'],\n      name: 'First Alert Animation',\n    },\n    firstPosition: {\n      control: 'select',\n      options: [\n        'top-left',\n        'top-center',\n        'top-right',\n        'bottom-left',\n        'bottom-center',\n        'bottom-right',\n      ],\n      name: 'First Alert Position',\n    },\n\n    // Second Alert Controls\n    secondMessage: {\n      control: { type: 'text', disable: false },\n      name: 'Second Alert Message',\n    },\n    secondType: {\n      control: 'select',\n      options: ['success', 'error', 'warning', 'info'],\n      name: 'Second Alert Type',\n    },\n    secondAction: {\n      control: { type: 'text', disable: false },\n      name: 'Second Alert Action',\n    },\n    secondDismissible: { control: 'boolean', name: 'Second Alert Dismissible' },\n    secondIcon: {\n      control: 'select',\n      options: [\n        '',\n        'pizza',\n        'mood',\n        'star',\n        'favorite',\n        'thumb_up',\n        'lightbulb',\n        'coffee',\n        'cloud',\n        'music_note',\n        'pets',\n        'rocket',\n        'beach_access',\n      ],\n      name: 'Second Alert Icon',\n    },\n    secondDuration: { control: 'number', name: 'Second Alert Duration' },\n    secondAnimation: {\n      control: 'select',\n      options: ['fade', 'slide'],\n      name: 'Second Alert Animation',\n    },\n    secondPosition: {\n      control: 'select',\n      options: [\n        'top-left',\n        'top-center',\n        'top-right',\n        'bottom-left',\n        'bottom-center',\n        'bottom-right',\n      ],\n      name: 'Second Alert Position',\n    },\n\n    // Third Alert Controls\n    thirdMessage: {\n      control: { type: 'text', disable: false },\n      name: 'Third Alert Message',\n    },\n    thirdType: {\n      control: 'select',\n      options: ['success', 'error', 'warning', 'info'],\n      name: 'Third Alert Type',\n    },\n    thirdAction: {\n      control: { type: 'text', disable: false },\n      name: 'Third Alert Action',\n    },\n    thirdDismissible: { control: 'boolean', name: 'Third Alert Dismissible' },\n    thirdIcon: {\n      control: 'select',\n      options: [\n        '',\n        'pizza',\n        'mood',\n        'star',\n        'favorite',\n        'thumb_up',\n        'lightbulb',\n        'coffee',\n        'cloud',\n        'music_note',\n        'pets',\n        'rocket',\n        'beach_access',\n      ],\n      name: 'Third Alert Icon',\n    },\n    thirdDuration: { control: 'number', name: 'Third Alert Duration' },\n    thirdAnimation: {\n      control: 'select',\n      options: ['fade', 'slide'],\n      name: 'Third Alert Animation',\n    },\n    thirdPosition: {\n      control: 'select',\n      options: [\n        'top-left',\n        'top-center',\n        'top-right',\n        'bottom-left',\n        'bottom-center',\n        'bottom-right',\n      ],\n      name: 'Third Alert Position',\n    },\n\n    // Remove inherited fields that are not used in this story\n    message: { table: { disable: true } },\n    type: { table: { disable: true } },\n    duration: { table: { disable: true } },\n    action: { table: { disable: true } },\n    dismissible: { table: { disable: true } },\n    position: { table: { disable: true } },\n    icon: { table: { disable: true } },\n    animation: { table: { disable: true } },\n  },\n}"
+            },
+            {
+                "name": "Success",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "libs/ngx-tailwind-flex-ui/src/lib/input/input.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\n  args: {\n    state: 'success',\n    placeholder: 'Success state',\n  },\n}"
             },
             {
                 "name": "SuccessWithAction",
@@ -1821,7 +2016,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\r\n  args: {\r\n    message: 'Data saved successfully',\r\n    type: 'success',\r\n    action: 'Undo',\r\n    duration: 3000,\r\n    position: 'bottom-center',\r\n  },\r\n}"
+                "defaultValue": "{\n  args: {\n    message: 'Data saved successfully',\n    type: 'success',\n    action: 'Undo',\n    duration: 3000,\n    position: 'bottom-center',\n  },\n}"
             },
             {
                 "name": "Text",
@@ -1831,7 +2026,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\r\n  args: {\r\n    variant: 'text',\r\n    disabled: false,\r\n  },\r\n  render: (args) => ({\r\n    props: args,\r\n    template: `<lib-button [variant]=\"variant\" [disabled]=\"disabled\">Text Button</lib-button>`,\r\n  }),\r\n}"
+                "defaultValue": "{\n  args: {\n    variant: 'text',\n    disabled: false,\n  },\n  render: (args) => ({\n    props: args,\n    template: `<lib-button [variant]=\"variant\" [disabled]=\"disabled\">Text Button</lib-button>`,\n  }),\n}"
             },
             {
                 "name": "Thick",
@@ -1841,7 +2036,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\r\n  args: {\r\n    thickness: 6,\r\n  },\r\n}"
+                "defaultValue": "{\n  args: {\n    thickness: 6,\n  },\n}"
             },
             {
                 "name": "WarningWithCustomIcon",
@@ -1851,22 +2046,11 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\r\n  args: {\r\n    message: 'Custom icon alert',\r\n    type: 'warning',\r\n    icon: 'star',\r\n    dismissible: true,\r\n    duration: 5000,\r\n    position: 'top-center',\r\n  },\r\n}"
+                "defaultValue": "{\n  args: {\n    message: 'Custom icon alert',\n    type: 'warning',\n    icon: 'star',\n    dismissible: true,\n    duration: 5000,\n    position: 'top-center',\n  },\n}"
             }
         ],
         "functions": [],
         "typealiases": [
-            {
-                "name": "Story",
-                "ctype": "miscellaneous",
-                "subtype": "typealias",
-                "rawtype": "StoryObj<AlertComponent>",
-                "file": "libs/ngx-tailwind-flex-ui/src/lib/alert/alert.component.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "description": "",
-                "kind": 183
-            },
             {
                 "name": "Story",
                 "ctype": "miscellaneous",
@@ -1882,8 +2066,19 @@
                 "name": "Story",
                 "ctype": "miscellaneous",
                 "subtype": "typealias",
-                "rawtype": "StoryObj<IconComponent>",
-                "file": "libs/ngx-tailwind-flex-ui/src/lib/icon/icon.stories.ts",
+                "rawtype": "StoryObj<AlertComponent>",
+                "file": "libs/ngx-tailwind-flex-ui/src/lib/alert/alert.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 183
+            },
+            {
+                "name": "Story",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "StoryObj<InputComponent>",
+                "file": "libs/ngx-tailwind-flex-ui/src/lib/input/input.component.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "description": "",
@@ -1895,6 +2090,17 @@
                 "subtype": "typealias",
                 "rawtype": "StoryObj<LoadingSpinnerComponent>",
                 "file": "libs/ngx-tailwind-flex-ui/src/lib/loadingSpinner/loadingSpinner.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 183
+            },
+            {
+                "name": "Story",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "StoryObj<IconComponent>",
+                "file": "libs/ngx-tailwind-flex-ui/src/lib/icon/icon.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "description": "",
@@ -1923,7 +2129,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{\r\n  args: {\r\n    variant: 'accent',\r\n    disabled: false,\r\n  },\r\n  render: (args) => ({\r\n    props: args,\r\n    template: `<lib-button [variant]=\"variant\" [disabled]=\"disabled\">Accent Button</lib-button>`,\r\n  }),\r\n}"
+                    "defaultValue": "{\n  args: {\n    variant: 'accent',\n    disabled: false,\n  },\n  render: (args) => ({\n    props: args,\n    template: `<lib-button [variant]=\"variant\" [disabled]=\"disabled\">Accent Button</lib-button>`,\n  }),\n}"
                 },
                 {
                     "name": "CustomStyled",
@@ -1933,7 +2139,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{\r\n  args: {\r\n    variant: 'primary',\r\n    class: 'text-lg px-6 py-3 bg-green-500 hover:bg-green-600',\r\n  },\r\n  render: (args) => ({\r\n    props: args,\r\n    template: `<lib-button [variant]=\"variant\" [class]=\"class\">Custom Styled Button</lib-button>`,\r\n  }),\r\n}"
+                    "defaultValue": "{\n  args: {\n    variant: 'primary',\n    class: 'text-lg px-6 py-3 bg-green-500 hover:bg-green-600',\n  },\n  render: (args) => ({\n    props: args,\n    template: `<lib-button [variant]=\"variant\" [class]=\"class\">Custom Styled Button</lib-button>`,\n  }),\n}"
                 },
                 {
                     "name": "Disabled",
@@ -1943,7 +2149,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{\r\n  args: {\r\n    variant: 'primary',\r\n    disabled: true,\r\n  },\r\n  render: (args) => ({\r\n    props: args,\r\n    template: `<lib-button [variant]=\"variant\" [disabled]=\"disabled\">Disabled Button</lib-button>`,\r\n  }),\r\n}"
+                    "defaultValue": "{\n  args: {\n    variant: 'primary',\n    disabled: true,\n  },\n  render: (args) => ({\n    props: args,\n    template: `<lib-button [variant]=\"variant\" [disabled]=\"disabled\">Disabled Button</lib-button>`,\n  }),\n}"
                 },
                 {
                     "name": "meta",
@@ -1953,7 +2159,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Meta<ButtonComponent>",
-                    "defaultValue": "{\r\n  title: 'Components/Button',\r\n  component: ButtonComponent,\r\n  tags: ['autodocs'],\r\n  argTypes: {\r\n    variant: {\r\n      control: 'select',\r\n      options: ['primary', 'accent', 'outline', 'text'],\r\n      description: 'Button style variant',\r\n    },\r\n    disabled: {\r\n      control: 'boolean',\r\n      description: 'Disables the button',\r\n    },\r\n    class: {\r\n      control: 'text',\r\n      description: 'Additional Tailwind CSS classes for customization',\r\n    },\r\n  },\r\n}"
+                    "defaultValue": "{\n  title: 'Components/Button',\n  component: ButtonComponent,\n  tags: ['autodocs'],\n  argTypes: {\n    variant: {\n      control: 'select',\n      options: ['primary', 'accent', 'outline', 'text'],\n      description: 'Button style variant',\n    },\n    disabled: {\n      control: 'boolean',\n      description: 'Disables the button',\n    },\n    class: {\n      control: 'text',\n      description: 'Additional Tailwind CSS classes for customization',\n    },\n  },\n}"
                 },
                 {
                     "name": "Outline",
@@ -1963,7 +2169,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{\r\n  args: {\r\n    variant: 'outline',\r\n    disabled: false,\r\n  },\r\n  render: (args) => ({\r\n    props: args,\r\n    template: `<lib-button [variant]=\"variant\" [disabled]=\"disabled\">Outline Button</lib-button>`,\r\n  }),\r\n}"
+                    "defaultValue": "{\n  args: {\n    variant: 'outline',\n    disabled: false,\n  },\n  render: (args) => ({\n    props: args,\n    template: `<lib-button [variant]=\"variant\" [disabled]=\"disabled\">Outline Button</lib-button>`,\n  }),\n}"
                 },
                 {
                     "name": "Primary",
@@ -1973,7 +2179,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{\r\n  args: {\r\n    variant: 'primary',\r\n    disabled: false,\r\n  },\r\n  render: (args) => ({\r\n    props: args,\r\n    template: `<lib-button [variant]=\"variant\" [disabled]=\"disabled\">Primary Button</lib-button>`,\r\n  }),\r\n}"
+                    "defaultValue": "{\n  args: {\n    variant: 'primary',\n    disabled: false,\n  },\n  render: (args) => ({\n    props: args,\n    template: `<lib-button [variant]=\"variant\" [disabled]=\"disabled\">Primary Button</lib-button>`,\n  }),\n}"
                 },
                 {
                     "name": "Text",
@@ -1983,7 +2189,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{\r\n  args: {\r\n    variant: 'text',\r\n    disabled: false,\r\n  },\r\n  render: (args) => ({\r\n    props: args,\r\n    template: `<lib-button [variant]=\"variant\" [disabled]=\"disabled\">Text Button</lib-button>`,\r\n  }),\r\n}"
+                    "defaultValue": "{\n  args: {\n    variant: 'text',\n    disabled: false,\n  },\n  render: (args) => ({\n    props: args,\n    template: `<lib-button [variant]=\"variant\" [disabled]=\"disabled\">Text Button</lib-button>`,\n  }),\n}"
                 }
             ],
             "libs/ngx-tailwind-flex-ui/src/lib/alert/alert.component.stories.ts": [
@@ -1995,7 +2201,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{\r\n  args: {\r\n    message: 'Disco party!',\r\n    type: 'info',\r\n    action: 'Dance',\r\n    duration: 5000,\r\n    position: 'bottom-center',\r\n  },\r\n}"
+                    "defaultValue": "{\n  args: {\n    message: 'Disco party!',\n    type: 'info',\n    action: 'Dance',\n    duration: 5000,\n    position: 'bottom-center',\n  },\n}"
                 },
                 {
                     "name": "ConfigurablePosition",
@@ -2005,7 +2211,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{\r\n  args: {\r\n    message: 'Pool party!',\r\n    type: 'info',\r\n    duration: 5000,\r\n    position: 'bottom-right',\r\n  },\r\n}"
+                    "defaultValue": "{\n  args: {\n    message: 'Pool party!',\n    type: 'info',\n    duration: 5000,\n    position: 'bottom-right',\n  },\n}"
                 },
                 {
                     "name": "DismissibleError",
@@ -2015,7 +2221,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{\r\n  args: {\r\n    message: 'Something went wrong',\r\n    type: 'error',\r\n    dismissible: true,\r\n    duration: 0,\r\n    position: 'top-right',\r\n  },\r\n}"
+                    "defaultValue": "{\n  args: {\n    message: 'Something went wrong',\n    type: 'error',\n    dismissible: true,\n    duration: 0,\n    position: 'top-right',\n  },\n}"
                 },
                 {
                     "name": "meta",
@@ -2025,7 +2231,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Meta<AlertComponent>",
-                    "defaultValue": "{\r\n  title: 'Components/Alert',\r\n  component: AlertComponent,\r\n  decorators: [\r\n    applicationConfig({\r\n      providers: [provideAnimations()],\r\n    }),\r\n  ],\r\n  args: {},\r\n  argTypes: {\r\n    message: { control: 'text' },\r\n    type: {\r\n      control: 'select',\r\n      options: ['success', 'warning', 'error', 'info'],\r\n    },\r\n    duration: { control: 'number' },\r\n    action: { control: 'text' },\r\n    dismissible: { control: 'boolean' },\r\n    position: {\r\n      control: 'select',\r\n      options: [\r\n        'top-left',\r\n        'top-center',\r\n        'top-right',\r\n        'bottom-left',\r\n        'bottom-center',\r\n        'bottom-right',\r\n      ],\r\n    },\r\n    icon: {\r\n      control: 'select',\r\n      options: [\r\n        '',\r\n        'pizza',\r\n        'mood',\r\n        'star',\r\n        'favorite',\r\n        'thumb_up',\r\n        'lightbulb',\r\n        'coffee',\r\n        'cloud',\r\n        'music_note',\r\n        'pets',\r\n        'rocket',\r\n        'beach_access',\r\n      ],\r\n    },\r\n    animation: { control: 'select', options: ['fade', 'slide'] },\r\n  },\r\n}"
+                    "defaultValue": "{\n  title: 'Components/Alert',\n  component: AlertComponent,\n  decorators: [\n    applicationConfig({\n      providers: [provideAnimations()],\n    }),\n  ],\n  args: {},\n  argTypes: {\n    message: { control: 'text' },\n    type: {\n      control: 'select',\n      options: ['success', 'warning', 'error', 'info'],\n    },\n    duration: { control: 'number' },\n    action: { control: 'text' },\n    dismissible: { control: 'boolean' },\n    position: {\n      control: 'select',\n      options: [\n        'top-left',\n        'top-center',\n        'top-right',\n        'bottom-left',\n        'bottom-center',\n        'bottom-right',\n      ],\n    },\n    icon: {\n      control: 'select',\n      options: [\n        '',\n        'pizza',\n        'mood',\n        'star',\n        'favorite',\n        'thumb_up',\n        'lightbulb',\n        'coffee',\n        'cloud',\n        'music_note',\n        'pets',\n        'rocket',\n        'beach_access',\n      ],\n    },\n    animation: { control: 'select', options: ['fade', 'slide'] },\n  },\n}"
                 },
                 {
                     "name": "StackedAlerts",
@@ -2035,7 +2241,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "StoryObj<>",
-                    "defaultValue": "{\r\n  render: (args: StackedAlertsArgs) => ({\r\n    props: args,\r\n    template: `\r\n      <lib-alert\r\n        [message]=\"firstMessage\"\r\n        [type]=\"firstType\"\r\n        [action]=\"firstAction\"\r\n        [dismissible]=\"firstDismissible\"\r\n        [icon]=\"firstIcon\"\r\n        [duration]=\"firstDuration\"\r\n        [animation]=\"firstAnimation\"\r\n        [position]=\"firstPosition\"\r\n        [bypassDuplicateCheck]=\"true\"\r\n      ></lib-alert>\r\n      <lib-alert\r\n        [message]=\"secondMessage\"\r\n        [type]=\"secondType\"\r\n        [action]=\"secondAction\"\r\n        [dismissible]=\"secondDismissible\"\r\n        [icon]=\"secondIcon\"\r\n        [duration]=\"secondDuration\"\r\n        [animation]=\"secondAnimation\"\r\n        [position]=\"secondPosition\"\r\n        [bypassDuplicateCheck]=\"true\"\r\n      ></lib-alert>\r\n      <lib-alert\r\n        [message]=\"thirdMessage\"\r\n        [type]=\"thirdType\"\r\n        [action]=\"thirdAction\"\r\n        [dismissible]=\"thirdDismissible\"\r\n        [icon]=\"thirdIcon\"\r\n        [duration]=\"thirdDuration\"\r\n        [animation]=\"thirdAnimation\"\r\n        [position]=\"thirdPosition\"\r\n        [bypassDuplicateCheck]=\"true\"\r\n      ></lib-alert>\r\n    `,\r\n  }),\r\n  args: {\r\n    firstMessage: 'First alert',\r\n    firstType: 'success',\r\n    firstAction: null,\r\n    firstDismissible: true,\r\n    firstIcon: 'star',\r\n    firstDuration: 50000,\r\n    firstAnimation: 'slide',\r\n    firstPosition: 'top-right',\r\n\r\n    secondMessage: 'Second alert',\r\n    secondType: 'warning',\r\n    secondAction: null,\r\n    secondDismissible: true,\r\n    secondIcon: null,\r\n    secondDuration: 50000,\r\n    secondAnimation: 'slide',\r\n    secondPosition: 'top-right',\r\n\r\n    thirdMessage: 'Third alert',\r\n    thirdType: 'error',\r\n    thirdAction: null,\r\n    thirdDismissible: true,\r\n    thirdIcon: null,\r\n    thirdDuration: 50000,\r\n    thirdAnimation: 'slide',\r\n    thirdPosition: 'top-right',\r\n  } as StackedAlertsArgs,\r\n  argTypes: {\r\n    // First Alert Controls\r\n    firstMessage: {\r\n      control: { type: 'text', disable: false },\r\n      name: 'First Alert Message',\r\n    },\r\n    firstType: {\r\n      control: 'select',\r\n      options: ['success', 'error', 'warning', 'info'],\r\n      name: 'First Alert Type',\r\n    },\r\n    firstAction: {\r\n      control: { type: 'text', disable: false },\r\n      name: 'First Alert Action',\r\n    },\r\n    firstDismissible: { control: 'boolean', name: 'First Alert Dismissible' },\r\n    firstIcon: {\r\n      control: 'select',\r\n      options: [\r\n        '',\r\n        'pizza',\r\n        'mood',\r\n        'star',\r\n        'favorite',\r\n        'thumb_up',\r\n        'lightbulb',\r\n        'coffee',\r\n        'cloud',\r\n        'music_note',\r\n        'pets',\r\n        'rocket',\r\n        'beach_access',\r\n      ],\r\n      name: 'First Alert Icon',\r\n    },\r\n    firstDuration: { control: 'number', name: 'First Alert Duration' },\r\n    firstAnimation: {\r\n      control: 'select',\r\n      options: ['fade', 'slide'],\r\n      name: 'First Alert Animation',\r\n    },\r\n    firstPosition: {\r\n      control: 'select',\r\n      options: [\r\n        'top-left',\r\n        'top-center',\r\n        'top-right',\r\n        'bottom-left',\r\n        'bottom-center',\r\n        'bottom-right',\r\n      ],\r\n      name: 'First Alert Position',\r\n    },\r\n\r\n    // Second Alert Controls\r\n    secondMessage: {\r\n      control: { type: 'text', disable: false },\r\n      name: 'Second Alert Message',\r\n    },\r\n    secondType: {\r\n      control: 'select',\r\n      options: ['success', 'error', 'warning', 'info'],\r\n      name: 'Second Alert Type',\r\n    },\r\n    secondAction: {\r\n      control: { type: 'text', disable: false },\r\n      name: 'Second Alert Action',\r\n    },\r\n    secondDismissible: { control: 'boolean', name: 'Second Alert Dismissible' },\r\n    secondIcon: {\r\n      control: 'select',\r\n      options: [\r\n        '',\r\n        'pizza',\r\n        'mood',\r\n        'star',\r\n        'favorite',\r\n        'thumb_up',\r\n        'lightbulb',\r\n        'coffee',\r\n        'cloud',\r\n        'music_note',\r\n        'pets',\r\n        'rocket',\r\n        'beach_access',\r\n      ],\r\n      name: 'Second Alert Icon',\r\n    },\r\n    secondDuration: { control: 'number', name: 'Second Alert Duration' },\r\n    secondAnimation: {\r\n      control: 'select',\r\n      options: ['fade', 'slide'],\r\n      name: 'Second Alert Animation',\r\n    },\r\n    secondPosition: {\r\n      control: 'select',\r\n      options: [\r\n        'top-left',\r\n        'top-center',\r\n        'top-right',\r\n        'bottom-left',\r\n        'bottom-center',\r\n        'bottom-right',\r\n      ],\r\n      name: 'Second Alert Position',\r\n    },\r\n\r\n    // Third Alert Controls\r\n    thirdMessage: {\r\n      control: { type: 'text', disable: false },\r\n      name: 'Third Alert Message',\r\n    },\r\n    thirdType: {\r\n      control: 'select',\r\n      options: ['success', 'error', 'warning', 'info'],\r\n      name: 'Third Alert Type',\r\n    },\r\n    thirdAction: {\r\n      control: { type: 'text', disable: false },\r\n      name: 'Third Alert Action',\r\n    },\r\n    thirdDismissible: { control: 'boolean', name: 'Third Alert Dismissible' },\r\n    thirdIcon: {\r\n      control: 'select',\r\n      options: [\r\n        '',\r\n        'pizza',\r\n        'mood',\r\n        'star',\r\n        'favorite',\r\n        'thumb_up',\r\n        'lightbulb',\r\n        'coffee',\r\n        'cloud',\r\n        'music_note',\r\n        'pets',\r\n        'rocket',\r\n        'beach_access',\r\n      ],\r\n      name: 'Third Alert Icon',\r\n    },\r\n    thirdDuration: { control: 'number', name: 'Third Alert Duration' },\r\n    thirdAnimation: {\r\n      control: 'select',\r\n      options: ['fade', 'slide'],\r\n      name: 'Third Alert Animation',\r\n    },\r\n    thirdPosition: {\r\n      control: 'select',\r\n      options: [\r\n        'top-left',\r\n        'top-center',\r\n        'top-right',\r\n        'bottom-left',\r\n        'bottom-center',\r\n        'bottom-right',\r\n      ],\r\n      name: 'Third Alert Position',\r\n    },\r\n\r\n    // Remove inherited fields that are not used in this story\r\n    message: { table: { disable: true } },\r\n    type: { table: { disable: true } },\r\n    duration: { table: { disable: true } },\r\n    action: { table: { disable: true } },\r\n    dismissible: { table: { disable: true } },\r\n    position: { table: { disable: true } },\r\n    icon: { table: { disable: true } },\r\n    animation: { table: { disable: true } },\r\n  },\r\n}"
+                    "defaultValue": "{\n  render: (args: StackedAlertsArgs) => ({\n    props: args,\n    template: `\n      <lib-alert\n        [message]=\"firstMessage\"\n        [type]=\"firstType\"\n        [action]=\"firstAction\"\n        [dismissible]=\"firstDismissible\"\n        [icon]=\"firstIcon\"\n        [duration]=\"firstDuration\"\n        [animation]=\"firstAnimation\"\n        [position]=\"firstPosition\"\n        [bypassDuplicateCheck]=\"true\"\n      ></lib-alert>\n      <lib-alert\n        [message]=\"secondMessage\"\n        [type]=\"secondType\"\n        [action]=\"secondAction\"\n        [dismissible]=\"secondDismissible\"\n        [icon]=\"secondIcon\"\n        [duration]=\"secondDuration\"\n        [animation]=\"secondAnimation\"\n        [position]=\"secondPosition\"\n        [bypassDuplicateCheck]=\"true\"\n      ></lib-alert>\n      <lib-alert\n        [message]=\"thirdMessage\"\n        [type]=\"thirdType\"\n        [action]=\"thirdAction\"\n        [dismissible]=\"thirdDismissible\"\n        [icon]=\"thirdIcon\"\n        [duration]=\"thirdDuration\"\n        [animation]=\"thirdAnimation\"\n        [position]=\"thirdPosition\"\n        [bypassDuplicateCheck]=\"true\"\n      ></lib-alert>\n    `,\n  }),\n  args: {\n    firstMessage: 'First alert',\n    firstType: 'success',\n    firstAction: null,\n    firstDismissible: true,\n    firstIcon: 'star',\n    firstDuration: 50000,\n    firstAnimation: 'slide',\n    firstPosition: 'top-right',\n\n    secondMessage: 'Second alert',\n    secondType: 'warning',\n    secondAction: null,\n    secondDismissible: true,\n    secondIcon: null,\n    secondDuration: 50000,\n    secondAnimation: 'slide',\n    secondPosition: 'top-right',\n\n    thirdMessage: 'Third alert',\n    thirdType: 'error',\n    thirdAction: null,\n    thirdDismissible: true,\n    thirdIcon: null,\n    thirdDuration: 50000,\n    thirdAnimation: 'slide',\n    thirdPosition: 'top-right',\n  } as StackedAlertsArgs,\n  argTypes: {\n    // First Alert Controls\n    firstMessage: {\n      control: { type: 'text', disable: false },\n      name: 'First Alert Message',\n    },\n    firstType: {\n      control: 'select',\n      options: ['success', 'error', 'warning', 'info'],\n      name: 'First Alert Type',\n    },\n    firstAction: {\n      control: { type: 'text', disable: false },\n      name: 'First Alert Action',\n    },\n    firstDismissible: { control: 'boolean', name: 'First Alert Dismissible' },\n    firstIcon: {\n      control: 'select',\n      options: [\n        '',\n        'pizza',\n        'mood',\n        'star',\n        'favorite',\n        'thumb_up',\n        'lightbulb',\n        'coffee',\n        'cloud',\n        'music_note',\n        'pets',\n        'rocket',\n        'beach_access',\n      ],\n      name: 'First Alert Icon',\n    },\n    firstDuration: { control: 'number', name: 'First Alert Duration' },\n    firstAnimation: {\n      control: 'select',\n      options: ['fade', 'slide'],\n      name: 'First Alert Animation',\n    },\n    firstPosition: {\n      control: 'select',\n      options: [\n        'top-left',\n        'top-center',\n        'top-right',\n        'bottom-left',\n        'bottom-center',\n        'bottom-right',\n      ],\n      name: 'First Alert Position',\n    },\n\n    // Second Alert Controls\n    secondMessage: {\n      control: { type: 'text', disable: false },\n      name: 'Second Alert Message',\n    },\n    secondType: {\n      control: 'select',\n      options: ['success', 'error', 'warning', 'info'],\n      name: 'Second Alert Type',\n    },\n    secondAction: {\n      control: { type: 'text', disable: false },\n      name: 'Second Alert Action',\n    },\n    secondDismissible: { control: 'boolean', name: 'Second Alert Dismissible' },\n    secondIcon: {\n      control: 'select',\n      options: [\n        '',\n        'pizza',\n        'mood',\n        'star',\n        'favorite',\n        'thumb_up',\n        'lightbulb',\n        'coffee',\n        'cloud',\n        'music_note',\n        'pets',\n        'rocket',\n        'beach_access',\n      ],\n      name: 'Second Alert Icon',\n    },\n    secondDuration: { control: 'number', name: 'Second Alert Duration' },\n    secondAnimation: {\n      control: 'select',\n      options: ['fade', 'slide'],\n      name: 'Second Alert Animation',\n    },\n    secondPosition: {\n      control: 'select',\n      options: [\n        'top-left',\n        'top-center',\n        'top-right',\n        'bottom-left',\n        'bottom-center',\n        'bottom-right',\n      ],\n      name: 'Second Alert Position',\n    },\n\n    // Third Alert Controls\n    thirdMessage: {\n      control: { type: 'text', disable: false },\n      name: 'Third Alert Message',\n    },\n    thirdType: {\n      control: 'select',\n      options: ['success', 'error', 'warning', 'info'],\n      name: 'Third Alert Type',\n    },\n    thirdAction: {\n      control: { type: 'text', disable: false },\n      name: 'Third Alert Action',\n    },\n    thirdDismissible: { control: 'boolean', name: 'Third Alert Dismissible' },\n    thirdIcon: {\n      control: 'select',\n      options: [\n        '',\n        'pizza',\n        'mood',\n        'star',\n        'favorite',\n        'thumb_up',\n        'lightbulb',\n        'coffee',\n        'cloud',\n        'music_note',\n        'pets',\n        'rocket',\n        'beach_access',\n      ],\n      name: 'Third Alert Icon',\n    },\n    thirdDuration: { control: 'number', name: 'Third Alert Duration' },\n    thirdAnimation: {\n      control: 'select',\n      options: ['fade', 'slide'],\n      name: 'Third Alert Animation',\n    },\n    thirdPosition: {\n      control: 'select',\n      options: [\n        'top-left',\n        'top-center',\n        'top-right',\n        'bottom-left',\n        'bottom-center',\n        'bottom-right',\n      ],\n      name: 'Third Alert Position',\n    },\n\n    // Remove inherited fields that are not used in this story\n    message: { table: { disable: true } },\n    type: { table: { disable: true } },\n    duration: { table: { disable: true } },\n    action: { table: { disable: true } },\n    dismissible: { table: { disable: true } },\n    position: { table: { disable: true } },\n    icon: { table: { disable: true } },\n    animation: { table: { disable: true } },\n  },\n}"
                 },
                 {
                     "name": "SuccessWithAction",
@@ -2045,7 +2251,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{\r\n  args: {\r\n    message: 'Data saved successfully',\r\n    type: 'success',\r\n    action: 'Undo',\r\n    duration: 3000,\r\n    position: 'bottom-center',\r\n  },\r\n}"
+                    "defaultValue": "{\n  args: {\n    message: 'Data saved successfully',\n    type: 'success',\n    action: 'Undo',\n    duration: 3000,\n    position: 'bottom-center',\n  },\n}"
                 },
                 {
                     "name": "WarningWithCustomIcon",
@@ -2055,7 +2261,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{\r\n  args: {\r\n    message: 'Custom icon alert',\r\n    type: 'warning',\r\n    icon: 'star',\r\n    dismissible: true,\r\n    duration: 5000,\r\n    position: 'top-center',\r\n  },\r\n}"
+                    "defaultValue": "{\n  args: {\n    message: 'Custom icon alert',\n    type: 'warning',\n    icon: 'star',\n    dismissible: true,\n    duration: 5000,\n    position: 'top-center',\n  },\n}"
                 }
             ],
             "libs/ngx-tailwind-flex-ui/src/lib/loadingSpinner/loadingSpinner.component.stories.ts": [
@@ -2067,7 +2273,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{\r\n  args: {\r\n    color: '#ef4444', // Tailwind red-500\r\n  },\r\n}"
+                    "defaultValue": "{\n  args: {\n    color: '#ef4444', // Tailwind red-500\n  },\n}"
                 },
                 {
                     "name": "Default",
@@ -2077,7 +2283,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{\r\n  args: {},\r\n}"
+                    "defaultValue": "{\n  args: {},\n}"
                 },
                 {
                     "name": "Determinate",
@@ -2087,7 +2293,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{\r\n  args: {\r\n    mode: 'determinate',\r\n    value: 50,\r\n  },\r\n}"
+                    "defaultValue": "{\n  args: {\n    mode: 'determinate',\n    value: 50,\n  },\n}"
                 },
                 {
                     "name": "DeterminateProgress",
@@ -2097,7 +2303,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{\r\n  args: {\r\n    mode: 'determinate',\r\n    value: 75,\r\n    size: 50,\r\n    thickness: 5,\r\n    color: '#10b981', // Tailwind green-500\r\n  },\r\n}"
+                    "defaultValue": "{\n  args: {\n    mode: 'determinate',\n    value: 75,\n    size: 50,\n    thickness: 5,\n    color: '#10b981', // Tailwind green-500\n  },\n}"
                 },
                 {
                     "name": "Large",
@@ -2107,7 +2313,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{\r\n  args: {\r\n    size: 60,\r\n  },\r\n}"
+                    "defaultValue": "{\n  args: {\n    size: 60,\n  },\n}"
                 },
                 {
                     "name": "meta",
@@ -2117,7 +2323,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Meta<LoadingSpinnerComponent>",
-                    "defaultValue": "{\r\n  title: 'Components/LoadingSpinnerComponent',\r\n  component: LoadingSpinnerComponent,\r\n  tags: ['autodocs'],\r\n  argTypes: {\r\n    mode: {\r\n      control: 'select',\r\n      options: ['determinate', 'indeterminate'],\r\n      description: 'Loading state',\r\n    },\r\n    value: {\r\n      control: 'number',\r\n      description: 'Progress value (0-100) for determinate mode',\r\n    },\r\n    size: { control: 'number', description: 'Diameter in pixels' },\r\n    thickness: { control: 'number', description: 'Stroke width in pixels' },\r\n    color: {\r\n      control: 'color',\r\n      description: 'Spinner color (hex or Tailwind color)',\r\n    },\r\n  },\r\n}"
+                    "defaultValue": "{\n  title: 'Components/LoadingSpinnerComponent',\n  component: LoadingSpinnerComponent,\n  tags: ['autodocs'],\n  argTypes: {\n    mode: {\n      control: 'select',\n      options: ['determinate', 'indeterminate'],\n      description: 'Loading state',\n    },\n    value: {\n      control: 'number',\n      description: 'Progress value (0-100) for determinate mode',\n    },\n    size: { control: 'number', description: 'Diameter in pixels' },\n    thickness: { control: 'number', description: 'Stroke width in pixels' },\n    color: {\n      control: 'color',\n      description: 'Spinner color (hex or Tailwind color)',\n    },\n  },\n}"
                 },
                 {
                     "name": "Thick",
@@ -2127,7 +2333,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{\r\n  args: {\r\n    thickness: 6,\r\n  },\r\n}"
+                    "defaultValue": "{\n  args: {\n    thickness: 6,\n  },\n}"
                 }
             ],
             "libs/ngx-tailwind-flex-ui/.storybook/main.ts": [
@@ -2139,7 +2345,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "StorybookConfig",
-                    "defaultValue": "{\r\n  stories: ['../**/*.@(mdx|stories.@(js|jsx|ts|tsx))'],\r\n  addons: ['@storybook/addon-essentials', '@storybook/addon-interactions'],\r\n  framework: {\r\n    name: '@storybook/angular',\r\n    options: {},\r\n  },\r\n  docs: {\r\n    autodocs: true,\r\n    defaultName: 'Docs',\r\n  },\r\n}"
+                    "defaultValue": "{\n  stories: ['../**/*.@(mdx|stories.@(js|jsx|ts|tsx))'],\n  addons: ['@storybook/addon-essentials', '@storybook/addon-interactions'],\n  framework: {\n    name: '@storybook/angular',\n    options: {},\n  },\n  docs: {\n    autodocs: true,\n    defaultName: 'Docs',\n  },\n}"
                 }
             ],
             "libs/ngx-tailwind-flex-ui/src/lib/progress-bar/progress-bar.component.stories.ts": [
@@ -2151,7 +2357,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{\r\n  args: {\r\n    progress: 60,\r\n    color: 'primary',\r\n    variant: 'determinate',\r\n    class: 'h-6 rounded-lg',\r\n  },\r\n  render: (args) => ({\r\n    props: args,\r\n    template: `<lib-progress-bar [progress]=\"progress\" [color]=\"color\" [variant]=\"variant\" [class]=\"class\"></lib-progress-bar>`,\r\n  }),\r\n}"
+                    "defaultValue": "{\n  args: {\n    progress: 60,\n    color: 'primary',\n    variant: 'determinate',\n    class: 'h-6 rounded-lg',\n  },\n  render: (args) => ({\n    props: args,\n    template: `<lib-progress-bar [progress]=\"progress\" [color]=\"color\" [variant]=\"variant\" [class]=\"class\"></lib-progress-bar>`,\n  }),\n}"
                 },
                 {
                     "name": "Default",
@@ -2161,7 +2367,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{\r\n  args: {\r\n    progress: 25,\r\n    color: \"primary\",\r\n    variant: 'determinate',\r\n    bufferProgress: 0\r\n  },\r\n  render: (args) => ({\r\n    props: args,\r\n    template: `<lib-progress-bar [progress]=\"progress\" [color]=\"color\" [variant]=\"variant\"></lib-progress-bar>`,\r\n  }),\r\n}"
+                    "defaultValue": "{\n  args: {\n    progress: 25,\n    color: \"primary\",\n    variant: 'determinate',\n    bufferProgress: 0\n  },\n  render: (args) => ({\n    props: args,\n    template: `<lib-progress-bar [progress]=\"progress\" [color]=\"color\" [variant]=\"variant\"></lib-progress-bar>`,\n  }),\n}"
                 },
                 {
                     "name": "GreenBuffer",
@@ -2171,7 +2377,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{\r\n  args: {\r\n    progress: 40,\r\n    bufferProgress: 5,\r\n    color: 'success',\r\n    variant: 'buffer',\r\n  },\r\n  render: (args) => ({\r\n    props: args,\r\n    template: `<lib-progress-bar [progress]=\"progress\" [buffer]=\"buffer\" [color]=\"color\" [variant]=\"variant\"></lib-progress-bar>`,\r\n  }),\r\n}"
+                    "defaultValue": "{\n  args: {\n    progress: 40,\n    bufferProgress: 5,\n    color: 'success',\n    variant: 'buffer',\n  },\n  render: (args) => ({\n    props: args,\n    template: `<lib-progress-bar [progress]=\"progress\" [buffer]=\"buffer\" [color]=\"color\" [variant]=\"variant\"></lib-progress-bar>`,\n  }),\n}"
                 },
                 {
                     "name": "GreenProgress",
@@ -2181,7 +2387,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{\r\n  args: {\r\n    progress: 70,\r\n    color: 'success',\r\n    variant: 'determinate',\r\n  },\r\n  render: (args) => ({\r\n    props: args,\r\n    template: `<lib-progress-bar [progress]=\"progress\" [color]=\"color\" [variant]=\"variant\"></lib-progress-bar>`,\r\n  }),\r\n}"
+                    "defaultValue": "{\n  args: {\n    progress: 70,\n    color: 'success',\n    variant: 'determinate',\n  },\n  render: (args) => ({\n    props: args,\n    template: `<lib-progress-bar [progress]=\"progress\" [color]=\"color\" [variant]=\"variant\"></lib-progress-bar>`,\n  }),\n}"
                 },
                 {
                     "name": "meta",
@@ -2191,7 +2397,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Meta<ProgressBarComponent>",
-                    "defaultValue": "{\r\n  title: 'Components/Progress Bar',\r\n  component: ProgressBarComponent,\r\n  tags: ['autodocs'],\r\n  argTypes: {\r\n    progress: {\r\n      control: { type: 'range', min: 0, max: 100, step: 1 },\r\n      description: 'Progress percentage (0 to 100)',\r\n    },\r\n    // buffer: {\r\n    //   control: { type: 'range', min: 0, max: 100, step: 1 },\r\n    //   description: 'Buffer progress percentage (used in buffer variant)',\r\n    // },\r\n    color: {\r\n      control: 'select',\r\n      options: ['primary', 'secondary', 'success', 'error'],\r\n      description: 'Color of the progress bar',\r\n    },\r\n    variant: {\r\n      control: 'select',\r\n      options: ['determinate', 'indeterminate', 'buffer', 'query'],\r\n      description: 'Progress bar type',\r\n    },\r\n    // class: {\r\n    //   control: 'text',\r\n    //   description: 'Additional Tailwind CSS classes for customization',\r\n    // },\r\n  },\r\n}"
+                    "defaultValue": "{\n  title: 'Components/Progress Bar',\n  component: ProgressBarComponent,\n  tags: ['autodocs'],\n  argTypes: {\n    progress: {\n      control: { type: 'range', min: 0, max: 100, step: 1 },\n      description: 'Progress percentage (0 to 100)',\n    },\n    // buffer: {\n    //   control: { type: 'range', min: 0, max: 100, step: 1 },\n    //   description: 'Buffer progress percentage (used in buffer variant)',\n    // },\n    color: {\n      control: 'select',\n      options: ['primary', 'secondary', 'success', 'error'],\n      description: 'Color of the progress bar',\n    },\n    variant: {\n      control: 'select',\n      options: ['determinate', 'indeterminate', 'buffer', 'query'],\n      description: 'Progress bar type',\n    },\n    // class: {\n    //   control: 'text',\n    //   description: 'Additional Tailwind CSS classes for customization',\n    // },\n  },\n}"
                 },
                 {
                     "name": "RedIndeterminate",
@@ -2201,49 +2407,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{\r\n  args: {\r\n    color: 'error',\r\n    variant: 'indeterminate',\r\n  },\r\n  render: (args) => ({\r\n    props: args,\r\n    template: `<lib-progress-bar [color]=\"color\" [variant]=\"variant\"></lib-progress-bar>`,\r\n  }),\r\n}"
-                }
-            ],
-            "libs/ngx-tailwind-flex-ui/src/lib/icon/icon.stories.ts": [
-                {
-                    "name": "Default",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "libs/ngx-tailwind-flex-ui/src/lib/icon/icon.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Story",
-                    "defaultValue": "{\r\n  args: {\r\n    name: 'home',\r\n    size: 'md',\r\n    color: 'text-gray-500',\r\n  },\r\n  render: (args) => ({\r\n    props: args,\r\n    template: `<lib-icon [name]=\"name\" [size]=\"size\" [color]=\"color\"></lib-icon>`,\r\n  }),\r\n}"
-                },
-                {
-                    "name": "LargeRedIcon",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "libs/ngx-tailwind-flex-ui/src/lib/icon/icon.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Story",
-                    "defaultValue": "{\r\n  args: {\r\n    name: 'favorite',\r\n    size: 'xl',\r\n    color: 'text-red-500',\r\n  },\r\n  render: (args) => ({\r\n    props: args,\r\n    template: `<lib-icon [name]=\"name\" [size]=\"size\" [color]=\"color\"></lib-icon>`,\r\n  }),\r\n}"
-                },
-                {
-                    "name": "meta",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "libs/ngx-tailwind-flex-ui/src/lib/icon/icon.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Meta<IconComponent>",
-                    "defaultValue": "{\r\n  title: 'Components/Icon',\r\n  component: IconComponent,\r\n  tags: ['autodocs'],\r\n  argTypes: {\r\n    name: { control: 'text', description: 'Icon name from Material Icons' },\r\n    size: { \r\n      control: 'radio', \r\n      options: ['sm', 'md', 'lg', 'xl'], \r\n      description: 'Size of the icon' \r\n    },\r\n    color: { control: 'text', description: 'Tailwind color classes' },\r\n  },\r\n}"
-                },
-                {
-                    "name": "SmallBlueIcon",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "libs/ngx-tailwind-flex-ui/src/lib/icon/icon.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Story",
-                    "defaultValue": "{\r\n  args: {\r\n    name: 'star',\r\n    size: 'sm',\r\n    color: 'text-blue-500',\r\n  },\r\n  render: (args) => ({\r\n    props: args,\r\n    template: `<lib-icon [name]=\"name\" [size]=\"size\" [color]=\"color\"></lib-icon>`,\r\n  }),\r\n}"
+                    "defaultValue": "{\n  args: {\n    color: 'error',\n    variant: 'indeterminate',\n  },\n  render: (args) => ({\n    props: args,\n    template: `<lib-progress-bar [color]=\"color\" [variant]=\"variant\"></lib-progress-bar>`,\n  }),\n}"
                 }
             ],
             "libs/ngx-tailwind-flex-ui/src/lib/paginator/paginator.component.stories.ts": [
@@ -2255,7 +2419,111 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "StoryObj<PaginatorComponent>",
-                    "defaultValue": "{\r\n  args: {\r\n    length: 100,\r\n    pageSize: 10,\r\n    pageIndex: 0,\r\n  },\r\n}"
+                    "defaultValue": "{\n  args: {\n    length: 100,\n    pageSize: 10,\n    pageIndex: 0,\n  },\n}"
+                }
+            ],
+            "libs/ngx-tailwind-flex-ui/src/lib/icon/icon.stories.ts": [
+                {
+                    "name": "Default",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/ngx-tailwind-flex-ui/src/lib/icon/icon.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  args: {\n    name: 'home',\n    size: 'md',\n    color: 'text-gray-500',\n  },\n  render: (args) => ({\n    props: args,\n    template: `<lib-icon [name]=\"name\" [size]=\"size\" [color]=\"color\"></lib-icon>`,\n  }),\n}"
+                },
+                {
+                    "name": "LargeRedIcon",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/ngx-tailwind-flex-ui/src/lib/icon/icon.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  args: {\n    name: 'favorite',\n    size: 'xl',\n    color: 'text-red-500',\n  },\n  render: (args) => ({\n    props: args,\n    template: `<lib-icon [name]=\"name\" [size]=\"size\" [color]=\"color\"></lib-icon>`,\n  }),\n}"
+                },
+                {
+                    "name": "meta",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/ngx-tailwind-flex-ui/src/lib/icon/icon.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Meta<IconComponent>",
+                    "defaultValue": "{\n  title: 'Components/Icon',\n  component: IconComponent,\n  tags: ['autodocs'],\n  argTypes: {\n    name: { control: 'text', description: 'Icon name from Material Icons' },\n    size: { \n      control: 'radio', \n      options: ['sm', 'md', 'lg', 'xl'], \n      description: 'Size of the icon' \n    },\n    color: { control: 'text', description: 'Tailwind color classes' },\n  },\n}"
+                },
+                {
+                    "name": "SmallBlueIcon",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/ngx-tailwind-flex-ui/src/lib/icon/icon.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  args: {\n    name: 'star',\n    size: 'sm',\n    color: 'text-blue-500',\n  },\n  render: (args) => ({\n    props: args,\n    template: `<lib-icon [name]=\"name\" [size]=\"size\" [color]=\"color\"></lib-icon>`,\n  }),\n}"
+                }
+            ],
+            "libs/ngx-tailwind-flex-ui/src/lib/input/input.component.stories.ts": [
+                {
+                    "name": "Error",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/ngx-tailwind-flex-ui/src/lib/input/input.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  args: {\n    state: 'error',\n    placeholder: 'Error state',\n  },\n}"
+                },
+                {
+                    "name": "Filled",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/ngx-tailwind-flex-ui/src/lib/input/input.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  args: {\n    variant: 'filled',\n    placeholder: 'Filled input',\n  },\n}"
+                },
+                {
+                    "name": "Large",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/ngx-tailwind-flex-ui/src/lib/input/input.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  args: {\n    size: 'lg',\n    placeholder: 'Large input',\n  },\n}"
+                },
+                {
+                    "name": "meta",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/ngx-tailwind-flex-ui/src/lib/input/input.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Meta<InputComponent>",
+                    "defaultValue": "{\n  title: 'Form/Input',\n  component: InputComponent,\n  tags: ['autodocs'],\n  render: (args: InputComponent) => ({ props: args }),\n}"
+                },
+                {
+                    "name": "Outline",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/ngx-tailwind-flex-ui/src/lib/input/input.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  args: {\n    variant: 'outline',\n    placeholder: 'Outline input',\n  },\n}"
+                },
+                {
+                    "name": "Success",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "libs/ngx-tailwind-flex-ui/src/lib/input/input.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\n  args: {\n    state: 'success',\n    placeholder: 'Success state',\n  },\n}"
                 }
             ],
             "libs/ngx-tailwind-flex-ui/.storybook/preview.ts": [
@@ -2277,26 +2545,13 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "object",
-                    "defaultValue": "{\r\n  actions: { argTypesRegex: '^on[A-Z].*' },\r\n  controls: {\r\n    matchers: {\r\n      color: /(background|color)$/i,\r\n      date: /Date$/,\r\n    },\r\n  },\r\n}"
+                    "defaultValue": "{\n  actions: { argTypesRegex: '^on[A-Z].*' },\n  controls: {\n    matchers: {\n      color: /(background|color)$/i,\n      date: /Date$/,\n    },\n  },\n}"
                 }
             ]
         },
         "groupedFunctions": {},
         "groupedEnumerations": {},
         "groupedTypeAliases": {
-            "libs/ngx-tailwind-flex-ui/src/lib/alert/alert.component.stories.ts": [
-                {
-                    "name": "Story",
-                    "ctype": "miscellaneous",
-                    "subtype": "typealias",
-                    "rawtype": "StoryObj<AlertComponent>",
-                    "file": "libs/ngx-tailwind-flex-ui/src/lib/alert/alert.component.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "description": "",
-                    "kind": 183
-                }
-            ],
             "libs/ngx-tailwind-flex-ui/src/lib/button/button.component.stories.ts": [
                 {
                     "name": "Story",
@@ -2310,13 +2565,26 @@
                     "kind": 183
                 }
             ],
-            "libs/ngx-tailwind-flex-ui/src/lib/icon/icon.stories.ts": [
+            "libs/ngx-tailwind-flex-ui/src/lib/alert/alert.component.stories.ts": [
                 {
                     "name": "Story",
                     "ctype": "miscellaneous",
                     "subtype": "typealias",
-                    "rawtype": "StoryObj<IconComponent>",
-                    "file": "libs/ngx-tailwind-flex-ui/src/lib/icon/icon.stories.ts",
+                    "rawtype": "StoryObj<AlertComponent>",
+                    "file": "libs/ngx-tailwind-flex-ui/src/lib/alert/alert.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 183
+                }
+            ],
+            "libs/ngx-tailwind-flex-ui/src/lib/input/input.component.stories.ts": [
+                {
+                    "name": "Story",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "StoryObj<InputComponent>",
+                    "file": "libs/ngx-tailwind-flex-ui/src/lib/input/input.component.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "description": "",
@@ -2330,6 +2598,19 @@
                     "subtype": "typealias",
                     "rawtype": "StoryObj<LoadingSpinnerComponent>",
                     "file": "libs/ngx-tailwind-flex-ui/src/lib/loadingSpinner/loadingSpinner.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 183
+                }
+            ],
+            "libs/ngx-tailwind-flex-ui/src/lib/icon/icon.stories.ts": [
+                {
+                    "name": "Story",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "StoryObj<IconComponent>",
+                    "file": "libs/ngx-tailwind-flex-ui/src/lib/icon/icon.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "description": "",
@@ -2630,6 +2911,85 @@
                 "name": "Story",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/ngx-tailwind-flex-ui/src/lib/input/input.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Error",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/ngx-tailwind-flex-ui/src/lib/input/input.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Filled",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/ngx-tailwind-flex-ui/src/lib/input/input.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Large",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/ngx-tailwind-flex-ui/src/lib/input/input.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "meta",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/ngx-tailwind-flex-ui/src/lib/input/input.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Outline",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/ngx-tailwind-flex-ui/src/lib/input/input.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Success",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/ngx-tailwind-flex-ui/src/lib/input/input.component.stories.ts",
+                "type": "type alias",
+                "linktype": "miscellaneous",
+                "linksubtype": "typealias",
+                "name": "Story",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "libs/ngx-tailwind-flex-ui/src/lib/input/input.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "InputComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/10",
                 "status": "low"
             },
             {
