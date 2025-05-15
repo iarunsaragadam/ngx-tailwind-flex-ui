@@ -1,0 +1,19 @@
+<div class="border rounded overflow-hidden">
+    <button
+      class="w-full text-left p-4 font-semibold bg-gray-100"
+      (click)="toggle()"
+      [disabled]="disabled"
+    >
+      {{ header }}
+    </button>
+  
+    <div
+      class="overflow-hidden transition-all duration-300 ease-in-out"
+      [style.maxHeight]="expanded ? '200px' : '0'"
+    >
+      <div class="p-4">
+        <ng-content></ng-content>
+      </div>
+    </div>
+  </div>
+  
