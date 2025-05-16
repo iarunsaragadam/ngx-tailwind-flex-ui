@@ -1,0 +1,46 @@
+<div
+  [attr.role]="text ? 'separator' : 'presentation'"
+  [attr.aria-label]="text ? text : null"
+  [ngClass]="{
+    flex: text && orientation === 'horizontal',
+    'items-center': text && orientation === 'horizontal',
+    'flex-col': text && orientation === 'vertical',
+    'justify-center': text && orientation === 'vertical',
+    'border-t': orientation === 'horizontal',
+    'border-l': orientation === 'vertical',
+    'border-solid': style === 'solid',
+    'border-dashed': style === 'dashed',
+    'border-dotted': style === 'dotted',
+    'transition-all duration-300': hoverEffect,
+    'hover:border-gray-500': hoverEffect
+  }"
+  [style.border-width.px]="thickness"
+  [style.border-color]="color"
+  [style.width]="
+    orientation === 'horizontal'
+      ? length || (inset ? null : '100%')
+      : text
+      ? 'auto'
+      : '1px'
+  "
+  [style.height]="
+    orientation === 'vertical'
+      ? length || (inset ? null : '100%')
+      : text
+      ? 'auto'
+      : '1px'
+  "
+  [style.margin-left]="inset && orientation === 'horizontal' ? '1rem' : '0'"
+  [style.margin-right]="inset && orientation === 'horizontal' ? '1rem' : '0'"
+  [style.margin-top]="inset && orientation === 'vertical' ? '1rem' : '0'"
+  [style.margin-bottom]="inset && orientation === 'vertical' ? '1rem' : '0'"
+>
+  <span
+    *ngIf="text"
+    class="px-2 whitespace-nowrap"
+    [style.color]="textColor"
+    [style.font-size]="textSize"
+    [style.font-weight]="textWeight"
+    >{{ text }}</span
+  >
+</div>
