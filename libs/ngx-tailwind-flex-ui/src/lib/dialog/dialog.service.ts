@@ -2,26 +2,26 @@ import { ApplicationRef, ComponentRef, createComponent, EnvironmentInjector, Inj
 import { DialogComponent } from './dialog.component';
 import { DialogConfig } from './dialog-config';
 import { DialogRef } from './dialog-ref';
-import { DIALOG_DATA } from './dialog.tokens';
+import { DIALOG_DATA, DialogData } from './dialog.tokens';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DialogService {
-  private readonly dialogRefs = new Set<DialogRef<any>>();
+  private readonly dialogRefs = new Set<DialogRef>();
 
   constructor(
     private appRef: ApplicationRef,
     private injector: EnvironmentInjector
   ) {}
 
-  open<T, D = any, R = any>(
+  open<T, D extends DialogData = DialogData, R = unknown>(
     component: Type<T>,
     config: DialogConfig<D> = {}
   ): DialogRef<R> {
     // Create an instance of DialogRef
     const dialogRef = new DialogRef<R>(config);
-    this.dialogRefs.add(dialogRef);
+    this.dialogRefs.add(dialogRef as DialogRef);
 
     // Create the dialog component
     const dialogComponentRef = this.createDialogComponent(dialogRef, config);
@@ -51,7 +51,7 @@ export class DialogService {
     });
 
     // Set the dialogRef instance on the component
-    dialogComponentRef.instance.dialogRef = dialogRef;
+    dialogComponentRef.instance.dialogRef = dialogRef as DialogRef;
     dialogComponentRef.instance.ariaLabelledBy = config.ariaLabelledBy;
     dialogComponentRef.instance.ariaDescribedBy = config.ariaDescribedBy;
 
@@ -96,6 +96,6 @@ export class DialogService {
     this.appRef.detachView(dialogComponentRef.hostView);
     dialogComponentRef.destroy();
     document.body.removeChild(dialogComponentRef.location.nativeElement);
-    this.dialogRefs.delete(dialogRef);
+    this.dialogRefs.delete(dialogRef as DialogRef);
   }
 } 

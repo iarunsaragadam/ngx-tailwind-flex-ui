@@ -1,6 +1,6 @@
 import { Component, Inject, Input, Optional, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { DIALOG_DATA } from './dialog.tokens';
+import { DIALOG_DATA, DialogData } from './dialog.tokens';
 import { DialogRef } from './dialog-ref';
 
 @Component({
@@ -10,8 +10,8 @@ import { DialogRef } from './dialog-ref';
   template: `
     <div
       class="fixed inset-0 z-50 flex items-center justify-center bg-black/50"
-      (click)="onBackdropClick($event)"
-      (keydown.escape)="onEscapeKey($event)"
+      (click)="onBackdropClick()"
+      (keydown)="onBackdropKeydown($event)"
       tabindex="-1"
     >
       <div
@@ -33,26 +33,25 @@ import { DialogRef } from './dialog-ref';
     'class': 'block',
   }
 })
-export class DialogComponent {
+export class DialogComponent<T = unknown> {
   @Input() ariaLabelledBy?: string;
   @Input() ariaDescribedBy?: string;
 
   constructor(
-    public dialogRef: DialogRef<any>,
-    @Optional() @Inject(DIALOG_DATA) public data: any
+    public dialogRef: DialogRef<T>,
+    @Optional() @Inject(DIALOG_DATA) public data: DialogData
   ) {}
 
-  onBackdropClick(event: MouseEvent): void {
+  onBackdropClick(): void {
     if (this.dialogRef.config.disableClose) {
       return;
     }
     this.dialogRef.close();
   }
-
-  onEscapeKey(event: KeyboardEvent): void {
-    if (!this.dialogRef.config.disableClose) {
+  onBackdropKeydown(event: KeyboardEvent): void {
+    if (event.key === 'Escape' && !this.dialogRef.config.disableClose) {
       this.dialogRef.close();
-    }
+  }
   }
 
   onDialogKeydown(event: KeyboardEvent): void {
@@ -66,3 +65,12 @@ export class DialogComponent {
     }
   }
 } 
+
+function onDialogKeydown(event: Event | undefined, KeyboardEvent: { new(type: string, eventInitDict?: KeyboardEventInit): KeyboardEvent; prototype: KeyboardEvent; readonly DOM_KEY_LOCATION_STANDARD: 0; readonly DOM_KEY_LOCATION_LEFT: 1; readonly DOM_KEY_LOCATION_RIGHT: 2; readonly DOM_KEY_LOCATION_NUMPAD: 3; }) {
+  throw new Error('Function not implemented.');
+}
+
+
+function handleEscapeKey() {
+  throw new Error('Function not implemented.');
+}

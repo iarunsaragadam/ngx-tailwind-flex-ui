@@ -1,27 +1,23 @@
-import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { Component, Inject, inject } from '@angular/core';
+import { Meta, StoryObj } from '@storybook/angular';
+import { Component } from '@angular/core';
 import { DialogService } from './dialog.service';
 import { DialogRef } from './dialog-ref';
 import { DIALOG_DATA } from './dialog.tokens';
-import { DialogComponent } from './dialog.component';
 
 @Component({
-  selector: 'lib-demo-dialog',
   template: `
-    <div class="p-4">
-      <h2 class="text-lg font-semibold mb-4" lib-dialog-title>Confirm Action</h2>
-      <div class="mb-4" lib-dialog-content>
-        <p>{{ data.message }}</p>
-      </div>
-      <div class="flex justify-end space-x-2" lib-dialog-actions>
+    <div class="p-6">
+      <h2 class="text-xl font-semibold mb-4">Confirm Action</h2>
+      <p class="mb-6">Are you sure you want to proceed with this action?</p>
+      <div class="flex justify-end space-x-4">
         <button
-          class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50"
+          class="px-4 py-2 text-gray-600 hover:text-gray-800"
           (click)="dialogRef.close(false)"
         >
           Cancel
         </button>
         <button
-          class="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700"
+          class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
           (click)="dialogRef.close(true)"
         >
           Confirm
@@ -32,46 +28,45 @@ import { DialogComponent } from './dialog.component';
 })
 class DemoDialogComponent {
   constructor(
-    public dialogRef: DialogRef<boolean>,
-    @Inject(DIALOG_DATA) public data: { message: string }
+    public dialogRef: DialogRef<boolean>
   ) {}
 }
 
 export default {
-  title: 'Components/Dialog',
-  decorators: [
-    moduleMetadata({
-      imports: [DialogComponent],
-      providers: [DialogService]
-    })
-  ],
-  parameters: {
-    layout: 'centered'
-  }
+  title: 'Dialog',
+  decorators: []
 } as Meta;
 
-export const Basic: StoryObj = {
-  render: (args) => ({
+type Story = StoryObj<{ openDialog: () => void }>;
+
+export const Basic: Story = {
+  render: (args: { openDialog: () => void }) => ({
     props: {
       ...args,
       openDialog: () => {
-        const dialogService = inject(DialogService);
-        const dialogRef = dialogService.open(DemoDialogComponent, {
-          data: { message: 'Are you sure you want to proceed?' }
-        });
-
-        dialogRef.afterClosed().subscribe((result: boolean | undefined) => {
-          console.log('Dialog result:', result);
+        const dialogService = new DialogService(null!, null!);
+        const dialogRef = dialogService.open<DemoDialogComponent, Record<string, never>, boolean>(DemoDialogComponent);
+        
+        dialogRef.afterClosed().subscribe({
+          next: (result) => {
+            if (result === true) {
+              console.log('User confirmed');
+            } else {
+              console.log('User cancelled');
+            }
+          }
         });
       }
     },
     template: `
-      <button
-        class="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700"
-        (click)="openDialog()"
-      >
-        Open Dialog
-      </button>
+      <div class="p-4">
+        <button
+          class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+          (click)="openDialog()"
+        >
+          Open Dialog
+        </button>
+      </div>
     `
   })
 }; 

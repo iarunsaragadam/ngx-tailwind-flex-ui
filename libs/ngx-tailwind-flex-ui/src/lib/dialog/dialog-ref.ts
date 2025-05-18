@@ -1,7 +1,7 @@
 import { Observable, Subject } from 'rxjs';
 import { DialogConfig } from './dialog-config';
 
-export class DialogRef<R = any> {
+export class DialogRef<R = unknown> {
   private readonly afterClosedSubject = new Subject<R | undefined>();
 
   constructor(public readonly config: DialogConfig = {}) {}
