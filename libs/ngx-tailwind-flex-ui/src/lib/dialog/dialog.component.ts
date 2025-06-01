@@ -11,6 +11,7 @@ import { DialogRef } from './dialog-ref';
     <div
       class="fixed inset-0 z-50 flex items-center justify-center bg-black/50"
       (click)="onBackdropClick()"
+      (keydown)="onBackdropKeydown($event)"
       tabindex="-1"
     >
       <div
@@ -46,6 +47,13 @@ export class DialogComponent<T = unknown> {
       return;
     }
     this.dialogRef.close();
+  }
+
+  onBackdropKeydown(event: KeyboardEvent): void {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      this.onBackdropClick();
+    }
   }
 
   onDialogKeydown(event: KeyboardEvent): void {
