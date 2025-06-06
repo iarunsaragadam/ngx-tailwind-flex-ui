@@ -1942,7 +1942,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\r\n  args: { multi: true },\r\n  render: (args) => ({\r\n    props: args,\r\n    template: `\r\n      <app-accordion [multi]=\"multi\">\r\n        <app-accordion-panel header=\"Item A\">\r\n          <p>Content A</p>\r\n        </app-accordion-panel>\r\n        <app-accordion-panel header=\"Item B\">\r\n          <p>Content B</p>\r\n        </app-accordion-panel>\r\n      </app-accordion>\r\n    `,\r\n  }),\r\n}"
+                "defaultValue": "{\r\n  args: { multi: true },\r\n  render: (args) => ({\r\n    props: args,\r\n    template: `\r\n      <lib-accordion [multi]=\"multi\">\r\n        <lib-accordion-panel header=\"Item A\">\r\n          <p>Content A</p>\r\n        </lib-accordion-panel>\r\n        <lib-accordion-panel header=\"Item B\">\r\n          <p>Content B</p>\r\n        </lib-accordion-panel>\r\n      </lib-accordion>\r\n    `,\r\n  }),\r\n}"
             },
             {
                 "name": "Outline",
@@ -1992,7 +1992,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\r\n  args: { multi: false },\r\n  render: (args) => ({\r\n    props: args,\r\n    template: `\r\n      <app-accordion [multi]=\"multi\">\r\n        <app-accordion-panel header=\"Section 1\">\r\n          <p>Content for section 1</p>\r\n        </app-accordion-panel>\r\n        <app-accordion-panel header=\"Section 2\">\r\n          <p>Content for section 2</p>\r\n        </app-accordion-panel>\r\n      </app-accordion>\r\n    `,\r\n  }),\r\n}"
+                "defaultValue": "{\r\n  args: { multi: false },\r\n  render: (args) => ({\r\n    props: args,\r\n    template: `\r\n      <lib-accordion [multi]=\"multi\">\r\n        <lib-accordion-panel header=\"Section 1\">\r\n          <p>Content for section 1</p>\r\n        </lib-accordion-panel>\r\n        <lib-accordion-panel header=\"Section 2\">\r\n          <p>Content for section 2</p>\r\n        </lib-accordion-panel>\r\n      </lib-accordion>\r\n    `,\r\n  }),\r\n}"
             },
             {
                 "name": "SmallBlueIcon",
@@ -2511,7 +2511,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{\r\n  args: { multi: true },\r\n  render: (args) => ({\r\n    props: args,\r\n    template: `\r\n      <app-accordion [multi]=\"multi\">\r\n        <app-accordion-panel header=\"Item A\">\r\n          <p>Content A</p>\r\n        </app-accordion-panel>\r\n        <app-accordion-panel header=\"Item B\">\r\n          <p>Content B</p>\r\n        </app-accordion-panel>\r\n      </app-accordion>\r\n    `,\r\n  }),\r\n}"
+                    "defaultValue": "{\r\n  args: { multi: true },\r\n  render: (args) => ({\r\n    props: args,\r\n    template: `\r\n      <lib-accordion [multi]=\"multi\">\r\n        <lib-accordion-panel header=\"Item A\">\r\n          <p>Content A</p>\r\n        </lib-accordion-panel>\r\n        <lib-accordion-panel header=\"Item B\">\r\n          <p>Content B</p>\r\n        </lib-accordion-panel>\r\n      </lib-accordion>\r\n    `,\r\n  }),\r\n}"
                 },
                 {
                     "name": "SingleExpansion",
@@ -2521,7 +2521,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{\r\n  args: { multi: false },\r\n  render: (args) => ({\r\n    props: args,\r\n    template: `\r\n      <app-accordion [multi]=\"multi\">\r\n        <app-accordion-panel header=\"Section 1\">\r\n          <p>Content for section 1</p>\r\n        </app-accordion-panel>\r\n        <app-accordion-panel header=\"Section 2\">\r\n          <p>Content for section 2</p>\r\n        </app-accordion-panel>\r\n      </app-accordion>\r\n    `,\r\n  }),\r\n}"
+                    "defaultValue": "{\r\n  args: { multi: false },\r\n  render: (args) => ({\r\n    props: args,\r\n    template: `\r\n      <lib-accordion [multi]=\"multi\">\r\n        <lib-accordion-panel header=\"Section 1\">\r\n          <p>Content for section 1</p>\r\n        </lib-accordion-panel>\r\n        <lib-accordion-panel header=\"Section 2\">\r\n          <p>Content for section 2</p>\r\n        </lib-accordion-panel>\r\n      </lib-accordion>\r\n    `,\r\n  }),\r\n}"
                 }
             ]
         },
