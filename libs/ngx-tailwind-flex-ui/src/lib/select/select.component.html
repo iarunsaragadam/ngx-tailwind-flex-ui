@@ -1,0 +1,137 @@
+<div class="relative w-full" #trigger [style.width]="width">
+  <div class="relative">
+    <input
+      type="text"
+      [placeholder]="placeholder"
+      [disabled]="disabled"
+      [required]="required"
+      [readonly]="true"
+      [value]="displayValue"
+      [tabIndex]="tabIndex"
+      [attr.aria-label]="ariaLabel || null"
+      [attr.aria-labelledby]="ariaLabelledby || null"
+      class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 cursor-pointer"
+      (click)="togglePanel($event)"
+      (keydown)="handleKeydown($event)"
+    />
+    <!-- Dismiss/Clear icon for single select -->
+    <button
+      *ngIf="!multiple && value"
+      type="button"
+      (click)="clearSelection($event)"
+      class="absolute right-8 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400 hover:text-red-500 focus:outline-none"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M6 18L18 6M6 6l12 12"
+        />
+      </svg>
+    </button>
+    <!-- Selected chips for multiple select -->
+    <div
+      *ngIf="multiple && selectedValues.length"
+      class="flex flex-wrap gap-1 mt-1"
+    >
+      <span
+        *ngFor="let val of selectedValues"
+        class="inline-flex items-center px-2 py-1 bg-blue-100 text-blue-700 rounded text-xs"
+      >
+        {{ getLabelForValue(val) }}
+        <button
+          type="button"
+          (click)="removeSelected(val, $event)"
+          class="ml-1 text-blue-500 hover:text-red-500 focus:outline-none"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            class="h-4 w-4"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M6 18L18 6M6 6l12 12"
+            />
+          </svg>
+        </button>
+      </span>
+    </div>
+  </div>
+
+  <div
+    *ngIf="isOpen"
+    #panel
+    class="absolute z-10 mt-1 w-full bg-white border border-gray-200 rounded-md shadow-lg overflow-hidden"
+    [class]="panelClass"
+    [class.max-h-60]="!panelClass"
+    role="listbox"
+    [attr.aria-multiselectable]="multiple"
+    [attr.aria-activedescendant]="
+      focusedOptionIndex >= 0 ? 'option-' + focusedOptionIndex : null
+    "
+  >
+    <div
+      *ngIf="options && options.length > 5"
+      class="sticky top-0 bg-white p-2 border-b border-gray-200"
+    >
+      <input
+        #searchInput
+        [(ngModel)]="searchText"
+        class="w-full px-3 py-2 text-sm border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+        placeholder="Search..."
+        (click)="$event.stopPropagation()"
+        aria-label="Filter options"
+      />
+    </div>
+
+    <div class="overflow-y-auto max-h-[244px]">
+      <ng-container *ngIf="filteredOptions.length > 0; else noOptions">
+        <lib-select-option
+          *ngFor="let option of filteredOptions; let i = index"
+          [value]="option.value"
+          [label]="option.label"
+          [disabled]="option.disabled"
+          [selected]="isSelected(option)"
+          (click)="selectOption(option, $event)"
+          [id]="'option-' + i"
+          [class.bg-blue-100]="i === focusedOptionIndex"
+        >
+          <ng-container *ngIf="multiple">
+            <svg
+              *ngIf="isSelected(option)"
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-5 w-5 mr-2 text-blue-600"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                clip-rule="evenodd"
+              />
+            </svg>
+            <span *ngIf="!isSelected(option)" class="w-5 mr-2"></span>
+          </ng-container>
+          {{ option.label }}
+        </lib-select-option>
+      </ng-container>
+
+      <ng-template #noOptions>
+        <div class="px-4 py-2 text-sm text-gray-500 text-center">
+          No options found
+        </div>
+      </ng-template>
+    </div>
+  </div>
+</div>
