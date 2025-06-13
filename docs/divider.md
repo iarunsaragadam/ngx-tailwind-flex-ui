@@ -10,7 +10,7 @@ The `DividerComponent` provides a simple visual separator between UI elements.
 ## Inputs
 | Name | Type | Default | Description |
 | ---- | ---- | ------- | ----------- |
-| `orientation` | `'horizontal' | 'vertical'` | `'horizontal'` | Divider orientation |
+| `orientation` | `'horizontal' \| 'vertical'` | `'horizontal'` | Divider orientation |
 | `class` | `string` | `''` | Additional Tailwind classes |
 
 ## Accessibility
