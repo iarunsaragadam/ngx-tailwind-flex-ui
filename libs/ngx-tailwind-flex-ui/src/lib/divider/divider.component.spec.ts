@@ -33,4 +33,11 @@ describe('DividerComponent', () => {
     expect(div.classList).toContain('w-px');
     expect(div.getAttribute('aria-orientation')).toBe('vertical');
   });
+
+  it('should apply extra classes', () => {
+    component.className = 'bg-red-500';
+    fixture.detectChanges();
+    const div: HTMLElement = fixture.nativeElement;
+    expect(div.classList).toContain('bg-red-500');
+  });
 });

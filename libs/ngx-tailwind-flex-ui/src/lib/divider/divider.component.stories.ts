@@ -11,7 +11,7 @@ const meta: Meta<DividerComponent> = {
       options: ['horizontal', 'vertical'],
       description: 'Divider orientation',
     },
-    class: {
+    className: {
       control: 'text',
       description: 'Additional Tailwind CSS classes for customization',
     },
@@ -51,13 +51,13 @@ export const Vertical: Story = {
 };
 
 export const CustomStyled: Story = {
-  args: { orientation: 'horizontal', class: 'bg-blue-500' },
+  args: { orientation: 'horizontal', className: 'bg-blue-500' },
   render: (args) => ({
     props: args,
     template: `
       <div class="space-y-2">
         <p>Item 1</p>
-        <lib-divider [orientation]="orientation" [class]="class"></lib-divider>
+        <lib-divider [orientation]="orientation" [className]="className"></lib-divider>
         <p>Item 2</p>
       </div>
     `,

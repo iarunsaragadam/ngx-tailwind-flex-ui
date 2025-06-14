@@ -11,7 +11,7 @@ The `DividerComponent` provides a simple visual separator between UI elements.
 | Name | Type | Default | Description |
 | ---- | ---- | ------- | ----------- |
 | `orientation` | `'horizontal' \| 'vertical'` | `'horizontal'` | Divider orientation |
-| `class` | `string` | `''` | Additional Tailwind classes |
+| `className` | `string` | `''` | Additional Tailwind classes |
 
 ## Accessibility
 - Uses `role="separator"` and sets `aria-orientation` to match the divider orientation.

@@ -8,14 +8,15 @@ import { Component, HostBinding, Input } from '@angular/core';
 })
 export class DividerComponent {
   @Input() orientation: 'horizontal' | 'vertical' = 'horizontal';
-  @Input() class = '';
+  /** Additional Tailwind CSS classes for customization */
+  @Input() className = '';
 
   @HostBinding('class')
   get hostClasses(): string {
     const base = 'bg-gray-300';
     const orientClass =
       this.orientation === 'vertical' ? 'w-px h-full' : 'h-px w-full';
-    return `${base} ${orientClass} ${this.class}`.trim();
+    return `${base} ${orientClass} ${this.className}`.trim();
   }
 
   @HostBinding('attr.role') role = 'separator';
