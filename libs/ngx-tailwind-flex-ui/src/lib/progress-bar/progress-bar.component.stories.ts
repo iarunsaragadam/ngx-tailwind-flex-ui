@@ -44,7 +44,7 @@ export const Default: Story = {
   },
   render: (args) => ({
     props: args,
-    template: `<lib-progress-bar [progress]="progress" [color]="color" [variant]="variant"></lib-progress-bar>`,
+    template: `<lib-progress-bar [progress]="progress" [color]="color" [variant]="variant" [bufferProgress]="bufferProgress"></lib-progress-bar>`,
   }),
 };
 
@@ -53,10 +53,11 @@ export const GreenProgress: Story = {
     progress: 70,
     color: 'success',
     variant: 'determinate',
+    bufferProgress: 0
   },
   render: (args) => ({
     props: args,
-    template: `<lib-progress-bar [progress]="progress" [color]="color" [variant]="variant"></lib-progress-bar>`,
+    template: `<lib-progress-bar [progress]="progress" [color]="color" [variant]="variant" [bufferProgress]="bufferProgress"></lib-progress-bar>`,
   }),
 };
 
@@ -69,7 +70,7 @@ export const GreenBuffer: Story = {
   },
   render: (args) => ({
     props: args,
-    template: `<lib-progress-bar [progress]="progress" [buffer]="buffer" [color]="color" [variant]="variant"></lib-progress-bar>`,
+    template: `<lib-progress-bar [progress]="progress" [bufferProgress]="bufferProgress" [color]="color" [variant]="variant"></lib-progress-bar>`,
   }),
 };
 

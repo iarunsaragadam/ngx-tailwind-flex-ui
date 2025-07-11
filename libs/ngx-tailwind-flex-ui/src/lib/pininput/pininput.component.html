@@ -1,0 +1,15 @@
+<div class="otp-container">
+    <input
+      *ngFor="let digit of otpValues; let i = index"
+      #otpInput
+      type="{{ mask ? 'password' : 'text' }}"
+      [(ngModel)]="otpValues[i]"
+      (input)="onInput($event, i)"
+      (keydown)="onKeyDown($event, i)"
+      (paste)="onPaste($event)"
+      maxlength="1"
+      [disabled]="disabled"
+      class="otp-box"
+      [attr.aria-label]="'OTP Digit ' + (i + 1)"
+    />
+  </div>

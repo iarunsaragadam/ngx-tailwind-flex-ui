@@ -1,17 +1,16 @@
-import { Meta, StoryObj } from '@storybook/angular';
+import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { AccordionComponent } from './accordion.component';
-import { moduleMetadata } from '@storybook/angular';
 import { AccordionPanelComponent } from './accordion-panel.component';
 
 const meta: Meta<AccordionComponent> = {
   title: 'Components/Accordion',
   component: AccordionComponent,
+  tags: ['autodocs'],
   decorators: [
     moduleMetadata({
-      imports: [AccordionComponent, AccordionPanelComponent],
+      imports: [AccordionComponent, AccordionPanelComponent], // Standalone components must be imported
     }),
   ],
-  tags: ['autodocs'],
   argTypes: {
     multi: {
       control: 'boolean',
@@ -28,14 +27,14 @@ export const SingleExpansion: Story = {
   render: (args) => ({
     props: args,
     template: `
-      <app-accordion [multi]="multi">
-        <app-accordion-panel header="Section 1">
+      <lib-accordion [multi]="multi">
+        <lib-accordion-panel header="Section 1">
           <p>Content for section 1</p>
-        </app-accordion-panel>
-        <app-accordion-panel header="Section 2">
+        </lib-accordion-panel>
+        <lib-accordion-panel header="Section 2">
           <p>Content for section 2</p>
-        </app-accordion-panel>
-      </app-accordion>
+        </lib-accordion-panel>
+      </lib-accordion>
     `,
   }),
 };
@@ -45,14 +44,14 @@ export const MultiExpansion: Story = {
   render: (args) => ({
     props: args,
     template: `
-      <app-accordion [multi]="multi">
-        <app-accordion-panel header="Item A">
+      <lib-accordion [multi]="multi">
+        <lib-accordion-panel header="Item A">
           <p>Content A</p>
-        </app-accordion-panel>
-        <app-accordion-panel header="Item B">
+        </lib-accordion-panel>
+        <lib-accordion-panel header="Item B">
           <p>Content B</p>
-        </app-accordion-panel>
-      </app-accordion>
+        </lib-accordion-panel>
+      </lib-accordion>
     `,
   }),
 };

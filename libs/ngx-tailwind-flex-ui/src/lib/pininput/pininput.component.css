@@ -1,0 +1,20 @@
+.input-container {
+    display: flex;
+    justify-content: center;
+    gap: 4px; /* Increase spacing slightly for better visibility */
+}
+
+.otp-box {
+    width: 10px; /* Adjusted width */
+    height: 10px; /* Adjusted height */
+    font-size: 6px; /* Adjusted font size for better readability */
+    text-align: center;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    transition: border-color 0.3s ease-in-out;
+}
+
+.otp-box:focus {
+    border-color: #007bff;
+    outline: none;
+}
