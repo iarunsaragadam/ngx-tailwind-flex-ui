@@ -1,0 +1,170 @@
+<!-- Drag & Drop Container -->
+<div
+  class="file-upload-container"
+  [ngClass]="{ 'is-dragging': isDragging }"
+  (dragover)="onDragOver($event)"
+  (dragleave)="onDragLeave()"
+  (drop)="onDrop($event)"
+>
+  <p>Drag and drop files here or</p>
+  <label class="file-upload-browse">
+    Browse
+    <input
+      type="file"
+      class="hidden"
+      (change)="onFileSelect($event)"
+      [attr.multiple]="multiple ? '' : null"
+      [accept]="acceptedFormats.join(',')"
+    />
+  </label>
+</div>
+
+<!-- Error/Success Message -->
+<div
+  *ngIf="errorMessage"
+  [ngClass]="{
+    'file-upload-error': errorMessage.includes('❗'),
+    'file-upload-success': errorMessage.includes('✅'),
+    'file-upload-info': errorMessage.includes('ℹ️')
+  }"
+>
+  {{ errorMessage }}
+</div>
+
+<!-- File List -->
+<ul *ngIf="selectedFiles.length > 0" class="file-list">
+  <li *ngFor="let file of selectedFiles; let i = index" class="file-item">
+    <span>{{ file.name }} ({{ (file.size / 1024).toFixed(2) }} KB)</span>
+
+    <!-- Progress Bar -->
+    <div
+      *ngIf="
+        isUploading &&
+        uploadProgress[file.name] !== undefined &&
+        uploadProgress[file.name] < 100
+      "
+      class="progress-bar-container"
+    >
+      <div
+        class="progress-bar"
+        [style.width.%]="uploadProgress[file.name]"
+      ></div>
+    </div>
+
+    <!-- Done Status -->
+    <div *ngIf="uploadStatus[file.name]" class="upload-complete-message">
+      ✅ Done
+    </div>
+
+    <!-- Preview Button -->
+    <button
+      *ngIf="isPreviewable(file.type)"
+      class="preview-text"
+      (click)="openPreview(file.name)"
+      (keydown.enter)="openPreview(file.name)"
+      (keydown.space)="openPreview(file.name)"
+      tabindex="0"
+    >
+      🔍 Click here for preview
+    </button>
+
+    <!-- Remove File Button -->
+    <button
+      class="file-remove"
+      (click)="initiateFileRemoval(i)"
+      (keydown.enter)="initiateFileRemoval(i)"
+      (keydown.space)="initiateFileRemoval(i)"
+      tabindex="0"
+    >
+      ❌
+    </button>
+  </li>
+</ul>
+
+<!-- Delete Confirmation Modal -->
+<!-- eslint-disable @angular-eslint/template/click-events-have-key-events -->
+<div
+  *ngIf="showDeleteConfirmation"
+  class="confirmation-modal"
+  role="dialog"
+  aria-modal="true"
+  (click)="cancelFileRemoval()"
+  (keydown.enter)="cancelFileRemoval()"
+  (keydown.space)="cancelFileRemoval()"
+  (keydown.esc)="cancelFileRemoval()"
+  tabindex="0"
+>
+  <div
+    class="confirmation-modal-content"
+    (click)="$event.stopPropagation()"
+    role="document"
+  >
+    <p>
+      Are you sure you want to remove "{{
+        selectedFiles[fileToDeleteIndex!].name
+      }}"?
+    </p>
+    <button
+      class="confirm-button"
+      (click)="confirmFileRemoval()"
+      (keydown.enter)="confirmFileRemoval()"
+      (keydown.space)="confirmFileRemoval()"
+      tabindex="0"
+    >
+      Yes, Remove
+    </button>
+    <button
+      class="cancel-button"
+      (click)="cancelFileRemoval()"
+      (keydown.enter)="cancelFileRemoval()"
+      (keydown.space)="cancelFileRemoval()"
+      tabindex="0"
+    >
+      Cancel
+    </button>
+  </div>
+</div>
+<!-- eslint-enable @angular-eslint/template/click-events-have-key-events -->
+
+<!-- Image Preview Modal -->
+<div
+  *ngIf="showPreview"
+  class="preview-modal"
+  role="dialog"
+  aria-modal="true"
+  (click)="closePreview()"
+  (keydown.esc)="closePreview()"
+  tabindex="0"
+>
+  <div class="preview-modal-content" role="document">
+    <button
+      #closeButton
+      class="close-button"
+      (click)="closePreview($event)"
+      (keydown.enter)="closePreview($event)"
+      (keydown.space)="closePreview($event)"
+      tabindex="0"
+    >
+      ❌
+    </button>
+    <img
+      *ngIf="selectedFileType.startsWith('image')"
+      [src]="selectedPreview"
+      class="full-preview"
+      alt="Preview of uploaded image"
+    />
+  </div>
+</div>
+
+<!-- Upload Button -->
+<button
+  *ngIf="selectedFiles.length > 0"
+  class="upload-button"
+  (click)="uploadFiles()"
+  (keydown.enter)="uploadFiles()"
+  (keydown.space)="uploadFiles()"
+  tabindex="0"
+  [disabled]="isUploading || (errorMessage && errorMessage.includes('❗'))"
+>
+  🚀 Upload Files
+</button>
