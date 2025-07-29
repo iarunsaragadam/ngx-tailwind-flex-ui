@@ -69,7 +69,7 @@ export const GreenBuffer: Story = {
   },
   render: (args) => ({
     props: args,
-    template: `<lib-progress-bar [progress]="progress" [buffer]="buffer" [color]="color" [variant]="variant"></lib-progress-bar>`,
+    template: `<lib-progress-bar [progress]="progress" [bufferProgress]="bufferProgress" [color]="color" [variant]="variant"></lib-progress-bar>`,
   }),
 };
 
