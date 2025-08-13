@@ -11,7 +11,7 @@ export class AccordionPanelComponent {
     expanded = false;
     toggleCallback?: (panel: AccordionPanelComponent) => void;
     toggle() {
-        if (this,this.disabled) return;
+        if (this.disabled) return;
         this.expanded = !this.expanded;
         this.toggleCallback?.(this);
     }

@@ -5,20 +5,23 @@ import { AccordionPanelComponent } from './accordion-panel.component';
   selector: 'lib-accordion',
   standalone: true,
   templateUrl: './accordion.component.html',
-  styleUrl: './accordion.component.css',
+  styleUrls: ['./accordion.component.css'],
 })
 export class AccordionComponent implements AfterContentInit {
   @Input() multi = false;
   @ContentChildren(AccordionPanelComponent) panels!: QueryList<AccordionPanelComponent>;
+
   ngAfterContentInit() {
-    this.panels.forEach(panel => {
+    this.panels.forEach((panel) => {
       panel.toggleCallback = (clickedPanel) => {
-      if (!this.multi) {
-        this.panels.forEach(p => {
-          if (p !== clickedPanel) p.expanded = false;
-        });
-      }
-    };
-  });
-}
+        if (!this.multi) {
+          this.panels.forEach((p) => {
+            if (p !== clickedPanel) {
+              p.expanded = false;
+            }
+          });
+        }
+      };
+    });
+  }
 }
